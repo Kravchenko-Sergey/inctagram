@@ -1,6 +1,6 @@
 FROM node:18.15 as dependencies
 WORKDIR /app
-COPY package.json yarn.lock ./
+COPY package.json package-lock.json ./
 RUN yarn install
 
 FROM node:18.15 as builder
