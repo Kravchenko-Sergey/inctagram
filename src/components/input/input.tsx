@@ -22,7 +22,7 @@ export type InputPropsType = {
   error?: string
   searchInput?: boolean
   width?: string
-  callback?: () => void
+  // callback?: () => void
 } & ComponentPropsWithoutRef<'input'>
 
 export const Input = forwardRef<HTMLInputElement, InputPropsType>(
@@ -39,7 +39,7 @@ export const Input = forwardRef<HTMLInputElement, InputPropsType>(
       type,
       width,
       label,
-      callback,
+      // callback,
       ...restProps
     },
     ref
