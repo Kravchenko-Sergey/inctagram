@@ -9,7 +9,7 @@ import {
 
 import { clsx } from 'clsx'
 
-import cls from './input.module.scss'
+import cls from './text-field.module.scss'
 
 import { Eye } from '@/src/assets/icons/eye'
 import { EyeClosed } from '@/src/assets/icons/eye-closed'
@@ -22,10 +22,10 @@ export type InputPropsType = {
   error?: string
   searchInput?: boolean
   width?: string
-  callback?: () => void
+  // callback?: () => void
 } & ComponentPropsWithoutRef<'input'>
 
-export const Input = forwardRef<HTMLInputElement, InputPropsType>(
+export const TextField = forwardRef<HTMLInputElement, InputPropsType>(
   (
     {
       className,
@@ -39,7 +39,7 @@ export const Input = forwardRef<HTMLInputElement, InputPropsType>(
       type,
       width,
       label,
-      callback,
+      // callback,
       ...restProps
     },
     ref
