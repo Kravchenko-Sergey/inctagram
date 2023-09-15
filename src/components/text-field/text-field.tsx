@@ -9,20 +9,19 @@ import {
 
 import { clsx } from 'clsx'
 
-import cls from './text-field.module.scss'
+import s from './text-field.module.scss'
 
 import { Eye } from '@/src/assets/icons/eye'
 import { EyeClosed } from '@/src/assets/icons/eye-closed'
 import { SearchIcon } from '@/src/assets/icons/search-icon'
+import { Typography } from '@/src/components/typography'
 
 export type InputPropsType = {
   label?: string
   inputTextClassName?: string
-  // type?: string
   error?: string
   searchInput?: boolean
   width?: string
-  // callback?: () => void
 } & ComponentPropsWithoutRef<'input'>
 
 export const TextField = forwardRef<HTMLInputElement, InputPropsType>(
@@ -39,7 +38,6 @@ export const TextField = forwardRef<HTMLInputElement, InputPropsType>(
       type,
       width,
       label,
-      // callback,
       ...restProps
     },
     ref
@@ -47,9 +45,9 @@ export const TextField = forwardRef<HTMLInputElement, InputPropsType>(
     const [iconVisible, setIconVisible] = useState(type)
 
     const classNames = {
-      input: clsx(cls.inputContainer, !!error && cls.error, className),
-      label: clsx(cls.inputContainer, !!error && cls.error, className),
-      inpText: clsx(cls.input, inputTextClassName),
+      input: clsx(s.inputContainer, !!error && s.error, className),
+      label: clsx(s.inputContainer, !!error && s.error, className),
+      inpText: clsx(s.input, inputTextClassName),
     }
 
     const iconClickHandler = useCallback(
@@ -66,19 +64,19 @@ export const TextField = forwardRef<HTMLInputElement, InputPropsType>(
     }
 
     return (
-      <div className={clsx(cls.main, disabled && cls.disabled)} style={{ width }}>
+      <div className={clsx(s.main, disabled && s.disabled)} style={{ width }}>
         {label && (
           <div>
-            {/*<Typography className={cls.label} variant="regular_14">*/}
-            <p>{label}</p>
-            {/*</Typography>*/}
+            <Typography className={s.label} variant="regular_text_14">
+              {label}
+            </Typography>
           </div>
         )}
         <div className={classNames.input}>
           {searchInput && (
             <span
               style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-              className={cls.icon}
+              className={s.icon}
             >
               <SearchIcon />
             </span>
@@ -94,7 +92,7 @@ export const TextField = forwardRef<HTMLInputElement, InputPropsType>(
             {...restProps}
           />
           {(type === 'password' || iconVisible === 'password') && (
-            <button disabled={disabled} className={cls.fakebutton} onClick={iconClickHandler}>
+            <button disabled={disabled} className={s.fakebutton} onClick={iconClickHandler}>
               {iconVisible === 'password' ? (
                 <Eye color={disabled ? 'var(--dark-100)' : ''} />
               ) : (
@@ -103,12 +101,12 @@ export const TextField = forwardRef<HTMLInputElement, InputPropsType>(
             </button>
           )}
         </div>
-        <div className={cls.errorContainer}>
+        <div className={s.errorContainer}>
           {error && (
             <div style={{ margin: '4px 0' }}>
-              {/*<Typography color="error" variant="small_text">*/}
-              <p>{error}</p>
-              {/*</Typography>*/}
+              <Typography color="error" variant="small_text">
+                {error}
+              </Typography>
             </div>
           )}
         </div>
