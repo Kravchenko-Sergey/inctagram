@@ -2,7 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { Typography } from '../typography'
 
-const meta: Meta<Typography> = {
+// const meta: Meta<Typography> = {
+const meta = {
   title: 'Components/UI/Typography',
   component: Typography,
   tags: ['autodocs'],
@@ -27,7 +28,7 @@ const meta: Meta<Typography> = {
       control: { type: 'radio' },
     },
   },
-}
+} satisfies Meta<typeof Typography>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -105,7 +106,7 @@ export const small_text: Story = {
 export const semi_bold_small_text: Story = {
   args: {
     children: 'Text content semi_bold_small_text',
-    variant: 'semi_bold_small_text',
+    variant: 'semi-bold_small_text',
   },
 }
 
