@@ -4,11 +4,11 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import TextArea from '@/src/components/text-area/text-area'
 
-const meta: Meta<TextArea> = {
+const meta = {
   title: 'Components/UI/TextArea',
   component: TextArea,
   tags: ['autodocs'],
-}
+} satisfies Meta<typeof TextArea>
 
 export default meta
 type Story = StoryObj<typeof meta>

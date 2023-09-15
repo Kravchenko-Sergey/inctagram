@@ -10,7 +10,7 @@ export type TextFieldProps = {
   className?: string
   onClearClick?: () => void
   errorMessage?: string
-} & ComponentPropsWithoutRef<'input'>
+} & ComponentPropsWithoutRef<'textarea'>
 
 const TextArea = forwardRef<HTMLTextAreaElement, TextFieldProps>((props, ref) => {
   const { label, disabled, error, onClearClick, ...rest } = props
