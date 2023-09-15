@@ -43,7 +43,7 @@ export const CheckboxItem = ({
     <div style={{ position: 'relative' }}>
       <div className={classNames.container}>
         <LabelRadix.Root asChild>
-          <Typography className={s.wrap} as={'label'} variant="regular_14">
+          <Typography className={s.wrap} as={'label'} variant="regular_text_14">
             <div className={classNames.buttonWrapper}>
               <CheckboxRadix.Root
                 className={classNames.root}
@@ -65,7 +65,7 @@ export const CheckboxItem = ({
         </LabelRadix.Root>
       </div>
       {errorMessage && (
-        <Typography color="error" variant="regular_14" className={s.errorMessage}>
+        <Typography variant="error" className={s.errorMessage}>
           {errorMessage}
         </Typography>
       )}
