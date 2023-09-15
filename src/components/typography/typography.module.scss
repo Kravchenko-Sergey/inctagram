@@ -1,0 +1,76 @@
+@mixin typography($fontSize, $fontWeight, $lineHeight) {
+  margin: 0;
+
+  font-size: $fontSize;
+  font-weight: $fontWeight;
+  line-height: $lineHeight;
+  color: var(--light-100);
+}
+
+.large {
+  @include typography(var(--font-size-xxl), var(--font-weight-semibold), var(--line-height-l));
+}
+
+.h1 {
+  @include typography(var(--font-size-xl), var(--font-weight-bold), var(--line-height-l));
+}
+
+.h2 {
+  @include typography(var(--font-size-l), var(--font-weight-bold), var(--line-height-m));
+}
+
+.h3 {
+  @include typography(var(--font-size-m), var(--font-weight-semibold), var(--line-height-m));
+}
+
+.regular_text_16 {
+  @include typography(var(--font-size-m), var(--font-weight-regular), var(--line-height-m));
+}
+
+.bold_text_16 {
+  @include typography(var(--font-size-m), var(--font-weight-bold), var(--line-height-m));
+}
+
+.regular_text_14 {
+  @include typography(var(--font-size-s), var(--font-weight-regular), var(--line-height-m));
+}
+
+.medium_text_14 {
+  @include typography(var(--font-size-s), var(--font-weight-medium), var(--line-height-m));
+}
+
+.bold_text_14 {
+  @include typography(var(--font-size-s), var(--font-weight-bold), var(--line-height-m));
+}
+
+.small_text {
+  @include typography(var(--font-size-xs), var(--font-weight-regular), var(--line-height-s));
+}
+
+.semi_bold_small_text {
+  @include typography(var(--font-size-xs), var(--font-weight-semibold), var(--line-height-s));
+}
+
+.regular_link,
+.regular_link:visited {
+  @include typography(var(--font-size-s), var(--font-weight-regular), var(--line-height-m));
+
+  cursor: pointer;
+  color: var(--primary-500);
+  text-decoration: underline;
+}
+
+.small_link,
+.small_link:visited {
+  @include typography(var(--font-size-s), var(--font-weight-regular), var(--line-height-s));
+
+  cursor: pointer;
+  color: var(--primary-500);
+  text-decoration: underline;
+}
+
+.error {
+  @include typography(var(--font-size-xs), var(--font-weight-regular), var(--line-height-s));
+
+  color: var(--danger-300);
+}
