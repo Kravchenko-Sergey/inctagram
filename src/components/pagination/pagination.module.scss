@@ -1,0 +1,74 @@
+.root {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  height: 24px;
+}
+
+.container {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+
+  .item:disabled & {
+    color: var(--dark-100);
+  }
+}
+
+.dots {
+  all: unset;
+
+  cursor: default;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+}
+
+.item {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+
+  border-radius: 2px;
+
+  transition: 0.2s ease-out;
+
+  &:disabled {
+    cursor: initial;
+  }
+
+  &.selected {
+    color: var(--dark-900);
+    background-color: var(--light-100);
+  }
+
+  &:focus-within {
+    border-radius: 4px;
+    outline: 2px solid var(--info-900);
+  }
+
+  &:hover:not(&:disabled) {
+    background-color: var(--dark-500);
+  }
+}
+
+.selectBox {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  white-space: nowrap;
+}
