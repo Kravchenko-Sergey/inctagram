@@ -14,6 +14,7 @@ import s from './text-field.module.scss'
 import { Eye } from '@/src/assets/icons/eye'
 import { EyeClosed } from '@/src/assets/icons/eye-closed'
 import { SearchIcon } from '@/src/assets/icons/search-icon'
+import { Typography } from '@/src/components/typography'
 
 export type InputPropsType = {
   label?: string
@@ -37,7 +38,6 @@ export const TextField = forwardRef<HTMLInputElement, InputPropsType>(
       type,
       width,
       label,
-      // callback,
       ...restProps
     },
     ref
@@ -67,9 +67,9 @@ export const TextField = forwardRef<HTMLInputElement, InputPropsType>(
       <div className={clsx(s.main, disabled && s.disabled)} style={{ width }}>
         {label && (
           <div>
-            {/*<Typography className={cls.label} variant="regular_14">*/}
-            <p>{label}</p>
-            {/*</Typography>*/}
+            <Typography className={s.label} variant="regular_text_14">
+              {label}
+            </Typography>
           </div>
         )}
         <div className={classNames.input}>
@@ -104,9 +104,9 @@ export const TextField = forwardRef<HTMLInputElement, InputPropsType>(
         <div className={s.errorContainer}>
           {error && (
             <div style={{ margin: '4px 0' }}>
-              {/*<Typography color="error" variant="small_text">*/}
-              <p>{error}</p>
-              {/*</Typography>*/}
+              <Typography color="error" variant="small_text">
+                {error}
+              </Typography>
             </div>
           )}
         </div>

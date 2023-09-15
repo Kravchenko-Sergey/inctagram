@@ -22,7 +22,7 @@ export type TypographyProps<T extends ElementType = 'p'> = {
     | 'small_link'
     | 'error'
   children?: ReactNode
-  href?: string
+  // href?: string
   className?: string
 }
 
