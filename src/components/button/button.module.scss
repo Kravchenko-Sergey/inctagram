@@ -3,6 +3,7 @@
 
   padding: 6px 24px;
 
+  font-weight: 600;
   color: var(--light-100);
   text-align: center;
 
@@ -17,44 +18,121 @@
 .primary {
   background: var(--primary-500);
   border: 2px solid transparent;
-}
 
-.primary:hover {
-  background: var(--primary-100);
-  border: 2px solid transparent;
-}
+  &:focus {
+    border-color: var(--primary-700);
+    outline: none;
+  }
 
-.primary:focus {
-  border-color: var(--primary-700);
-  outline: none;
-}
+  &:hover {
+    background: var(--primary-100);
+    border: 2px solid transparent;
+  }
 
-.primary:active {
-  background: var(--primary-700);
-  border: 2px solid transparent;
-}
+  &:active {
+    background: var(--primary-700);
+    border: 2px solid transparent;
+  }
 
-.primary.disabled {
-  cursor: auto;
-  color: var(--light-900);
-  background: var(--primary-900);
-  border: 2px solid transparent;
+  &.disabled {
+    cursor: auto;
+    color: var(--light-900);
+    background: var(--primary-900);
+    border: 2px solid transparent;
+  }
 }
 
 .secondary {
   background: var(--dark-300);
+  border: 1px solid transparent;
+
+  &:focus {
+    background: var(--dark-300);
+    border-color: var(--primary-300);
+    outline: none;
+  }
+
+  &:hover {
+    background: var(--dark-100);
+    border: 1px solid transparent;
+  }
+
+  &:active {
+    background: #212121;
+    border: 1px solid transparent;
+  }
+
+  &.disabled {
+    cursor: auto;
+    color: var(--light-900);
+    background: var(--dark-500);
+    border: 1px solid transparent;
+  }
 }
 
 .ghost {
+  color: var(--primary-500);
   background: transparent;
   border: 1px solid var(--primary-500);
+
+  &:focus {
+    color: var(--primary-700);
+    border: 1px solid var(--primary-700);
+    outline: none;
+  }
+
+  &:hover {
+    color: var(--primary-100);
+    border: 1px solid var(--primary-100);
+  }
+
+  &:active {
+    color: var(--primary-700);
+    border: 1px solid var(--primary-700);
+  }
+
+  &.disabled {
+    cursor: auto;
+    color: var(--primary-900);
+    border: 1px solid var(--primary-900);
+  }
 }
 
 .link {
+  color: var(--primary-500);
   background: transparent;
-  border: none;
+  border: 2px solid transparent;
+
+  &:focus {
+    color: var(--primary-500);
+    border: 2px solid var(--primary-500);
+    outline: none;
+  }
+
+  &:hover {
+    color: var(--primary-100);
+    border: 2px solid transparent;
+  }
+
+  &:active {
+    color: var(--primary-700);
+    border: 2px solid transparent;
+  }
+
+  &.disabled {
+    cursor: auto;
+    color: var(--primary-900);
+    border: 2px solid transparent;
+  }
 }
 
 .fullWidth {
   width: 100%;
+}
+
+.withIcon {
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  background: var(--dark-300);
 }

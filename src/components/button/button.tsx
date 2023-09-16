@@ -6,10 +6,11 @@ import s from './button.module.scss'
 
 export type ButtonPropsType<T extends ElementType = 'button'> = {
   as?: T
-  variant: 'primary' | 'secondary' | 'ghost' | 'link'
+  variant: 'primary' | 'secondary' | 'ghost' | 'link' | 'withIcon'
   fullWidth?: boolean
   disabled?: boolean
   className?: string
+  buttonType?: string
   children: ReactNode
 } & ComponentPropsWithoutRef<T>
 
@@ -19,6 +20,8 @@ export const Button = <T extends ElementType = 'button'>(props: ButtonPropsType<
     fullWidth,
     disabled,
     className,
+    children,
+    buttonType,
     as: Component = 'button',
     ...restProps
   } = props
@@ -27,5 +30,9 @@ export const Button = <T extends ElementType = 'button'>(props: ButtonPropsType<
     btn: clsx(s.btn, s[variant], fullWidth && s.fullWidth, disabled && s.disabled, className),
   }
 
-  return <Component className={classNames.btn} disabled={disabled} {...restProps} />
+  return (
+    <Component className={classNames.btn} disabled={disabled} {...restProps} type={buttonType}>
+      {children}
+    </Component>
+  )
 }
