@@ -38,7 +38,7 @@
   line-height: var(--font-line-m);
   color: var(--light-100);
 
-  // background-color: var(--color-dark-300);
+  background-color: var(--dark-700);
   border: 1px solid var(--dark-100);
   border-radius: 0.125rem;
 
@@ -50,7 +50,7 @@
   &[data-state='open'] {
     cursor: pointer;
 
-    // background-color: var(--dark-500);
+    background-color: var(--dark-500);
     border: 1px solid var(--light-100);
     border-bottom: none;
     border-radius: 0.125rem 0.125rem 0 0;
@@ -126,7 +126,7 @@
   width: var(--radix-select-trigger-width);
   max-height: var(--radix-select-content-available-height);
 
-  background-color: var(--dark-900);
+  background-color: var(--dark-500);
 
   // background-color: var(--dark-500);
   border: 1px solid var(--light-100);
@@ -151,10 +151,11 @@
 
   // width: 100%;
   padding: 6px 12px;
+
   font-size: var(--font-size-s);
   line-height: var(--font-line-m);
 
-  // background-color: var(--dark-900);
+  background-color: var(--dark-500);
 
   &.pagination {
     padding: 0 0 0 6px;
@@ -180,9 +181,12 @@
 
 .label {
   display: block;
+
+  margin-bottom: 3px;
+
   font-size: var(--font-size-s);
   line-height: var(--font-line-m);
-  color: var(--dark-100);
+  color: var(--light-900);
 
   &.disabled {
     color: var(--dark-300);
