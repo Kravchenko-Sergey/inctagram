@@ -1,0 +1,60 @@
+.btn {
+  cursor: pointer;
+
+  padding: 6px 24px;
+
+  color: var(--light-100);
+  text-align: center;
+
+  border-radius: 2px;
+
+  transition:
+    color 0.3s ease,
+    border 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.primary {
+  background: var(--primary-500);
+  border: 2px solid transparent;
+}
+
+.primary:hover {
+  background: var(--primary-100);
+  border: 2px solid transparent;
+}
+
+.primary:focus {
+  border-color: var(--primary-700);
+  outline: none;
+}
+
+.primary:active {
+  background: var(--primary-700);
+  border: 2px solid transparent;
+}
+
+.primary.disabled {
+  cursor: auto;
+  color: var(--light-900);
+  background: var(--primary-900);
+  border: 2px solid transparent;
+}
+
+.secondary {
+  background: var(--dark-300);
+}
+
+.ghost {
+  background: transparent;
+  border: 1px solid var(--primary-500);
+}
+
+.link {
+  background: transparent;
+  border: none;
+}
+
+.fullWidth {
+  width: 100%;
+}
