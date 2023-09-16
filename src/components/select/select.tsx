@@ -60,6 +60,8 @@ export const Select: FC<SelectProps> = ({
   const withoutPlaceholder = variant === 'pagination' ? value : 'Select Box'
   const rootStyles = { width }
 
+  console.log('value')
+
   return (
     <div className={classNames.root}>
       <Typography variant={'regular_text_16'} as="label" className={classNames.label}>
