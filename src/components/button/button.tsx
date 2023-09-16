@@ -10,7 +10,7 @@ export type ButtonPropsType<T extends ElementType = 'button'> = {
   fullWidth?: boolean
   disabled?: boolean
   className?: string
-  buttonType?: string
+  // buttonType?: string тут тс ошибку выдает.
   children: ReactNode
 } & ComponentPropsWithoutRef<T>
 
@@ -31,7 +31,8 @@ export const Button = <T extends ElementType = 'button'>(props: ButtonPropsType<
   }
 
   return (
-    <Component className={classNames.btn} disabled={disabled} {...restProps} type={buttonType}>
+    // <Component className={classNames.btn} disabled={disabled} {...restProps} type={buttonType}> тип есть в restProps
+    <Component className={classNames.btn} disabled={disabled} {...restProps}>
       {children}
     </Component>
   )
