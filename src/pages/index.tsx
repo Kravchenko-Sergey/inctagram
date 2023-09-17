@@ -11,25 +11,25 @@ import { PersonOutline } from '@/src/assets/icons/person-outline'
 import { PlusSquareOutline } from '@/src/assets/icons/plus-square-outline'
 import { SearchIcon } from '@/src/assets/icons/search-icon'
 import { TrendingUpOutline } from '@/src/assets/icons/trending-up-outline'
+import { HeadMeta } from '@/src/components/head-meta'
 import { Sidebar } from '@/src/components/sidebar'
 import { Typography } from '@/src/components/typography'
-import { HeadMeta } from '@/src/components/head-meta'
-
-const sidebarItems = [
-  { href: '/', icon: <HomeOutline />, title: 'Home' },
-  { href: '/create', icon: <PlusSquareOutline />, title: 'Create' },
-  { href: '/profile', icon: <PersonOutline />, title: 'My Profile' },
-  { href: '/messenger', icon: <MessageCircleOutline />, title: 'Messenger' },
-  { href: '/search', icon: <SearchIcon />, title: 'Search' },
-  { href: '/statistics', icon: <TrendingUpOutline />, title: 'Statistics' },
-  { href: '/favorites', icon: <BookmarkOutline />, title: 'Favorites' },
-  { href: '/logout', icon: <LogOutOutline />, title: 'Log Out' },
-]
 
 // const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const router = useRouter()
+
+  const sidebarItems = [
+    { href: '/', icon: <HomeOutline />, title: 'Home' },
+    { href: '/create', icon: <PlusSquareOutline />, title: 'Create' },
+    { href: '/profile', icon: <PersonOutline />, title: 'My Profile' },
+    { href: '/messenger', icon: <MessageCircleOutline />, title: 'Messenger' },
+    { href: '/search', icon: <SearchIcon />, title: 'Search' },
+    { href: '/statistics', icon: <TrendingUpOutline />, title: 'Statistics' },
+    { href: '/favorites', icon: <BookmarkOutline />, title: 'Favorites' },
+    { href: '/logout', icon: <LogOutOutline />, title: 'Log Out' },
+  ]
 
   return (
     <>
