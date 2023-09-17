@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ReCAPTCHA from 'react-google-recaptcha'
+import GoogleRecaptcha from 'react-google-recaptcha'
 
 export const Recaptcha = () => {
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_LOCALHOST_KEY
@@ -11,6 +11,6 @@ export const Recaptcha = () => {
   !siteKey && console.error('RECAPTCHA_SITE_KEY не задан')
 
   return siteKey ? (
-    <ReCAPTCHA sitekey={siteKey} onChange={handleRecaptchaChange} theme="dark" />
+    <GoogleRecaptcha sitekey={siteKey} onChange={handleRecaptchaChange} theme="dark" />
   ) : null
 }
