@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Typography } from '@/src/components/typography'
+import { HeadMeta } from '@/src/components/head-meta'
 
 const SignUp = () => {
   return (

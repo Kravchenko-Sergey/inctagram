@@ -1,7 +1,14 @@
 import React from 'react'
 
+import { HeadMeta } from '@/src/components/head-meta'
+
 const Profile = () => {
-  return <div>Profile</div>
+  return (
+    <>
+      <HeadMeta title="Profile" />
+      <main>Profile</main>
+    </>
+  )
 }
 
 export default Profile

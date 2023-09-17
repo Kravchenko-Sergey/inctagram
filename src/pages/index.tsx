@@ -13,6 +13,7 @@ import { SearchIcon } from '@/src/assets/icons/search-icon'
 import { TrendingUpOutline } from '@/src/assets/icons/trending-up-outline'
 import { Sidebar } from '@/src/components/sidebar'
 import { Typography } from '@/src/components/typography'
+import { HeadMeta } from '@/src/components/head-meta'
 
 const sidebarItems = [
   { href: '/', icon: <HomeOutline />, title: 'Home' },
@@ -25,25 +26,30 @@ const sidebarItems = [
   { href: '/logout', icon: <LogOutOutline />, title: 'Log Out' },
 ]
 
+// const inter = Inter({ subsets: ['latin'] })
+
 export default function Home() {
   const router = useRouter()
 
   return (
-    <main>
-      <Sidebar>
-        {sidebarItems.map((item, index) => (
-          <Link
-            key={index}
-            href={item.href}
-            className={`${s.item} ${router.pathname === item.href ? s.active : ''}`}
-          >
-            <>
-              {item.icon}
-              <Typography>{item.title}</Typography>
-            </>
-          </Link>
-        ))}
-      </Sidebar>
-    </main>
+    <>
+      <HeadMeta title="Home" />
+      <main>
+        <Sidebar>
+          {sidebarItems.map((item, index) => (
+            <Link
+              key={index}
+              href={item.href}
+              className={`${s.item} ${router.pathname === item.href ? s.active : ''}`}
+            >
+              <>
+                {item.icon}
+                <Typography>{item.title}</Typography>
+              </>
+            </Link>
+          ))}
+        </Sidebar>
+      </main>
+    </>
   )
 }

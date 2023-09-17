@@ -68,7 +68,7 @@ export const SimpleWithLabel = {
   },
 
   args: {
-    placeholder: 'select...',
+    // placeholder: 'select...',
     options: optionsPrimary,
     label: 'Select',
   },
