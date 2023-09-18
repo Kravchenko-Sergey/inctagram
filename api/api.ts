@@ -42,7 +42,7 @@ export const baseQueryWithReauth: BaseQueryFn<
       try {
         const refreshResult = await baseQuery(
           {
-            url: 'auth/refresh-token',
+            url: 'auth/update-tokens',
             method: 'POST',
           },
           api,
@@ -75,8 +75,8 @@ export const baseQueryWithReauth: BaseQueryFn<
 
 export const instagramAPI = createApi({
   reducerPath: 'instagramAPI',
-  // baseQuery: baseQueryWithReauth,
-  baseQuery: baseQuery,
+  baseQuery: baseQueryWithReauth,
+  // baseQuery: baseQuery,
   // baseQuery: retry(baseQuery, {maxRetries:3}), повтор при ощибке и количество повторов запроса
   endpoints: () => ({}),
   tagTypes: [],
