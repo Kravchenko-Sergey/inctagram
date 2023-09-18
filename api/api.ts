@@ -77,10 +77,6 @@ export const instagramAPI = createApi({
   reducerPath: 'instagramAPI',
   baseQuery: baseQueryWithReauth,
   // baseQuery: baseQuery,
-  // baseQuery: retry(baseQuery, {maxRetries:3}), повтор при ощибке и количество повторов запроса
   endpoints: () => ({}),
   tagTypes: [],
-  // keepUnusedDataFor:5 время хранения данных в кеше 5 сек есть и для квери запросов оно
-  // refetchOnFocus: true обновдение при смене вкладки когда страница теряет и полуяает фокус
-  // refetchOnReconnect: true обновлене странияки при появлении интернета и реконекте  все это можно вказывать в хуке
 })
