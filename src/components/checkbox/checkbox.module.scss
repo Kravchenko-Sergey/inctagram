@@ -1,0 +1,113 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  &.disabled {
+    color: var(--dark-100);
+  }
+}
+
+.root {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+  width: 18px;
+  height: 18px;
+
+  border: 2px solid var(--light-900);
+  border-radius: 2px;
+
+  &:hover {
+    border: 2px solid var(--light-500);
+  }
+
+  &:focus {
+    // background-color: var(--dark-500);
+    outline: none;
+  }
+
+  &:active {
+    background-color: var(--dark-100);
+    outline: none;
+  }
+
+  &:disabled {
+    cursor: initial;
+    border-color: var(--dark-100);
+  }
+
+  &[data-state='checked']:disabled {
+    background-color: var(--dark-100);
+  }
+}
+
+.buttonWrapper {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+  margin-right: 3px;
+
+  background-color: rgb(255 255 255 / 0%);
+  border-radius: 50%;
+
+  &.disabled {
+    cursor: initial;
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  &:focus-within,
+  &:hover:not(.disabled),
+  &:hover .root:not([data-state='checked']) {
+    background-color: var(--dark-100);
+  }
+
+  &:active:not(.disabled) {
+    background-color: var(--dark-100);
+  }
+
+  &.left {
+    margin-left: -9px;
+  }
+}
+
+.indicator {
+  width: 18px;
+  height: 18px;
+}
+
+.wrap {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: white;
+
+  &:hover {
+    .buttonWrapper {
+      background-color: var(--dark-100);
+    }
+  }
+}
+
+.errorMessage {
+  position: absolute;
+  bottom: -20px;
+  width: 300px;
+}

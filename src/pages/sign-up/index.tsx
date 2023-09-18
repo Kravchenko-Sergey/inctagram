@@ -1,7 +1,14 @@
 import React from 'react'
 
-const signUp = () => {
-  return <div>sign up</div>
+import { HeadMeta } from '@/src/components/head-meta'
+
+const SignUp = () => {
+  return (
+    <>
+      <HeadMeta title={'/Sign-up'} />
+      <div>sign up</div>
+    </>
+  )
 }
 
-export default signUp
+export default SignUp

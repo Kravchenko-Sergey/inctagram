@@ -1,0 +1,55 @@
+.root {
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+
+  padding: 6px 12px;
+
+  background-color: var(--dark-500);
+  border: 1px solid var(--dark-100);
+  border-radius: 2px;
+
+  transition: 0.2s ease-out;
+
+  &.error {
+    border-color: var(--danger-500);
+  }
+
+  &.error:focus-within {
+    border-color: var(--danger-300);
+    outline: 1px solid var(--danger-300);
+  }
+
+  &:focus-within:not(.error) {
+    border: 1px solid var(--primary-700);
+    outline: 1px solid var(--primary-700);
+  }
+}
+
+.textarea {
+  all: unset;
+  width: 100%;
+  height: 100%;
+
+  &:disabled::placeholder {
+    color: var(--dark-100);
+  }
+}
+
+.error {
+  line-height: 24px !important;
+  color: var(--danger-300) !important;
+}
+
+.label {
+  user-select: none;
+  color: var(--light-900) !important; // переменной с таким цветом нет в палитре цветов
+
+  &.disabled {
+    color: var(--dark-100) !important; // переменной с таким цветом нет в палитре цветов
+  }
+}

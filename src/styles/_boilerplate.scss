@@ -1,0 +1,83 @@
+html {
+  box-sizing: border-box;
+  font-size: 100%;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a,
+input,
+button,
+select,
+textarea,
+optgroup,
+option {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  color: inherit;
+}
+
+input:-webkit-autofill {
+  -webkit-background-clip: text;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  font: var(--font-m);
+  font-family: 'Inter', sans-serif;
+  color: var(--light-100);
+
+  background-color: var(--dark-900);
+}
+
+input,
+button,
+select,
+textarea,
+optgroup,
+option {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+
+  &:hover {
+    border: none;
+  }
+}
+
+input {
+  background: none;
+  border: none;
+
+  &:active,
+  &:focus,
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+p,
+button {
+  margin: 0;
+  padding: 0;
+}
