@@ -7,7 +7,7 @@ import {
 } from '@reduxjs/toolkit/query/react'
 import { Mutex } from 'async-mutex'
 
-import { TOKEN_LOCAL_STORAGE_KEY } from '@/src/consts/localstorage'
+import { TOKEN_LOCAL_STORAGE_KEY } from '@/consts/localstorage'
 
 const baseUrl = ''
 
