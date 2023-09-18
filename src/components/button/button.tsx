@@ -1,6 +1,7 @@
 import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
 
 import { clsx } from 'clsx'
+import Link from 'next/link'
 
 import s from './button.module.scss'
 
@@ -22,6 +23,7 @@ export const Button = <T extends ElementType = 'button'>(props: ButtonPropsType<
     className,
     children,
     buttonType,
+    href,
     as: Component = 'button',
     ...restProps
   } = props
@@ -30,9 +32,16 @@ export const Button = <T extends ElementType = 'button'>(props: ButtonPropsType<
     btn: clsx(s.btn, s[variant], fullWidth && s.fullWidth, disabled && s.disabled, className),
   }
 
+  if (Component === 'a' || variant === 'link') {
+    return (
+      <Link href={href} passHref className={classNames.btn} {...restProps}>
+        {children}
+      </Link>
+    )
+  }
+
   return (
-    // <Component className={classNames.btn} disabled={disabled} {...restProps} type={buttonType}> тип есть в restProps
-    <Component className={classNames.btn} disabled={disabled} {...restProps}>
+    <Component className={classNames.btn} {...restProps} disabled={disabled}>
       {children}
     </Component>
   )

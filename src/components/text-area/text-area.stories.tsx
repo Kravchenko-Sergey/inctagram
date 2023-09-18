@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import type { Meta, StoryObj } from '@storybook/react'
 
-import TextArea from '@/src/components/text-area/text-area'
+import TextArea from '@/components/text-area/text-area'
 
 const meta = {
   title: 'Components/UI/TextArea',

@@ -7,7 +7,7 @@ import { Typography } from '../typography'
 
 import s from './select.module.scss'
 
-import { ArrowDownIcon } from '@/src/assets/icons/arrow-down'
+import { ArrowDownIcon } from '@/assets/icons/arrow-down'
 
 export type Option = { label: string | ReactElement; value: string }
 

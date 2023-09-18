@@ -2,9 +2,9 @@ import { useState } from 'react'
 
 import type { Meta } from '@storybook/react'
 
-import { Button } from '@/src/components/button'
-import { Modal, ModalType } from '@/src/components/modal/modal'
-import { Typography } from '@/src/components/typography'
+import { Button } from '@/components/button'
+import { Modal, ModalType } from '@/components/modal/modal'
+import { Typography } from '@/components/typography'
 
 export default {
   title: 'Components/Modal',

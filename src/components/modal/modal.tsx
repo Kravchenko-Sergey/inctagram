@@ -7,7 +7,7 @@ import { Typography } from '../typography'
 
 import s from './modal.module.scss'
 
-import { CloseModal } from '@/src/assets/icons/close-modal-icon'
+import { CloseModal } from '@/assets/icons/close-modal-icon'
 
 export type ModalType = {
   children?: ReactNode
