@@ -28,6 +28,10 @@ option {
   color: inherit;
 }
 
+a {
+  text-decoration: none;
+}
+
 input:-webkit-autofill {
   -webkit-background-clip: text;
 }

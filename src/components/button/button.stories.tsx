@@ -51,5 +51,6 @@ export const AsLink: Story = {
     variant: 'link',
     children: 'Link as a button',
     as: 'a',
+    href: '',
   },
 }

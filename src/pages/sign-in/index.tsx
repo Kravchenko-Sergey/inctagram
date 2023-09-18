@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { HeadMeta } from '@/src/components/head-meta'
+import { HeadMeta } from '@/components/head-meta'
 
 const signIn = () => {
   return (
