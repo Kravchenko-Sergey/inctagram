@@ -5,10 +5,9 @@ import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { useRegistrationMutation } from '../../../api/auth-api/auth.api'
-
 import s from './registration.module.scss'
 
+import { useRegistrationMutation } from '@/api/auth-api/auth.api'
 import { GitHubIcon } from '@/assets/icons/github-icon'
 import { GoogleIcon } from '@/assets/icons/google-icon'
 import { Button } from '@/components/button'

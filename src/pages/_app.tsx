@@ -4,8 +4,7 @@ import '@/styles/index.scss'
 import '@/styles/nprogress.css'
 import { Provider } from 'react-redux'
 
-import { useLoader } from '../../hooks/useLoader'
-
+import { useLoader } from '@/hooks/useLoader'
 import { store } from '@/store/store'
 
 export const inter = Inter({
