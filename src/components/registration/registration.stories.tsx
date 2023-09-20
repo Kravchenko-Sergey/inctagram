@@ -3,14 +3,14 @@ import { ChangeEvent, useState } from 'react'
 import { Meta, StoryObj } from '@storybook/react'
 import { Provider } from 'react-redux'
 
-import { SignUp } from '@/components/sign-up/sign-up'
+import { Registration } from '@/components/registration/registration'
 import { store } from '@/store/store'
 
 const meta = {
-  title: 'Components/SignUp',
-  component: SignUp,
+  title: 'Components/Registration',
+  component: Registration,
   tags: ['autodocs'],
-} satisfies Meta<typeof SignUp>
+} satisfies Meta<typeof Registration>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -19,7 +19,7 @@ export const MainSignUp: Story = {
   render: () => {
     return (
       <Provider store={store}>
-        <SignUp />
+        <Registration />
       </Provider>
     )
   },

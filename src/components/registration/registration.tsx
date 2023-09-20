@@ -3,12 +3,11 @@ import React, { memo, useCallback, useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
-import { register } from 'tsconfig-paths'
 import { z } from 'zod'
 
 import { useRegistrationMutation } from '../../../api/auth-api/auth.api'
 
-import s from './sign-up.module.scss'
+import s from './registration.module.scss'
 
 import { GitHubIcon } from '@/assets/icons/github-icon'
 import { GoogleIcon } from '@/assets/icons/google-icon'
@@ -37,23 +36,23 @@ const registrationSchema = z
       .email('The email must match the format example@example.com'),
     password: z
       .string()
+      .nonempty('Enter password')
       .regex(
         passwordRegex,
         'Password must contain 1-9, a-z, A-Z, ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^' +
           ' _` { | } ~'
       )
       .trim()
-      .nonempty('Enter password')
       .min(6, 'Password must be at least 6 characters'),
     confirm: z
       .string()
+      .nonempty('Enter password')
       .regex(
         passwordRegex,
         'Password must contain 1-9, a-z, A-Z, ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^' +
           ' _` { | } ~'
       )
       .trim()
-      .nonempty('Enter password')
       .min(6, 'Password must be at least 6 characters'),
     read: z.boolean(),
   })
@@ -73,7 +72,7 @@ const registrationSchema = z
 
 export type RegisterFormType = z.infer<typeof registrationSchema>
 
-export const SignUp = memo(() => {
+export const Registration = memo(() => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { push } = useRouter()
   const [register] = useRegistrationMutation()
@@ -111,7 +110,6 @@ export const SignUp = memo(() => {
         setIsModalOpen(true)
       } catch (e: unknown) {
         const error = e as ErrorType
-
         // if (error?.data?.message === 'User with this email is already registered') {
         //   setError('email', { type: 'email', message: t.errors.emailExists })
         // } else if (error?.data?.message === 'User with this username is already registered') {
@@ -165,7 +163,16 @@ export const SignUp = memo(() => {
               name={'read'}
             />
 
-            <Typography variant="small_text"></Typography>
+            <Typography variant="small_text">
+              I agree to the{' '}
+              <Typography as={'a'} href={''} variant="small_link">
+                Terms of Service
+              </Typography>{' '}
+              and{' '}
+              <Typography as="a" href={''} variant="small_link">
+                Privacy Policy
+              </Typography>
+            </Typography>
           </div>
 
           <Button

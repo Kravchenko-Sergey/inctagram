@@ -12,6 +12,7 @@ export type CheckboxProps = {
   className?: string
   checked?: boolean
   onChange?: (checked: boolean) => void
+  onBlur: () => void
   disabled?: boolean
   required?: boolean
   label?: string
@@ -27,6 +28,7 @@ export const CheckboxItem = ({
   required,
   position,
   className,
+  onBlur,
   label,
   id,
   errorMessage,
@@ -46,6 +48,7 @@ export const CheckboxItem = ({
           <Typography className={s.wrap} as={'label'} variant="regular_text_14">
             <div className={classNames.buttonWrapper}>
               <CheckboxRadix.Root
+                onBlur={onBlur}
                 className={classNames.root}
                 checked={checked}
                 onCheckedChange={onChange}

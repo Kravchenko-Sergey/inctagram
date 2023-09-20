@@ -5,7 +5,7 @@ import Link from 'next/link'
 import s from './typography.module.scss'
 
 export type TypographyProps<T extends ElementType = 'p'> = {
-  as?: T extends 'a' ? 'p' : T
+  as?: T
   variant?:
     | 'large'
     | 'h1'

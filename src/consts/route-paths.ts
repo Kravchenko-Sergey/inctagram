@@ -7,7 +7,7 @@ export const PATH = {
   MESSENGER: '/messenger',
   SEARCH: '/search',
   STATISTIC: '/statistic',
-  REGISTRATION: '/auth',
+  REGISTRATION: '/sign-up',
   LOGIN: '/login',
   FAVORITES: '/favorites',
   PASSWORD_RECOVERY: '/auth/recover',
