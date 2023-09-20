@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 
 import '@/styles/index.scss'
 import '@/styles/nprogress.css'
+
 import { useLoader } from '../../hooks/useLoader'
 
 export const inter = Inter({
