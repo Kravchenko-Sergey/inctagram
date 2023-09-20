@@ -3,8 +3,9 @@ import { Inter } from 'next/font/google'
 
 import '@/styles/index.scss'
 import '@/styles/nprogress.css'
-
-import { useLoader } from '../../hooks/useLoader'
+import { Provider } from 'react-redux'
+import { useLoader } from '@/hooks/useLoader'
+import { store } from '@/store/store'
 
 export const inter = Inter({
   subsets: ['latin', 'cyrillic'],
@@ -16,5 +17,9 @@ export const inter = Inter({
 export default function App({ Component, pageProps }: AppProps) {
   useLoader()
 
-  return <Component className={inter.className} {...pageProps} />
+  return (
+    <Provider store={store}>
+      <Component className={inter.className} {...pageProps} />
+    </Provider>
+  )
 }
