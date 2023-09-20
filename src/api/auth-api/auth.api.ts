@@ -94,4 +94,4 @@ export const authAPI = instagramAPI.injectEndpoints({
   }),
 })
 
-export const { useMeQuery } = authAPI
+export const { useMeQuery, useRegistrationMutation } = authAPI

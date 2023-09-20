@@ -104,9 +104,7 @@ export const TextField = forwardRef<HTMLInputElement, InputPropsType>(
         <div className={s.errorContainer}>
           {error && (
             <div style={{ margin: '4px 0' }}>
-              <Typography color="error" variant="small_text">
-                {error}
-              </Typography>
+              <Typography variant="error">{error}</Typography>
             </div>
           )}
         </div>
