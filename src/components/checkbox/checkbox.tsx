@@ -12,7 +12,7 @@ export type CheckboxProps = {
   className?: string
   checked?: boolean
   onChange?: (checked: boolean) => void
-  onBlur: () => void
+  onBlur?: () => void
   disabled?: boolean
   required?: boolean
   label?: string
