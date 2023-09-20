@@ -3,7 +3,6 @@ import { Inter } from 'next/font/google'
 import '@/styles/index.scss'
 import '@/styles/nprogress.css'
 import { Provider } from 'react-redux'
-
 import { useLoader } from '@/hooks/useLoader'
 import { store } from '@/store/store'
 
