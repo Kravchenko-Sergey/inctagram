@@ -5,7 +5,7 @@ import { CheckboxItem } from '../../checkbox'
 import { CheckboxProps } from '@/components/checkbox/checkbox'
 
 export type ControlledCheckboxProps<T extends FieldValues> = UseControllerProps<T> &
-  Omit<CheckboxProps, 'onChange' | 'value' | 'id'>
+  Omit<CheckboxProps, 'onChange' | 'onBlur' | 'value' | 'id'>
 
 export const ControlledCheckbox = <T extends FieldValues>({
   name,
@@ -16,7 +16,7 @@ export const ControlledCheckbox = <T extends FieldValues>({
   ...checkboxProps
 }: ControlledCheckboxProps<T>) => {
   const {
-    field: { onChange, value },
+    field: { onChange, onBlur, value },
   } = useController({
     name,
     rules,
@@ -32,6 +32,7 @@ export const ControlledCheckbox = <T extends FieldValues>({
         checked: value,
         id: name,
         ...checkboxProps,
+        onBlur,
       }}
     />
   )

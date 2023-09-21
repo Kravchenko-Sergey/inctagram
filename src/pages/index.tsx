@@ -14,6 +14,7 @@ import { TrendingUpOutline } from '@/assets/icons/trending-up-outline'
 import { HeadMeta } from '@/components/head-meta'
 import { Sidebar } from '@/components/sidebar'
 import { Typography } from '@/components/typography'
+import { PATH } from '@/consts/route-paths'
 
 // const inter = Inter({ subsets: ['latin'] })
 
@@ -21,14 +22,15 @@ export default function Home() {
   const router = useRouter()
 
   const sidebarItems = [
-    { href: '/', icon: <HomeOutline />, title: 'Home' },
-    { href: '/create', icon: <PlusSquareOutline />, title: 'Create' },
-    { href: '/profile', icon: <PersonOutline />, title: 'My Profile' },
-    { href: '/messenger', icon: <MessageCircleOutline />, title: 'Messenger' },
-    { href: '/search', icon: <SearchIcon />, title: 'Search' },
-    { href: '/statistics', icon: <TrendingUpOutline />, title: 'Statistics' },
-    { href: '/favorites', icon: <BookmarkOutline />, title: 'Favorites' },
-    { href: '/logout', icon: <LogOutOutline />, title: 'Log Out' },
+    { href: PATH.HOME, icon: <HomeOutline />, title: 'Home' },
+    // { href: PATH.CREATE, icon: <PlusSquareOutline />, title: 'Create' },
+    { href: PATH.REGISTRATION, icon: <PlusSquareOutline />, title: 'Registration' },
+    { href: PATH.PROFILE, icon: <PersonOutline />, title: 'My Profile' },
+    { href: PATH.MESSENGER, icon: <MessageCircleOutline />, title: 'Messenger' },
+    { href: PATH.SEARCH, icon: <SearchIcon />, title: 'Search' },
+    { href: PATH.STATISTIC, icon: <TrendingUpOutline />, title: 'Statistics' },
+    { href: PATH.FAVORITES, icon: <BookmarkOutline />, title: 'Favorites' },
+    { href: PATH.LOGOUT, icon: <LogOutOutline />, title: 'Log Out' },
   ]
 
   return (

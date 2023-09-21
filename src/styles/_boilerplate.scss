@@ -85,3 +85,33 @@ button {
   margin: 0;
   padding: 0;
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  //font-family: 'Inter', sans-serif;
+  border: 0;
+  -webkit-text-fill-color: var(--light-900);
+  -webkit-box-shadow: 0 0 0 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
+  //background: -webkit-linear-gradient(
+  //  top,
+  //  rgba(255, 255, 255, 0) 0%,
+  //  rgba(0, 174, 255, 0.04) 50%,
+  //  rgba(255, 255, 255, 0) 51%,
+  //  rgba(0, 174, 255, 0.03) 100%
+  //);
+  &:active {
+    color: var(--light-100) !important;
+  }
+  &:focus-within {
+    color: var(--light-100) !important;
+  }
+}
