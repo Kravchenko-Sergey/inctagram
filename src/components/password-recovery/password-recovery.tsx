@@ -38,9 +38,7 @@ const passwordRecoverySchema = z.object({
 export type passwordRecoverySchemaType = z.infer<typeof passwordRecoverySchema>
 
 const PasswordRecoveryPageComponent = memo(() => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
   const {
-    reset,
     handleSubmit,
     control,
     formState: { errors, isValid },
@@ -61,11 +59,13 @@ const PasswordRecoveryPageComponent = memo(() => {
         <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
           <ControlledTextField
             control={control}
+            type={'password'}
             name={'new_password'}
             label={'New password'}
           ></ControlledTextField>
           <ControlledTextField
             control={control}
+            type={'password'}
             name={'password_confirmation'}
             label={'Password confirmation'}
           ></ControlledTextField>

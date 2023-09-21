@@ -3,7 +3,7 @@ import React from 'react'
 import { HeadMeta } from '@/components/head-meta'
 import PasswordRecoveryPageComponent from '@/components/password-recovery/password-recovery'
 
-const PasswordRecovery = () => {
+const Recover = () => {
   return (
     <>
       <HeadMeta title="Password recovery" />
@@ -14,4 +14,4 @@ const PasswordRecovery = () => {
   )
 }
 
-export default PasswordRecovery
+export default Recover

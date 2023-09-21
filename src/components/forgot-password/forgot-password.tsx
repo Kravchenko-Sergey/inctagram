@@ -25,6 +25,7 @@ const forgotPasswordSchema = z.object({
 export type forgotPasswordSchemaType = z.infer<typeof forgotPasswordSchema>
 
 const ForgotPasswordPageComponent = memo(() => {
+  const [isLinkSent, setIsLinkSent] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const {
     reset,
@@ -33,11 +34,13 @@ const ForgotPasswordPageComponent = memo(() => {
     formState: { errors, isValid },
   } = useForm<forgotPasswordSchemaType>({
     resolver: zodResolver(forgotPasswordSchema),
+    mode: 'onBlur',
   })
 
   const onSubmit = (data: forgotPasswordSchemaType) => {
     console.log(data)
     setIsModalOpen(true)
+    setIsLinkSent(true)
   }
 
   const handleCloseModal = useCallback(() => {
@@ -61,6 +64,11 @@ const ForgotPasswordPageComponent = memo(() => {
           <Typography variant={'regular_text_14'} className={s.instructions}>
             Enter your email address and we will send you further instructions
           </Typography>
+          {isLinkSent && (
+            <Typography className={s.linkSent}>
+              The link has been sent by email. If you don’t receive an email send link again
+            </Typography>
+          )}
           <Button variant={'primary'} fullWidth={true} className={s.submitBtn} type={'submit'}>
             <Typography variant={'semi-bold_small_text'}>Send Link</Typography>
           </Button>
@@ -69,11 +77,21 @@ const ForgotPasswordPageComponent = memo(() => {
           </Button>
         </form>
       </Card>
-      <Modal isOpen={isModalOpen} title={'Email sent'}>
-        <Typography variant={'bold_text_16'}>
+      <Modal
+        isOpen={isModalOpen}
+        title={'Email sent'}
+        className={s.modalContent}
+        onOpenChange={handleCloseModal}
+      >
+        <Typography variant={'regular_text_16'}>
           We have sent a link to confirm your email to epam@epam.com
         </Typography>
-        <Button variant={'primary'}>
+        <Button
+          variant={'primary'}
+          onClick={() => {
+            setIsModalOpen(false)
+          }}
+        >
           <Typography variant={'bold_text_16'}>OK</Typography>
         </Button>
       </Modal>
