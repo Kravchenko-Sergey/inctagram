@@ -9,6 +9,7 @@ import s from './forgot-password.module.scss'
 import { Button } from '@/components/button'
 import { Card } from '@/components/card'
 import { ControlledTextField } from '@/components/controlled/controlled-text-field'
+import { Modal } from '@/components/modal'
 import { Typography } from '@/components/typography'
 import { PATH } from '@/consts/route-paths'
 
@@ -61,13 +62,21 @@ const ForgotPasswordPageComponent = memo(() => {
             Enter your email address and we will send you further instructions
           </Typography>
           <Button variant={'primary'} fullWidth={true} className={s.submitBtn} type={'submit'}>
-            Send Link
+            <Typography variant={'semi-bold_small_text'}>Send Link</Typography>
           </Button>
           <Button variant="link" href={PATH.LOGIN} as="a" className={s.returnBtn}>
-            Back to Sign In
+            <Typography variant={'semi-bold_small_text'}>Back to Sign In</Typography>
           </Button>
         </form>
       </Card>
+      <Modal isOpen={isModalOpen} title={'Email sent'}>
+        <Typography variant={'bold_text_16'}>
+          We have sent a link to confirm your email to epam@epam.com
+        </Typography>
+        <Button variant={'primary'}>
+          <Typography variant={'bold_text_16'}>OK</Typography>
+        </Button>
+      </Modal>
     </>
   )
 })
