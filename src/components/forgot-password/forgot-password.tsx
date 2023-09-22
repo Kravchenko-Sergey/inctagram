@@ -72,8 +72,8 @@ const ForgotPasswordPageComponent = memo(() => {
           <Button variant={'primary'} fullWidth={true} className={s.submitBtn} type={'submit'}>
             <Typography variant={'semi-bold_small_text'}>Send Link</Typography>
           </Button>
-          <Button variant="link" href={PATH.LOGIN} as="a" className={s.returnBtn}>
-            <Typography variant={'semi-bold_small_text'}>Back to Sign In</Typography>
+          <Button variant="link" href={PATH.LOGIN} className={s.returnBtn}>
+            Back to Sign In
           </Button>
         </form>
       </Card>
@@ -86,12 +86,7 @@ const ForgotPasswordPageComponent = memo(() => {
         <Typography variant={'regular_text_16'}>
           We have sent a link to confirm your email to epam@epam.com
         </Typography>
-        <Button
-          variant={'primary'}
-          onClick={() => {
-            setIsModalOpen(false)
-          }}
-        >
+        <Button variant={'primary'} onClick={handleCloseModal}>
           <Typography variant={'bold_text_16'}>OK</Typography>
         </Button>
       </Modal>
