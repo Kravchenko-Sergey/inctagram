@@ -13,10 +13,16 @@
   border-radius: 2px;
 }
 
+.title.title {
+  // .title {
+  align-self: center;
+  margin-bottom: 13px;
+}
+
 .checkboxWrap {
   display: flex;
   align-items: center;
-  margin-bottom: 26px;
+  margin-bottom: 35px;
 }
 
 .btnSingUp {
@@ -41,15 +47,11 @@
   width: 378px;
 }
 
-.title {
-  align-self: center;
-  margin-bottom: 13px;
-}
-
 .icons {
   display: flex;
   gap: 60px;
   justify-content: center;
+
   margin-bottom: 24px;
 }
 

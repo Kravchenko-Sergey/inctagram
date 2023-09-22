@@ -1,0 +1,10 @@
+.pageWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: var(--content-height);
+  padding-right: 24px;
+  padding-left: 24px;
+}
