@@ -32,7 +32,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextFieldProps>((props, ref) =>
           {...rest}
         />
       </div>
-      <Typography variant={'regular_text_14'} as={'div'} className={s.error}>
+      <Typography variant={'regular_text_14'} as={'div'} color="error" className={s.error}>
         {error}
       </Typography>
     </div>

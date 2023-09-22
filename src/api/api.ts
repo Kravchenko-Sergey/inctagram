@@ -25,8 +25,6 @@ const baseQuery = fetchBaseQuery({
   },
 })
 
-console.log('value')
-
 const mutex = new Mutex()
 
 export const baseQueryWithReauth: BaseQueryFn<

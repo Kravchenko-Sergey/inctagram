@@ -1,0 +1,36 @@
+.header {
+  position: sticky;
+  top: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  height: 60px;
+  padding: 0 64px 0 60px;
+
+  color: var(--light-100);
+
+  background-color: black;
+  border-bottom: 1px solid var(--dark-300);
+}
+
+//.appLogo {
+//  font-size: var(--font-size-large);
+//  font-weight: var(--weight-semibold);
+//  color: var(--light-100);
+//}
+
+.menuContainer {
+  display: flex;
+  gap: 48px;
+  align-items: center;
+}
+
+// MEDIA REQUESTS
+
+@media screen and (width <= 767px) {
+  .menuContainer {
+    display: none;
+  }
+}

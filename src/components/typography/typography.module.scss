@@ -62,7 +62,7 @@
 
 .small_link,
 .small_link:visited {
-  @include typography(var(--font-size-s), var(--font-weight-regular), var(--line-height-s));
+  @include typography(var(--font-size-xs), var(--font-weight-regular), var(--line-height-s));
 
   cursor: pointer;
   color: var(--primary-500);
@@ -73,4 +73,20 @@
   @include typography(var(--font-size-xs), var(--font-weight-regular), var(--line-height-s));
 
   color: var(--danger-300);
+}
+
+.inherit {
+  color: inherit;
+}
+
+.primary {
+  color: var(--light-100);
+}
+
+.secondary {
+  color: var(--light-900);
+}
+
+.link {
+  color: var(--primary-300);
 }

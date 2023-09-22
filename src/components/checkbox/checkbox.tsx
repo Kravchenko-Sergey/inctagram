@@ -68,7 +68,7 @@ export const CheckboxItem = ({
         </LabelRadix.Root>
       </div>
       {errorMessage && (
-        <Typography variant="error" className={s.errorMessage}>
+        <Typography variant="error" color="error" className={s.errorMessage}>
           {errorMessage}
         </Typography>
       )}

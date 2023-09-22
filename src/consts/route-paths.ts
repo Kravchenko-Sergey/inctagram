@@ -12,4 +12,6 @@ export const PATH = {
   FAVORITES: '/favorites',
   PASSWORD_RECOVERY: '/auth/recover',
   LOGOUT: '/logout',
+  POLICY: '/auth/policy',
+  SERVICE: '/auth/terms',
 } as const
