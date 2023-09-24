@@ -7,6 +7,12 @@ export type LoginType = {
   accessToken?: string
 }
 
+export type RegistrationType = {
+  userName: string
+  email: string
+  password: string
+}
+
 export type RegistrationResendEmailType = {
   email: string
   baseUrl: string

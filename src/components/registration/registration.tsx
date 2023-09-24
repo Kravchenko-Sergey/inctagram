@@ -3,6 +3,7 @@ import React, { memo, useCallback, useEffect, useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
 
 import s from './registration.module.scss'
 
@@ -19,18 +20,22 @@ import { PATH } from '@/consts/route-paths'
 import { FormFields, triggerZodFieldError } from '@/helpers/updateZodErrors'
 import { useTranslation } from '@/hooks/use-translation'
 import { createRegisterSchema, RegisterFormType } from '@/schemas/registrationSchema'
-import { ErrorType } from '@/types'
+import { addErrorAC } from '@/store/app-slice'
+import { useAppSelector } from '@/store/store'
+import { RegisterError } from '@/types'
 
 export const Registration = memo(() => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { push } = useRouter()
+  const dispatch = useDispatch()
+  const err = useAppSelector(state => state.appReducer.serverError)
   const { t } = useTranslation()
-
-  const [register] = useRegistrationMutation()
+  const [register, { error }] = useRegistrationMutation()
   const {
     reset,
     formState: { errors, isValid, touchedFields },
     control,
+    setError,
     trigger,
     getValues,
     handleSubmit,
@@ -56,40 +61,51 @@ export const Registration = memo(() => {
     push(PATH.LOGIN)
   }, [push])
 
+  // useEffect(() => {
+  //   const err: any = error
+  //
+  //   if (err && err.data.messages[0].message === 'User with this email is already exist') {
+  //     dispatch(addErrorAC({ error: t.errors.emailExists, name: 'email' }))
+  //     setError('email', { type: 'email', message: t.errors.emailExists })
+  //   } else if (err && err.data.messages[0].message === 'User with this name is already exist') {
+  //     dispatch(addErrorAC({ error: t.errors.usernameExists, name: 'username' }))
+  //   }
+  // }, [dispatch, error, setError, t])
+
   const onSubmit = useCallback(
     async (data: RegisterFormType) => {
       try {
         await register({
-          username: data.username,
+          userName: data.username,
           email: data.email,
           password: data.password,
         }).unwrap()
         setIsModalOpen(true)
+        // dispatch(addErrorAC({ name: '', error: '' }))
       } catch (e: unknown) {
-        const error = e as ErrorType
-        // if (error?.data?.message === 'User with this email is already registered') {
-        //   setError('email', { type: 'email', message: t.errors.emailExists })
-        // } else if (error?.data?.message === 'User with this username is already registered') {
-        //   setError('username', { type: 'username', message: t.errors.usernameExists })
-        // } else if (error.status === 500) {
-        //   // setErrorServer('noResponse')
-        //   // dispatch(setAppError(t.errors.noResponse))
-        // } else {
-        //   // setErrorServer('requestFailed')
-        //   // dispatch(setAppError(t.errors.requestFailed))
-        // }
+        const error = e as RegisterError
+
+        if (error?.data.messages[0].message === 'User with this email is already exist') {
+          // dispatch(addErrorAC({ error: t.errors.emailExists, name: 'email' }))
+          setError('email', { type: 'email', message: t.errors.emailExists })
+        } else if (error?.data.messages[0].message === 'User with this name is already exist') {
+          setError('username', { type: 'username', message: t.errors.usernameExists })
+          // dispatch(addErrorAC({ error: t.errors.usernameExists, name: 'username' }))
+          // } else if (error.status === 500) {
+          // setErrorServer('noResponse')
+          // dispatch(setAppError(t.errors.noResponse))
+          // } else {
+          // setErrorServer('requestFailed')
+          // dispatch(setAppError(t.errors.requestFailed))
+        }
       }
     },
-    [register]
+    [register, setError, t.errors.emailExists, t.errors.usernameExists]
   )
 
   return (
     <>
       <div className={s.root}>
-        {/*<LanguageSelect />*/}
-        {/*<Typography className={s.title} variant="h1">*/}
-        {/*  {t.auth.signUp}*/}
-        {/*</Typography>*/}
         <Typography className={s.title} variant="h1">
           {t.auth.signUp}
         </Typography>
@@ -99,12 +115,18 @@ export const Registration = memo(() => {
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
-          <ControlledTextField label={t.auth.username} control={control} name={'username'} />
+          <ControlledTextField
+            label={t.auth.username}
+            // errorMessage={err.name == 'username' ? err.error : ''}
+            control={control}
+            name={'username'}
+          />
           <ControlledTextField
             // placeholder={'Epam@epam.com'}
             label={t.auth.emailLabel}
             control={control}
             name={'email'}
+            // errorMessage={err.name == 'email' ? err.error : ''}
           />
           <ControlledTextField
             type={'password'}

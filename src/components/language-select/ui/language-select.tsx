@@ -24,6 +24,7 @@ export const LanguageSelect = memo(() => {
     en: <GreatBritainComponent />,
     ru: <RussiaComponent />,
   }
+
   const options = useMemo(() => {
     return Array.isArray(locales)
       ? locales.map(el => ({

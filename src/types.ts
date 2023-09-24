@@ -8,3 +8,7 @@ export type ErrorType = {
   ]
   error: string
 }
+export type RegisterError = {
+  status: number
+  data: ErrorType
+}
