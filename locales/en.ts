@@ -1,4 +1,8 @@
+import React from 'react'
+
 import { LocaleType } from './ru'
+
+import s from '@/pages/auth/terms/terms.module.scss'
 
 export const en: LocaleType = {
   test: 'Lorem Ipsum is simply dummy text of the printing',
@@ -72,5 +76,88 @@ export const en: LocaleType = {
     expiredDescription:
       'Looks like the verification link has expired. Not to worry, we can send the link again',
     resendLink: 'Resend verification link',
+    policy: '<1>one</1> <2>two</2> <3>three</3> <4>four</4>',
+    policy1:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
+      ' magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet consectetur adipiscing elit ut aliquam' +
+      ' purus sit amet luctus. Tortovitae purus faucibus ornare suspendisse sed nisi. Dolor sit amet consectetur' +
+      ' adipiscing.',
+    policy2:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et' +
+      ' dolore' +
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
+      ' magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet consectetur adipiscing elit ut aliquam' +
+      ' purus sit amet luctus. Tortovitae purus faucibus ornare suspendisse sed nisi. Dolor sit amet consectetur' +
+      ' adipiscing.',
+    policy3:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et' +
+      ' dolore' +
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
+      ' magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet consectetur adipiscing elit ut aliquam' +
+      ' purus sit amet luctus. Tortovitae purus faucibus ornare suspendisse sed nisi. Dolor sit amet consectetur' +
+      ' adipiscing.',
+    policy4:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et' +
+      ' dolore' +
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
+      ' magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet consectetur adipiscing elit ut aliquam' +
+      ' purus sit amet luctus. Tortovitae purus faucibus ornare suspendisse sed nisi. Dolor sit amet consectetur' +
+      ' adipiscing.',
+
+    terms: '<1>one</1> <2>two</2> <3>three</3> <4>four</4>',
+
+    // '<1>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
+    // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
+    // ' magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet consectetur adipiscing elit ut aliquam' +
+    // ' purus sit amet luctus. Tortovitae purus faucibus ornare suspendisse sed nisi. Dolor sit amet consectetur' +
+    // ' adipiscing.</1>' +
+    // '<2>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
+    // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
+    // ' magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet consectetur adipiscing elit ut aliquam' +
+    // ' purus sit amet luctus. Tortovitae purus faucibus ornare suspendisse sed nisi. Dolor sit amet consectetur' +
+    // ' adipiscing.</2>' +
+    // '<3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
+    // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
+    // ' magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet consectetur adipiscing elit ut aliquam' +
+    // ' purus sit amet luctus. Tortovitae purus faucibus ornare suspendisse sed nisi. Dolor sit amet consectetur' +
+    // ' adipiscing.</2>' +
+    // '<2>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
+    // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
+    // ' magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet consectetur adipiscing elit ut aliquam' +
+    // ' purus sit amet luctus. Tortovitae purus faucibus ornare suspendisse sed nisi. Dolor sit amet consectetur' +
+    // ' adipiscing.</3>' +
+    // '<4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
+    // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
+    // ' magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet consectetur adipiscing elit ut aliquam' +
+    // ' purus sit amet luctus. Tortovitae purus faucibus ornare suspendisse sed nisi. Dolor sit amet consectetur' +
+    // ' adipiscing.</4>',
+    terms1:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
+      ' magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet consectetur adipiscing elit ut aliquam' +
+      ' purus sit amet luctus. Tortovitae purus faucibus ornare suspendisse sed nisi. Dolor sit amet consectetur' +
+      ' adipiscing.',
+    terms2:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et' +
+      ' dolore' +
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
+      ' magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet consectetur adipiscing elit ut aliquam' +
+      ' purus sit amet luctus. Tortovitae purus faucibus ornare suspendisse sed nisi. Dolor sit amet consectetur' +
+      ' adipiscing.',
+    terms3:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et' +
+      ' dolore' +
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
+      ' magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet consectetur adipiscing elit ut aliquam' +
+      ' purus sit amet luctus. Tortovitae purus faucibus ornare suspendisse sed nisi. Dolor sit amet consectetur' +
+      ' adipiscing.',
+    terms4:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et' +
+      ' dolore' +
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
+      ' magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet consectetur adipiscing elit ut aliquam' +
+      ' purus sit amet luctus. Tortovitae purus faucibus ornare suspendisse sed nisi. Dolor sit amet consectetur' +
+      ' adipiscing.',
   },
 }

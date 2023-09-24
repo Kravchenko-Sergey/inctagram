@@ -10,7 +10,9 @@ const SignUp = () => {
   return (
     <div className={s.pageWrapper}>
       <HeadMeta title={'Registration'} />
-      <Registration />
+      <div className={s.wrapper}>
+        <Registration />
+      </div>
     </div>
   )
 }
