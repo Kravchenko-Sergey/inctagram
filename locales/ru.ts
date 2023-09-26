@@ -4,6 +4,7 @@ import s from '@/pages/auth/policy/policy.module.scss'
 
 export const ru = {
   test: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати ',
+  ok: 'OK',
   languageSelect: {
     russian: 'Русский',
     english: 'Английский',
@@ -41,6 +42,7 @@ export const ru = {
     emailSent: 'Письмо с подтверждением отправлено',
     passwordLabel: 'Пароль',
     forgotPassword: 'Забыли пароль?',
+    restorePassword: 'Восстановление пароля',
     haveAccount: `Уже есть аккаунт?`,
     notHaveAccount: `Ещё нет аккаунта?`,
     signInTitle: 'Вход',
@@ -56,6 +58,8 @@ export const ru = {
     passwordRecoveryTitle: 'Забыл Пароль',
     passwordRecoveryDescription:
       'Введите свой адрес электронной почты и мы вышлем вам дальнейшие инструкции',
+    passwordRecoveryLinkSent:
+      'Ссылка для восстановление пароля была отправлена на почту. Если Вы не получили ссылку, отправьте её еще раз',
     backToLogin: 'Вернуться к Входу',
     backToRegistration: 'Вернуться к регистрации',
     sendLink: 'Отправить Ссылку',

@@ -2,7 +2,6 @@ import React, { memo, useCallback, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 
 import s from './forgot-password.module.scss'
 
@@ -12,19 +11,11 @@ import { ControlledTextField } from '@/components/controlled/controlled-text-fie
 import { Modal } from '@/components/modal'
 import { Typography } from '@/components/typography'
 import { PATH } from '@/consts/route-paths'
-
-const forgotPasswordSchema = z.object({
-  email: z
-    .string()
-    .trim()
-    .nonempty('Введите email')
-    .email('The email must match the format example@example.com')
-    .default(''),
-})
-
-export type forgotPasswordSchemaType = z.infer<typeof forgotPasswordSchema>
+import { useTranslation } from '@/hooks/use-translation'
+import { forgotPasswordSchema, forgotPasswordSchemaType } from '@/schemas/forgotPasswordSchema'
 
 const ForgotPasswordPageComponent = memo(() => {
+  const { t } = useTranslation()
   const [isLinkSent, setIsLinkSent] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const {
@@ -33,7 +24,7 @@ const ForgotPasswordPageComponent = memo(() => {
     control,
     formState: { errors, isValid },
   } = useForm<forgotPasswordSchemaType>({
-    resolver: zodResolver(forgotPasswordSchema),
+    resolver: zodResolver(forgotPasswordSchema(t)),
     mode: 'onBlur',
   })
 
@@ -52,7 +43,7 @@ const ForgotPasswordPageComponent = memo(() => {
     <>
       <Card className={s.forgotPassword}>
         <Typography variant={'h1'} className={s.title}>
-          Forgot password
+          {t.auth.restorePassword}
         </Typography>
         <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
           <ControlledTextField
@@ -62,32 +53,30 @@ const ForgotPasswordPageComponent = memo(() => {
             placeholder={'Epam@epam.com'}
           ></ControlledTextField>
           <Typography variant={'regular_text_14'} className={s.instructions}>
-            Enter your email address and we will send you further instructions
+            {t.auth.passwordRecoveryDescription}
           </Typography>
           {isLinkSent && (
-            <Typography className={s.linkSent}>
-              The link has been sent by email. If you don’t receive an email send link again
-            </Typography>
+            <Typography className={s.linkSent}>{t.auth.passwordRecoveryLinkSent}</Typography>
           )}
           <Button variant={'primary'} fullWidth={true} className={s.submitBtn} type={'submit'}>
-            <Typography variant={'semi-bold_small_text'}>Send Link</Typography>
+            <Typography variant={'semi-bold_small_text'}> {t.auth.sendLink} </Typography>
           </Button>
           <Button variant="link" href={PATH.LOGIN} className={s.returnBtn}>
-            Back to Sign In
+            {t.auth.backToLogin}
           </Button>
         </form>
       </Card>
       <Modal
         isOpen={isModalOpen}
-        title={'Email sent'}
+        title={t.auth.emailSent}
         className={s.modalContent}
         onOpenChange={handleCloseModal}
       >
         <Typography variant={'regular_text_16'}>
-          We have sent a link to confirm your email to epam@epam.com
+          {t.auth.sentCodeToEmail('epam@epam.com')}
         </Typography>
         <Button variant={'primary'} onClick={handleCloseModal}>
-          <Typography variant={'bold_text_16'}>OK</Typography>
+          <Typography variant={'bold_text_16'}>{t.ok}</Typography>
         </Button>
       </Modal>
     </>
