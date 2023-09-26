@@ -6,6 +6,7 @@ import {
   LoginType,
   RecoverPasswordType,
   RegistrationResendEmailType,
+  RegistrationType,
   UserType,
 } from './types'
 
@@ -18,7 +19,7 @@ export const authAPI = instagramAPI.injectEndpoints({
         body,
       }),
     }),
-    registration: build.mutation<void, any>({
+    registration: build.mutation<void, RegistrationType>({
       query: body => ({
         url: `auth/registration`,
         method: 'POST',

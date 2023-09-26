@@ -31,9 +31,10 @@
 //
 // export { Memo as ReactComponent }
 import { SVGProps, memo } from 'react'
+
 const GoogleIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={36} height={36} fill="none" {...props}>
-    <g clipPath="url(#a)">
+    <g>
       <path
         fill="#EA4335"
         d="M7.9 14.65A10.62 10.62 0 0 1 18 7.36c2.54 0 4.83.9 6.63 2.38l5.23-5.24a17.95 17.95 0 0 0-28 5.48l6.04 4.67Z"

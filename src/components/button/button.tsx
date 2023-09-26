@@ -22,7 +22,6 @@ export const Button = <T extends ElementType = 'button'>(props: ButtonPropsType<
     disabled,
     className,
     children,
-    buttonType,
     href,
     as: Component = 'button',
     ...restProps

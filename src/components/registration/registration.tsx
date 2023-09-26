@@ -1,9 +1,9 @@
-import React, { memo, useCallback, useState } from 'react'
+import React, { memo, useCallback, useEffect, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
+import { useDispatch } from 'react-redux'
 
 import s from './registration.module.scss'
 
@@ -14,79 +14,42 @@ import { Button } from '@/components/button'
 import { ControlledCheckbox } from '@/components/controlled/controlled-checkbox'
 import { ControlledTextField } from '@/components/controlled/controlled-text-field'
 import { Modal } from '@/components/modal'
+import { Trans } from '@/components/trans/trans'
 import { Typography } from '@/components/typography'
-import { passwordRegex, usernameRegex } from '@/consts/regex'
 import { PATH } from '@/consts/route-paths'
-import { ErrorType } from '@/types'
-
-const registrationSchema = z
-  .object({
-    username: z
-      .string()
-      .trim()
-      .nonempty('Enter Username')
-      .min(6, 'Username must be at least 6 characters')
-      .max(30, 'Maximum number of characters 30')
-      .regex(usernameRegex),
-    email: z
-      .string()
-      .trim()
-      .nonempty('Enter your email')
-      .email('The email must match the format example@example.com'),
-    password: z
-      .string()
-      .nonempty('Enter password')
-      .regex(
-        passwordRegex,
-        'Password must contain 1-9, a-z, A-Z, ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^' +
-          ' _` { | } ~'
-      )
-      .trim()
-      .min(6, 'Password must be at least 6 characters'),
-    confirm: z
-      .string()
-      .nonempty('Enter password')
-      .regex(
-        passwordRegex,
-        'Password must contain 1-9, a-z, A-Z, ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^' +
-          ' _` { | } ~'
-      )
-      .trim()
-      .min(6, 'Password must be at least 6 characters'),
-    read: z.boolean(),
-  })
-  .refine(data => data.password === data.confirm, {
-    message: 'The passwords must match',
-    path: ['confirm'],
-  })
-  .superRefine((data, ctx) => {
-    if (!data.read) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: 'Terms and Privacy Policy must be true',
-        path: ['read'],
-      })
-    }
-  })
-
-export type RegisterFormType = z.infer<typeof registrationSchema>
+import { FormFields, triggerZodFieldError } from '@/helpers/updateZodErrors'
+import { useTranslation } from '@/hooks/use-translation'
+import { createRegisterSchema, RegisterFormType } from '@/schemas/registrationSchema'
+import { addErrorAC } from '@/store/app-slice'
+import { useAppSelector } from '@/store/store'
+import { RegisterError } from '@/types'
 
 export const Registration = memo(() => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { push } = useRouter()
-  const [register] = useRegistrationMutation()
+  const dispatch = useDispatch()
+  const err = useAppSelector(state => state.appReducer.serverError)
+  const { t } = useTranslation()
+  const [register, { error }] = useRegistrationMutation()
   const {
     reset,
-    formState: { errors, isValid },
+    formState: { errors, isValid, touchedFields },
     control,
     setError,
+    trigger,
     getValues,
     handleSubmit,
   } = useForm<RegisterFormType>({
-    resolver: zodResolver(registrationSchema),
+    resolver: zodResolver(createRegisterSchema(t)),
     mode: 'onBlur',
     defaultValues: { username: '', email: '', password: '', confirm: '', read: false },
   })
+
+  useEffect(() => {
+    const touchedFieldNames: FormFields[] = Object.keys(touchedFields) as FormFields[]
+
+    triggerZodFieldError(touchedFieldNames, trigger)
+  }, [t, touchedFields, trigger])
 
   const handleCloseModal = useCallback(() => {
     setIsModalOpen(false)
@@ -98,60 +61,82 @@ export const Registration = memo(() => {
     push(PATH.LOGIN)
   }, [push])
 
+  // useEffect(() => {
+  //   const err: any = error
+  //
+  //   if (err && err.data.messages[0].message === 'User with this email is already exist') {
+  //     dispatch(addErrorAC({ error: t.errors.emailExists, name: 'email' }))
+  //     setError('email', { type: 'email', message: t.errors.emailExists })
+  //   } else if (err && err.data.messages[0].message === 'User with this name is already exist') {
+  //     dispatch(addErrorAC({ error: t.errors.usernameExists, name: 'username' }))
+  //   }
+  // }, [dispatch, error, setError, t])
+
   const onSubmit = useCallback(
     async (data: RegisterFormType) => {
       try {
         await register({
-          username: data.username,
+          userName: data.username,
           email: data.email,
           password: data.password,
         }).unwrap()
         setIsModalOpen(true)
+        // dispatch(addErrorAC({ name: '', error: '' }))
       } catch (e: unknown) {
-        const error = e as ErrorType
-        // if (error?.data?.message === 'User with this email is already registered') {
-        //   setError('email', { type: 'email', message: t.errors.emailExists })
-        // } else if (error?.data?.message === 'User with this username is already registered') {
-        //   setError('username', { type: 'username', message: t.errors.usernameExists })
-        // } else if (error.status === 500) {
-        //   // setErrorServer('noResponse')
-        //   // dispatch(setAppError(t.errors.noResponse))
-        // } else {
-        //   // setErrorServer('requestFailed')
-        //   // dispatch(setAppError(t.errors.requestFailed))
-        // }
+        const error = e as RegisterError
+
+        if (error?.data.messages[0].message === 'User with this email is already exist') {
+          // dispatch(addErrorAC({ error: t.errors.emailExists, name: 'email' }))
+          setError('email', { type: 'email', message: t.errors.emailExists })
+        } else if (error?.data.messages[0].message === 'User with this name is already exist') {
+          setError('username', { type: 'username', message: t.errors.usernameExists })
+          // dispatch(addErrorAC({ error: t.errors.usernameExists, name: 'username' }))
+          // } else if (error.status === 500) {
+          // setErrorServer('noResponse')
+          // dispatch(setAppError(t.errors.noResponse))
+          // } else {
+          // setErrorServer('requestFailed')
+          // dispatch(setAppError(t.errors.requestFailed))
+        }
       }
     },
-    [register]
+    [register, setError, t.errors.emailExists, t.errors.usernameExists]
   )
 
   return (
     <>
       <div className={s.root}>
-        <Typography variant="h1" className={s.title}>
-          Sign Up
+        <Typography className={s.title} variant="h1">
+          {t.auth.signUp}
         </Typography>
         <div className={s.icons}>
           <GoogleIcon className={s.icon} />
           <GitHubIcon className={s.icon} />
         </div>
+
         <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
-          <ControlledTextField label={'Username'} control={control} name={'username'} />
+          <ControlledTextField
+            label={t.auth.username}
+            // errorMessage={err.name == 'username' ? err.error : ''}
+            control={control}
+            name={'username'}
+          />
           <ControlledTextField
             // placeholder={'Epam@epam.com'}
-            label={'Email'}
+            label={t.auth.emailLabel}
             control={control}
             name={'email'}
+            // errorMessage={err.name == 'email' ? err.error : ''}
           />
           <ControlledTextField
             type={'password'}
-            label={'Password'}
+            label={t.auth.passwordLabel}
             control={control}
             name={'password'}
           />
           <ControlledTextField
             type={'password'}
-            label={'Password confirmation'}
+            label={t.auth.passwordConfirmation}
             control={control}
             name={'confirm'}
           />
@@ -163,17 +148,23 @@ export const Registration = memo(() => {
             />
 
             <Typography variant="small_text">
-              I agree to the{' '}
-              <Typography as={'a'} href={''} variant="small_link">
-                Terms of Service
-              </Typography>{' '}
-              and{' '}
-              <Typography as="a" href={''} variant="small_link">
-                Privacy Policy
-              </Typography>
+              <Trans
+                text={t.auth.termsPolicyLinks}
+                tags={{
+                  '1': () => (
+                    <Typography variant="small_link" href={PATH.SERVICE} color="inherit" as="a">
+                      {t.auth.termsOfService}
+                    </Typography>
+                  ),
+                  '2': () => (
+                    <Typography variant="small_link" href={PATH.POLICY} color="inherit" as="a">
+                      {t.auth.privacyPolicy}
+                    </Typography>
+                  ),
+                }}
+              />
             </Typography>
           </div>
-
           <Button
             disabled={!isValid}
             className={s.btnSingUp}
@@ -182,26 +173,26 @@ export const Registration = memo(() => {
             type={'submit'}
           >
             <Typography color="inherit" variant="h3">
-              Sign Up
+              {t.auth.signUp}
             </Typography>
           </Button>
         </form>
         <Typography className={s.footerTitle} variant="regular_text_16">
-          Do you have an account?
+          {t.auth.haveAccount}
         </Typography>
         <Button className={s.btnSignIn} variant="link" href={PATH.LOGIN} as="a" fullWidth>
-          <Typography color="primary" variant="h3">
-            Sign In
+          <Typography className={s.link} color="inherit" variant="h3">
+            {t.auth.signIn}
           </Typography>
         </Button>
       </div>
       <Modal
         isOpen={isModalOpen}
-        title={'Email sent'}
+        title={t.auth.emailSent}
         className={s.modal}
         onOpenChange={handleCloseModal}
       >
-        {/*{t.auth.sentCodeToEmail(getValues('email'))}*/}
+        {t.auth.sentCodeToEmail(getValues('email'))}
         <Button variant="primary" onClick={handleChangeModal} className={s.modalButton}>
           <Typography color="inherit" variant="h3">
             OK

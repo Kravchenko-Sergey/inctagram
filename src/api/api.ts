@@ -9,7 +9,7 @@ import { Mutex } from 'async-mutex'
 
 import { TOKEN_LOCAL_STORAGE_KEY } from '@/consts/localstorage'
 
-const baseUrl = ''
+const baseUrl = 'https://inctagram.work/api/v1/'
 
 const baseQuery = fetchBaseQuery({
   baseUrl,
@@ -24,8 +24,6 @@ const baseQuery = fetchBaseQuery({
     return headers
   },
 })
-
-console.log('value')
 
 const mutex = new Mutex()
 
@@ -51,6 +49,7 @@ export const baseQueryWithReauth: BaseQueryFn<
           extraOptions
         )
 
+        // localStorage.setItem('token', refreshResult.data.accessToken)
         if (refreshResult.meta?.response?.status === 204) {
           result = await baseQuery(args, api, extraOptions)
         } else {

@@ -8,8 +8,11 @@ export const PATH = {
   SEARCH: '/search',
   STATISTIC: '/statistic',
   REGISTRATION: '/sign-up',
-  LOGIN: '/login',
+  LOGIN: '/sign-in',
   FAVORITES: '/favorites',
   FORGOT_PASSWORD: '/auth/forgot-password',
   LOGOUT: '/logout',
+  POLICY: '/auth/policy',
+  SERVICE: '/auth/terms',
+  CONFIRM: '/auth/registration-confirmation',
 } as const
