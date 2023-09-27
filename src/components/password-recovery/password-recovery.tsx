@@ -2,7 +2,6 @@ import React, { memo } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 
 import s from './password-recovery.module.scss'
 
@@ -10,40 +9,20 @@ import { Button } from '@/components/button'
 import { Card } from '@/components/card'
 import { ControlledTextField } from '@/components/controlled/controlled-text-field'
 import { Typography } from '@/components/typography'
-import { passwordRegex } from '@/consts/regex'
-
-const passwordRecoverySchema = z.object({
-  new_password: z
-    .string()
-    .nonempty('Enter password')
-    .regex(
-      passwordRegex,
-      'Password must contain 1-9, a-z, A-Z, ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^' +
-        ' _` { | } ~'
-    )
-    .trim()
-    .min(6, 'Password must be at least 6 characters'),
-  password_confirmation: z
-    .string()
-    .nonempty('Enter password')
-    .regex(
-      passwordRegex,
-      'Password must contain 1-9, a-z, A-Z, ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^' +
-        ' _` { | } ~'
-    )
-    .trim()
-    .min(6, 'Password must be at least 6 characters'),
-})
-
-export type passwordRecoverySchemaType = z.infer<typeof passwordRecoverySchema>
+import { useTranslation } from '@/hooks/use-translation'
+import {
+  passwordRecoverySchema,
+  passwordRecoverySchemaType,
+} from '@/schemas/passwordRecoverySchema'
 
 const PasswordRecoveryPageComponent = memo(() => {
+  const { t } = useTranslation()
   const {
     handleSubmit,
     control,
     formState: { errors, isValid },
   } = useForm<passwordRecoverySchemaType>({
-    resolver: zodResolver(passwordRecoverySchema),
+    resolver: zodResolver(passwordRecoverySchema(t)),
   })
 
   const onSubmit = (data: passwordRecoverySchemaType) => {
@@ -54,7 +33,7 @@ const PasswordRecoveryPageComponent = memo(() => {
     <>
       <Card className={s.passwordRecovery}>
         <Typography variant={'h1'} className={s.title}>
-          Create New Password
+          {t.auth.newPasswordTitle}
         </Typography>
         <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
           <ControlledTextField
@@ -70,10 +49,10 @@ const PasswordRecoveryPageComponent = memo(() => {
             label={'Password confirmation'}
           ></ControlledTextField>
           <Typography variant={'regular_text_14'} className={s.instructions}>
-            Your password must be between 6 and 20 characters
+            {t.auth.newPasswordDescription}
           </Typography>
           <Button variant={'primary'} fullWidth={true} className={s.submitBtn} type={'submit'}>
-            <Typography variant={'semi-bold_small_text'}>Create new password</Typography>
+            <Typography variant={'semi-bold_small_text'}>{t.auth.newPasswordButton}</Typography>
           </Button>
         </form>
       </Card>
