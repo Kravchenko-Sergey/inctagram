@@ -9,6 +9,7 @@ import { Button } from '@/components/button'
 import { Card } from '@/components/card'
 import { ControlledTextField } from '@/components/controlled/controlled-text-field'
 import { Modal } from '@/components/modal'
+import { Recaptcha } from '@/components/recaptcha'
 import { Typography } from '@/components/typography'
 import { PATH } from '@/consts/route-paths'
 import { useTranslation } from '@/hooks/use-translation'
@@ -64,6 +65,9 @@ const ForgotPasswordPageComponent = memo(() => {
           <Button variant="link" href={PATH.LOGIN} className={s.returnBtn}>
             {t.auth.backToLogin}
           </Button>
+          <div className={s.recaptchaContainer}>
+            <Recaptcha />
+          </div>
         </form>
       </Card>
       <Modal
