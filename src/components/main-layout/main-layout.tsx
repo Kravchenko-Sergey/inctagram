@@ -22,7 +22,7 @@ export const MainLayout = ({ className, children }: LayoutProps) => {
   return (
     <div className={className}>
       <Header />
-      <main className={s.flexContainer}>
+      <div className={s.flexContainer}>
         {/*{authorized && <Sidebar />}*/}
         <Sidebar>
           {sidebarItems.map((item, index) => (
@@ -33,13 +33,13 @@ export const MainLayout = ({ className, children }: LayoutProps) => {
             >
               <>
                 {item.icon}
-                <Typography>{item.title}</Typography>
+                <Typography color="inherit">{item.title}</Typography>
               </>
             </Link>
           ))}
         </Sidebar>
         {children}
-      </main>
+      </div>
       {/*{authorized && <Footer />}*/}
     </div>
   )

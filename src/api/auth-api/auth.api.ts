@@ -95,4 +95,12 @@ export const authAPI = instagramAPI.injectEndpoints({
   }),
 })
 
-export const { useMeQuery, useRegistrationMutation } = authAPI
+export const {
+  useMeQuery,
+  useLogoutMutation,
+  useLazyGithubLoginQuery,
+  useGoogleLoginMutation,
+  useRegistrationMutation,
+  useVerifyMailMutation,
+  useResendEmailMutation,
+} = authAPI
