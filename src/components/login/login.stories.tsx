@@ -2,8 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { Login } from './'
 
-import { LoginFormValues } from '@/schemas/loginSchema'
-
 const meta = {
   title: 'Components/AUTH/Login',
   component: Login,
