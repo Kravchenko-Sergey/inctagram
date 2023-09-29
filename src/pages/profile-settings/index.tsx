@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form'
 
 import s from './profile-settings.module.scss'
 
-import { HomeOutline } from '@/assets/icons/home-outline'
 import { ImageOutline } from '@/assets/icons/image-outline'
 import { Button } from '@/components/button'
 import { ControlledTextField } from '@/components/controlled/controlled-text-field'
