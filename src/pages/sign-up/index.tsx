@@ -2,7 +2,6 @@ import React from 'react'
 
 import s from './sign-up.module.scss'
 
-import { GitHubIcon } from '@/assets/icons/github-icon'
 import { HeadMeta } from '@/components/head-meta'
 import { Registration } from '@/components/registration/registration'
 

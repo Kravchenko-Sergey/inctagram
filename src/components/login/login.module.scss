@@ -1,0 +1,52 @@
+.card {
+  width: 100%;
+  max-width: 378px;
+  padding: 24px;
+}
+
+.title {
+  padding-bottom: 13px;
+  text-align: center;
+}
+
+.icons {
+  display: flex;
+  gap: 60px;
+  justify-content: center;
+  margin-bottom: 24px;
+
+  > * {
+    cursor: pointer;
+  }
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-bottom: 36px;
+}
+
+.forgotPassLink {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 24px;
+  color: var(--light-900) !important;
+}
+
+.submitBtn {
+  padding: 4px 0;
+}
+
+.caption {
+  padding-top: 18px;
+  padding-bottom: 12px;
+  text-align: center;
+}
+
+.signUpLink {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  color: var(--primary-500) !important;
+}
