@@ -1,7 +1,7 @@
 import React, { memo, useCallback, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 
 import s from './forgot-password.module.scss'
 
@@ -17,8 +17,6 @@ import { Typography } from '@/components/typography'
 import { PATH } from '@/consts/route-paths'
 import { useTranslation } from '@/hooks/use-translation'
 import { forgotPasswordSchema, forgotPasswordSchemaType } from '@/schemas/forgotPasswordSchema'
-import { RegisterFormType } from '@/schemas/registrationSchema'
-import { RegisterError } from '@/types'
 
 const ForgotPasswordPageComponent = memo(() => {
   const { t } = useTranslation()
@@ -103,12 +101,17 @@ const ForgotPasswordPageComponent = memo(() => {
           </Button>
           <div className={s.recaptchaContainer}>
             {/*<input type="hidden" control={control} name={'recaptcha'} value={recaptchaValue} />*/}
-            <TextField
-              type={'hidden'}
-              control={control}
-              name={'recaptcha'}
-              value={recaptchaValue}
-            />
+            {/*<TextField*/}
+            {/*  type={'hidden'}*/}
+            {/*  control={control}*/}
+            {/*  name={'recaptcha'}*/}
+            {/*  value={recaptchaValue}*/}
+            {/*/>*/}
+            {/*<Controller*/}
+            {/*  name="recaptcha"*/}
+            {/*  control={control}*/}
+            {/*  render={({ field }) => <Recaptcha {...field} setRecaptcha={setRecaptcha} />}*/}
+            {/*/>*/}
             <Recaptcha setRecaptcha={setRecaptcha} />
           </div>
         </form>
