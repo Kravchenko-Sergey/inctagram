@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-import { LocaleType } from '../../locales/ru'
+import { LocaleType } from 'locales/ru'
 
 export const forgotPasswordSchema = (t: LocaleType) => {
   return z.object({
@@ -13,4 +13,4 @@ export const forgotPasswordSchema = (t: LocaleType) => {
   })
 }
 
-export type forgotPasswordSchemaType = z.infer<typeof forgotPasswordSchema>
+export type ForgotPasswordSchemaType = z.infer<ReturnType<typeof forgotPasswordSchema>>

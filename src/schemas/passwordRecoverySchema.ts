@@ -1,8 +1,7 @@
 import { z } from 'zod'
 
-import { LocaleType } from '../../locales/ru'
-
 import { passwordRegex } from '@/consts/regex'
+import { LocaleType } from 'locales/ru'
 
 export const passwordRecoverySchema = (t: LocaleType) => {
   return z.object({
@@ -16,4 +15,4 @@ export const passwordRecoverySchema = (t: LocaleType) => {
   })
 }
 
-export type passwordRecoverySchemaType = z.infer<typeof passwordRecoverySchema>
+export type PasswordRecoverySchemaType = z.infer<ReturnType<typeof passwordRecoverySchema>>

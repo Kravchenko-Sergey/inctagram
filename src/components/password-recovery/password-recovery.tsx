@@ -12,20 +12,16 @@ import { Typography } from '@/components/typography'
 import { useTranslation } from '@/hooks/use-translation'
 import {
   passwordRecoverySchema,
-  passwordRecoverySchemaType,
+  PasswordRecoverySchemaType,
 } from '@/schemas/passwordRecoverySchema'
 
 const PasswordRecoveryPageComponent = memo(() => {
   const { t } = useTranslation()
-  const {
-    handleSubmit,
-    control,
-    formState: { errors, isValid },
-  } = useForm<passwordRecoverySchemaType>({
+  const { handleSubmit, control } = useForm<PasswordRecoverySchemaType>({
     resolver: zodResolver(passwordRecoverySchema(t)),
   })
 
-  const onSubmit = (data: passwordRecoverySchemaType) => {
+  const onSubmit = (data: PasswordRecoverySchemaType) => {
     console.log(data)
   }
 
