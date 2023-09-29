@@ -1,13 +1,13 @@
 import React, { memo, useCallback, useEffect, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useGoogleLogin } from '@react-oauth/google'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
 
 import s from './registration.module.scss'
 
-import { useRegistrationMutation } from '@/api/auth-api/auth.api'
+import { useGoogleLoginMutation, useRegistrationMutation } from '@/api/auth-api/auth.api'
 import { GitHubIcon } from '@/assets/icons/github-icon'
 import { GoogleIcon } from '@/assets/icons/google-icon'
 import { Button } from '@/components/button'
@@ -20,17 +20,14 @@ import { PATH } from '@/consts/route-paths'
 import { FormFields, triggerZodFieldError } from '@/helpers/updateZodErrors'
 import { useTranslation } from '@/hooks/use-translation'
 import { createRegisterSchema, RegisterFormType } from '@/schemas/registrationSchema'
-import { addErrorAC } from '@/store/app-slice'
-import { useAppSelector } from '@/store/store'
 import { RegisterError } from '@/types'
 
 export const Registration = memo(() => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { push } = useRouter()
-  const dispatch = useDispatch()
-  const err = useAppSelector(state => state.appReducer.serverError)
   const { t } = useTranslation()
-  const [register, { error }] = useRegistrationMutation()
+  const [register] = useRegistrationMutation()
+  const [googleLogin] = useGoogleLoginMutation()
   const {
     reset,
     formState: { errors, isValid, touchedFields },
@@ -61,17 +58,6 @@ export const Registration = memo(() => {
     push(PATH.LOGIN)
   }, [push])
 
-  // useEffect(() => {
-  //   const err: any = error
-  //
-  //   if (err && err.data.messages[0].message === 'User with this email is already exist') {
-  //     dispatch(addErrorAC({ error: t.errors.emailExists, name: 'email' }))
-  //     setError('email', { type: 'email', message: t.errors.emailExists })
-  //   } else if (err && err.data.messages[0].message === 'User with this name is already exist') {
-  //     dispatch(addErrorAC({ error: t.errors.usernameExists, name: 'username' }))
-  //   }
-  // }, [dispatch, error, setError, t])
-
   const onSubmit = useCallback(
     async (data: RegisterFormType) => {
       try {
@@ -81,27 +67,23 @@ export const Registration = memo(() => {
           password: data.password,
         }).unwrap()
         setIsModalOpen(true)
-        // dispatch(addErrorAC({ name: '', error: '' }))
       } catch (e: unknown) {
         const error = e as RegisterError
 
         if (error?.data.messages[0].message === 'User with this email is already exist') {
-          // dispatch(addErrorAC({ error: t.errors.emailExists, name: 'email' }))
           setError('email', { type: 'email', message: t.errors.emailExists })
         } else if (error?.data.messages[0].message === 'User with this name is already exist') {
           setError('username', { type: 'username', message: t.errors.usernameExists })
-          // dispatch(addErrorAC({ error: t.errors.usernameExists, name: 'username' }))
-          // } else if (error.status === 500) {
-          // setErrorServer('noResponse')
-          // dispatch(setAppError(t.errors.noResponse))
-          // } else {
-          // setErrorServer('requestFailed')
-          // dispatch(setAppError(t.errors.requestFailed))
         }
       }
     },
     [register, setError, t.errors.emailExists, t.errors.usernameExists]
   )
+
+  const googleLoginAndRegister = useGoogleLogin({
+    onSuccess: tokenResponse => googleLogin({ code: tokenResponse.code }),
+    flow: 'auth-code',
+  })
 
   return (
     <>
@@ -110,24 +92,18 @@ export const Registration = memo(() => {
           {t.auth.signUp}
         </Typography>
         <div className={s.icons}>
-          <GoogleIcon className={s.icon} />
-          <GitHubIcon className={s.icon} />
+          <GoogleIcon onClick={googleLoginAndRegister as unknown as any} className={s.icon} />
+          <GitHubIcon
+            onClick={() =>
+              window.location.assign('https://inctagram.work/api/v1/auth/github/login')
+            }
+            className={s.icon}
+          />
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
-          <ControlledTextField
-            label={t.auth.username}
-            // errorMessage={err.name == 'username' ? err.error : ''}
-            control={control}
-            name={'username'}
-          />
-          <ControlledTextField
-            // placeholder={'Epam@epam.com'}
-            label={t.auth.emailLabel}
-            control={control}
-            name={'email'}
-            // errorMessage={err.name == 'email' ? err.error : ''}
-          />
+          <ControlledTextField label={t.auth.username} control={control} name={'username'} />
+          <ControlledTextField label={t.auth.emailLabel} control={control} name={'email'} />
           <ControlledTextField
             type={'password'}
             label={t.auth.passwordLabel}

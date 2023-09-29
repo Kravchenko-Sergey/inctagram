@@ -33,7 +33,7 @@ export const MainLayout = ({ className, children }: LayoutProps) => {
             >
               <>
                 {item.icon}
-                <Typography>{item.title}</Typography>
+                <Typography color="inherit">{item.title}</Typography>
               </>
             </Link>
           ))}
