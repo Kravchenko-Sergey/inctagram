@@ -1,33 +1,27 @@
-import Image from 'next/image'
+import { useLayoutEffect } from 'react'
 
-import s from './registration-confirmation.module.scss'
+import { useRouter } from 'next/router'
 
-import ConfirmImg from '@/assets/image/confirm-success.png'
-import { Button } from '@/components/button'
-import { Typography } from '@/components/typography'
-import { PATH } from '@/consts/route-paths'
-import { useTranslation } from '@/hooks/use-translation'
+import { useVerifyMailMutation } from '@/api/auth-api/auth.api'
+import { MailVerificationError } from '@/components/mail-verification-error'
+import { MailVerificationSuccess } from '@/components/mail-verification-success'
 
 const Confirm = () => {
-  const { t } = useTranslation()
+  const [verify, { isSuccess }] = useVerifyMailMutation()
+  const { query } = useRouter()
+
+  useLayoutEffect(() => {
+    verify({ confirmationCode: query.code as string })
+  }, [query.code, verify])
 
   return (
-    <div className={s.pageWrapper}>
-      <div className={s.itemWrapper}>
-        <Typography variant="h1" className={s.title}>
-          {t.auth.congratulations}
-        </Typography>
-        <Typography variant="regular_text_16" className={s.description}>
-          {t.auth.emailConfirmed}
-        </Typography>
-        <Button variant="primary" href={PATH.LOGIN} as="a" className={s.button}>
-          <Typography variant="h3" className={s.signin}>
-            {t.auth.signIn}
-          </Typography>
-        </Button>
-        <Image src={ConfirmImg} alt="successful signup" className={s.img} />
-      </div>
-    </div>
+    <>
+      {!isSuccess ? (
+        <MailVerificationError email={query.email as string} />
+      ) : (
+        <MailVerificationSuccess />
+      )}
+    </>
   )
 }
 

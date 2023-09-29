@@ -101,4 +101,6 @@ export const {
   useLazyGithubLoginQuery,
   useGoogleLoginMutation,
   useRegistrationMutation,
+  useVerifyMailMutation,
+  useResendEmailMutation,
 } = authAPI

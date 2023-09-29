@@ -9,7 +9,7 @@ import { Mutex } from 'async-mutex'
 
 import { TOKEN_LOCAL_STORAGE_KEY } from '@/consts/localstorage'
 
-const baseUrl = 'https://inctagram.work/api/v1/'
+export const baseUrl = 'https://inctagram.work/api/v1/'
 
 const baseQuery = fetchBaseQuery({
   baseUrl,

@@ -7,7 +7,7 @@ type FormType = RegisterFormType
 export type FormFields = keyof FormType
 
 /**
- * reset error messages from zod on touched by user fields (trigger validation)
+ * reset error messenger from zod on touched by user fields (trigger validation)
  * @param touchedFieldNames names from touched fields in react hook form
  * @param trigger trigger func from react hook form
  */

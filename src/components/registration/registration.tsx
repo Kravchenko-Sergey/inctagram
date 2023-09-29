@@ -2,17 +2,12 @@ import React, { memo, useCallback, useEffect, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useGoogleLogin } from '@react-oauth/google'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 
 import s from './registration.module.scss'
 
-import {
-  useLazyGithubLoginQuery,
-  useLogoutMutation,
-  useRegistrationMutation,
-} from '@/api/auth-api/auth.api'
+import { useGoogleLoginMutation, useRegistrationMutation } from '@/api/auth-api/auth.api'
 import { GitHubIcon } from '@/assets/icons/github-icon'
 import { GoogleIcon } from '@/assets/icons/google-icon'
 import { Button } from '@/components/button'
@@ -32,6 +27,7 @@ export const Registration = memo(() => {
   const { push } = useRouter()
   const { t } = useTranslation()
   const [register] = useRegistrationMutation()
+  const [googleLogin] = useGoogleLoginMutation()
   const {
     reset,
     formState: { errors, isValid, touchedFields },
@@ -85,10 +81,9 @@ export const Registration = memo(() => {
   )
 
   const googleLoginAndRegister = useGoogleLogin({
-    onSuccess: tokenResponse => console.log(tokenResponse),
+    onSuccess: tokenResponse => googleLogin({ code: tokenResponse.code }),
+    flow: 'auth-code',
   })
-  const [gitLogin] = useLazyGithubLoginQuery()
-  const [logout] = useLogoutMutation()
 
   return (
     <>
@@ -96,24 +91,19 @@ export const Registration = memo(() => {
         <Typography className={s.title} variant="h1">
           {t.auth.signUp}
         </Typography>
-        <Button onClick={() => logout()} variant="primary">
-          logout
-        </Button>
         <div className={s.icons}>
           <GoogleIcon onClick={googleLoginAndRegister as unknown as any} className={s.icon} />
-          <Link href={'https://inctagram.work/api/v1/auth/github/login'}>
-            <GitHubIcon className={s.icon} />
-          </Link>
+          <GitHubIcon
+            onClick={() =>
+              window.location.assign('https://inctagram.work/api/v1/auth/github/login')
+            }
+            className={s.icon}
+          />
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
           <ControlledTextField label={t.auth.username} control={control} name={'username'} />
-          <ControlledTextField
-            // placeholder={'Epam@epam.com'}
-            label={t.auth.emailLabel}
-            control={control}
-            name={'email'}
-          />
+          <ControlledTextField label={t.auth.emailLabel} control={control} name={'email'} />
           <ControlledTextField
             type={'password'}
             label={t.auth.passwordLabel}
