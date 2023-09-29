@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 import Image from 'next/image'
 
@@ -10,7 +10,7 @@ import { Typography } from '@/components/typography'
 import { PATH } from '@/consts/route-paths'
 import { useTranslation } from '@/hooks/use-translation'
 
-export const MailVerificationSuccess = React.memo(() => {
+export const MailVerificationSuccess = memo(() => {
   const { t } = useTranslation()
 
   return (
