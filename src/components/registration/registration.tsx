@@ -3,13 +3,11 @@ import React, { memo, useCallback, useEffect, useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
 
 import s from './registration.module.scss'
 
 import { useRegistrationMutation } from '@/api/auth-api/auth.api'
-import { GitHubIcon } from '@/assets/icons/github-icon'
-import { GoogleIcon } from '@/assets/icons/google-icon'
+import { GitHubIcon, GoogleIcon } from '@/assets/icons'
 import { Button } from '@/components/button'
 import { ControlledCheckbox } from '@/components/controlled/controlled-checkbox'
 import { ControlledTextField } from '@/components/controlled/controlled-text-field'
@@ -20,17 +18,13 @@ import { PATH } from '@/consts/route-paths'
 import { FormFields, triggerZodFieldError } from '@/helpers/updateZodErrors'
 import { useTranslation } from '@/hooks/use-translation'
 import { createRegisterSchema, RegisterFormType } from '@/schemas/registrationSchema'
-import { addErrorAC } from '@/store/app-slice'
-import { useAppSelector } from '@/store/store'
 import { RegisterError } from '@/types'
 
 export const Registration = memo(() => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { push } = useRouter()
-  const dispatch = useDispatch()
-  const err = useAppSelector(state => state.appReducer.serverError)
   const { t } = useTranslation()
-  const [register, { error }] = useRegistrationMutation()
+  const [register] = useRegistrationMutation()
   const {
     reset,
     formState: { errors, isValid, touchedFields },

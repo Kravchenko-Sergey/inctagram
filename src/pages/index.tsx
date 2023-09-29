@@ -3,14 +3,16 @@ import { useRouter } from 'next/router'
 
 import s from '../components/sidebar/sidebar.module.scss'
 
-import { BookmarkOutline } from '@/assets/icons/bookmark-outline'
-import { HomeOutline } from '@/assets/icons/home-outline'
-import { LogOutOutline } from '@/assets/icons/log-out-outline'
-import { MessageCircleOutline } from '@/assets/icons/message-circle-outline'
-import { PersonOutline } from '@/assets/icons/person-outline'
-import { PlusSquareOutline } from '@/assets/icons/plus-square-outline'
-import { SearchIcon } from '@/assets/icons/search-icon'
-import { TrendingUpOutline } from '@/assets/icons/trending-up-outline'
+import {
+  BookmarkOutline,
+  HomeOutline,
+  LogOutOutline,
+  MessageCircleOutline,
+  PersonOutline,
+  PlusSquareOutline,
+  SearchIcon,
+  TrendingUpOutline,
+} from '@/assets/icons'
 import { HeadMeta } from '@/components/head-meta'
 import { Sidebar } from '@/components/sidebar'
 import { Typography } from '@/components/typography'

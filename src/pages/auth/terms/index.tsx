@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 
 import s from './terms.module.scss'
 
-import { ArrowLeft } from '@/assets/icons/arrow-left'
+import { ArrowLeft } from '@/assets/icons'
 import { Button } from '@/components/button'
 import { Trans } from '@/components/trans/trans'
 import { Typography } from '@/components/typography'

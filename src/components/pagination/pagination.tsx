@@ -4,8 +4,7 @@ import { Select } from '../select'
 
 import s from './pagination.module.scss'
 
-import { ArrowLeft } from '@/assets/icons/arrow-left'
-import { ArrowRight } from '@/assets/icons/arrow-right'
+import { ArrowRight, ArrowLeft } from '@/assets/icons'
 import { usePagination } from '@/components/pagination/use-pagination'
 
 export type PaginationProps = {

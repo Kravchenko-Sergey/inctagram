@@ -2,13 +2,12 @@ import React, { memo } from 'react'
 
 import s from './policy.module.scss'
 
-import { ArrowLeft } from '@/assets/icons/arrow-left'
+import { ArrowLeft } from '@/assets/icons'
 import { Button } from '@/components/button'
 import { Trans } from '@/components/trans/trans'
 import { Typography } from '@/components/typography'
 import { PATH } from '@/consts/route-paths'
 import { useTranslation } from '@/hooks/use-translation'
-import Confirm from '@/pages/auth/registration-confirmation'
 
 const Policy = memo(() => {
   const { t } = useTranslation()

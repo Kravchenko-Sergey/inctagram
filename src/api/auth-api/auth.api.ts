@@ -1,5 +1,3 @@
-import { instagramAPI } from '../api'
-
 import {
   GoogleLoginType,
   LoginFormType,
@@ -9,6 +7,8 @@ import {
   RegistrationType,
   UserType,
 } from './types'
+
+import { instagramAPI } from '@/api'
 
 export const authAPI = instagramAPI.injectEndpoints({
   endpoints: build => ({

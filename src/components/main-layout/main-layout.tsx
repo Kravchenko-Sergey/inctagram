@@ -10,6 +10,7 @@ import { Header } from '@/components/header'
 import { Sidebar } from '@/components/sidebar'
 import { Typography } from '@/components/typography'
 import { sidebarItems } from '@/consts/sidebar-routes'
+
 type LayoutProps = {
   className?: string
   children?: ReactNode

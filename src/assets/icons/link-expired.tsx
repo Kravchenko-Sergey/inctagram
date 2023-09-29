@@ -1,6 +1,7 @@
 import { SVGProps, memo } from 'react'
+
 const LinkExpiredIcon = (props: SVGProps<SVGSVGElement>) => (
-  <svg width={473} height={353} fill="none">
+  <svg width={473} height={353} fill="none" {...props}>
     <path d="M473 309.72H0V309.957H473V309.72Z" fill="#4C4C4C" />
     <path d="M425.605 324.941H394.274V325.178H425.605V324.941Z" fill="#4C4C4C" />
     <path d="M313.334 327.515H305.113V327.751H313.334V327.515Z" fill="#EBEBEB" />

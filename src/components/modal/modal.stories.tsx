@@ -94,7 +94,7 @@ export const ModalWithSaveButton = {
 }
 
 export const ModalWithDoubleButton = {
-  render: (args: ModalType) => {
+  render: () => {
     const [open, setOpen] = useState(false)
     const handleModalClosed = () => {
       setOpen(false)
