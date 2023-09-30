@@ -10,6 +10,7 @@ export const forgotPasswordSchema = (t: LocaleType) => {
       .nonempty(t.errors.nonemptyEmail)
       .email(t.errors.regexEmail)
       .default(''),
+    recaptcha: z.string().trim(),
   })
 }
 

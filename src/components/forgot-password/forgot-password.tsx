@@ -18,8 +18,16 @@ import { forgotPasswordSchema, forgotPasswordSchemaType } from '@/schemas/forgot
 const ForgotPasswordPageComponent = memo(() => {
   const { t } = useTranslation()
   const [isLinkSent, setIsLinkSent] = useState(false)
+  const [recaptchaValue, setRecaptchaValue] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const setRecaptcha = value => {
+    console.log(value)
+    setRecaptchaValue(value)
+  }
+
   const {
+    register,
     reset,
     handleSubmit,
     control,
@@ -66,7 +74,8 @@ const ForgotPasswordPageComponent = memo(() => {
             {t.auth.backToLogin}
           </Button>
           <div className={s.recaptchaContainer}>
-            <Recaptcha />
+            <input type={'hidden'} value={recaptchaValue} {...register('recaptcha')} />
+            <Recaptcha setRecaptchaValue={setRecaptcha} />
           </div>
         </form>
       </Card>
