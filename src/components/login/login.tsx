@@ -4,8 +4,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 
-import s from './login.module.scss'
-
 import { useLoginMutation } from '@/api/auth-api/auth.api'
 import { GitHubIcon } from '@/assets/icons/github-icon'
 import { GoogleIcon } from '@/assets/icons/google-icon'
@@ -17,6 +15,7 @@ import { PATH } from '@/consts/route-paths'
 import { FormFields, triggerZodFieldError } from '@/helpers/updateZodErrors'
 import { useTranslation } from '@/hooks/use-translation'
 import { LoginFormValues, loginSchema } from '@/schemas/loginSchema'
+import s from './login.module.scss'
 
 type LoginProps = {
   onGoogleAuth?: () => void
