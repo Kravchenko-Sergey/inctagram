@@ -15,11 +15,11 @@ import { Typography } from '@/components/typography'
 import { PATH } from '@/consts/route-paths'
 import { useTranslation } from '@/hooks/use-translation'
 import { forgotPasswordSchema, ForgotPasswordSchemaType } from '@/schemas/forgotPasswordSchema'
-import { RegisterFormType } from '@/schemas/registrationSchema'
 import { RegisterError } from '@/types'
 
 const ForgotPasswordPageComponent = memo(() => {
   const { t } = useTranslation()
+  const [sentEmailValue, setSentEmailValue] = useState('')
   const [isLinkSent, setIsLinkSent] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const recaptchaRef = React.createRef()
@@ -35,12 +35,6 @@ const ForgotPasswordPageComponent = memo(() => {
     mode: 'onBlur',
   })
 
-  // const onSubmit = (data: ForgotPasswordSchemaType) => {
-  //   console.log(data)
-  //   setIsModalOpen(true)
-  //   setIsLinkSent(true)
-  // }
-
   const onSubmit = useCallback(
     async (data: ForgotPasswordSchemaType) => {
       try {
@@ -48,6 +42,7 @@ const ForgotPasswordPageComponent = memo(() => {
           email: data.email,
           recaptcha: data.recaptcha,
         }).unwrap()
+        setSentEmailValue(data.email)
         setIsModalOpen(true)
         setIsLinkSent(true)
       } catch (e: unknown) {
@@ -111,7 +106,7 @@ const ForgotPasswordPageComponent = memo(() => {
         onOpenChange={handleCloseModal}
       >
         <Typography variant={'regular_text_16'}>
-          {t.auth.sentCodeToEmail('epam@epam.com')}
+          {t.auth.sentCodeToEmail(sentEmailValue)}
         </Typography>
         <Button variant={'primary'} onClick={handleCloseModal}>
           <Typography variant={'bold_text_16'}>{t.ok}</Typography>
