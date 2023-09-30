@@ -60,7 +60,7 @@ export const authAPI = instagramAPI.injectEndpoints({
         url: '/auth/me',
       }),
     }),
-    checkRecoveryCode: build.mutation<void, { recoveryCode: string }>({
+    checkRecoveryCode: build.mutation<{ email: string }, { recoveryCode: string }>({
       query: (body: { recoveryCode: string }) => ({
         url: `auth/check-recovery-code`,
         method: 'POST',
@@ -95,4 +95,9 @@ export const authAPI = instagramAPI.injectEndpoints({
   }),
 })
 
-export const { useMeQuery, useRegistrationMutation } = authAPI
+export const {
+  useMeQuery,
+  useRegistrationMutation,
+  useCheckRecoveryCodeMutation,
+  useCreateNewPasswordMutation,
+} = authAPI

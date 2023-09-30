@@ -1,6 +1,4 @@
-import React, { memo } from 'react'
-
-import s from './password-recovery-result.module.scss'
+import s from './recovery-link-expired.module.scss'
 
 import { LinkExpiredIcon } from '@/assets/icons'
 import { Button } from '@/components/button'
@@ -8,7 +6,7 @@ import { Typography } from '@/components/typography'
 import { PATH } from '@/consts/route-paths'
 import { useTranslation } from '@/hooks/use-translation'
 
-const PasswordRecoveryResultPageComponent = memo(() => {
+export const RecoveryLinkExpired = () => {
   const { t } = useTranslation()
 
   return (
@@ -27,6 +25,4 @@ const PasswordRecoveryResultPageComponent = memo(() => {
       <LinkExpiredIcon />
     </div>
   )
-})
-
-export default PasswordRecoveryResultPageComponent
+}

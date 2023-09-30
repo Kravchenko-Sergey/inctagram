@@ -1,23 +1,23 @@
 import { Meta, StoryObj } from '@storybook/react'
 import { Provider } from 'react-redux'
 
-import PasswordRecoveryPageComponent from '@/components/password-recovery/password-recovery'
+import { RecoveryLinkExpired } from '@/components/recovery-link-expired/recovery-link-expired'
 import { store } from '@/store/store'
 
 const meta = {
-  title: 'Components/PasswordRecovery',
-  component: PasswordRecoveryPageComponent,
+  title: 'Components/PasswordRecoveryResult',
+  component: RecoveryLinkExpired,
   tags: ['autodocs'],
-} satisfies Meta<typeof PasswordRecoveryPageComponent>
+} satisfies Meta<typeof RecoveryLinkExpired>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const PasswordRecovery: Story = {
+export const PasswordRecoveryResult: Story = {
   render: () => {
     return (
       <Provider store={store}>
-        <PasswordRecoveryPageComponent />
+        <RecoveryLinkExpired />
       </Provider>
     )
   },
