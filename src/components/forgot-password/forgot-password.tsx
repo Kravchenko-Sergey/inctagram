@@ -61,13 +61,7 @@ const ForgotPasswordPageComponent = memo(() => {
           {isLinkSent && (
             <Typography className={s.linkSent}>{t.auth.passwordRecoveryLinkSent}</Typography>
           )}
-          <Button
-            disabled={!isValid}
-            variant={'primary'}
-            fullWidth={true}
-            className={s.submitBtn}
-            type={'submit'}
-          >
+          <Button variant={'primary'} fullWidth={true} className={s.submitBtn} type={'submit'}>
             <Typography variant={'semi-bold_small_text'}> {t.auth.sendLink} </Typography>
           </Button>
           <Button variant="link" href={PATH.LOGIN} className={s.returnBtn}>
