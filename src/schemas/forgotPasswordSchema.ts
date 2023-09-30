@@ -14,4 +14,4 @@ export const forgotPasswordSchema = (t: LocaleType) => {
   })
 }
 
-export type forgotPasswordSchemaType = z.infer<typeof forgotPasswordSchema>
+export type ForgotPasswordSchemaType = z.infer<ReturnType<typeof forgotPasswordSchema>>

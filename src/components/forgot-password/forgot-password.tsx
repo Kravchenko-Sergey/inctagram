@@ -1,7 +1,7 @@
 import React, { memo, useCallback, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 
 import s from './forgot-password.module.scss'
 
@@ -13,31 +13,25 @@ import { Recaptcha } from '@/components/recaptcha'
 import { Typography } from '@/components/typography'
 import { PATH } from '@/consts/route-paths'
 import { useTranslation } from '@/hooks/use-translation'
-import { forgotPasswordSchema, forgotPasswordSchemaType } from '@/schemas/forgotPasswordSchema'
+import { forgotPasswordSchema, ForgotPasswordSchemaType } from '@/schemas/forgotPasswordSchema'
 
 const ForgotPasswordPageComponent = memo(() => {
   const { t } = useTranslation()
   const [isLinkSent, setIsLinkSent] = useState(false)
-  const [recaptchaValue, setRecaptchaValue] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
-
-  const setRecaptcha = value => {
-    console.log(value)
-    setRecaptchaValue(value)
-  }
+  const recaptchaRef = React.createRef()
 
   const {
-    register,
     reset,
     handleSubmit,
     control,
     formState: { errors, isValid },
-  } = useForm<forgotPasswordSchemaType>({
+  } = useForm<ForgotPasswordSchemaType>({
     resolver: zodResolver(forgotPasswordSchema(t)),
     mode: 'onBlur',
   })
 
-  const onSubmit = (data: forgotPasswordSchemaType) => {
+  const onSubmit = (data: ForgotPasswordSchemaType) => {
     console.log(data)
     setIsModalOpen(true)
     setIsLinkSent(true)
@@ -67,15 +61,24 @@ const ForgotPasswordPageComponent = memo(() => {
           {isLinkSent && (
             <Typography className={s.linkSent}>{t.auth.passwordRecoveryLinkSent}</Typography>
           )}
-          <Button variant={'primary'} fullWidth={true} className={s.submitBtn} type={'submit'}>
+          <Button
+            disabled={!isValid}
+            variant={'primary'}
+            fullWidth={true}
+            className={s.submitBtn}
+            type={'submit'}
+          >
             <Typography variant={'semi-bold_small_text'}> {t.auth.sendLink} </Typography>
           </Button>
           <Button variant="link" href={PATH.LOGIN} className={s.returnBtn}>
             {t.auth.backToLogin}
           </Button>
           <div className={s.recaptchaContainer}>
-            <input type={'hidden'} value={recaptchaValue} {...register('recaptcha')} />
-            <Recaptcha setRecaptchaValue={setRecaptcha} />
+            <Controller
+              name="recaptcha"
+              control={control}
+              render={({ field }) => <Recaptcha ref={recaptchaRef} {...field} />}
+            />
           </div>
         </form>
       </Card>
