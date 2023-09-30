@@ -42,7 +42,6 @@ export const Login: FC<LoginProps> = ({ onGoogleAuth, onGithubAuth }) => {
   })
 
   const onSubmit = (data: LoginFormValues) => {
-    console.log(data)
     signIn(data)
       .unwrap()
       .then(() => {
