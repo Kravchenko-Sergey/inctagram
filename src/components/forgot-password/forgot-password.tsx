@@ -5,6 +5,7 @@ import { Controller, useForm } from 'react-hook-form'
 
 import s from './forgot-password.module.scss'
 
+import { useRecoverPasswordMutation } from '@/api/auth-api/auth.api'
 import { Button } from '@/components/button'
 import { Card } from '@/components/card'
 import { ControlledTextField } from '@/components/controlled/controlled-text-field'
@@ -14,12 +15,15 @@ import { Typography } from '@/components/typography'
 import { PATH } from '@/consts/route-paths'
 import { useTranslation } from '@/hooks/use-translation'
 import { forgotPasswordSchema, ForgotPasswordSchemaType } from '@/schemas/forgotPasswordSchema'
+import { RegisterFormType } from '@/schemas/registrationSchema'
+import { RegisterError } from '@/types'
 
 const ForgotPasswordPageComponent = memo(() => {
   const { t } = useTranslation()
   const [isLinkSent, setIsLinkSent] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const recaptchaRef = React.createRef()
+  const [recover] = useRecoverPasswordMutation()
 
   const {
     reset,
@@ -31,11 +35,29 @@ const ForgotPasswordPageComponent = memo(() => {
     mode: 'onBlur',
   })
 
-  const onSubmit = (data: ForgotPasswordSchemaType) => {
-    console.log(data)
-    setIsModalOpen(true)
-    setIsLinkSent(true)
-  }
+  // const onSubmit = (data: ForgotPasswordSchemaType) => {
+  //   console.log(data)
+  //   setIsModalOpen(true)
+  //   setIsLinkSent(true)
+  // }
+
+  const onSubmit = useCallback(
+    async (data: ForgotPasswordSchemaType) => {
+      try {
+        await recover({
+          email: data.email,
+          recaptcha: data.recaptcha,
+        }).unwrap()
+        setIsModalOpen(true)
+        setIsLinkSent(true)
+      } catch (e: unknown) {
+        const error = e as RegisterError
+
+        console.log(error)
+      }
+    },
+    [recover]
+  )
 
   const handleCloseModal = useCallback(() => {
     setIsModalOpen(false)
@@ -61,7 +83,13 @@ const ForgotPasswordPageComponent = memo(() => {
           {isLinkSent && (
             <Typography className={s.linkSent}>{t.auth.passwordRecoveryLinkSent}</Typography>
           )}
-          <Button variant={'primary'} fullWidth={true} className={s.submitBtn} type={'submit'}>
+          <Button
+            disabled={!isValid}
+            variant={'primary'}
+            fullWidth={true}
+            className={s.submitBtn}
+            type={'submit'}
+          >
             <Typography variant={'semi-bold_small_text'}> {t.auth.sendLink} </Typography>
           </Button>
           <Button variant="link" href={PATH.LOGIN} className={s.returnBtn}>
