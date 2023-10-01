@@ -16,6 +16,7 @@ export const en: LocaleType = {
     regexUsername: 'Username must contain  1-9, a-z, A-Z, . _ -',
     regexFirstname: 'Firstname must contain a-z, A-Z',
     regexLastname: 'Lastname must contain a-z, A-Z',
+    regexAboutMe: 'Field must contain 1-9, a-z, A-Z, . _ -',
     nonemptyUsername: 'Enter your Username',
     nonemptyFirstname: 'Enter your name',
     nonemptyLastname: 'Enter your last name',
@@ -26,6 +27,7 @@ export const en: LocaleType = {
       `The maximum length of the name must not exceed ${max} characters`,
     maxLastname: (max: number) =>
       `The maximum length of the last name must not exceed ${max} characters`,
+    maxFieldLength: (max: number) => `Maximum number of characters - ${max}`,
     regexEmail: 'The email must match the format example@example.com',
     nonemptyEmail: 'Enter your email',
     nonemptyPassword: 'Enter your password',

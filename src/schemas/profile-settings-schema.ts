@@ -25,13 +25,14 @@ export const profileSettingsSchema = (t: LocaleType) => {
       .nonempty(t.errors.nonemptyLastname)
       .max(50, t.errors.maxLastname(50))
       .regex(lastNameRegex, t.errors.regexLastname),
-    dateOfBirth: z.string().datetime(),
+    /*dateOfBirth: z.string().datetime(),*/
     city: z.string(),
     aboutMe: z
       .string()
       .trim()
-      .max(200, t.errors.maxUsername(200))
-      .regex(aboutMeRegex, t.errors.regexUsername),
+      .max(200, t.errors.maxFieldLength(200))
+      .regex(aboutMeRegex, t.errors.regexAboutMe)
+      .optional(),
   })
 }
 

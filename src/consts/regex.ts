@@ -3,4 +3,4 @@ export const passwordRegex: RegExp =
 export const usernameRegex: RegExp = /^[0-9A-Za-z.\-_]+$/
 export const firstNameRegex = /[A-Za-zА-Яа-я]/
 export const lastNameRegex = /[A-Za-zА-Яа-я]/
-export const aboutMeRegex = /[0-9A-Za-zА-Яа-я\s\S]/
+export const aboutMeRegex = /[0-9A-Za-zА-Яа-я\s\S]|/
