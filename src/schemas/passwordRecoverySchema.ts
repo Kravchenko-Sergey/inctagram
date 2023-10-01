@@ -5,13 +5,13 @@ import { LocaleType } from 'locales/ru'
 
 export const passwordRecoverySchema = (t: LocaleType) => {
   return z.object({
-    new_password: z
+    newPassword: z
       .string()
       .nonempty(t.errors.nonemptyPassword)
       .regex(passwordRegex, t.errors.regexPasswordMustContain)
       .trim()
       .min(6, t.errors.minPassword(6)),
-    password_confirmation: z.string().nonempty(t.errors.nonemptyConfirm).trim(),
+    passwordConfirmation: z.string().nonempty(t.errors.nonemptyConfirm).trim(),
   })
 }
 

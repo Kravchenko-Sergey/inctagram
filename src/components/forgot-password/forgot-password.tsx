@@ -1,9 +1,7 @@
-import React, { memo, useCallback, useState } from 'react'
+import { memo, useCallback, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-
-import s from './forgot-password.module.scss'
 
 import { Button } from '@/components/button'
 import { Card } from '@/components/card'
@@ -15,16 +13,13 @@ import { PATH } from '@/consts/route-paths'
 import { useTranslation } from '@/hooks/use-translation'
 import { forgotPasswordSchema, ForgotPasswordSchemaType } from '@/schemas/forgotPasswordSchema'
 
+import s from './forgot-password.module.scss'
+
 const ForgotPasswordPageComponent = memo(() => {
   const { t } = useTranslation()
   const [isLinkSent, setIsLinkSent] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const {
-    reset,
-    handleSubmit,
-    control,
-    formState: { errors, isValid },
-  } = useForm<ForgotPasswordSchemaType>({
+  const { reset, handleSubmit, control } = useForm<ForgotPasswordSchemaType>({
     resolver: zodResolver(forgotPasswordSchema(t)),
     mode: 'onBlur',
   })
@@ -43,24 +38,24 @@ const ForgotPasswordPageComponent = memo(() => {
   return (
     <>
       <Card className={s.forgotPassword}>
-        <Typography variant={'h1'} className={s.title}>
+        <Typography variant="h1" className={s.title}>
           {t.auth.restorePassword}
         </Typography>
         <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
           <ControlledTextField
             control={control}
-            name={'email'}
-            label={'Email'}
-            placeholder={'Epam@epam.com'}
-          ></ControlledTextField>
-          <Typography variant={'regular_text_14'} className={s.instructions}>
+            name="email"
+            label="Email"
+            placeholder="example@epam.com"
+          />
+          <Typography variant="regular_text_14" className={s.instructions}>
             {t.auth.passwordRecoveryDescription}
           </Typography>
           {isLinkSent && (
             <Typography className={s.linkSent}>{t.auth.passwordRecoveryLinkSent}</Typography>
           )}
-          <Button variant={'primary'} fullWidth={true} className={s.submitBtn} type={'submit'}>
-            <Typography variant={'semi-bold_small_text'}> {t.auth.sendLink} </Typography>
+          <Button variant="primary" fullWidth={true} className={s.submitBtn} type={'submit'}>
+            <Typography variant="semi-bold_small_text"> {t.auth.sendLink} </Typography>
           </Button>
           <Button as="a" variant="link" href={PATH.LOGIN} className={s.returnBtn}>
             {t.auth.backToLogin}
@@ -76,11 +71,9 @@ const ForgotPasswordPageComponent = memo(() => {
         className={s.modalContent}
         onOpenChange={handleCloseModal}
       >
-        <Typography variant={'regular_text_16'}>
-          {t.auth.sentCodeToEmail('epam@epam.com')}
-        </Typography>
-        <Button variant={'primary'} onClick={handleCloseModal}>
-          <Typography variant={'bold_text_16'}>{t.ok}</Typography>
+        <Typography variant="regular_text_16">{t.auth.sentCodeToEmail('epam@epam.com')}</Typography>
+        <Button variant="primary" onClick={handleCloseModal}>
+          <Typography variant="bold_text_16">{t.ok}</Typography>
         </Button>
       </Modal>
     </>

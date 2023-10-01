@@ -1,8 +1,4 @@
-import React from 'react'
-
 import { LocaleType } from './ru'
-
-import s from '@/pages/auth/terms/terms.module.scss'
 
 export const en: LocaleType = {
   test: 'Lorem Ipsum is simply dummy text of the printing',
@@ -20,7 +16,6 @@ export const en: LocaleType = {
     loginIncorrectPassword: `The password is incorrect. Try again please`,
     regexUsername: 'Username must contain  1-9, a-z, A-Z, . _ -',
     nonemptyUsername: 'Enter your Username',
-    // minUsername: 'Username must be at least 6 characters',
     minUsername: (min: number) => `Username must be at least ${min} characters`,
     maxUsername: (max: number) => `Maximum number of characters  ${max}`,
     regexEmail: 'The email must match the format example@example.com',
@@ -38,6 +33,7 @@ export const en: LocaleType = {
     emailExists: 'User with this email is already registered',
     usernameExists: 'User with this username is already registered',
   },
+
   auth: {
     emailLabel: 'Email',
     emailSent: 'Email Sent',
@@ -67,6 +63,7 @@ export const en: LocaleType = {
     sendLinkAgain: 'Send Link Again',
     sendLoader: 'Sending...',
     signupLoader: 'Signing Up...',
+    newPassword: 'New password',
     newPasswordTitle: 'Create New Password',
     newPasswordButton: 'Create new password',
     newPasswordDescription: 'Your password must be between 6 and 20 characters',
@@ -79,7 +76,8 @@ export const en: LocaleType = {
     emailExpired: 'Email verification link expired',
     expiredDescription:
       'Looks like the verification link has expired. Not to worry, we can send the link again',
-    resendLink: 'Resend verification link',
+    resendVerificationLink: 'Resend verification link',
+    resendLink: 'Resend link',
     policy: '<1>one</1> <2>two</2> <3>three</3> <4>four</4>',
     policy1:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
@@ -108,34 +106,7 @@ export const en: LocaleType = {
       ' magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet consectetur adipiscing elit ut aliquam' +
       ' purus sit amet luctus. Tortovitae purus faucibus ornare suspendisse sed nisi. Dolor sit amet consectetur' +
       ' adipiscing.',
-
     terms: '<1>one</1> <2>two</2> <3>three</3> <4>four</4>',
-
-    // '<1>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
-    // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
-    // ' magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet consectetur adipiscing elit ut aliquam' +
-    // ' purus sit amet luctus. Tortovitae purus faucibus ornare suspendisse sed nisi. Dolor sit amet consectetur' +
-    // ' adipiscing.</1>' +
-    // '<2>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
-    // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
-    // ' magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet consectetur adipiscing elit ut aliquam' +
-    // ' purus sit amet luctus. Tortovitae purus faucibus ornare suspendisse sed nisi. Dolor sit amet consectetur' +
-    // ' adipiscing.</2>' +
-    // '<3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
-    // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
-    // ' magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet consectetur adipiscing elit ut aliquam' +
-    // ' purus sit amet luctus. Tortovitae purus faucibus ornare suspendisse sed nisi. Dolor sit amet consectetur' +
-    // ' adipiscing.</2>' +
-    // '<2>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
-    // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
-    // ' magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet consectetur adipiscing elit ut aliquam' +
-    // ' purus sit amet luctus. Tortovitae purus faucibus ornare suspendisse sed nisi. Dolor sit amet consectetur' +
-    // ' adipiscing.</3>' +
-    // '<4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
-    // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
-    // ' magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet consectetur adipiscing elit ut aliquam' +
-    // ' purus sit amet luctus. Tortovitae purus faucibus ornare suspendisse sed nisi. Dolor sit amet consectetur' +
-    // ' adipiscing.</4>',
     terms1:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +

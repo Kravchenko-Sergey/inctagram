@@ -54,3 +54,12 @@ export const AsLink: Story = {
     href: '',
   },
 }
+
+export const LinkAsButton: Story = {
+  args: {
+    variant: 'link-btn',
+    children: 'Button as link',
+    as: 'a',
+    href: '',
+  },
+}

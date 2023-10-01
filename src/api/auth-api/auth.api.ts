@@ -67,7 +67,6 @@ export const authAPI = instagramAPI.injectEndpoints({
         body,
       }),
     }),
-
     createNewPassword: build.mutation<void, { newPassword: string; recoveryCode: string }>({
       query: (body: { newPassword: string; recoveryCode: string }) => ({
         url: '/auth/new-password',

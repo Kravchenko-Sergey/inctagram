@@ -15,7 +15,8 @@ type ExpectedQuery = {
 
 const Recovery = () => {
   const { query, isReady } = useRouter()
-  const [checkRecoveryCode, { isLoading, data, isError }] = useCheckRecoveryCodeMutation()
+  const [checkRecoveryCode, { isLoading, data, isError, isUninitialized }] =
+    useCheckRecoveryCodeMutation()
 
   const isValidQuery = checkValidQuery<ExpectedQuery>(query)
 
@@ -29,11 +30,9 @@ const Recovery = () => {
     }
 
     fetch()
-    // need to request only for initial render
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [checkRecoveryCode, isReady, isValidQuery, query.code])
 
-  if (isLoading || !isReady) {
+  if (isLoading || !isReady || isUninitialized) {
     // TODO Replace with custom loader
     return <div>Loading...</div>
   }
