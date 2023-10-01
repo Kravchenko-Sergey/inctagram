@@ -3,22 +3,24 @@
   padding: 36px 64px 26px 24px;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-}
-
-.fortContent {
+.formContent {
   display: flex;
   gap: 40px;
+}
 
-  margin-bottom: 24px;
-  padding-bottom: 24px;
+.form {
+  position: relative;
 
-  border-bottom: 1px solid var(--dark-300);
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  padding-top: 24px;
 }
 
 .userImageBox {
+  position: relative;
+
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -51,6 +53,46 @@
   margin-bottom: 24px;
 }
 
+.textArea {
+  width: 100%;
+  background-color: inherit;
+  border: none;
+
+  :active {
+    border: none;
+  }
+
+  :focus {
+    border: none;
+  }
+}
+
+.line {
+  position: absolute;
+  right: 0;
+  bottom: 36px;
+
+  width: 100%;
+  height: 1px;
+  margin-bottom: 24px;
+
+  background-color: var(--dark-300);
+}
+
+.line2 {
+  position: absolute;
+  right: 0;
+  bottom: 36px;
+  left: 0;
+
+  width: 120%;
+  height: 1px;
+  margin-bottom: 24px;
+
+  background-color: var(--dark-300);
+}
+
 .submitBtn {
   align-self: end;
+  margin-top: 48px;
 }
