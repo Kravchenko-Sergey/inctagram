@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -8,10 +8,10 @@ import s from './profile-settings.module.scss'
 import { useUpdateProfileMutation } from '@/api/profile-api/profile.api'
 import { ImageOutline } from '@/assets/icons/image-outline'
 import { Button } from '@/components/button'
+import { ControlledTextArea } from '@/components/controlled/controlled-text-area'
 import { ControlledTextField } from '@/components/controlled/controlled-text-field'
 import { Select } from '@/components/select'
 import { Tabs } from '@/components/tabs'
-import TextArea from '@/components/text-area/text-area'
 import { FormFields, triggerZodFieldError } from '@/helpers/updateZodErrors'
 import { useTranslation } from '@/hooks/use-translation'
 import { ProfileSettingsFormValues, profileSettingsSchema } from '@/schemas/profile-settings-schema'
@@ -28,6 +28,7 @@ const Index = () => {
     { value: 'tab4', title: t.profile.myPayments },
   ]
 
+  const [city, setCity] = useState('City')
   const cityOptions = [
     {
       value: 'Apple',
@@ -38,18 +39,6 @@ const Index = () => {
       label: 'Banana',
     },
   ]
-
-  const onSubmit = (data: ProfileSettingsFormValues) => {
-    console.log(data)
-    updateProfile({
-      userName: data.userName,
-      firstName: data.firstName,
-      lastName: data.lastName,
-      city: data.city,
-      dateOfBirth: data.dateOfBirth,
-      aboutMe: data.aboutMe,
-    })
-  }
 
   const {
     handleSubmit,
@@ -64,10 +53,22 @@ const Index = () => {
       firstName: '',
       lastName: '',
       city: '',
-      dateOfBirth: '',
+      /*dateOfBirth: '',*/
       aboutMe: '',
     },
   })
+
+  const onSubmit = (data: ProfileSettingsFormValues) => {
+    console.log(data)
+    updateProfile({
+      userName: data.userName,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      city: data.city,
+      /*dateOfBirth: data.dateOfBirth,*/
+      aboutMe: data.aboutMe || '',
+    })
+  }
 
   useEffect(() => {
     const touchedFieldNames: FormFields[] = Object.keys(touchedFields) as FormFields[]
@@ -80,32 +81,38 @@ const Index = () => {
       <div>
         <Tabs tabsList={profileTabs} />
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
-        <div className={s.fortContent}>
-          <div className={s.userImageBox}>
-            <div className={s.userImage}>
-              <ImageOutline />
-            </div>
-            <Button variant={'ghost'}>{t.profile.addAvatar}</Button>
+      <div className={s.formContent}>
+        <div className={s.userImageBox}>
+          <div className={s.userImage}>
+            <ImageOutline />
           </div>
-          <div className={s.userInfo}>
-            <ControlledTextField control={control} name="userName" label={t.auth.username} />
-            <ControlledTextField control={control} name="firstName" label={t.profile.firstName} />
-            <ControlledTextField control={control} name="lastName" label={t.profile.lastName} />
-            <Select
-              options={cityOptions}
-              value={'City'}
-              onChange={() => {}}
-              label={t.profile.citySelect}
-              className={s.select}
-            />
-            <TextArea label={t.profile.aboutMe} />
-          </div>
+          <Button variant={'ghost'}>{t.profile.addAvatar}</Button>
+          <div className={s.line2}></div>
         </div>
-        <Button variant="primary" className={s.submitBtn}>
-          {t.profile.saveChanges}
-        </Button>
-      </form>
+        <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
+          <ControlledTextField control={control} name="userName" label={t.auth.username} />
+          <ControlledTextField control={control} name="firstName" label={t.profile.firstName} />
+          <ControlledTextField control={control} name="lastName" label={t.profile.lastName} />
+          <Select
+            name="city"
+            options={cityOptions}
+            value={city}
+            onChange={setCity}
+            label={t.profile.citySelect}
+            className={s.select}
+          />
+          <ControlledTextArea
+            name="aboutMe"
+            control={control}
+            label={t.profile.aboutMe}
+            className={s.textArea}
+          />
+          <div className={s.line}></div>
+          <Button variant="primary" className={s.submitBtn}>
+            {t.profile.saveChanges}
+          </Button>
+        </form>
+      </div>
     </div>
   )
 }
