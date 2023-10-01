@@ -1,3 +1,4 @@
+import { GoogleOAuthProvider } from '@react-oauth/google'
 import type { AppProps } from 'next/app'
 import { Inter } from 'next/font/google'
 import '@/styles/index.scss'
@@ -25,11 +26,12 @@ export default function App({ Component, pageProps }: AppProps) {
           font-family: ${inter.style.fontFamily};
         }
       `}</style>
-
       <Provider store={store}>
-        <MainLayout className={inter.className}>
-          <Component {...pageProps} />
-        </MainLayout>
+        <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_ID ?? ''}>
+          <MainLayout className={inter.className}>
+            <Component {...pageProps} />
+          </MainLayout>
+        </GoogleOAuthProvider>
       </Provider>
     </>
   )

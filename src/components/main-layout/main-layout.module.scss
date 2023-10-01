@@ -33,7 +33,15 @@
   }
 
   &:focus {
-    border: 2px solid var(--primary-700);
+    // border: 2px solid var(--primary-700);
     border-radius: 2px;
   }
+}
+
+.active {
+  color: var(--primary-700);
+}
+
+.active svg {
+  color: var(--primary-700);
 }

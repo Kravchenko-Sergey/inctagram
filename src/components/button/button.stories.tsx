@@ -8,7 +8,7 @@ const meta = {
   tags: ['autodocs'],
   argTypes: {
     variant: {
-      options: ['primary', 'secondary', 'ghost', 'link'],
+      options: ['primary', 'secondary', 'ghost', 'link', 'link-btn'],
       control: { type: 'radio' },
     },
   },

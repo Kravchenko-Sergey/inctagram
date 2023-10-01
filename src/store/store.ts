@@ -4,14 +4,12 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
 import { instagramAPI } from '@/api'
 import { authAPI } from '@/api/auth-api/auth.api'
-import { appReducer } from '@/store/app-slice'
 
 // import { auth-api } from '@/features/auth/api/auth.api'
 // import { instagramAPI } from '@/store/api'
 
 export const store = configureStore({
   reducer: {
-    appReducer,
     [authAPI.reducerPath]: authAPI.reducer,
   },
   devTools: true,

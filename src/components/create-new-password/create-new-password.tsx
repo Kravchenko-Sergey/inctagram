@@ -25,23 +25,18 @@ export const CreateNewPassword: FC<CreateNewPasswordProps> = ({ code: recoveryCo
   const {
     handleSubmit,
     control,
-    setError,
     formState: { isValid },
   } = useForm<PasswordRecoverySchemaType>({
     resolver: zodResolver(passwordRecoverySchema(t)),
+    mode: 'onBlur',
   })
   const [createNewPassword] = useCreateNewPasswordMutation()
 
-  const onSubmit = async ({ newPassword, passwordConfirmation }: PasswordRecoverySchemaType) => {
+  const onSubmit = async ({ newPassword }: PasswordRecoverySchemaType) => {
     try {
-      if (newPassword !== passwordConfirmation) {
-        setError('passwordConfirmation', { message: t.errors.passwordsMustMatch })
-
-        return
-      }
       await createNewPassword({ newPassword, recoveryCode })
     } catch (error) {
-      throw new Error() // TODO display error notification
+      console.log('Error occured', error) // TODO display error notification
     }
   }
 
@@ -68,9 +63,9 @@ export const CreateNewPassword: FC<CreateNewPasswordProps> = ({ code: recoveryCo
         </Typography>
         <Button
           variant="primary"
-          fullWidth={true}
+          fullWidth
           className={s.submitBtn}
-          type={'submit'}
+          type="submit"
           disabled={!isValid}
         >
           <Typography variant="semi-bold_small_text">{t.auth.newPasswordButton}</Typography>

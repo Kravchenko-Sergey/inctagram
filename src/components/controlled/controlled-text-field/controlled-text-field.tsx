@@ -4,7 +4,6 @@ import { TextField } from '@/components/text-field'
 import { InputPropsType } from '@/components/text-field/text-field'
 
 type Props<T extends FieldValues> = {
-  errorMessage?: string
   control: Control<T>
   name: FieldPath<T>
 } & Omit<InputPropsType, 'onChange' | 'value'>

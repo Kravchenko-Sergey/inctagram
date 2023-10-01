@@ -96,7 +96,13 @@ export const authAPI = instagramAPI.injectEndpoints({
 
 export const {
   useMeQuery,
+  useLogoutMutation,
+  useLazyGithubLoginQuery,
+  useGoogleLoginMutation,
   useRegistrationMutation,
+  useVerifyMailMutation,
+  useResendEmailMutation,
+  useRecoverPasswordMutation,
   useCheckRecoveryCodeMutation,
   useCreateNewPasswordMutation,
 } = authAPI
