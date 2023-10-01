@@ -11,7 +11,7 @@ export type GetProfileResponse = {
   firstName: string
   lastName: string
   city: string
-  dateOfBirth: string
+  /*dateOfBirth: string*/
   aboutMe: string
   avatars: Avatar[]
 }
