@@ -11,10 +11,10 @@ import { clsx } from 'clsx'
 
 import s from './text-field.module.scss'
 
-import { Eye } from '@/src/assets/icons/eye'
-import { EyeClosed } from '@/src/assets/icons/eye-closed'
-import { SearchIcon } from '@/src/assets/icons/search-icon'
-import { Typography } from '@/src/components/typography'
+import { Eye } from '@/assets/icons/eye'
+import { EyeClosed } from '@/assets/icons/eye-closed'
+import { SearchIcon } from '@/assets/icons/search-icon'
+import { Typography } from '@/components/typography'
 
 export type InputPropsType = {
   label?: string
@@ -104,7 +104,7 @@ export const TextField = forwardRef<HTMLInputElement, InputPropsType>(
         <div className={s.errorContainer}>
           {error && (
             <div style={{ margin: '4px 0' }}>
-              <Typography color="error" variant="small_text">
+              <Typography color="error" variant="error">
                 {error}
               </Typography>
             </div>

@@ -6,12 +6,13 @@ import { Typography } from '../typography'
 
 import s from './checkbox.module.scss'
 
-import { Check } from '@/src/assets/icons/check'
+import { Check } from '@/assets/icons/check'
 
 export type CheckboxProps = {
   className?: string
   checked?: boolean
   onChange?: (checked: boolean) => void
+  onBlur?: () => void
   disabled?: boolean
   required?: boolean
   label?: string
@@ -27,6 +28,7 @@ export const CheckboxItem = ({
   required,
   position,
   className,
+  onBlur,
   label,
   id,
   errorMessage,
@@ -46,6 +48,7 @@ export const CheckboxItem = ({
           <Typography className={s.wrap} as={'label'} variant="regular_text_14">
             <div className={classNames.buttonWrapper}>
               <CheckboxRadix.Root
+                onBlur={onBlur}
                 className={classNames.root}
                 checked={checked}
                 onCheckedChange={onChange}
@@ -65,7 +68,7 @@ export const CheckboxItem = ({
         </LabelRadix.Root>
       </div>
       {errorMessage && (
-        <Typography variant="error" className={s.errorMessage}>
+        <Typography variant="error" color="error" className={s.errorMessage}>
           {errorMessage}
         </Typography>
       )}

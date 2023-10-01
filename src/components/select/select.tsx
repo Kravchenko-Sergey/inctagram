@@ -7,7 +7,7 @@ import { Typography } from '../typography'
 
 import s from './select.module.scss'
 
-import { ArrowDownIcon } from '@/src/assets/icons/arrow-down'
+import { ArrowDownIcon } from '@/assets/icons/arrow-down'
 
 export type Option = { label: string | ReactElement; value: string }
 
@@ -25,7 +25,7 @@ type CommonProps = {
   placeholder?: string | ReactElement
   required?: boolean
   variant?: 'primary' | 'pagination'
-  options: Array<Option>
+  options: Option[]
   portal?: boolean
   errorMessage?: string
   label?: string
@@ -78,7 +78,7 @@ export const Select: FC<SelectProps> = ({
           <SelectRadix.Content className={classNames.content} position={'popper'}>
             {options.map(option => (
               <SelectRadix.Item value={option.value} className={classNames.item} key={option.value}>
-                <Typography as="span" className={s.active} color="secondary">
+                <Typography as="span" className={s.active}>
                   {option.label}
                 </Typography>
               </SelectRadix.Item>
