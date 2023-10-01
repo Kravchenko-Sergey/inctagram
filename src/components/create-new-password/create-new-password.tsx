@@ -1,6 +1,6 @@
-import { FC } from 'react'
-
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/router'
+import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { useCreateNewPasswordMutation } from '@/api/auth-api/auth.api'
@@ -8,6 +8,7 @@ import { Button } from '@/components/button'
 import { Card } from '@/components/card'
 import { ControlledTextField } from '@/components/controlled/controlled-text-field'
 import { Typography } from '@/components/typography'
+import { PATH } from '@/consts/route-paths'
 import { useTranslation } from '@/hooks/use-translation'
 import {
   passwordRecoverySchema,
@@ -22,6 +23,7 @@ type CreateNewPasswordProps = {
 
 export const CreateNewPassword: FC<CreateNewPasswordProps> = ({ code: recoveryCode }) => {
   const { t } = useTranslation()
+  const { push } = useRouter()
   const {
     handleSubmit,
     control,
@@ -35,6 +37,7 @@ export const CreateNewPassword: FC<CreateNewPasswordProps> = ({ code: recoveryCo
   const onSubmit = async ({ newPassword }: PasswordRecoverySchemaType) => {
     try {
       await createNewPassword({ newPassword, recoveryCode })
+      push(PATH.LOGIN)
     } catch (error) {
       console.log('Error occured', error) // TODO display error notification
     }
