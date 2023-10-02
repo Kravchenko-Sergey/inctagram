@@ -18,26 +18,42 @@
 
 .inputContainer {
   position: relative;
+
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+
+  padding: 6px 12px;
+
+  background: var(--dark-500);
+  border: 1px solid var(--dark-300);
+  border-radius: 2px;
 }
 
 .icon {
   position: absolute;
   top: 6px;
   right: 12px;
-  color: var(--color-text-primary);
+
+  // color: red;
 
   &.disabled {
-    color: var(--color-text-disabled);
+    //  color: var(--color-text-disabled);
   }
 }
 
 .input {
   position: relative;
   width: 100%;
+  color: var(--light-100);
+
+  &:hover {
+    color: var(--light-100);
+  }
 
   &.error {
-    color: var(--color-accent-500);
-    border-color: var(--color-accent-500);
+    color: var(--danger-500);
+    border-color: var(--danger-500);
   }
 }
 
@@ -64,12 +80,13 @@
   width: 36px;
   height: 36px;
 
-  border-radius: var(--border-radius-s);
+  background: var(--dark-100);
+  border-radius: 50%;
 
   transition: var(--transtition-duration-basic) background-color;
 
   &:hover {
-    background-color: var(--color-bg-focus);
+    background-color: var(--dark-100);
   }
 }
 
@@ -82,7 +99,7 @@
   height: 36px;
   margin: 0;
 
-  color: var(--color-text-primary);
+  color: var(--dark-100);
 }
 
 :global(.react-datepicker__header) {
@@ -115,7 +132,7 @@
   height: 36px;
   margin: 0;
 
-  color: var(--color-text-primary);
+  color: var(--light-100);
 
   border-radius: 50%;
   outline: none;
@@ -134,21 +151,21 @@
 }
 
 :global(.react-datepicker__day--outside-month) {
-  color: var(--color-text-inactive);
+  color: var(--dark-100);
 }
 
 :global(.react-datepicker__day--weekend) {
-  color: var(--color-text-secondary);
+  color: var(--light-900);
 }
 
 :global(.react-datepicker__day--today) {
-  color: var(--color-accent-500);
+  color: var(--primary-500);
 }
 
 :global(.react-datepicker__day--selected) {
-  color: var(--color-neutral-light-50);
-  background-color: var(--color-action-hover);
-  background-image: radial-gradient(28px circle, var(--color-accent-500) 48%, transparent 51%);
+  color: var(--light-100);
+  background-color: var(--primary-900);
+  background-image: radial-gradient(28px circle, var(--primary-500) 48%, transparent 51%);
   border-radius: 50%;
 }
 
