@@ -12,10 +12,10 @@ import { Recaptcha } from '@/components/recaptcha'
 import { Typography } from '@/components/typography'
 import { PATH } from '@/consts/route-paths'
 import { useTranslation } from '@/hooks/use-translation'
-import { forgotPasswordSchema, ForgotPasswordSchemaType } from '@/schemas/forgotPasswordSchema'
+import { forgotPasswordSchema, ForgotPasswordSchemaType } from '@/schemas'
 
-import s from './forgot-password.module.scss'
 import { RegisterError } from '@/types'
+import s from './forgot-password.module.scss'
 
 const ForgotPasswordPageComponent = memo(() => {
   const { t } = useTranslation()

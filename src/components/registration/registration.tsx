@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useGoogleLogin } from '@react-oauth/google'
@@ -19,7 +19,7 @@ import { PATH } from '@/consts/route-paths'
 import { tokenSetterToLocalStorage } from '@/helpers/tokenSetterToLocalStorage'
 import { FormFields, triggerZodFieldError } from '@/helpers/updateZodErrors'
 import { useTranslation } from '@/hooks/use-translation'
-import { createRegisterSchema, RegisterFormType } from '@/schemas/registrationSchema'
+import { RegisterFormType, createRegisterSchema } from '@/schemas'
 import { RegisterError } from '@/types'
 
 export const Registration = memo(() => {

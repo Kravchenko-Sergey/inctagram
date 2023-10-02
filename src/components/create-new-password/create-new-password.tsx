@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { useCreateNewPasswordMutation } from '@/api/auth-api/auth.api'
@@ -10,8 +10,9 @@ import { ControlledTextField } from '@/components/controlled/controlled-text-fie
 import { Typography } from '@/components/typography'
 import { PATH } from '@/consts/route-paths'
 import { useTranslation } from '@/hooks/use-translation'
-import { PasswordRecoveryFormType, passwordRecoverySchema } from '@/schemas/passwordRecoverySchema'
+import { PasswordRecoveryFormType, passwordRecoverySchema } from '@/schemas'
 
+import { FormFields, triggerZodFieldError } from '@/helpers/updateZodErrors'
 import s from './create-new-password.module.scss'
 
 type CreateNewPasswordProps = {
@@ -24,14 +25,11 @@ export const CreateNewPassword: FC<CreateNewPasswordProps> = ({ code: recoveryCo
   const {
     handleSubmit,
     control,
-    formState: { isValid },
+    trigger,
+    formState: { isValid, touchedFields },
   } = useForm<PasswordRecoveryFormType>({
     resolver: zodResolver(passwordRecoverySchema(t)),
     mode: 'onBlur',
-    defaultValues: {
-      newPassword: '',
-      passwordConfirmation: '',
-    },
   })
   const [createNewPassword] = useCreateNewPasswordMutation()
 
@@ -43,6 +41,12 @@ export const CreateNewPassword: FC<CreateNewPasswordProps> = ({ code: recoveryCo
       console.log('Error occured', error) // TODO display error notification
     }
   }
+
+  useEffect(() => {
+    const touchedFieldNames: FormFields[] = Object.keys(touchedFields) as FormFields[]
+
+    triggerZodFieldError(touchedFieldNames, trigger)
+  }, [t, touchedFields, trigger])
 
   return (
     <Card className={s.passwordRecovery}>
