@@ -1,4 +1,4 @@
-import { instagramAPI } from '@/api/api'
+import { instagramAPI } from '@/api'
 import { ArgUpdateProfile, GetProfileResponse, UploadAvatarResponse } from '@/api/profile-api/types'
 
 export const profileAPI = instagramAPI.injectEndpoints({
