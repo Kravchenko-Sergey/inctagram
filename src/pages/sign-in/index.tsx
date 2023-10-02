@@ -9,10 +9,11 @@ import { useGoogleLoginMutation } from '@/api/auth-api/auth.api'
 import { HeadMeta } from '@/components/head-meta'
 import { Login } from '@/components/login'
 import { PATH } from '@/consts/route-paths'
+import { tokenSetterToLocalStorage } from '@/helpers/tokenSetterToLocalStorage'
 
 const SignIn = () => {
   const router = useRouter()
-  const [googleLogin] = useGoogleLoginMutation()
+  const [googleLogin, { data: googleToken }] = useGoogleLoginMutation()
 
   const onGoogleAuth = useGoogleLogin({
     onSuccess: tokenResponse => {
@@ -24,6 +25,10 @@ const SignIn = () => {
 
   const onGithubAuth = () => {
     window.location.assign('https://inctagram.work/api/v1/auth/github/login')
+  }
+
+  if (googleToken && googleToken.accessToken) {
+    tokenSetterToLocalStorage(googleToken.accessToken)
   }
 
   return (
