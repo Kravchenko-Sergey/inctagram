@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-import { LocaleType } from '../../locales/ru'
+import { LocaleType } from 'locales/ru'
 
 import { aboutMeRegex, firstNameRegex, lastNameRegex, usernameRegex } from '@/consts/regex'
 

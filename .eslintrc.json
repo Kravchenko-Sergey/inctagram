@@ -1,8 +1,5 @@
 {
-  "extends": [
-    "next/core-web-vitals",
-    "@it-incubator/eslint-config"
-  ],
+  "extends": ["next/core-web-vitals", "@it-incubator/eslint-config"],
   "overrides": [
     {
       "files": ["*.stories.tsx"],
