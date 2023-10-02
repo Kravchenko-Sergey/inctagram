@@ -24,7 +24,11 @@ const Recovery = () => {
     const fetch = async () => {
       if (isValidQuery) {
         if (isReady && isValidQuery) {
-          await checkRecoveryCode({ recoveryCode: query.code })
+          try {
+            await checkRecoveryCode({ recoveryCode: query.code })
+          } catch (error) {
+            console.log('Error occured', error) // TODO display error notification
+          }
         }
       }
     }

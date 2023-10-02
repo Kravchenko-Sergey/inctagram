@@ -20,4 +20,4 @@ export const passwordRecoverySchema = (t: LocaleType) => {
     })
 }
 
-export type PasswordRecoverySchemaType = z.infer<ReturnType<typeof passwordRecoverySchema>>
+export type PasswordRecoveryFormType = z.infer<ReturnType<typeof passwordRecoverySchema>>

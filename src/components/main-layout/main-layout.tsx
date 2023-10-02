@@ -3,7 +3,6 @@ import { ReactNode } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-// import s from './../sidebar/sidebar.module.scss'
 import s from './main-layout.module.scss'
 
 import { Header } from '@/components/header'

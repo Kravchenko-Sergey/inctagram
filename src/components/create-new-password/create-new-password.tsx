@@ -10,10 +10,7 @@ import { ControlledTextField } from '@/components/controlled/controlled-text-fie
 import { Typography } from '@/components/typography'
 import { PATH } from '@/consts/route-paths'
 import { useTranslation } from '@/hooks/use-translation'
-import {
-  passwordRecoverySchema,
-  PasswordRecoverySchemaType,
-} from '@/schemas/passwordRecoverySchema'
+import { PasswordRecoveryFormType, passwordRecoverySchema } from '@/schemas/passwordRecoverySchema'
 
 import s from './create-new-password.module.scss'
 
@@ -28,15 +25,19 @@ export const CreateNewPassword: FC<CreateNewPasswordProps> = ({ code: recoveryCo
     handleSubmit,
     control,
     formState: { isValid },
-  } = useForm<PasswordRecoverySchemaType>({
+  } = useForm<PasswordRecoveryFormType>({
     resolver: zodResolver(passwordRecoverySchema(t)),
     mode: 'onBlur',
+    defaultValues: {
+      newPassword: '',
+      passwordConfirmation: '',
+    },
   })
   const [createNewPassword] = useCreateNewPasswordMutation()
 
-  const onSubmit = async ({ newPassword }: PasswordRecoverySchemaType) => {
+  const onSubmit = async ({ newPassword }: PasswordRecoveryFormType) => {
     try {
-      await createNewPassword({ newPassword, recoveryCode })
+      await createNewPassword({ newPassword, recoveryCode }).unwrap()
       push(PATH.LOGIN)
     } catch (error) {
       console.log('Error occured', error) // TODO display error notification

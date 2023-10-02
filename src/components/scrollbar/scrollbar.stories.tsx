@@ -1,18 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import s from './../sidebar/sidebar.module.scss'
+import s from '@/components/sidebar/sidebar.module.scss'
 
 import { Scrollbar } from './'
 
 import {
-  TrendingUpOutline,
-  SearchIcon,
-  PlusSquareOutline,
-  PersonOutline,
   BookmarkOutline,
   HomeOutline,
   LogOutOutline,
   MessageCircleOutline,
+  PersonOutline,
+  PlusSquareOutline,
+  SearchIcon,
+  TrendingUpOutline,
 } from '@/assets/icons'
 import { Typography } from '@/components/typography'
 
