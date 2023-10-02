@@ -10,13 +10,14 @@ import { ImageOutline } from '@/assets/icons/image-outline'
 import { Button } from '@/components/button'
 import { ControlledTextArea } from '@/components/controlled/controlled-text-area'
 import { ControlledTextField } from '@/components/controlled/controlled-text-field'
+import { getMainLayout } from '@/components/layout/main-layout/main-layout'
 import { Select } from '@/components/select'
 import { Tabs } from '@/components/tabs'
 import { FormFields, triggerZodFieldError } from '@/helpers/updateZodErrors'
 import { useTranslation } from '@/hooks/use-translation'
 import { ProfileSettingsFormValues, profileSettingsSchema } from '@/schemas/profile-settings-schema'
 
-const Index = () => {
+const ProfileSettings = () => {
   const { t } = useTranslation()
 
   const [updateProfile] = useUpdateProfileMutation()
@@ -117,4 +118,5 @@ const Index = () => {
   )
 }
 
-export default Index
+ProfileSettings.getLayout = getMainLayout
+export default ProfileSettings

@@ -7,6 +7,7 @@ import s from './sign-in.module.scss'
 
 import { useGoogleLoginMutation } from '@/api/auth-api/auth.api'
 import { HeadMeta } from '@/components/head-meta'
+import { getHeaderLayout } from '@/components/layout/header-layout/header-layout'
 import { Login } from '@/components/login'
 import { PATH } from '@/consts/route-paths'
 
@@ -27,13 +28,14 @@ const SignIn = () => {
   }
 
   return (
-    <>
+    <div className={s.root}>
       <HeadMeta title="Sign-in" />
-      <main className={s.root}>
+      <main>
         <Login onGoogleAuth={onGoogleAuth} onGithubAuth={onGithubAuth} />
       </main>
-    </>
+    </div>
   )
 }
 
+SignIn.getLayout = getHeaderLayout
 export default SignIn
