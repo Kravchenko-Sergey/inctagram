@@ -1,5 +1,3 @@
-import { instagramAPI } from '../api'
-
 import {
   GoogleLoginType,
   LoginFormType,
@@ -9,6 +7,8 @@ import {
   RegistrationType,
   UserType,
 } from './types'
+
+import { instagramAPI } from '@/api'
 
 export const authAPI = instagramAPI.injectEndpoints({
   endpoints: build => ({
@@ -60,14 +60,13 @@ export const authAPI = instagramAPI.injectEndpoints({
         url: '/auth/me',
       }),
     }),
-    checkRecoveryCode: build.mutation<void, { recoveryCode: string }>({
+    checkRecoveryCode: build.mutation<{ email: string }, { recoveryCode: string }>({
       query: (body: { recoveryCode: string }) => ({
         url: `auth/check-recovery-code`,
         method: 'POST',
         body,
       }),
     }),
-
     createNewPassword: build.mutation<void, { newPassword: string; recoveryCode: string }>({
       query: (body: { newPassword: string; recoveryCode: string }) => ({
         url: '/auth/new-password',
@@ -105,4 +104,6 @@ export const {
   useVerifyMailMutation,
   useResendEmailMutation,
   useRecoverPasswordMutation,
+  useCheckRecoveryCodeMutation,
+  useCreateNewPasswordMutation,
 } = authAPI

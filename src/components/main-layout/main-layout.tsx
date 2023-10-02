@@ -3,13 +3,13 @@ import { ReactNode } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-// import s from './../sidebar/sidebar.module.scss'
 import s from './main-layout.module.scss'
 
 import { Header } from '@/components/header'
 import { Sidebar } from '@/components/sidebar'
 import { Typography } from '@/components/typography'
 import { sidebarItems } from '@/consts/sidebar-routes'
+
 type LayoutProps = {
   className?: string
   children?: ReactNode

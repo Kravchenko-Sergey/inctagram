@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import { FC, useEffect } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
@@ -16,7 +16,7 @@ import { Typography } from '@/components/typography'
 import { PATH } from '@/consts/route-paths'
 import { FormFields, triggerZodFieldError } from '@/helpers/updateZodErrors'
 import { useTranslation } from '@/hooks/use-translation'
-import { LoginFormValues, loginSchema } from '@/schemas/loginSchema'
+import { LoginFormValues, loginSchema } from '@/schemas'
 
 type LoginProps = {
   onGoogleAuth?: () => void

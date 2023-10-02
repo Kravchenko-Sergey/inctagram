@@ -1,6 +1,6 @@
 import { SVGProps, memo } from 'react'
 
-export const MessageCircleOutline = (props: SVGProps<SVGSVGElement>) => (
+const Person = (props: SVGProps<SVGSVGElement>) => (
   <svg
     width="24"
     height="24"
@@ -27,6 +27,6 @@ export const MessageCircleOutline = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 )
-const Memo = memo(MessageCircleOutline)
+const Memo = memo(Person)
 
-export { Memo as ReactComponent }
+export { Memo as Person }

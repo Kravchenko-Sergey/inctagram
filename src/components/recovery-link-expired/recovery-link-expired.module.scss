@@ -1,12 +1,16 @@
 .root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
   max-width: 1280px;
-  margin: 0 auto;
   padding-top: 35px;
+
   text-align: center;
 
   .content {
     max-width: 294px;
-    margin: 0 auto 30px;
   }
 
   .title {
@@ -15,5 +19,10 @@
 
   .description {
     margin: 0 0 30px;
+  }
+
+  .link {
+    width: auto;
+    margin: 30px;
   }
 }
