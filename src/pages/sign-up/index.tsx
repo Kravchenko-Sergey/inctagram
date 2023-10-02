@@ -3,6 +3,7 @@ import React from 'react'
 import s from './sign-up.module.scss'
 
 import { HeadMeta } from '@/components/head-meta'
+import { getHeaderLayout } from '@/components/layout/header-layout/header-layout'
 import { Registration } from '@/components/registration/registration'
 
 const SignUp = () => {
@@ -15,5 +16,7 @@ const SignUp = () => {
     </div>
   )
 }
+
+SignUp.getLayout = getHeaderLayout
 
 export default SignUp

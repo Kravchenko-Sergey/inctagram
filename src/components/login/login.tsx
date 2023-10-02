@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import { FC, useEffect } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
@@ -14,7 +14,7 @@ import { Typography } from '@/components/typography'
 import { PATH } from '@/consts/route-paths'
 import { FormFields, triggerZodFieldError } from '@/helpers/updateZodErrors'
 import { useTranslation } from '@/hooks/use-translation'
-import { LoginFormValues, loginSchema } from '@/schemas/loginSchema'
+import { LoginFormValues, loginSchema } from '@/schemas'
 import s from './login.module.scss'
 
 type LoginProps = {
@@ -41,7 +41,6 @@ export const Login: FC<LoginProps> = ({ onGoogleAuth, onGithubAuth }) => {
   })
 
   const onSubmit = (data: LoginFormValues) => {
-    console.log(data)
     signIn(data)
       .unwrap()
       .then(() => {
@@ -65,7 +64,7 @@ export const Login: FC<LoginProps> = ({ onGoogleAuth, onGithubAuth }) => {
 
   return (
     <Card className={s.card}>
-      <Typography variant={'h1'} as={'h1'} className={s.title}>
+      <Typography variant="h1" as="h1" className={s.title}>
         {t.auth.signIn}
       </Typography>
       <div className={s.icons}>
@@ -75,29 +74,29 @@ export const Login: FC<LoginProps> = ({ onGoogleAuth, onGithubAuth }) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={s.fields}>
           <ControlledTextField
-            name={'email'}
+            name="email"
             control={control}
             label={t.auth.emailLabel}
-            type={'email'}
+            type="email"
           />
           <ControlledTextField
-            name={'password'}
+            name="password"
             control={control}
             label={t.auth.passwordLabel}
-            type={'password'}
+            type="password"
           />
         </div>
-        <Typography href="/recover-password" as={'a'} className={s.forgotPassLink}>
+        <Typography href={PATH.FORGOT_PASSWORD} as="a" className={s.forgotPassLink}>
           {t.auth.forgotPassword}
         </Typography>
-        <Button variant="primary" fullWidth type={'submit'} className={s.submitBtn}>
-          <Typography variant={'h3'}>{t.auth.signIn}</Typography>
+        <Button variant="primary" fullWidth type="submit" className={s.submitBtn}>
+          <Typography variant="h3">{t.auth.signIn}</Typography>
         </Button>
       </form>
-      <Typography variant={'regular_text_16'} as={'div'} className={s.caption}>
+      <Typography variant="regular_text_16" as="div" className={s.caption}>
         {t.auth.haveAccount}
       </Typography>
-      <Typography href="/sign-up" variant={'h3'} as={'a'} className={s.signUpLink}>
+      <Typography href={PATH.REGISTRATION} variant="h3" as="a" className={s.signUpLink}>
         {t.auth.signUp}
       </Typography>
     </Card>

@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef, ElementType, ReactNode, useMemo } from 'react'
+import React, { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
 
 import { clsx } from 'clsx'
 import Link from 'next/link'
@@ -24,7 +24,6 @@ export type TypographyProps<T extends ElementType = 'p'> = {
     | 'small_link'
     | 'error'
   children?: ReactNode
-  // href?: string
   className?: string
 }
 

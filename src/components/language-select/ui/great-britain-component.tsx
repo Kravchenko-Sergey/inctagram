@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import enIcon from './../../../../public/en.png'
+import enIcon from 'public/en.png'
 
 import { Typography } from '@/components/typography'
 import { useTranslation } from '@/hooks/use-translation'
