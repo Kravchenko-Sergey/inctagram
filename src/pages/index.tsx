@@ -1,11 +1,9 @@
-import { useRouter } from 'next/router'
-
 import { HeadMeta } from '@/components/head-meta'
 
 // const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const router = useRouter()
+  // const router = useRouter()
 
   // const sidebarItems = [
   //   { href: PATH.HOME, icon: <HomeOutline />, title: 'Home' },

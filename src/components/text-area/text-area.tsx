@@ -13,7 +13,7 @@ export type TextAreaProps = {
 } & ComponentPropsWithoutRef<'textarea'>
 
 const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, ref) => {
-  const { label, disabled, error, onClearClick, ...rest } = props
+  const { label, disabled, error, ...rest } = props
 
   return (
     <div className={s.root}>
