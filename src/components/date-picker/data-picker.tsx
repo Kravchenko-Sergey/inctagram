@@ -9,13 +9,13 @@ import 'react-datepicker/dist/react-datepicker.min.css'
 import { ReactDatePickerCustomHeaderProps } from 'react-datepicker'
 
 import textFieldStyles from './../text-field/text-field.module.scss'
-import s from './data-picker.module.scss'
 
 import { ArrowLeft } from '@/assets/icons/arrow-left'
 import { ArrowRight } from '@/assets/icons/arrow-right'
 import { CalendarIcon } from '@/assets/icons/calendar'
 import { Label } from '@/components/label-radix/Label'
 import { Typography } from '@/components/typography'
+import s from './data-picker.module.scss'
 
 export type DatePickerProps = {
   placeholder?: string

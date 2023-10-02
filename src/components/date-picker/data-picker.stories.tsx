@@ -28,9 +28,19 @@ export const Default: Story = {
 export const Range: Story = {
   render: (args: DatePickerProps) => {
     const [startDate, setStartDate] = useState<Date | null>(new Date())
-    const [endDate, setEndDate] = useState<Date | null>(startDate?.getDate() + 5)
 
-    return <DataPicker setStartDate={setStartDate} startDate={startDate} />
+    const [endDate, setEndDate] = useState<Date | null>(
+      startDate ? new Date(startDate.getTime() + 5 * 24 * 60 * 60 * 1000) : null
+    )
+
+    return (
+      <DataPicker
+        setStartDate={setStartDate}
+        startDate={startDate}
+        endDate={endDate}
+        setEndDate={setEndDate}
+      />
+    )
   },
 
   args: {
