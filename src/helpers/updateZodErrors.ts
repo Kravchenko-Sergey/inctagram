@@ -1,8 +1,10 @@
 // type FormType = LoginFormType | RegisterFormType | ProfileSettingFormType | PasswodsMatchFormType
 import { LoginFormType } from '@/api/auth-api/types'
+import { ProfileSettingsFormValues } from '@/schemas/profile-settings-schema'
+import { RegisterFormType } from '@/schemas/registrationSchema'
 import { PasswordRecoveryFormType, RegisterFormType } from '@/schemas'
 
-type FormType = RegisterFormType | LoginFormType | PasswordRecoveryFormType
+type FormType = RegisterFormType | LoginFormType | PasswordRecoveryFormType|  ProfileSettingsFormValues
 // add your form manual type
 
 export type FormFields = keyof FormType

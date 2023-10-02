@@ -1,11 +1,13 @@
+import React, { ReactElement, ReactNode } from 'react'
+
 import { GoogleOAuthProvider } from '@react-oauth/google'
+import { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 import { Inter } from 'next/font/google'
 import '@/styles/index.scss'
 import '@/styles/nprogress.css'
 import { Provider } from 'react-redux'
 
-import { MainLayout } from '@/components/main-layout/main-layout'
 import { useLoader } from '@/hooks/useLoader'
 import { store } from '@/store/store'
 
@@ -16,8 +18,18 @@ export const inter = Inter({
   // variable: '--font-inter',
 })
 
-export default function App({ Component, pageProps }: AppProps) {
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode
+}
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout
+}
+
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useLoader()
+
+  const getLayout = Component.getLayout ?? (page => page)
 
   return (
     <>
@@ -28,9 +40,7 @@ export default function App({ Component, pageProps }: AppProps) {
       `}</style>
       <Provider store={store}>
         <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_ID ?? ''}>
-          <MainLayout className={inter.className}>
-            <Component {...pageProps} />
-          </MainLayout>
+          {getLayout(<Component {...pageProps} />)}
         </GoogleOAuthProvider>
       </Provider>
     </>

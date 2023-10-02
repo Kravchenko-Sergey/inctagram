@@ -4,7 +4,7 @@ import { Typography } from '../typography'
 
 import s from './text-area.module.scss'
 
-export type TextFieldProps = {
+export type TextAreaProps = {
   error?: string
   label?: string
   className?: string
@@ -12,7 +12,7 @@ export type TextFieldProps = {
   errorMessage?: string
 } & ComponentPropsWithoutRef<'textarea'>
 
-const TextArea = forwardRef<HTMLTextAreaElement, TextFieldProps>((props, ref) => {
+const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, ref) => {
   const { label, disabled, error, onClearClick, ...rest } = props
 
   return (

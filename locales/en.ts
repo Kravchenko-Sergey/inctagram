@@ -15,9 +15,20 @@ export const en: LocaleType = {
     loginFailed: 'Login Failed',
     loginIncorrectPassword: `The password is incorrect. Try again please`,
     regexUsername: 'Username must contain  1-9, a-z, A-Z, . _ -',
+    regexFirstname: 'Firstname must contain a-z, A-Z',
+    regexLastname: 'Lastname must contain a-z, A-Z',
+    regexAboutMe: 'Field must contain 1-9, a-z, A-Z, . _ -',
     nonemptyUsername: 'Enter your Username',
+    nonemptyFirstname: 'Enter your name',
+    nonemptyLastname: 'Enter your last name',
+    // minUsername: 'Username must be at least 6 characters',
     minUsername: (min: number) => `Username must be at least ${min} characters`,
     maxUsername: (max: number) => `Maximum number of characters  ${max}`,
+    maxFirstname: (max: number) =>
+      `The maximum length of the name must not exceed ${max} characters`,
+    maxLastname: (max: number) =>
+      `The maximum length of the last name must not exceed ${max} characters`,
+    maxFieldLength: (max: number) => `Maximum number of characters - ${max}`,
     regexEmail: 'The email must match the format example@example.com',
     nonemptyEmail: 'Enter your email',
     nonemptyPassword: 'Enter your password',
@@ -134,5 +145,17 @@ export const en: LocaleType = {
       ' magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet consectetur adipiscing elit ut aliquam' +
       ' purus sit amet luctus. Tortovitae purus faucibus ornare suspendisse sed nisi. Dolor sit amet consectetur' +
       ' adipiscing.',
+  },
+  profile: {
+    firstName: 'First Name',
+    lastName: 'Last Name',
+    citySelect: 'Select your city',
+    aboutMe: 'About Me',
+    saveChanges: 'Save Changes',
+    addAvatar: 'Add a Profile Photo',
+    generalInfo: 'General information',
+    devices: 'Devices',
+    accManagement: 'Account Management',
+    myPayments: 'My payments',
   },
 }
