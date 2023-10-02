@@ -7,7 +7,7 @@ import s from './button.module.scss'
 
 export type ButtonPropsType<T extends ElementType = 'button'> = {
   as?: T
-  variant: 'primary' | 'secondary' | 'ghost' | 'link' | 'withIcon'
+  variant: 'primary' | 'secondary' | 'ghost' | 'link' | 'withIcon' | 'link-btn'
   fullWidth?: boolean
   disabled?: boolean
   className?: string
@@ -31,7 +31,7 @@ export const Button = <T extends ElementType = 'button'>(props: ButtonPropsType<
     btn: clsx(s.btn, s[variant], fullWidth && s.fullWidth, disabled && s.disabled, className),
   }
 
-  if (Component === 'a' || variant === 'link') {
+  if (Component === 'a' || variant === 'link' || variant === 'link-btn') {
     return (
       <Link href={href} passHref className={classNames.btn} {...restProps}>
         {children}

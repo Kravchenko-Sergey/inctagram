@@ -16,7 +16,8 @@
     background-color 0.3s ease;
 }
 
-.primary {
+.primary,
+.link-btn {
   background: var(--primary-500);
   border: 2px solid transparent;
 
@@ -41,6 +42,11 @@
     background: var(--primary-900);
     border: 2px solid transparent;
   }
+}
+
+.link-btn {
+  display: block;
+  width: fit-content;
 }
 
 .secondary {

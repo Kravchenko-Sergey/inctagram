@@ -10,7 +10,7 @@ export const PATH = {
   REGISTRATION: '/sign-up',
   LOGIN: '/sign-in',
   FAVORITES: '/favorites',
-  PASSWORD_RECOVERY: '/auth/recover',
+  FORGOT_PASSWORD: '/auth/forgot-password',
   LOGOUT: '/logout',
   POLICY: '/auth/policy',
   SERVICE: '/auth/terms',

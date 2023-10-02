@@ -8,7 +8,7 @@ const meta = {
   tags: ['autodocs'],
   argTypes: {
     variant: {
-      options: ['primary', 'secondary', 'ghost', 'link'],
+      options: ['primary', 'secondary', 'ghost', 'link', 'link-btn'],
       control: { type: 'radio' },
     },
   },
@@ -51,6 +51,13 @@ export const AsLink: Story = {
     variant: 'link',
     children: 'Link as a button',
     as: 'a',
+    href: '',
+  },
+}
+export const LinkBtn: Story = {
+  args: {
+    variant: 'link-btn',
+    children: 'Link as a button with button appearance',
     href: '',
   },
 }

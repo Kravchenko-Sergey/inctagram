@@ -6,6 +6,7 @@ import s from '@/pages/auth/terms/terms.module.scss'
 
 export const en: LocaleType = {
   test: 'Lorem Ipsum is simply dummy text of the printing',
+  ok: 'OK',
   languageSelect: {
     russian: 'Russian',
     english: 'English',
@@ -42,6 +43,7 @@ export const en: LocaleType = {
     emailSent: 'Email Sent',
     passwordLabel: 'Password',
     forgotPassword: 'Forgot password?',
+    restorePassword: 'Forgot Password',
     haveAccount: `Do you have an account?`,
     notHaveAccount: `Don't have an account?`,
     signInTitle: 'Sign In',
@@ -57,6 +59,8 @@ export const en: LocaleType = {
     passwordRecoveryTitle: 'Forgot Password',
     passwordRecoveryDescription:
       'Enter your email address and we will send you further instructions',
+    passwordRecoveryLinkSent:
+      'The link has been sent by email. If you don’t receive an email send link again',
     backToLogin: 'Back to Sign In',
     backToRegistration: 'Back to sign up',
     sendLink: 'Send Link',

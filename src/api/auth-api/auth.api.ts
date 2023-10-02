@@ -104,4 +104,5 @@ export const {
   useRegistrationMutation,
   useVerifyMailMutation,
   useResendEmailMutation,
+  useRecoverPasswordMutation,
 } = authAPI
