@@ -16,6 +16,7 @@ import { Modal } from '@/components/modal'
 import { Trans } from '@/components/trans/trans'
 import { Typography } from '@/components/typography'
 import { PATH } from '@/consts/route-paths'
+import { tokenSetterToLocalStorage } from '@/helpers/tokenSetterToLocalStorage'
 import { FormFields, triggerZodFieldError } from '@/helpers/updateZodErrors'
 import { useTranslation } from '@/hooks/use-translation'
 import { createRegisterSchema, RegisterFormType } from '@/schemas/registrationSchema'
@@ -26,7 +27,7 @@ export const Registration = memo(() => {
   const { push } = useRouter()
   const { t } = useTranslation()
   const [register] = useRegistrationMutation()
-  const [googleLogin] = useGoogleLoginMutation()
+  const [googleLogin, { data: googleToken }] = useGoogleLoginMutation()
   const {
     reset,
     formState: { errors, isValid, touchedFields },
@@ -80,9 +81,15 @@ export const Registration = memo(() => {
   )
 
   const googleLoginAndRegister = useGoogleLogin({
-    onSuccess: tokenResponse => googleLogin({ code: tokenResponse.code }),
+    onSuccess: tokenResponse => {
+      googleLogin({ code: tokenResponse.code })
+    },
     flow: 'auth-code',
   })
+
+  if (googleToken && googleToken.accessToken) {
+    tokenSetterToLocalStorage(googleToken.accessToken)
+  }
 
   return (
     <>

@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { useRouter } from 'next/router'
 
-const Github = () => {
-  const { query } = useRouter()
+import { PATH } from '@/consts/route-paths'
+import { tokenSetterToLocalStorage } from '@/helpers/tokenSetterToLocalStorage'
 
-  console.log('value', query.accessToken)
+const Github = () => {
+  const router = useRouter()
+
+  console.log('value', router.query.accessToken)
+
+  useEffect(() => {
+    if (router.query.accessToken) {
+      tokenSetterToLocalStorage(router.query.accessToken as string)
+      router.push(PATH.PROFILE)
+    }
+  }, [router])
 
   return <></>
 }
