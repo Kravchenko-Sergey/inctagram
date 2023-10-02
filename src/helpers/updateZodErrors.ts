@@ -1,14 +1,20 @@
 // type FormType = LoginFormType | RegisterFormType | ProfileSettingFormType | PasswodsMatchFormType
 import { LoginFormType } from '@/api/auth-api/types'
+import { PasswordRecoveryFormType } from '@/schemas'
+import { ProfileSettingsFormValues } from '@/schemas/profile-settings-schema'
 import { RegisterFormType } from '@/schemas/registrationSchema'
 
-type FormType = RegisterFormType | LoginFormType
+type FormType =
+  | RegisterFormType
+  | LoginFormType
+  | PasswordRecoveryFormType
+  | ProfileSettingsFormValues
 // add your form manual type
 
 export type FormFields = keyof FormType
 
 /**
- * reset error messenger from zod on touched by user fields (trigger validation)
+ * reset error messages from zod on touched by user fields (trigger validation)
  * @param touchedFieldNames names from touched fields in react hook form
  * @param trigger trigger func from react hook form
  */

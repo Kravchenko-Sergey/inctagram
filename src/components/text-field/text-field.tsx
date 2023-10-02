@@ -11,9 +11,7 @@ import { clsx } from 'clsx'
 
 import s from './text-field.module.scss'
 
-import { Eye } from '@/assets/icons/eye'
-import { EyeClosed } from '@/assets/icons/eye-closed'
-import { SearchIcon } from '@/assets/icons/search-icon'
+import { Eye, EyeClosed, SearchIcon } from '@/assets/icons'
 import { Typography } from '@/components/typography'
 
 export type InputPropsType = {

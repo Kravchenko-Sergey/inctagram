@@ -1,0 +1,28 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  max-width: 1280px;
+  padding-top: 35px;
+
+  text-align: center;
+
+  .content {
+    max-width: 294px;
+  }
+
+  .title {
+    margin: 0 0 20px;
+  }
+
+  .description {
+    margin: 0 0 30px;
+  }
+
+  .link {
+    width: auto;
+    margin: 30px;
+  }
+}

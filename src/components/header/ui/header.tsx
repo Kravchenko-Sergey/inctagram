@@ -6,11 +6,13 @@ import { Typography } from '@/components/typography'
 export const Header = () => {
   return (
     <header className={s.header}>
-      <Typography color="primary" variant="large">
-        Inctagram
-      </Typography>
-      <div className={s.menuContainer}>
-        <LanguageSelect />
+      <div className={s.content}>
+        <Typography color="primary" variant="large">
+          Inctagram
+        </Typography>
+        <div className={s.menuContainer}>
+          <LanguageSelect />
+        </div>
       </div>
     </header>
   )

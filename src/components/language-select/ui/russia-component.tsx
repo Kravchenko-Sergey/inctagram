@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import ruIcon from './../../../../public/ru.png'
+import ruIcon from 'public/ru.png'
 
 import { Typography } from '@/components/typography'
 import { useTranslation } from '@/hooks/use-translation'

@@ -7,7 +7,7 @@ import s from './button.module.scss'
 
 export type ButtonPropsType<T extends ElementType = 'button'> = {
   as?: T
-  variant: 'primary' | 'secondary' | 'ghost' | 'link' | 'withIcon'
+  variant: 'primary' | 'secondary' | 'ghost' | 'link' | 'withIcon' | 'link-btn'
   fullWidth?: boolean
   disabled?: boolean
   className?: string

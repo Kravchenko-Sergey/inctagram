@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useGoogleLogin } from '@react-oauth/google'
@@ -8,8 +8,7 @@ import { useForm } from 'react-hook-form'
 import s from './registration.module.scss'
 
 import { useGoogleLoginMutation, useRegistrationMutation } from '@/api/auth-api/auth.api'
-import { GitHubIcon } from '@/assets/icons/github-icon'
-import { GoogleIcon } from '@/assets/icons/google-icon'
+import { GitHubIcon, GoogleIcon } from '@/assets/icons'
 import { Button } from '@/components/button'
 import { ControlledCheckbox } from '@/components/controlled/controlled-checkbox'
 import { ControlledTextField } from '@/components/controlled/controlled-text-field'
@@ -17,9 +16,10 @@ import { Modal } from '@/components/modal'
 import { Trans } from '@/components/trans/trans'
 import { Typography } from '@/components/typography'
 import { PATH } from '@/consts/route-paths'
+import { tokenSetterToLocalStorage } from '@/helpers/tokenSetterToLocalStorage'
 import { FormFields, triggerZodFieldError } from '@/helpers/updateZodErrors'
 import { useTranslation } from '@/hooks/use-translation'
-import { createRegisterSchema, RegisterFormType } from '@/schemas/registrationSchema'
+import { RegisterFormType, createRegisterSchema } from '@/schemas'
 import { RegisterError } from '@/types'
 
 export const Registration = memo(() => {
@@ -27,7 +27,7 @@ export const Registration = memo(() => {
   const { push } = useRouter()
   const { t } = useTranslation()
   const [register] = useRegistrationMutation()
-  const [googleLogin] = useGoogleLoginMutation()
+  const [googleLogin, { data: googleToken }] = useGoogleLoginMutation()
   const {
     reset,
     formState: { errors, isValid, touchedFields },
@@ -81,9 +81,15 @@ export const Registration = memo(() => {
   )
 
   const googleLoginAndRegister = useGoogleLogin({
-    onSuccess: tokenResponse => googleLogin({ code: tokenResponse.code }),
+    onSuccess: tokenResponse => {
+      googleLogin({ code: tokenResponse.code })
+    },
     flow: 'auth-code',
   })
+
+  if (googleToken && googleToken.accessToken) {
+    tokenSetterToLocalStorage(googleToken.accessToken)
+  }
 
   return (
     <>

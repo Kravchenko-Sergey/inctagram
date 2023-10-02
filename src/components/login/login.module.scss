@@ -2,6 +2,10 @@
   width: 100%;
   max-width: 378px;
   padding: 24px;
+
+  background: var(--dark-500);
+  border: 1px solid var(--dark-300);
+  border-radius: 2px;
 }
 
 .title {
