@@ -1,8 +1,7 @@
 import { z } from 'zod'
 
-import { LocaleType } from '../../locales/ru'
-
 import { passwordRegex, usernameRegex } from '@/consts/regex'
+import { LocaleType } from 'locales/ru'
 
 export const createRegisterSchema = (t: LocaleType) => {
   return z

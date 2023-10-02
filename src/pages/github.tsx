@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import { PATH } from '@/consts/route-paths'
+import { tokenSetterToLocalStorage } from '@/helpers/tokenSetterToLocalStorage'
 
 const Github = () => {
   const router = useRouter()
@@ -10,7 +11,10 @@ const Github = () => {
   console.log('value', router.query.accessToken)
 
   useEffect(() => {
-    router.push(PATH.PROFILE)
+    if (router.query.accessToken) {
+      tokenSetterToLocalStorage(router.query.accessToken as string)
+      router.push(PATH.PROFILE)
+    }
   }, [router])
 
   return <></>

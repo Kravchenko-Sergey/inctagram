@@ -2,6 +2,7 @@ import { LocaleType } from './ru'
 
 export const en: LocaleType = {
   test: 'Lorem Ipsum is simply dummy text of the printing',
+  ok: 'OK',
   languageSelect: {
     russian: 'Russian',
     english: 'English',
@@ -43,11 +44,13 @@ export const en: LocaleType = {
     emailExists: 'User with this email is already registered',
     usernameExists: 'User with this username is already registered',
   },
+
   auth: {
     emailLabel: 'Email',
     emailSent: 'Email Sent',
     passwordLabel: 'Password',
     forgotPassword: 'Forgot password?',
+    restorePassword: 'Forgot Password',
     haveAccount: `Do you have an account?`,
     notHaveAccount: `Don't have an account?`,
     signInTitle: 'Sign In',
@@ -63,12 +66,15 @@ export const en: LocaleType = {
     passwordRecoveryTitle: 'Forgot Password',
     passwordRecoveryDescription:
       'Enter your email address and we will send you further instructions',
+    passwordRecoveryLinkSent:
+      'The link has been sent by email. If you don’t receive an email send link again',
     backToLogin: 'Back to Sign In',
     backToRegistration: 'Back to sign up',
     sendLink: 'Send Link',
     sendLinkAgain: 'Send Link Again',
     sendLoader: 'Sending...',
     signupLoader: 'Signing Up...',
+    newPassword: 'New password',
     newPasswordTitle: 'Create New Password',
     newPasswordButton: 'Create new password',
     newPasswordDescription: 'Your password must be between 6 and 20 characters',
@@ -81,7 +87,8 @@ export const en: LocaleType = {
     emailExpired: 'Email verification link expired',
     expiredDescription:
       'Looks like the verification link has expired. Not to worry, we can send the link again',
-    resendLink: 'Resend verification link',
+    resendVerificationLink: 'Resend verification link',
+    resendLink: 'Resend link',
     policy: '<1>one</1> <2>two</2> <3>three</3> <4>four</4>',
     policy1:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
@@ -110,34 +117,7 @@ export const en: LocaleType = {
       ' magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet consectetur adipiscing elit ut aliquam' +
       ' purus sit amet luctus. Tortovitae purus faucibus ornare suspendisse sed nisi. Dolor sit amet consectetur' +
       ' adipiscing.',
-
     terms: '<1>one</1> <2>two</2> <3>three</3> <4>four</4>',
-
-    // '<1>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
-    // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
-    // ' magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet consectetur adipiscing elit ut aliquam' +
-    // ' purus sit amet luctus. Tortovitae purus faucibus ornare suspendisse sed nisi. Dolor sit amet consectetur' +
-    // ' adipiscing.</1>' +
-    // '<2>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
-    // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
-    // ' magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet consectetur adipiscing elit ut aliquam' +
-    // ' purus sit amet luctus. Tortovitae purus faucibus ornare suspendisse sed nisi. Dolor sit amet consectetur' +
-    // ' adipiscing.</2>' +
-    // '<3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
-    // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
-    // ' magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet consectetur adipiscing elit ut aliquam' +
-    // ' purus sit amet luctus. Tortovitae purus faucibus ornare suspendisse sed nisi. Dolor sit amet consectetur' +
-    // ' adipiscing.</2>' +
-    // '<2>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
-    // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
-    // ' magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet consectetur adipiscing elit ut aliquam' +
-    // ' purus sit amet luctus. Tortovitae purus faucibus ornare suspendisse sed nisi. Dolor sit amet consectetur' +
-    // ' adipiscing.</3>' +
-    // '<4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
-    // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
-    // ' magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet consectetur adipiscing elit ut aliquam' +
-    // ' purus sit amet luctus. Tortovitae purus faucibus ornare suspendisse sed nisi. Dolor sit amet consectetur' +
-    // ' adipiscing.</4>',
     terms1:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore' +

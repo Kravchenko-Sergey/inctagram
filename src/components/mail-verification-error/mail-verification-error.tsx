@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 
 import s from './mail-verification-error.module.scss'
 
-import { baseUrl } from '@/api/api'
+import { baseUrl } from '@/api'
 import { useResendEmailMutation } from '@/api/auth-api/auth.api'
 import ConfirmImg from '@/assets/image/confirm-error.png'
 import { Button } from '@/components/button'
