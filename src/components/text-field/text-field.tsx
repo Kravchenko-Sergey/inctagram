@@ -9,10 +9,10 @@ import {
 
 import { clsx } from 'clsx'
 
-import s from './text-field.module.scss'
-
 import { Eye, EyeClosed, SearchIcon } from '@/assets/icons'
-import { Typography } from '@/components/typography'
+import { Typography } from '@/components'
+
+import s from './text-field.module.scss'
 
 export type InputPropsType = {
   label?: string
@@ -51,7 +51,6 @@ export const TextField = forwardRef<HTMLInputElement, InputPropsType>(
     const iconClickHandler = useCallback(
       (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        // setIsClickedDown(true)
         setIconVisible(() => (iconVisible === 'password' ? 'text' : 'password'))
       },
       [iconVisible]

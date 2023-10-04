@@ -1,21 +1,19 @@
-import React, { ComponentProps, forwardRef, memo } from 'react'
+import { ComponentProps, forwardRef, memo } from 'react'
 
 import { clsx } from 'clsx'
-// import { ru } from 'date-fns/locale'
+// eslint-disable-next-line import/no-duplicates
 import { format } from 'date-fns'
+// eslint-disable-next-line import/no-duplicates
 import { ru } from 'date-fns/locale'
 import * as RDP from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.min.css'
 import { ReactDatePickerCustomHeaderProps } from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.min.css'
 
-import textFieldStyles from './../text-field/text-field.module.scss'
+import { ArrowLeft, ArrowRight, CalendarIcon } from '@/assets/icons'
+import { LabelRadix, Typography } from '@/components'
 
-import { ArrowLeft } from '@/assets/icons/arrow-left'
-import { ArrowRight } from '@/assets/icons/arrow-right'
-import { CalendarIcon } from '@/assets/icons/calendar'
-import { Label } from '@/components/label-radix/Label'
-import { Typography } from '@/components/typography'
-import s from './data-picker.module.scss'
+import textFieldStyles from '@/components/text-field/text-field.module.scss'
+import s from './date-picker.module.scss'
 
 export type DatePickerProps = {
   placeholder?: string
@@ -32,7 +30,7 @@ const RDPC = (((RDP.default as any).default as any) ||
   (RDP.default as any) ||
   (RDP as any)) as typeof RDP.default
 
-export const DataPicker = memo(
+export const DatePicker = memo(
   ({
     startDate,
     setStartDate,
@@ -86,7 +84,7 @@ export const DataPicker = memo(
           popperClassName={classNames.popper}
           dayClassName={classNames.day}
           locale={ru}
-          dateFormat={'dd/MM/yyyy'}
+          dateFormat="dd/MM/yyyy"
           showPopperArrow={false}
           calendarStartDay={1}
           disabled={disabled}
@@ -118,14 +116,14 @@ const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
     }
 
     return (
-      <Label label={label}>
+      <LabelRadix label={label}>
         <div className={classNames.inputContainer}>
           <input ref={ref} disabled={disabled} {...rest} />
           <div className={classNames.icon}>
             <CalendarIcon />
           </div>
         </div>
-      </Label>
+      </LabelRadix>
     )
   }
 )
@@ -143,7 +141,7 @@ const CustomHeader = ({ date, decreaseMonth, increaseMonth }: ReactDatePickerCus
     <div className={classNames.header}>
       <Typography variant="bold_text_16">{headerText}</Typography>
       <div className={classNames.buttonBox}>
-        <button className={classNames.button} type={'button'} onClick={decreaseMonth}>
+        <button className={classNames.button} type="button" onClick={decreaseMonth}>
           <ArrowLeft />
         </button>
 

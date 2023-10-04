@@ -1,7 +1,6 @@
-import s from './header.module.scss'
+import { LanguageSelect, Typography } from '@/components'
 
-import { LanguageSelect } from '@/components/language-select'
-import { Typography } from '@/components/typography'
+import s from './header.module.scss'
 
 export const Header = () => {
   return (

@@ -1,6 +1,5 @@
 import { LinkExpiredIcon } from '@/assets/icons'
-import { Button } from '@/components/button'
-import { Typography } from '@/components/typography'
+import { Button, Typography } from '@/components'
 import { PATH } from '@/consts/route-paths'
 import { useTranslation } from '@/hooks/use-translation'
 

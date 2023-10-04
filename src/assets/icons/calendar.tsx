@@ -1,5 +1,6 @@
-import { SVGProps, memo } from 'react'
-const CalendarIcon = (props: SVGProps<SVGSVGElement>) => (
+import { SVGProps } from 'react'
+
+export const CalendarIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     width={24}
     height={24}
@@ -21,6 +22,3 @@ const CalendarIcon = (props: SVGProps<SVGSVGElement>) => (
     </defs>
   </svg>
 )
-const Memo = memo(CalendarIcon)
-
-export { Memo as CalendarIcon }

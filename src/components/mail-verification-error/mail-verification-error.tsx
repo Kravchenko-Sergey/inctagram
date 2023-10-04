@@ -1,17 +1,16 @@
-import React, { memo } from 'react'
+import { memo } from 'react'
 
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
-import s from './mail-verification-error.module.scss'
-
 import { baseUrl } from '@/api'
 import { useResendEmailMutation } from '@/api/auth-api/auth.api'
 import ConfirmImg from '@/assets/image/confirm-error.png'
-import { Button } from '@/components/button'
-import { Typography } from '@/components/typography'
+import { Button, Typography } from '@/components'
 import { PATH } from '@/consts/route-paths'
 import { useTranslation } from '@/hooks/use-translation'
+
+import s from './mail-verification-error.module.scss'
 
 type MailVerificationErrorProps = {
   email: string
@@ -22,9 +21,14 @@ export const MailVerificationError = memo(({ email }: MailVerificationErrorProps
   const [resendEmail] = useResendEmailMutation()
   const { push } = useRouter()
 
-  const buttonHandler = () => {
-    resendEmail({ baseUrl: baseUrl, email })
-    push(PATH.LOGIN)
+  const buttonHandler = async () => {
+    try {
+      await resendEmail({ baseUrl: baseUrl, email })
+      push(PATH.LOGIN)
+    } catch (error) {
+      // TODO handle error
+      console.error(error)
+    }
   }
 
   return (

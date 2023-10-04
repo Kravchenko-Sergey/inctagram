@@ -1,16 +1,12 @@
-import React from 'react'
-
 import { useGoogleLogin } from '@react-oauth/google'
 import { useRouter } from 'next/router'
 
-import s from './sign-in.module.scss'
-
 import { useGoogleLoginMutation } from '@/api/auth-api/auth.api'
-import { HeadMeta } from '@/components/head-meta'
-import { getHeaderLayout } from '@/components/layout/header-layout/header-layout'
-import { Login } from '@/components/login'
+import { HeadMeta, Login, getHeaderLayout } from '@/components'
 import { PATH } from '@/consts/route-paths'
 import { tokenSetterToLocalStorage } from '@/helpers/tokenSetterToLocalStorage'
+
+import s from './sign-in.module.scss'
 
 const SignIn = () => {
   const router = useRouter()

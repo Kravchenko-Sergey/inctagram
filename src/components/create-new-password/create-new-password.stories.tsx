@@ -1,11 +1,11 @@
 import { Meta, StoryObj } from '@storybook/react'
 import { Provider } from 'react-redux'
 
-import { CreateNewPassword } from '@/components/create-new-password'
-import { store } from '@/store/store'
+import { store } from '@/store'
+import { CreateNewPassword } from './'
 
 const meta = {
-  title: 'Components/CreateNewPassword',
+  title: 'Page Components/CreateNewPassword',
   component: CreateNewPassword,
   tags: ['autodocs'],
   args: {

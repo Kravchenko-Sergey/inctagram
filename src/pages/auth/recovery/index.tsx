@@ -3,9 +3,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import { useCheckRecoveryCodeMutation } from '@/api/auth-api/auth.api'
-import { CreateNewPassword } from '@/components/create-new-password'
-import { HeadMeta } from '@/components/head-meta'
-import { RecoveryLinkExpired } from '@/components/recovery-link-expired'
+import { CreateNewPassword, HeadMeta, RecoveryLinkExpired, getHeaderLayout } from '@/components'
 import { checkValidQuery } from '@/helpers/checkValidQuery'
 
 type ExpectedQuery = {
@@ -54,5 +52,7 @@ const Recovery = () => {
     </>
   )
 }
+
+Recovery.getLayout = getHeaderLayout
 
 export default Recovery

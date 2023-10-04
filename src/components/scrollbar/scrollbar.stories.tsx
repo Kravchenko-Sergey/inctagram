@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import s from '@/components/sidebar/sidebar.module.scss'
-
 import { Scrollbar } from './'
+
+import s from './scrollbar.module.scss'
 
 import {
   BookmarkOutline,
@@ -14,7 +14,7 @@ import {
   SearchIcon,
   TrendingUpOutline,
 } from '@/assets/icons'
-import { Typography } from '@/components/typography'
+import { Typography } from '@/components'
 
 const meta = {
   title: 'Components/UI/Scrollbar',

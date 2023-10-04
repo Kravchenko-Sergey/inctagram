@@ -6,9 +6,6 @@ import { instagramAPI } from '@/api'
 import { authAPI } from '@/api/auth-api/auth.api'
 import { profileAPI } from '@/api/profile-api/profile.api'
 
-// import { auth-api } from '@/features/auth/api/auth.api'
-// import { instagramAPI } from '@/store/api'
-
 export const store = configureStore({
   reducer: {
     [authAPI.reducerPath]: authAPI.reducer,

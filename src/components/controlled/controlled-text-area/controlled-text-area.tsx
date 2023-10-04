@@ -1,6 +1,6 @@
 import { Control, FieldPath, FieldValues, useController } from 'react-hook-form'
 
-import TextArea, { TextAreaProps } from '@/components/text-area/text-area'
+import { TextArea, TextAreaProps } from '@/components'
 
 export type ControlledTextFieldProps<T extends FieldValues> = {
   name: FieldPath<T>
