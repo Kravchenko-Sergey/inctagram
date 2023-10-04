@@ -1,23 +1,19 @@
-import { memo, useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller, useForm } from 'react-hook-form'
 
 import { useRecoverPasswordMutation } from '@/api/auth-api/auth.api'
-import { Button } from '@/components/button'
-import { Card } from '@/components/card'
-import { ControlledTextField } from '@/components/controlled/controlled-text-field'
-import { Modal } from '@/components/modal'
-import { Recaptcha } from '@/components/recaptcha'
-import { Typography } from '@/components/typography'
+import { Button, Card, ControlledTextField, Modal, Recaptcha, Typography } from '@/components'
 import { PATH } from '@/consts/route-paths'
 import { useTranslation } from '@/hooks/use-translation'
-import { forgotPasswordSchema, ForgotPasswordSchemaType } from '@/schemas'
+import { ForgotPasswordSchemaType, forgotPasswordSchema } from '@/schemas'
 
 import { RegisterError } from '@/types'
-import s from './forgot-password.module.scss'
 
-const ForgotPasswordPageComponent = memo(() => {
+import s from './forgot-password-form.module.scss'
+
+export const ForgotPasswordForm = () => {
   const { t } = useTranslation()
   const [sentEmailValue, setSentEmailValue] = useState('')
   const [isLinkSent, setIsLinkSent] = useState(false)
@@ -79,12 +75,12 @@ const ForgotPasswordPageComponent = memo(() => {
           )}
           <Button
             disabled={!isValid}
-            variant={'primary'}
+            variant="primary"
             fullWidth={true}
             className={s.submitBtn}
-            type={'submit'}
+            type="submit"
           >
-            <Typography variant={'semi-bold_small_text'}> {t.auth.sendLink} </Typography>
+            <Typography variant="semi-bold_small_text"> {t.auth.sendLink} </Typography>
           </Button>
           <Button as="a" variant="link" href={PATH.LOGIN} className={s.returnBtn}>
             {t.auth.backToLogin}
@@ -104,15 +100,11 @@ const ForgotPasswordPageComponent = memo(() => {
         className={s.modalContent}
         onOpenChange={handleCloseModal}
       >
-        <Typography variant={'regular_text_16'}>
-          {t.auth.sentCodeToEmail(sentEmailValue)}
-        </Typography>
-        <Button variant={'primary'} onClick={handleCloseModal} className={s.closeButton}>
-          <Typography variant={'h3'}>{t.ok}</Typography>
+        <Typography variant="regular_text_16">{t.auth.sentCodeToEmail(sentEmailValue)}</Typography>
+        <Button variant="primary" onClick={handleCloseModal} className={s.closeButton}>
+          <Typography variant="h3">{t.ok}</Typography>
         </Button>
       </Modal>
     </>
   )
-})
-
-export default ForgotPasswordPageComponent
+}

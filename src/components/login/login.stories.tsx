@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Login } from './'
 
 const meta = {
-  title: 'Components/AUTH/Login',
+  title: 'Page Components/Login',
   component: Login,
   tags: ['autodocs'],
 } satisfies Meta<typeof Login>

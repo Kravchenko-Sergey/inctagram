@@ -1,11 +1,9 @@
-import React from 'react'
-
-import { HeadMeta } from '@/components/head-meta'
+import { HeadMeta } from '@/components'
 
 const Logout = () => {
   return (
     <>
-      <HeadMeta title="Sign-in" />
+      <HeadMeta title="Logout" />
       <main>Logout</main>
     </>
   )

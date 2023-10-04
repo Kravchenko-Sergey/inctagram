@@ -14,7 +14,7 @@ import {
   SearchIcon,
   TrendingUpOutline,
 } from '@/assets/icons'
-import { Typography } from '@/components/typography'
+import { Typography } from '@/components'
 
 const meta = {
   title: 'Components/UI/Sidebar',

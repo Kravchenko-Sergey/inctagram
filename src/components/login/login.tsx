@@ -5,16 +5,13 @@ import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 
 import { useLoginMutation } from '@/api/auth-api/auth.api'
-import { GitHubIcon } from '@/assets/icons/github-icon'
-import { GoogleIcon } from '@/assets/icons/google-icon'
-import { Button } from '@/components/button'
-import { Card } from '@/components/card'
-import { ControlledTextField } from '@/components/controlled/controlled-text-field'
-import { Typography } from '@/components/typography'
+import { GitHubIcon, GoogleIcon } from '@/assets/icons'
+import { Button, Card, ControlledTextField, Typography } from '@/components'
 import { PATH } from '@/consts/route-paths'
 import { FormFields, triggerZodFieldError } from '@/helpers/updateZodErrors'
 import { useTranslation } from '@/hooks/use-translation'
 import { LoginFormValues, loginSchema } from '@/schemas'
+
 import s from './login.module.scss'
 
 type LoginProps = {
@@ -40,20 +37,21 @@ export const Login: FC<LoginProps> = ({ onGoogleAuth, onGithubAuth }) => {
     defaultValues: { email: '', password: '' },
   })
 
-  const onSubmit = (data: LoginFormValues) => {
-    signIn(data)
-      .unwrap()
-      .then(() => {
-        router.push(PATH.PROFILE)
-      })
-      .catch(e => {
-        if (
-          e.data.messages[0].message === 'Authorization error' ||
-          e.data.messages === 'invalid password or email'
-        ) {
-          setError('password', { type: 'password', message: t.errors.loginIncorrectData })
-        }
-      })
+  const onSubmit = async (data: LoginFormValues) => {
+    try {
+      await signIn(data).unwrap()
+
+      router.push(PATH.PROFILE)
+    } catch (error) {
+      const e = error as any // TODO add type
+
+      if (
+        e.data.messages[0].message === 'Authorization error' ||
+        e.data.messages === 'invalid password or email'
+      ) {
+        setError('password', { type: 'password', message: t.errors.loginIncorrectData })
+      }
+    }
   }
 
   useEffect(() => {

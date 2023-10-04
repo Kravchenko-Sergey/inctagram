@@ -6,7 +6,7 @@ import type { Meta } from '@storybook/react'
 import { Select } from './'
 
 export default {
-  title: 'Components/Select',
+  title: 'Components/UI/Select',
   component: Select,
   tags: ['autodocs'],
 } satisfies Meta<typeof Select>

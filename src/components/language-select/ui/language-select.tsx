@@ -2,9 +2,9 @@ import { memo, useMemo, useState } from 'react'
 
 import { useRouter } from 'next/router'
 
-import { GreatBritainComponent } from '@/components/language-select/ui/great-britain-component'
-import { RussiaComponent } from '@/components/language-select/ui/russia-component'
-import { Select } from '@/components/select'
+import { Select } from '@/components'
+import { GreatBritainComponent } from './great-britain-component'
+import { RussiaComponent } from './russia-component'
 
 type LocalType = 'ru' | 'en'
 

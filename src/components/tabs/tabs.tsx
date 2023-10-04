@@ -1,10 +1,10 @@
-import React, { FC, MouseEventHandler } from 'react'
+import { FC, MouseEventHandler } from 'react'
 
 import * as TabsRadixUI from '@radix-ui/react-tabs'
 
 import s from './tabs.module.scss'
 
-export type Tab = {
+type Tab = {
   value: string
   title: string
   onClick?: MouseEventHandler<HTMLButtonElement> | undefined

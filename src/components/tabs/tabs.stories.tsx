@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { Tabs } from './tabs'
 
-// const meta: Meta<Tabs> = {
 const meta = {
   title: 'Components/UI/Tabs',
   component: Tabs,

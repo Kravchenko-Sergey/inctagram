@@ -3,11 +3,10 @@ import { CSSProperties, FC, ReactElement } from 'react'
 import * as SelectRadix from '@radix-ui/react-select'
 import { clsx } from 'clsx'
 
-import { Typography } from '../typography'
+import { ArrowDownIcon } from '@/assets/icons'
+import { Typography } from '@/components'
 
 import s from './select.module.scss'
-
-import { ArrowDownIcon } from '@/assets/icons'
 
 export type Option = { label: string | ReactElement; value: string }
 
@@ -62,7 +61,7 @@ export const Select: FC<SelectProps> = ({
 
   return (
     <div className={classNames.root}>
-      <Typography variant={'regular_text_16'} as="label" className={classNames.label}>
+      <Typography variant="regular_text_16" as="label" className={classNames.label}>
         {label}
       </Typography>
       <SelectRadix.Root disabled={disabled} onValueChange={onChange}>
@@ -75,7 +74,7 @@ export const Select: FC<SelectProps> = ({
           </SelectRadix.Icon>
         </SelectRadix.Trigger>
         <SelectRadix.Portal>
-          <SelectRadix.Content className={classNames.content} position={'popper'}>
+          <SelectRadix.Content className={classNames.content} position="popper">
             {options.map(option => (
               <SelectRadix.Item value={option.value} className={classNames.item} key={option.value}>
                 <Typography as="span" className={s.active}>
@@ -85,7 +84,7 @@ export const Select: FC<SelectProps> = ({
             ))}
           </SelectRadix.Content>
         </SelectRadix.Portal>
-        {showError && <Typography variant={'error'}>{errorMessage}</Typography>}
+        {showError && <Typography variant="error">{errorMessage}</Typography>}
       </SelectRadix.Root>
     </div>
   )

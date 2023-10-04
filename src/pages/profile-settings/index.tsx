@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -7,15 +7,17 @@ import s from './profile-settings.module.scss'
 
 import { useUpdateProfileMutation } from '@/api/profile-api/profile.api'
 import { ImageOutline } from '@/assets/icons/image-outline'
-import { Button } from '@/components/button'
-import { ControlledTextArea } from '@/components/controlled/controlled-text-area'
-import { ControlledTextField } from '@/components/controlled/controlled-text-field'
-import { getMainLayout } from '@/components/layout/main-layout/main-layout'
-import { Select } from '@/components/select'
-import { Tabs } from '@/components/tabs'
+import {
+  Button,
+  ControlledTextArea,
+  ControlledTextField,
+  getMainLayout,
+  Select,
+  Tabs,
+} from '@/components'
 import { FormFields, triggerZodFieldError } from '@/helpers/updateZodErrors'
 import { useTranslation } from '@/hooks/use-translation'
-import { ProfileSettingsFormValues, profileSettingsSchema } from '@/schemas/profile-settings-schema'
+import { ProfileSettingsFormType, profileSettingsSchema } from '@/schemas'
 
 const ProfileSettings = () => {
   const { t } = useTranslation()
@@ -46,7 +48,7 @@ const ProfileSettings = () => {
     control,
     formState: { touchedFields },
     trigger,
-  } = useForm<ProfileSettingsFormValues>({
+  } = useForm<ProfileSettingsFormType>({
     mode: 'onBlur',
     resolver: zodResolver(profileSettingsSchema(t)),
     defaultValues: {
@@ -59,7 +61,7 @@ const ProfileSettings = () => {
     },
   })
 
-  const onSubmit = (data: ProfileSettingsFormValues) => {
+  const onSubmit = (data: ProfileSettingsFormType) => {
     console.log(data)
     updateProfile({
       userName: data.userName,
@@ -87,7 +89,7 @@ const ProfileSettings = () => {
           <div className={s.userImage}>
             <ImageOutline />
           </div>
-          <Button variant={'ghost'}>{t.profile.addAvatar}</Button>
+          <Button variant="ghost">{t.profile.addAvatar}</Button>
           <div className={s.line2}></div>
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className={s.form}>

@@ -1,4 +1,4 @@
-import { HeadMeta } from '@/components/head-meta'
+import { HeadMeta } from '@/components'
 
 // const inter = Inter({ subsets: ['latin'] })
 

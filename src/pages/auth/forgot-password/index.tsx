@@ -1,17 +1,16 @@
-import React from 'react'
-
-import ForgotPasswordPageComponent from '@/components/forgot-password/forgot-password'
-import { HeadMeta } from '@/components/head-meta'
+import { ForgotPasswordForm, HeadMeta, getHeaderLayout } from '@/components'
 
 const ForgotPassword = () => {
   return (
     <>
       <HeadMeta title="Forgot password" />
       <main>
-        <ForgotPasswordPageComponent />
+        <ForgotPasswordForm />
       </main>
     </>
   )
 }
+
+ForgotPassword.getLayout = getHeaderLayout
 
 export default ForgotPassword
