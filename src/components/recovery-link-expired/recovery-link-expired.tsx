@@ -1,7 +1,7 @@
 import { LinkExpiredIcon } from '@/assets/icons'
 import { Button, Typography } from '@/components'
 import { PATH } from '@/consts/route-paths'
-import { useTranslation } from '@/hooks/use-translation'
+import { useTranslation } from '@/hooks'
 
 import s from './recovery-link-expired.module.scss'
 

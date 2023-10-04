@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { useGoogleLoginMutation } from '@/api/auth-api/auth.api'
 import { HeadMeta, Login, getHeaderLayout } from '@/components'
 import { PATH } from '@/consts/route-paths'
-import { tokenSetterToLocalStorage } from '@/helpers/tokenSetterToLocalStorage'
+import { tokenSetterToLocalStorage } from '@/helpers'
 
 import s from './sign-in.module.scss'
 

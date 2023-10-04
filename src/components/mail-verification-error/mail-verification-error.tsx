@@ -8,7 +8,7 @@ import { useResendEmailMutation } from '@/api/auth-api/auth.api'
 import ConfirmImg from '@/assets/image/confirm-error.png'
 import { Button, Typography } from '@/components'
 import { PATH } from '@/consts/route-paths'
-import { useTranslation } from '@/hooks/use-translation'
+import { useTranslation } from '@/hooks'
 
 import s from './mail-verification-error.module.scss'
 

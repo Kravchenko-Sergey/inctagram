@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 
 import { useCheckRecoveryCodeMutation } from '@/api/auth-api/auth.api'
 import { CreateNewPassword, HeadMeta, RecoveryLinkExpired, getHeaderLayout } from '@/components'
-import { checkValidQuery } from '@/helpers/checkValidQuery'
+import { checkValidQuery } from '@/helpers'
 
 type ExpectedQuery = {
   code: string

@@ -15,8 +15,8 @@ import {
   Select,
   Tabs,
 } from '@/components'
-import { FormFields, triggerZodFieldError } from '@/helpers/updateZodErrors'
-import { useTranslation } from '@/hooks/use-translation'
+import { FormFields, triggerZodFieldError } from '@/helpers'
+import { useTranslation } from '@/hooks'
 import { ProfileSettingsFormType, profileSettingsSchema } from '@/schemas'
 
 const ProfileSettings = () => {

@@ -7,10 +7,10 @@ import { useForm } from 'react-hook-form'
 import { useCreateNewPasswordMutation } from '@/api/auth-api/auth.api'
 import { Button, Card, ControlledTextField, Typography } from '@/components'
 import { PATH } from '@/consts/route-paths'
-import { useTranslation } from '@/hooks/use-translation'
+import { useTranslation } from '@/hooks'
 import { PasswordRecoveryFormType, passwordRecoverySchema } from '@/schemas'
 
-import { FormFields, triggerZodFieldError } from '@/helpers/updateZodErrors'
+import { FormFields, triggerZodFieldError } from '@/helpers'
 
 import s from './create-new-password.module.scss'
 

@@ -3,7 +3,7 @@ import Image from 'next/image'
 import ruIcon from 'public/ru.png'
 
 import { Typography } from '@/components'
-import { useTranslation } from '@/hooks/use-translation'
+import { useTranslation } from '@/hooks'
 
 export const RussiaComponent = () => {
   const { t } = useTranslation()

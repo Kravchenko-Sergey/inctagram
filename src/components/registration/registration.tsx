@@ -16,9 +16,8 @@ import {
   Typography,
 } from '@/components'
 import { PATH } from '@/consts/route-paths'
-import { tokenSetterToLocalStorage } from '@/helpers/tokenSetterToLocalStorage'
-import { FormFields, triggerZodFieldError } from '@/helpers/updateZodErrors'
-import { useTranslation } from '@/hooks/use-translation'
+import { tokenSetterToLocalStorage, FormFields, triggerZodFieldError } from '@/helpers'
+import { useTranslation } from '@/hooks'
 import { RegisterFormType, createRegisterSchema } from '@/schemas'
 import { RegisterError } from '@/types'
 

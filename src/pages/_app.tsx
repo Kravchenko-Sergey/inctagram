@@ -8,7 +8,7 @@ import type { AppProps } from 'next/app'
 import { Inter } from 'next/font/google'
 import { Provider } from 'react-redux'
 
-import { useLoader } from '@/hooks/useLoader'
+import { useLoader } from '@/hooks'
 import { store } from '@/store'
 
 export const inter = Inter({

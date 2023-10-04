@@ -6,7 +6,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { useRecoverPasswordMutation } from '@/api/auth-api/auth.api'
 import { Button, Card, ControlledTextField, Modal, Recaptcha, Typography } from '@/components'
 import { PATH } from '@/consts/route-paths'
-import { useTranslation } from '@/hooks/use-translation'
+import { useTranslation } from '@/hooks'
 import { ForgotPasswordSchemaType, forgotPasswordSchema } from '@/schemas'
 
 import { RegisterError } from '@/types'

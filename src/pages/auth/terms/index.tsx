@@ -3,7 +3,7 @@ import { memo } from 'react'
 import { ArrowLeft } from '@/assets/icons'
 import { Button, Trans, Typography } from '@/components'
 import { PATH } from '@/consts/route-paths'
-import { useTranslation } from '@/hooks/use-translation'
+import { useTranslation } from '@/hooks'
 
 import s from './terms.module.scss'
 
