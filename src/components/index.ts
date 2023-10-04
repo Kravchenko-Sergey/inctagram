@@ -6,7 +6,7 @@ export { ControlledCheckbox, ControlledTextArea, ControlledTextField } from './c
 export { DatePicker } from './date-picker'
 export { HeadMeta } from './head-meta'
 export { Header } from './header'
-export { LabelRadix } from './label-radix'
+export { Label } from './label'
 export { LanguageSelect } from './language-select/ui/language-select'
 export { getHeaderLayout, getMainLayout, getSidebarLayout } from './layout'
 export { Modal } from './modal'

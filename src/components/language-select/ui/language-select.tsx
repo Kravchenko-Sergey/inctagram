@@ -45,28 +45,3 @@ export const LanguageSelect = memo(() => {
     </div>
   )
 })
-
-//
-// export const LanguageSelect = memo(() => {
-//   const { locale, push, pathname, query, asPath, locales } = useRouter()
-//
-//   const changeLangHandler = (event: ChangeEvent<HTMLSelectElement>) => {
-//     const locale = event.currentTarget.value
-//
-//     push({ pathname, query }, asPath, { locale })
-//   }
-//
-//   return (
-//     <div className={cls.languageSelect}>
-//       <select onChange={changeLangHandler} defaultValue={locale}>
-//         {locales?.map(locale => {
-//           return (
-//             <option value={locale} key={locale}>
-//               {locale}
-//             </option>
-//           )
-//         })}
-//       </select>
-//     </div>
-//   )
-// })

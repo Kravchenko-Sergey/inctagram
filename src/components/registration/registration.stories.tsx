@@ -3,6 +3,7 @@ import { Provider } from 'react-redux'
 
 import { store } from '@/store'
 import { Registration } from './'
+import { GoogleOAuthProvider } from '@react-oauth/google'
 
 const meta = {
   title: 'Page Components/Registration',
@@ -16,9 +17,11 @@ type Story = StoryObj<typeof meta>
 export const MainSignUp: Story = {
   render: () => {
     return (
-      <Provider store={store}>
-        <Registration />
-      </Provider>
+      <GoogleOAuthProvider clientId="test">
+        <Provider store={store}>
+          <Registration />
+        </Provider>
+      </GoogleOAuthProvider>
     )
   },
   args: {},
