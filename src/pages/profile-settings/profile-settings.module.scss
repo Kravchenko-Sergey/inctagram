@@ -47,8 +47,8 @@
   align-items: center;
   justify-content: center;
 
-  width: 228px;
-  height: 228px;
+  width: 332px;
+  height: 340px;
   margin-bottom: 60px;
 
   background-color: var(--dark-500);
@@ -121,8 +121,19 @@
 }
 
 .modalInnerContent {
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   padding-top: 48px;
   padding-bottom: 84px;
+}
+
+.modalInnerContent:has(.saveButton) {
+  padding-top: 4px;
+  padding-bottom: 12px;
+}
+
+.saveButton {
+  align-self: flex-end;
 }

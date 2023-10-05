@@ -18,6 +18,7 @@ import { useTranslation } from '@/hooks/use-translation'
 import { ProfileSettingsFormValues, profileSettingsSchema } from '@/schemas/profile-settings-schema'
 import { Avatar } from '@/components/avatar'
 import { Modal } from '@/components/modal'
+import { Typography } from '@/components/typography'
 
 const ProfileSettings = () => {
   const { t } = useTranslation()
@@ -31,10 +32,25 @@ const ProfileSettings = () => {
     if (e.target.files && e.target.files.length) {
       const file = e.target.files[0]
 
-      console.log(file)
+      let previewPhoto = function (reader) {
+        setPreviewAvatar(reader.result)
+      }
+
+      let reader = new FileReader()
+
+      reader.addEventListener('load', previewPhoto.bind(this, reader))
+      reader.readAsDataURL(file)
     }
   }
   const handleCloseModal = useCallback(() => {
+    setPreviewAvatar('')
+    setIsModalOpen(false)
+  }, [])
+
+  const handleSaveCloseModal = useCallback(() => {
+    setUrl(previewAvatar)
+    console.log('previewAvatar', previewAvatar)
+    console.log('url', url)
     setIsModalOpen(false)
   }, [])
 
@@ -146,18 +162,28 @@ const ProfileSettings = () => {
         <div className={s.modalInnerContent}>
           <div className={s.addUserImage}>
             {previewAvatar ? (
-              <Avatar photo={previewAvatar} name="avatar" size={198} />
+              <Avatar photo={previewAvatar} name="avatar" size={316} />
             ) : (
               <ImageOutline />
             )}
           </div>
-          <Button variant={'primary'} onClick={() => inputRef && inputRef.current?.click()}>
-            {t.profile.addAvatar}
-          </Button>
-          <input ref={inputRef} type="file" onChange={uploadHandler} style={{ display: 'none' }} />
-          {/*<Button variant={'primary'} onClick={handleCloseModal}>*/}
-          {/*  <Typography variant={'h3'}>{t.profile.selectImage}</Typography>*/}
-          {/*</Button>*/}
+          {previewAvatar ? (
+            <Button variant={'primary'} onClick={handleSaveCloseModal} className={s.saveButton}>
+              <Typography variant={'h3'}>{t.profile.saveChanges}</Typography>
+            </Button>
+          ) : (
+            <>
+              <Button variant={'primary'} onClick={() => inputRef && inputRef.current?.click()}>
+                {t.profile.addAvatar}
+              </Button>
+              <input
+                ref={inputRef}
+                type="file"
+                onChange={uploadHandler}
+                style={{ display: 'none' }}
+              />
+            </>
+          )}
         </div>
       </Modal>
     </div>
