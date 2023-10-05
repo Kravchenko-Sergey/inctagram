@@ -157,5 +157,6 @@ export const en: LocaleType = {
     devices: 'Devices',
     accManagement: 'Account Management',
     myPayments: 'My payments',
+    selectImage: 'Select from computer',
   },
 }

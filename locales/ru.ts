@@ -147,6 +147,7 @@ export const ru = {
     devices: 'Устройства',
     accManagement: 'Управление счетами',
     myPayments: 'Мои платежи',
+    selectImage: 'Выбрать изображение с этого компьютера',
   },
 }
 

@@ -42,6 +42,18 @@
   border-radius: 50%;
 }
 
+.addUserImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 228px;
+  height: 228px;
+  margin-bottom: 60px;
+
+  background-color: var(--dark-500);
+}
+
 .userInfo {
   display: flex;
   flex-direction: column;
@@ -101,4 +113,16 @@
 .submitBtn {
   align-self: end;
   margin-top: 48px;
+}
+
+.modalContent {
+  width: 492px;
+  min-height: 564px;
+}
+
+.modalInnerContent {
+  display: grid;
+  place-items: center;
+  padding-top: 48px;
+  padding-bottom: 84px;
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -16,11 +16,27 @@ import { Tabs } from '@/components/tabs'
 import { FormFields, triggerZodFieldError } from '@/helpers/updateZodErrors'
 import { useTranslation } from '@/hooks/use-translation'
 import { ProfileSettingsFormValues, profileSettingsSchema } from '@/schemas/profile-settings-schema'
+import { Avatar } from '@/components/avatar'
+import { Modal } from '@/components/modal'
 
 const ProfileSettings = () => {
   const { t } = useTranslation()
 
   const [updateProfile] = useUpdateProfileMutation()
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [url, setUrl] = useState('')
+  const [previewAvatar, setPreviewAvatar] = useState(url)
+  const inputRef = useRef<HTMLInputElement>(null)
+  const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length) {
+      const file = e.target.files[0]
+
+      console.log(file)
+    }
+  }
+  const handleCloseModal = useCallback(() => {
+    setIsModalOpen(false)
+  }, [])
 
   const profileTabs = [
     { value: 'tab1', title: t.profile.generalInfo },
@@ -85,9 +101,16 @@ const ProfileSettings = () => {
       <div className={s.formContent}>
         <div className={s.userImageBox}>
           <div className={s.userImage}>
-            <ImageOutline />
+            {url ? <Avatar photo={url} name="avatar" size={198} /> : <ImageOutline />}
           </div>
-          <Button variant={'ghost'}>{t.profile.addAvatar}</Button>
+          <Button
+            variant={'ghost'}
+            onClick={() => {
+              setIsModalOpen(true)
+            }}
+          >
+            {t.profile.addAvatar}
+          </Button>
           <div className={s.line2}></div>
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
@@ -114,6 +137,29 @@ const ProfileSettings = () => {
           </Button>
         </form>
       </div>
+      <Modal
+        isOpen={isModalOpen}
+        title={t.profile.addAvatar}
+        className={s.modalContent}
+        onOpenChange={handleCloseModal}
+      >
+        <div className={s.modalInnerContent}>
+          <div className={s.addUserImage}>
+            {previewAvatar ? (
+              <Avatar photo={previewAvatar} name="avatar" size={198} />
+            ) : (
+              <ImageOutline />
+            )}
+          </div>
+          <Button variant={'primary'} onClick={() => inputRef && inputRef.current?.click()}>
+            {t.profile.addAvatar}
+          </Button>
+          <input ref={inputRef} type="file" onChange={uploadHandler} style={{ display: 'none' }} />
+          {/*<Button variant={'primary'} onClick={handleCloseModal}>*/}
+          {/*  <Typography variant={'h3'}>{t.profile.selectImage}</Typography>*/}
+          {/*</Button>*/}
+        </div>
+      </Modal>
     </div>
   )
 }
