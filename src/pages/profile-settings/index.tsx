@@ -26,14 +26,15 @@ const ProfileSettings = () => {
   const [updateProfile] = useUpdateProfileMutation()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [url, setUrl] = useState('')
-  const [previewAvatar, setPreviewAvatar] = useState(url)
+  const [previewAvatar, setPreviewAvatar] = useState('')
+  const [avatarEditMode, setAvatarEditMode] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length) {
       const file = e.target.files[0]
-
       let previewPhoto = function (reader) {
         setPreviewAvatar(reader.result)
+        setAvatarEditMode(true)
       }
 
       let reader = new FileReader()
@@ -42,17 +43,21 @@ const ProfileSettings = () => {
       reader.readAsDataURL(file)
     }
   }
-  const handleCloseModal = useCallback(() => {
+  const handleOpenModal = () => {
+    setPreviewAvatar(url)
+  }
+
+  const handleCloseModal = () => {
     setPreviewAvatar('')
     setIsModalOpen(false)
-  }, [])
+    setAvatarEditMode(false)
+  }
 
-  const handleSaveCloseModal = useCallback(() => {
+  const handleSaveCloseModal = () => {
     setUrl(previewAvatar)
-    console.log('previewAvatar', previewAvatar)
-    console.log('url', url)
     setIsModalOpen(false)
-  }, [])
+    setAvatarEditMode(false)
+  }
 
   const profileTabs = [
     { value: 'tab1', title: t.profile.generalInfo },
@@ -167,14 +172,14 @@ const ProfileSettings = () => {
               <ImageOutline />
             )}
           </div>
-          {previewAvatar ? (
+          {avatarEditMode ? (
             <Button variant={'primary'} onClick={handleSaveCloseModal} className={s.saveButton}>
               <Typography variant={'h3'}>{t.profile.saveChanges}</Typography>
             </Button>
           ) : (
             <>
               <Button variant={'primary'} onClick={() => inputRef && inputRef.current?.click()}>
-                {t.profile.addAvatar}
+                {t.profile.selectImage}
               </Button>
               <input
                 ref={inputRef}
