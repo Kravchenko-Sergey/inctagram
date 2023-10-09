@@ -18,5 +18,7 @@ export const ControlledTextArea = <T extends FieldValues>({
     fieldState: { error },
   } = useController({ name, control })
 
-  return <TextArea error={error?.message} className={className} {...field} {...rest} />
+  return (
+    <TextArea error={error?.message} className={className ? className : ''} {...field} {...rest} />
+  )
 }

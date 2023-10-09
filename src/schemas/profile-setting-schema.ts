@@ -25,14 +25,25 @@ export const profileSettingsSchema = (t: LocaleType) => {
       .nonempty(t.errors.nonemptyLastname)
       .max(50, t.errors.maxLastname(50))
       .regex(lastNameRegex, t.errors.regexLastname),
-    /*dateOfBirth: z.string().datetime(),*/
-    city: z.string(),
+    dateOfBirth: z.date().refine(
+      data => {
+        const dob = new Date(data)
+        const today = new Date()
+        const age = today.getFullYear() - dob.getFullYear()
+
+        return age >= 13
+      },
+      {
+        message: t.errors.under13,
+      }
+    ),
+    city: z.string().trim().nonempty(),
     aboutMe: z
       .string()
       .trim()
       .max(200, t.errors.maxFieldLength(200))
       .regex(aboutMeRegex, t.errors.regexAboutMe)
-      .optional(),
+      .nonempty(),
   })
 }
 

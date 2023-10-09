@@ -25,6 +25,7 @@ export const Default: Story = {
     startDate: null,
   },
 }
+
 export const Range: Story = {
   render: () => {
     const [startDate, setStartDate] = useState<Date | null>(new Date())
