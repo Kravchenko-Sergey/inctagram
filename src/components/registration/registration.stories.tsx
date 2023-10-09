@@ -1,11 +1,12 @@
 import { Meta, StoryObj } from '@storybook/react'
 import { Provider } from 'react-redux'
 
-import { Registration } from '@/components/registration/registration'
-import { store } from '@/store/store'
+import { store } from '@/store'
+import { Registration } from './'
+import { GoogleOAuthProvider } from '@react-oauth/google'
 
 const meta = {
-  title: 'Components/Registration',
+  title: 'Page Components/Registration',
   component: Registration,
   tags: ['autodocs'],
 } satisfies Meta<typeof Registration>
@@ -16,9 +17,11 @@ type Story = StoryObj<typeof meta>
 export const MainSignUp: Story = {
   render: () => {
     return (
-      <Provider store={store}>
-        <Registration />
-      </Provider>
+      <GoogleOAuthProvider clientId="test">
+        <Provider store={store}>
+          <Registration />
+        </Provider>
+      </GoogleOAuthProvider>
     )
   },
   args: {},

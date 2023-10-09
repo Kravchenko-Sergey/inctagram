@@ -1,13 +1,11 @@
-import React, { memo } from 'react'
-
-import s from './terms.module.scss'
+import { memo } from 'react'
 
 import { ArrowLeft } from '@/assets/icons'
-import { Button } from '@/components/button'
-import { Trans } from '@/components/trans/trans'
-import { Typography } from '@/components/typography'
+import { Button, Trans, Typography } from '@/components'
 import { PATH } from '@/consts/route-paths'
-import { useTranslation } from '@/hooks/use-translation'
+import { useTranslation } from '@/hooks'
+
+import s from './terms.module.scss'
 
 const Policy = memo(() => {
   const { t } = useTranslation()

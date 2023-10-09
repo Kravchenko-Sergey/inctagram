@@ -1,10 +1,9 @@
 import { FC, ReactNode } from 'react'
 
-import { Scrollbar } from '../scrollbar/scrollbar'
-
+import { Scrollbar } from '@/components'
 import s from './sidebar.module.scss'
 
-export type SidebarProps = {
+type SidebarProps = {
   children: ReactNode
   className?: string
 }

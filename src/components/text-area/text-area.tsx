@@ -35,9 +35,6 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, ref) => 
           ref={ref}
           disabled={disabled}
           {...rest}
-          // className={`${s.textarea} ${error ? s.error : ''} ${
-          //   classNameTextArea ? s.classNameTextArea : ''
-          // }`}
           className={classNames.textArea}
         />
       </div>

@@ -1,11 +1,11 @@
-import React, { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
+import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
 
 import { clsx } from 'clsx'
 import Link from 'next/link'
 
 import s from './typography.module.scss'
 
-export type TypographyProps<T extends ElementType = 'p'> = {
+type TypographyProps<T extends ElementType = 'p'> = {
   as?: T
   color?: 'primary' | 'secondary' | 'inherit' | 'error' | 'link'
   variant?:

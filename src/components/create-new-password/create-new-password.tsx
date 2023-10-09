@@ -1,18 +1,17 @@
+import { FC, useEffect } from 'react'
+
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
-import { FC, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { useCreateNewPasswordMutation } from '@/api/auth-api/auth.api'
-import { Button } from '@/components/button'
-import { Card } from '@/components/card'
-import { ControlledTextField } from '@/components/controlled/controlled-text-field'
-import { Typography } from '@/components/typography'
+import { Button, Card, ControlledTextField, Typography } from '@/components'
 import { PATH } from '@/consts/route-paths'
-import { useTranslation } from '@/hooks/use-translation'
+import { useTranslation } from '@/hooks'
 import { PasswordRecoveryFormType, passwordRecoverySchema } from '@/schemas'
 
-import { FormFields, triggerZodFieldError } from '@/helpers/updateZodErrors'
+import { FormFields, triggerZodFieldError } from '@/helpers'
+
 import s from './create-new-password.module.scss'
 
 type CreateNewPasswordProps = {
@@ -30,6 +29,10 @@ export const CreateNewPassword: FC<CreateNewPasswordProps> = ({ code: recoveryCo
   } = useForm<PasswordRecoveryFormType>({
     resolver: zodResolver(passwordRecoverySchema(t)),
     mode: 'onBlur',
+    defaultValues: {
+      newPassword: '',
+      passwordConfirmation: '',
+    },
   })
   const [createNewPassword] = useCreateNewPasswordMutation()
 

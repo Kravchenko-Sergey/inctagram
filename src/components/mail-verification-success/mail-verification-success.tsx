@@ -1,14 +1,13 @@
-import React, { memo } from 'react'
+import { memo } from 'react'
 
 import Image from 'next/image'
 
-import s from './mail-verification-success.module.scss'
-
 import ConfirmImg from '@/assets/image/confirm-success.png'
-import { Button } from '@/components/button'
-import { Typography } from '@/components/typography'
+import { Button, Typography } from '@/components'
 import { PATH } from '@/consts/route-paths'
-import { useTranslation } from '@/hooks/use-translation'
+import { useTranslation } from '@/hooks'
+
+import s from './mail-verification-success.module.scss'
 
 export const MailVerificationSuccess = memo(() => {
   const { t } = useTranslation()

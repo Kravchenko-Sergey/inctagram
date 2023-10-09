@@ -1,15 +1,15 @@
-import React, { ReactElement, ReactNode } from 'react'
+import { ReactElement, ReactNode } from 'react'
 
+import '@/styles/index.scss'
+import '@/styles/nprogress.css'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 import { Inter } from 'next/font/google'
-import '@/styles/index.scss'
-import '@/styles/nprogress.css'
 import { Provider } from 'react-redux'
 
-import { useLoader } from '@/hooks/useLoader'
-import { store } from '@/store/store'
+import { useLoader } from '@/hooks'
+import { store } from '@/store'
 
 export const inter = Inter({
   subsets: ['latin', 'cyrillic'],

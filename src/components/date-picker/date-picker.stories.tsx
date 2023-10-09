@@ -2,13 +2,13 @@ import { useState } from 'react'
 
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { DataPicker, DatePickerProps } from '@/components/date-picker/data-picker'
+import { DatePicker } from '.'
 
 const meta = {
-  title: 'Components/DataPicker',
-  component: DataPicker,
+  title: 'Components/UI/DataPicker',
+  component: DatePicker,
   tags: ['autodocs'],
-} satisfies Meta<typeof DataPicker>
+} satisfies Meta<typeof DatePicker>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -17,7 +17,7 @@ export const Default: Story = {
   render: () => {
     const [startDate, setStartDate] = useState<Date | null>(new Date())
 
-    return <DataPicker setStartDate={setStartDate} startDate={startDate} />
+    return <DatePicker setStartDate={setStartDate} startDate={startDate} />
   },
 
   args: {
@@ -35,7 +35,7 @@ export const Range: Story = {
     )
 
     return (
-      <DataPicker
+      <DatePicker
         setStartDate={setStartDate}
         startDate={startDate}
         endDate={endDate}

@@ -1,19 +1,19 @@
-import React, { FC, ReactNode } from 'react'
+import { FC, ReactNode } from 'react'
 
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import s from '@/components/layout/main-layout/main-layout.module.scss'
-import { Sidebar } from '@/components/sidebar'
-import { Typography } from '@/components/typography'
+import { Sidebar, Typography } from '@/components'
 import { sidebarItems } from '@/consts/sidebar-routes'
+
+import s from '@/components/layout/main-layout/main-layout.module.scss'
 
 type SidebarLayoutProps = {
   className?: string
   children?: ReactNode
 }
 
-export const SidebarLayout: FC<SidebarLayoutProps> = ({ children }) => {
+const SidebarLayout: FC<SidebarLayoutProps> = ({ children }) => {
   const router = useRouter()
 
   return (

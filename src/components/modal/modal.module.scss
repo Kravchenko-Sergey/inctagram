@@ -1,4 +1,4 @@
-.DialogOverlay {
+.dialogOverlay {
   position: fixed;
   z-index: 100;
   inset: 0;
@@ -9,7 +9,7 @@
   // animation: overlay-show 450ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.DialogContent {
+.dialogContent {
   position: fixed;
   z-index: 100;
   top: 50%;
@@ -52,7 +52,7 @@
   border-radius: 0 0 2px 2px;
 }
 
-.IconButton {
+.iconButton {
   all: unset;
 
   cursor: pointer;

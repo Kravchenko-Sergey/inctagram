@@ -47,4 +47,4 @@ export const profileSettingsSchema = (t: LocaleType) => {
   })
 }
 
-export type ProfileSettingsFormValues = z.infer<ReturnType<typeof profileSettingsSchema>>
+export type ProfileSettingsFormType = z.infer<ReturnType<typeof profileSettingsSchema>>

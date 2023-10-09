@@ -2,8 +2,8 @@ import Image from 'next/image'
 
 import ruIcon from 'public/ru.png'
 
-import { Typography } from '@/components/typography'
-import { useTranslation } from '@/hooks/use-translation'
+import { Typography } from '@/components'
+import { useTranslation } from '@/hooks'
 
 export const RussiaComponent = () => {
   const { t } = useTranslation()
@@ -11,7 +11,7 @@ export const RussiaComponent = () => {
   return (
     <div style={{ display: 'flex', alignItems: 'center' }}>
       <div style={{ marginRight: '5px', display: 'flex', alignItems: 'center' }}>
-        <Image width={24} height={24} src={ruIcon} alt=" Russia flag" />
+        <Image width={24} height={24} src={ruIcon} alt="Russia flag" />
       </div>
       <Typography variant="regular_text_16">{t.languageSelect.russian}</Typography>
     </div>

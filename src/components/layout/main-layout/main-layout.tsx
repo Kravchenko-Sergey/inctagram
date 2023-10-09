@@ -1,9 +1,9 @@
-import React, { ReactElement, ReactNode } from 'react'
+import { ReactElement, ReactNode } from 'react'
+
+import { Header, getSidebarLayout } from '@/components'
 
 import s from './main-layout.module.scss'
 
-import { Header } from '@/components/header'
-import { getSidebarLayout } from '@/components/layout/sidebar-layout/sidebar-layout'
 type LayoutProps = {
   className?: string
   children?: ReactNode

@@ -2,9 +2,9 @@ import { memo, useMemo, useState } from 'react'
 
 import { useRouter } from 'next/router'
 
-import { GreatBritainComponent } from '@/components/language-select/ui/great-britain-component'
-import { RussiaComponent } from '@/components/language-select/ui/russia-component'
-import { Select } from '@/components/select'
+import { Select } from '@/components'
+import { GreatBritainComponent } from './great-britain-component'
+import { RussiaComponent } from './russia-component'
 
 type LocalType = 'ru' | 'en'
 
@@ -45,28 +45,3 @@ export const LanguageSelect = memo(() => {
     </div>
   )
 })
-
-//
-// export const LanguageSelect = memo(() => {
-//   const { locale, push, pathname, query, asPath, locales } = useRouter()
-//
-//   const changeLangHandler = (event: ChangeEvent<HTMLSelectElement>) => {
-//     const locale = event.currentTarget.value
-//
-//     push({ pathname, query }, asPath, { locale })
-//   }
-//
-//   return (
-//     <div className={cls.languageSelect}>
-//       <select onChange={changeLangHandler} defaultValue={locale}>
-//         {locales?.map(locale => {
-//           return (
-//             <option value={locale} key={locale}>
-//               {locale}
-//             </option>
-//           )
-//         })}
-//       </select>
-//     </div>
-//   )
-// })

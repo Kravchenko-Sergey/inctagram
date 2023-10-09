@@ -3,7 +3,7 @@ import { CSSProperties, forwardRef, ReactElement } from 'react'
 import * as SelectRadix from '@radix-ui/react-select'
 import { clsx } from 'clsx'
 
-import { Typography } from '../typography'
+import { Typography } from '@/components'
 
 import s from './select.module.scss'
 
