@@ -94,7 +94,7 @@ const ProfileSettings = () => {
     }
   }, [deleteAvatar])
 
-  const onAvatarUpload = useCallback(async () => {
+  const onAvatarUpload = async () => {
     try {
       await uploadAvatar({
         avatars: newAvatarFile,
@@ -107,7 +107,7 @@ const ProfileSettings = () => {
 
       setUploadError(error)
     }
-  }, [uploadAvatar])
+  }
 
   const handleSaveCloseModal = async () => {
     console.log(newAvatarFile)
