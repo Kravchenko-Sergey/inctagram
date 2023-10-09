@@ -82,15 +82,16 @@ export const Registration = memo(() => {
   )
 
   const googleLoginAndRegister = useGoogleLogin({
-    onSuccess: tokenResponse => {
-      googleLogin({ code: tokenResponse.code })
+    onSuccess: async tokenResponse => {
+      await googleLogin({ code: tokenResponse.code })
+      if (googleToken && googleToken.accessToken) {
+        tokenSetterToLocalStorage(googleToken.accessToken)
+      }
     },
     flow: 'auth-code',
   })
 
-  if (googleToken && googleToken.accessToken) {
-    tokenSetterToLocalStorage(googleToken.accessToken)
-  }
+  const githubRegister = () => push('https://inctagram.work/api/v1/auth/github/login')
 
   return (
     <>
@@ -99,13 +100,8 @@ export const Registration = memo(() => {
           {t.auth.signUp}
         </Typography>
         <div className={s.icons}>
-          <GoogleIcon onClick={googleLoginAndRegister as unknown as any} className={s.icon} />
-          <GitHubIcon
-            onClick={() =>
-              window.location.assign('https://inctagram.work/api/v1/auth/github/login')
-            }
-            className={s.icon}
-          />
+          <GoogleIcon onClick={googleLoginAndRegister} className={s.icon} />
+          <GitHubIcon onClick={githubRegister} className={s.icon} />
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className={s.form}>

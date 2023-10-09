@@ -1,9 +1,7 @@
 import React, { ComponentProps, forwardRef } from 'react'
 
 import { clsx } from 'clsx'
-// import { ru } from 'date-fns/locale'
-import { format } from 'date-fns'
-import { ru } from 'date-fns/locale'
+import { format, ru } from 'date-fns'
 import * as RDP from 'react-datepicker'
 import { ReactDatePickerCustomHeaderProps } from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.min.css'

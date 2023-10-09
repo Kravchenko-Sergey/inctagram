@@ -8,8 +8,14 @@ import type { AppProps } from 'next/app'
 import { Inter } from 'next/font/google'
 import { Provider } from 'react-redux'
 
+<<<<<<< Updated upstream
 import { useLoader } from '@/hooks'
 import { store } from '@/store'
+=======
+import { useLoader } from '@/hooks/useLoader'
+import { store } from '@/store/store'
+import { AuthProvider } from '@/components/auth-provider'
+>>>>>>> Stashed changes
 
 export const inter = Inter({
   subsets: ['latin', 'cyrillic'],
@@ -38,10 +44,13 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           font-family: ${inter.style.fontFamily};
         }
       `}</style>
+
       <Provider store={store}>
-        <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_ID ?? ''}>
-          {getLayout(<Component {...pageProps} />)}
-        </GoogleOAuthProvider>
+        <AuthProvider>
+          <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_ID ?? ''}>
+            {getLayout(<Component {...pageProps} />)}
+          </GoogleOAuthProvider>
+        </AuthProvider>
       </Provider>
     </>
   )
