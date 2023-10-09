@@ -3,7 +3,6 @@ import { memo } from 'react'
 import { ArrowLeft } from '@/assets/icons'
 import { useRouter } from 'next/router'
 import { Button, Trans, Typography } from '@/components'
-import { PATH } from '@/consts/route-paths'
 import { useTranslation } from '@/hooks'
 
 import s from './policy.module.scss'

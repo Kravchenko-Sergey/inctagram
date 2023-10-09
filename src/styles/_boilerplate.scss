@@ -81,6 +81,7 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   font-family: Inter, sans-serif;
+
   border: 0;
   box-shadow: 0 0 0 1000px transparent inset;
 
@@ -96,6 +97,7 @@ select:-webkit-autofill:focus {
     color: var(--light-100) !important;
   }
 }
+
 select:-webkit-autofill:focus,
 textarea:-webkit-autofill:focus,
 input:-webkit-autofill:focus {

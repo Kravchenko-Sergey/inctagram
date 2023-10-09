@@ -7,7 +7,6 @@ import { ru } from 'date-fns/locale'
 import * as RDP from 'react-datepicker'
 import { ReactDatePickerCustomHeaderProps } from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.min.css'
-import Link from 'next/link'
 import { PATH } from '@/consts/route-paths'
 import textFieldStyles from './../text-field/text-field.module.scss'
 
@@ -97,7 +96,7 @@ export const DatePicker = forwardRef<FieldValues, DatePickerProps>(
           popperClassName={classNames.popper}
           dayClassName={classNames.day}
           locale={ru}
-          dateFormat={'dd/MM/yyyy'}
+          dateFormat="dd/MM/yyyy"
           showPopperArrow={false}
           calendarStartDay={1}
           disabled={disabled}

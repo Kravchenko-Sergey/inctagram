@@ -8,14 +8,12 @@ import { ProfileUpdate } from '@/components/profile-update/profile-update'
 import { Button } from '@/components/button'
 import { ImageOutline } from '@/assets/icons/image-outline'
 import { useUpdateProfileMutation } from '@/api/profile-api/profile.api'
-import { useMeQuery } from '@/api/auth-api/auth.api'
 import { ProfileSettingsFormType } from '@/schemas'
 
 const ProfileSettings = () => {
   const { t } = useTranslation()
 
-  const [updateProfile, { error, isLoading }] = useUpdateProfileMutation()
-  const { data: me, isLoading: dataLoading, isError } = useMeQuery()
+  const [updateProfile] = useUpdateProfileMutation()
 
   const updateProfileHandler = (data: ProfileSettingsFormType) => {
     updateProfile(data)
@@ -38,7 +36,7 @@ const ProfileSettings = () => {
           <div className={s.userImage}>
             <ImageOutline />
           </div>
-          <Button variant={'ghost'}>{t.profile.addAvatar}</Button>
+          <Button variant="ghost">{t.profile.addAvatar}</Button>
           <div className={s.line2}></div>
         </div>
         <div className={s.form}>
