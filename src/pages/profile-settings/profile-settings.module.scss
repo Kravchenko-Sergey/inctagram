@@ -140,6 +140,22 @@
   align-self: flex-end;
 }
 
+.profileAvatar {
+  position: relative;
+
+  .deleteAvatarIcon {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 24px;
+    height: 24px;
+    padding: 0;
+
+    background-color: transparent;
+  }
+}
+
 .uploadError {
   position: absolute;
   bottom: -30px;

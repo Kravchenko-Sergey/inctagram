@@ -19,6 +19,7 @@ import { Modal } from '@/components/modal'
 import { Typography } from '@/components/typography'
 import { RegisterError } from '@/types'
 import { ForgotPasswordSchemaType } from '@/schemas'
+import { DeleteAvatarIcon } from '@/assets/icons/delete-avatar-cross'
 
 const ProfileSettings = () => {
   const { t } = useTranslation()
@@ -83,32 +84,33 @@ const ProfileSettings = () => {
     setAvatarEditMode(false)
   }
 
-  const onAvatarUpload = useCallback(
-    async (data: ForgotPasswordSchemaType) => {
-      try {
-        await uploadAvatar({
-          avatars: [
-            {
-              url: 'https://example.com/image.jpg',
-              width: 300,
-              height: 300,
-              fileSize: 300,
-            },
-          ],
-        }).unwrap()
-        setUrl(previewAvatar)
-        setIsModalOpen(false)
-        setAvatarEditMode(false)
-      } catch (e: unknown) {
-        const error = e as RegisterError
+  const deleteAvatarHandler = useCallback(async () => {
+    try {
+      await deleteAvatar().unwrap()
+    } catch (e: unknown) {
+      const error = e as RegisterError
 
-        setUploadError(error)
-      }
-    },
-    [uploadAvatar]
-  )
+      console.log(error)
+    }
+  }, [deleteAvatar])
+
+  const onAvatarUpload = useCallback(async () => {
+    try {
+      await uploadAvatar({
+        avatars: newAvatarFile,
+      }).unwrap()
+      setUrl(previewAvatar)
+      setIsModalOpen(false)
+      setAvatarEditMode(false)
+    } catch (e: unknown) {
+      const error = e as RegisterError
+
+      setUploadError(error)
+    }
+  }, [uploadAvatar])
 
   const handleSaveCloseModal = async () => {
+    console.log(newAvatarFile)
     onAvatarUpload()
     // setUrl(previewAvatar)
     // setIsModalOpen(false)
@@ -130,7 +132,21 @@ const ProfileSettings = () => {
       <div className={s.formContent}>
         <div className={s.userImageBox}>
           <div className={s.userImage}>
-            {url ? <Avatar photo={url} name="avatar" size={198} /> : <ImageOutline />}
+            {url ? (
+              <div className={s.profileAvatar}>
+                <Avatar photo={url} name="avatar" size={198} />
+                <Button
+                  variant={'withIcon'}
+                  className={s.deleteAvatarIcon}
+                  type={'button'}
+                  onClick={deleteAvatarHandler}
+                >
+                  <DeleteAvatarIcon />
+                </Button>
+              </div>
+            ) : (
+              <ImageOutline />
+            )}
           </div>
           <Button
             variant={'ghost'}
