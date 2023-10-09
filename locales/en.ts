@@ -45,8 +45,8 @@ export const en: LocaleType = {
     emailExists: 'User with this email is already registered',
     usernameExists: 'User with this username is already registered',
     under13: 'A user under 13 cannot create a profile.',
-
-    // under13: (elem: ReactElement) => `A user under 13 cannot create a profile. ${elem} `,
+    tellUsSomethingAboutYou: 'The field must not be empty',
+    whereAreYouLive: 'Please indicate which city you live in',
   },
   components: {
     selectPlaceholder: 'Select Box',

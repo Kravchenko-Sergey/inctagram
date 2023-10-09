@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, forwardRef } from 'react'
 
-import { Typography } from '../typography'
+import { Typography } from '@/components'
 
 import { clsx } from 'clsx'
 import s from './text-area.module.scss'

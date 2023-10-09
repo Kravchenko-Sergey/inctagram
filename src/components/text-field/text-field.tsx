@@ -64,7 +64,7 @@ export const TextField = forwardRef<HTMLInputElement, InputPropsType>(
       <div className={clsx(s.main, disabled && s.disabled)} style={{ width }}>
         {label && (
           <div>
-            <Typography className={s.label} variant="regular_text_14">
+            <Typography className={s.label} color="secondary" variant="regular_text_14">
               {label}
             </Typography>
           </div>

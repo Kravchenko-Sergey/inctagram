@@ -8,6 +8,7 @@ import * as RDP from 'react-datepicker'
 import { ReactDatePickerCustomHeaderProps } from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.min.css'
 import { PATH } from '@/consts/route-paths'
+import { Label } from '@/components'
 import textFieldStyles from './../text-field/text-field.module.scss'
 
 import { ArrowLeft } from '@/assets/icons/arrow-left'
@@ -15,10 +16,10 @@ import { ArrowRight } from '@/assets/icons/arrow-right'
 import { CalendarIcon } from '@/assets/icons/calendar'
 
 import { Typography } from '@/components/typography'
-import s from './date-picker.module.scss'
 import { FieldValues } from 'react-hook-form'
 import { useTranslation } from '@/hooks/use-translation'
-import { Label } from '@/components'
+
+import s from './date-picker.module.scss'
 
 export type DatePickerProps = {
   placeholder?: string

@@ -146,6 +146,8 @@
   border: 1px solid var(--dark-300);
   border-radius: 2px;
 
+  transition: 0.2s ease-out;
+
   &:hover {
     border: 1px solid var(--light-900);
   }
@@ -275,9 +277,11 @@
 }
 
 .label {
-  font-size: 14px;
+  user-select: none;
+
+  font-size: 14px !important;
   font-weight: 400;
   font-style: normal;
   line-height: 24px;
-  color: var(--light-900);
+  color: var(--light-900) !important;
 }

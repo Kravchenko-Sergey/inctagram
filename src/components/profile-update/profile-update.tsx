@@ -19,11 +19,11 @@ const Cities = [
   { label: 'Baghdad', value: 'Baghdad' },
 ]
 
-type ProfileUpdatePropps = {
+type ProfileUpdateProps = {
   updateProfileHandler: (data: ProfileSettingsFormType) => void
 }
 
-export const ProfileUpdate = memo(({ updateProfileHandler }: ProfileUpdatePropps) => {
+export const ProfileUpdate = memo(({ updateProfileHandler }: ProfileUpdateProps) => {
   const { t } = useTranslation()
   // const [updateProfile, { error, isLoading }] = useUpdateProfileMutation()
   // const { data: me, isLoading, isError } = useMeQuery()
@@ -36,7 +36,14 @@ export const ProfileUpdate = memo(({ updateProfileHandler }: ProfileUpdatePropps
   } = useForm<ProfileSettingsFormType>({
     resolver: zodResolver(profileSettingsSchema(t)),
     mode: 'onBlur',
-    defaultValues: { firstName: '', userName: '', lastName: '', city: '', dateOfBirth: new Date() },
+    defaultValues: {
+      firstName: '',
+      userName: '',
+      lastName: '',
+      city: '',
+      dateOfBirth: new Date(),
+      aboutMe: '',
+    },
   })
 
   useEffect(() => {
