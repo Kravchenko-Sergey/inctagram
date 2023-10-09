@@ -10,10 +10,21 @@
 
   margin-right: auto;
   padding: 6px 0;
+
+  color: var(--light-100);
+
+  border: 1px solid transparent;
+
+  &:hover {
+    color: var(--primary-100);
+    border: 1px solid transparent;
+  }
 }
 
 .buttonIcon {
-  color: var(--light-100);
+  color: inherit;
+
+  // color: var(--light-100)
 }
 
 .wrapper {
