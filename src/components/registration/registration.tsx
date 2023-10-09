@@ -5,8 +5,6 @@ import { useGoogleLogin } from '@react-oauth/google'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 
-import s from './registration.module.scss'
-
 import { useGoogleLoginMutation, useRegistrationMutation } from '@/api/auth-api/auth.api'
 import { GitHubIcon, GoogleIcon } from '@/assets/icons'
 import { Button } from '@/components/button'
@@ -21,6 +19,8 @@ import { FormFields, triggerZodFieldError } from '@/helpers/updateZodErrors'
 import { useTranslation } from '@/hooks/use-translation'
 import { RegisterFormType, createRegisterSchema } from '@/schemas'
 import { RegisterError } from '@/types'
+
+import s from './registration.module.scss'
 
 export const Registration = memo(() => {
   const [isModalOpen, setIsModalOpen] = useState(false)

@@ -4,18 +4,15 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
 import s from './profile-settings.module.scss'
-
-import { useUpdateProfileMutation } from '@/api/profile-api/profile.api'
-import { ImageOutline } from '@/assets/icons/image-outline'
-import { Button } from '@/components/button'
-import { ControlledTextArea } from '@/components/controlled/controlled-text-area'
-import { ControlledTextField } from '@/components/controlled/controlled-text-field'
 import { getMainLayout } from '@/components/layout/main-layout/main-layout'
-import { Select } from '@/components/select'
 import { Tabs } from '@/components/tabs'
-import { FormFields, triggerZodFieldError } from '@/helpers/updateZodErrors'
 import { useTranslation } from '@/hooks/use-translation'
-import { ProfileSettingsFormValues, profileSettingsSchema } from '@/schemas/profile-settings-schema'
+import { ProfileUpdate } from '@/components/profile-update/profile-update'
+import { Button } from '@/components/button'
+import { ImageOutline } from '@/assets/icons/image-outline'
+import { useUpdateProfileMutation } from '@/api/profile-api/profile.api'
+import { useMeQuery } from '@/api/auth-api/auth.api'
+import { ProfileSettingsFormValues } from '@/schemas/profile-settings-schema'
 import { Avatar } from '@/components/avatar'
 import { Modal } from '@/components/modal'
 import { Typography } from '@/components/typography'
@@ -23,7 +20,11 @@ import { Typography } from '@/components/typography'
 const ProfileSettings = () => {
   const { t } = useTranslation()
 
-  const [updateProfile] = useUpdateProfileMutation()
+  const [updateProfile, { error, isLoading }] = useUpdateProfileMutation()
+  const { data: me, isLoading: dataLoading, isError } = useMeQuery()
+  const updateProfileHandler = (data: ProfileSettingsFormValues) => {
+    updateProfile(data)
+  }
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [url, setUrl] = useState('')
   const [previewAvatar, setPreviewAvatar] = useState('')
@@ -66,54 +67,6 @@ const ProfileSettings = () => {
     { value: 'tab4', title: t.profile.myPayments },
   ]
 
-  const [city, setCity] = useState('City')
-  const cityOptions = [
-    {
-      value: 'Apple',
-      label: 'Apple',
-    },
-    {
-      value: 'Banana',
-      label: 'Banana',
-    },
-  ]
-
-  const {
-    handleSubmit,
-    control,
-    formState: { touchedFields },
-    trigger,
-  } = useForm<ProfileSettingsFormValues>({
-    mode: 'onBlur',
-    resolver: zodResolver(profileSettingsSchema(t)),
-    defaultValues: {
-      userName: '',
-      firstName: '',
-      lastName: '',
-      city: '',
-      /*dateOfBirth: '',*/
-      aboutMe: '',
-    },
-  })
-
-  const onSubmit = (data: ProfileSettingsFormValues) => {
-    console.log(data)
-    updateProfile({
-      userName: data.userName,
-      firstName: data.firstName,
-      lastName: data.lastName,
-      city: data.city,
-      /*dateOfBirth: data.dateOfBirth,*/
-      aboutMe: data.aboutMe || '',
-    })
-  }
-
-  useEffect(() => {
-    const touchedFieldNames: FormFields[] = Object.keys(touchedFields) as FormFields[]
-
-    triggerZodFieldError(touchedFieldNames, trigger)
-  }, [t, touchedFields, trigger])
-
   return (
     <div className={s.root}>
       <div>
@@ -134,29 +87,9 @@ const ProfileSettings = () => {
           </Button>
           <div className={s.line2}></div>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
-          <ControlledTextField control={control} name="userName" label={t.auth.username} />
-          <ControlledTextField control={control} name="firstName" label={t.profile.firstName} />
-          <ControlledTextField control={control} name="lastName" label={t.profile.lastName} />
-          <Select
-            name="city"
-            options={cityOptions}
-            value={city}
-            onChange={setCity}
-            label={t.profile.citySelect}
-            className={s.select}
-          />
-          <ControlledTextArea
-            name="aboutMe"
-            control={control}
-            label={t.profile.aboutMe}
-            className={s.textArea}
-          />
-          <div className={s.line}></div>
-          <Button variant="primary" className={s.submitBtn}>
-            {t.profile.saveChanges}
-          </Button>
-        </form>
+        <div className={s.form}>
+          <ProfileUpdate updateProfileHandler={updateProfileHandler} />
+        </div>
       </div>
       <Modal
         isOpen={isModalOpen}

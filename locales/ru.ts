@@ -1,3 +1,5 @@
+import { ReactElement } from 'react'
+
 export const ru = {
   test: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати ',
   ok: 'OK',
@@ -39,8 +41,14 @@ export const ru = {
     requiredTerms: 'Нужно подтвердить согласие с правилами сервиса и политикой безопасности',
     emailExists: 'Пользователь с такой электронной почтой уже существует',
     usernameExists: 'Пользователь с таким именем уже существует',
-  },
+    // under13: `Возраст пользователя должен быть старше 13 лет. <Link href={PATH.POLICY}>Условиями сервиса</Link>`,
+    under13: 'Возраст пользователя должен быть старше 13 лет.',
 
+    // under13: (elem: ReactElement) => `Возраст пользователя должен быть старше 13 лет. ${elem} `,
+  },
+  components: {
+    selectPlaceholder: 'Выберете опцию',
+  },
   auth: {
     emailLabel: 'Электронная почта',
     emailSent: 'Письмо с подтверждением отправлено',
@@ -148,6 +156,8 @@ export const ru = {
     accManagement: 'Управление счетами',
     myPayments: 'Мои платежи',
     selectImage: 'Выбрать изображение с этого компьютера',
+    dateOfBirth: 'День рождения',
+    backToProfile: 'Вернуться на страницу профиля',
   },
 }
 

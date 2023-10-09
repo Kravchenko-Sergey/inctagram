@@ -14,7 +14,7 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  render: (args: DatePickerProps) => {
+  render: () => {
     const [startDate, setStartDate] = useState<Date | null>(new Date())
 
     return <DataPicker setStartDate={setStartDate} startDate={startDate} />
@@ -25,8 +25,9 @@ export const Default: Story = {
     startDate: null,
   },
 }
+
 export const Range: Story = {
-  render: (args: DatePickerProps) => {
+  render: () => {
     const [startDate, setStartDate] = useState<Date | null>(new Date())
 
     const [endDate, setEndDate] = useState<Date | null>(

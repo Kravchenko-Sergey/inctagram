@@ -8,8 +8,8 @@ import { tokenSetterToLocalStorage } from '@/helpers/tokenSetterToLocalStorage'
 const Github = () => {
   const router = useRouter()
 
-  console.log('value', router.query.accessToken)
-
+  console.log('value', router)
+  console.log('value')
   useEffect(() => {
     if (router.query.accessToken) {
       tokenSetterToLocalStorage(router.query.accessToken as string)

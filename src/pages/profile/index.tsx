@@ -1,8 +1,7 @@
 import React from 'react'
-
-import { Button } from '@/components/button'
 import { HeadMeta } from '@/components/head-meta'
 import { getMainLayout } from '@/components/layout/main-layout/main-layout'
+import { Button } from '@/components/button'
 
 const Profile = () => {
   return (

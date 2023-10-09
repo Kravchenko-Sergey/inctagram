@@ -1,4 +1,5 @@
 import { LocaleType } from './ru'
+import { ReactElement } from 'react'
 
 export const en: LocaleType = {
   test: 'Lorem Ipsum is simply dummy text of the printing',
@@ -43,8 +44,13 @@ export const en: LocaleType = {
     requiredTerms: 'Terms and Privacy Policy must be true',
     emailExists: 'User with this email is already registered',
     usernameExists: 'User with this username is already registered',
-  },
+    under13: 'A user under 13 cannot create a profile.',
 
+    // under13: (elem: ReactElement) => `A user under 13 cannot create a profile. ${elem} `,
+  },
+  components: {
+    selectPlaceholder: 'Select Box',
+  },
   auth: {
     emailLabel: 'Email',
     emailSent: 'Email Sent',
@@ -158,5 +164,7 @@ export const en: LocaleType = {
     accManagement: 'Account Management',
     myPayments: 'My payments',
     selectImage: 'Select from computer',
+    dateOfBirth: 'Date of birth',
+    backToProfile: 'Back to profile page',
   },
 }
