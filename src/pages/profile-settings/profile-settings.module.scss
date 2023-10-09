@@ -43,6 +43,8 @@
 }
 
 .addUserImage {
+  position: relative;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -136,4 +138,10 @@
 
 .saveButton {
   align-self: flex-end;
+}
+
+.uploadError {
+  position: absolute;
+  bottom: -30px;
+  color: var(--danger-500);
 }

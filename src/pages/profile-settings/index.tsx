@@ -1,7 +1,4 @@
-import React, { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react'
-
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
+import React, { ChangeEvent, useRef, useState } from 'react'
 
 import s from './profile-settings.module.scss'
 import { getMainLayout } from '@/components/layout/main-layout/main-layout'
@@ -27,34 +24,57 @@ const ProfileSettings = () => {
   }
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [url, setUrl] = useState('')
+  const permittedFileTypes = ['jpg', 'jpeg', 'png']
+  const permittedFileSize = 10485760 // 10Mb in bytes
   const [previewAvatar, setPreviewAvatar] = useState('')
+  const [uploadError, setUploadError] = useState('')
   const [avatarEditMode, setAvatarEditMode] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length) {
-      const file = e.target.files[0]
-      let previewPhoto = function (reader) {
-        setPreviewAvatar(reader.result)
-        setAvatarEditMode(true)
+    const uploadInput = e.target
+
+    if (uploadInput instanceof HTMLInputElement && uploadInput.files && uploadInput.files.length) {
+      const file = uploadInput.files[0]
+
+      if (!file) return setUploadError(t.errors.imageUploadError)
+      const fileName = file.name.toLowerCase()
+
+      const matches = [...permittedFileTypes].some(it => {
+        return fileName.endsWith(it)
+      })
+
+      if (matches && file.size <= permittedFileSize) {
+        setUploadError('')
+        let previewPhoto = function (reader) {
+          setPreviewAvatar(reader.result)
+          setAvatarEditMode(true)
+        }
+
+        let reader = new FileReader()
+
+        reader.addEventListener('load', previewPhoto.bind(this, reader))
+        reader.readAsDataURL(file)
+      } else if (!matches) {
+        setUploadError(t.errors.imageFormatError)
+      } else {
+        setUploadError(t.errors.imageSizeError)
       }
-
-      let reader = new FileReader()
-
-      reader.addEventListener('load', previewPhoto.bind(this, reader))
-      reader.readAsDataURL(file)
     }
   }
+
   const handleOpenModal = () => {
     setPreviewAvatar(url)
   }
 
   const handleCloseModal = () => {
+    setUploadError('')
     setPreviewAvatar('')
     setIsModalOpen(false)
     setAvatarEditMode(false)
   }
 
   const handleSaveCloseModal = () => {
+    setUploadError('')
     setUrl(previewAvatar)
     setIsModalOpen(false)
     setAvatarEditMode(false)
@@ -104,6 +124,7 @@ const ProfileSettings = () => {
             ) : (
               <ImageOutline />
             )}
+            {uploadError && <div className={s.uploadError}>{uploadError}</div>}
           </div>
           {avatarEditMode ? (
             <Button variant={'primary'} onClick={handleSaveCloseModal} className={s.saveButton}>

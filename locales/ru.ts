@@ -43,7 +43,9 @@ export const ru = {
     usernameExists: 'Пользователь с таким именем уже существует',
     // under13: `Возраст пользователя должен быть старше 13 лет. <Link href={PATH.POLICY}>Условиями сервиса</Link>`,
     under13: 'Возраст пользователя должен быть старше 13 лет.',
-
+    imageUploadError: 'Ошибка загрузки файла.',
+    imageFormatError: 'Файл должен иметь формат jpg или png.',
+    imageSizeError: 'Файл должен быть не больше 10 мб.',
     // under13: (elem: ReactElement) => `Возраст пользователя должен быть старше 13 лет. ${elem} `,
   },
   components: {

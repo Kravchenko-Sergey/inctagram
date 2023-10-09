@@ -45,7 +45,9 @@ export const en: LocaleType = {
     emailExists: 'User with this email is already registered',
     usernameExists: 'User with this username is already registered',
     under13: 'A user under 13 cannot create a profile.',
-
+    imageUploadError: 'Upload error.',
+    imageFormatError: 'File must be jpeg or png type',
+    imageSizeError: 'File must be less than 10 MB.',
     // under13: (elem: ReactElement) => `A user under 13 cannot create a profile. ${elem} `,
   },
   components: {
