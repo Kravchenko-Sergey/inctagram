@@ -37,13 +37,13 @@ export const profileSettingsSchema = (t: LocaleType) => {
         message: t.errors.under13,
       }
     ),
-    city: z.string().trim().nonempty(),
+    city: z.string().trim().nonempty(t.errors.whereAreYouLive),
     aboutMe: z
       .string()
       .trim()
       .max(200, t.errors.maxFieldLength(200))
       .regex(aboutMeRegex, t.errors.regexAboutMe)
-      .nonempty(),
+      .nonempty(t.errors.whereAreYouLive),
   })
 }
 

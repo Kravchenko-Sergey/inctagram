@@ -10,6 +10,8 @@
   border: 1px solid var(--dark-100);
   border-radius: 2px;
 
+  transition: 0.2s ease-out;
+
   &:hover {
     color: var(--light-900);
     border: 1px solid var(--light-900);
