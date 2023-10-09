@@ -14,7 +14,7 @@ export type TextAreaProps = {
   errorMessage?: string
 } & ComponentPropsWithoutRef<'textarea'>
 
-const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, ref) => {
+export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, ref) => {
   const { label, disabled, className, classNameTextArea, error, ...rest } = props
   const classNames = {
     root: clsx(s.root, className),
@@ -31,12 +31,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, ref) => 
         {label}
       </Typography>
       <div className={`${s.container} ${error ? s.error : ''} ${disabled ? s.disabled : ''}`}>
-        <textarea
-          ref={ref}
-          disabled={disabled}
-          {...rest}
-          className={classNames.textArea}
-        />
+        <textarea ref={ref} disabled={disabled} {...rest} className={classNames.textArea} />
       </div>
       <Typography variant={'regular_text_14'} as={'div'} color="error" className={s.error}>
         {error}
@@ -44,5 +39,3 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, ref) => 
     </div>
   )
 })
-
-export default TextArea

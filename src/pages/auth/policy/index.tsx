@@ -1,10 +1,6 @@
 import { memo } from 'react'
 
 import { ArrowLeft } from '@/assets/icons'
-import { Button } from '@/components/button'
-import { Trans } from '@/components/trans/trans'
-import { Typography } from '@/components/typography'
-import { useTranslation } from '@/hooks/use-translation'
 import { useRouter } from 'next/router'
 import { Button, Trans, Typography } from '@/components'
 import { PATH } from '@/consts/route-paths'

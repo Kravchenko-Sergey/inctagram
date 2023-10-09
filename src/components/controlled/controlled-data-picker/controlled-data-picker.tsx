@@ -1,6 +1,6 @@
 import { FieldValues, useController, UseControllerProps } from 'react-hook-form'
-import { DataPicker } from '@/components/date-picker'
-import { DatePickerProps } from '@/components/date-picker/data-picker'
+import { DatePicker } from '@/components/date-picker'
+import { DatePickerProps } from '@/components/date-picker/date-picker'
 
 export type ControlledDataPickerProps<T extends FieldValues> = UseControllerProps<T> &
   Omit<DatePickerProps, 'ref' | 'startDate' | 'setStartDate'>
@@ -25,7 +25,7 @@ export const ControlledDataPicker = <T extends FieldValues>({
 
   return (
     <div>
-      <DataPicker
+      <DatePicker
         errorMessage={rest.errorMessage}
         setStartDate={onChange}
         startDate={value}

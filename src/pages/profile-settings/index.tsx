@@ -9,7 +9,7 @@ import { Button } from '@/components/button'
 import { ImageOutline } from '@/assets/icons/image-outline'
 import { useUpdateProfileMutation } from '@/api/profile-api/profile.api'
 import { useMeQuery } from '@/api/auth-api/auth.api'
-import { ProfileSettingsFormValues } from '@/schemas/profile-settings-schema'
+import { ProfileSettingsFormType } from '@/schemas'
 
 const ProfileSettings = () => {
   const { t } = useTranslation()
@@ -17,7 +17,7 @@ const ProfileSettings = () => {
   const [updateProfile, { error, isLoading }] = useUpdateProfileMutation()
   const { data: me, isLoading: dataLoading, isError } = useMeQuery()
 
-  const updateProfileHandler = (data: ProfileSettingsFormValues) => {
+  const updateProfileHandler = (data: ProfileSettingsFormType) => {
     updateProfile(data)
   }
 

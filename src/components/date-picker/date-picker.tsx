@@ -14,11 +14,12 @@ import textFieldStyles from './../text-field/text-field.module.scss'
 import { ArrowLeft } from '@/assets/icons/arrow-left'
 import { ArrowRight } from '@/assets/icons/arrow-right'
 import { CalendarIcon } from '@/assets/icons/calendar'
-import { Label } from '@/components/label-radix/Label'
+
 import { Typography } from '@/components/typography'
-import s from './data-picker.module.scss'
+import s from './date-picker.module.scss'
 import { FieldValues } from 'react-hook-form'
 import { useTranslation } from '@/hooks/use-translation'
+import { Label } from '@/components'
 
 export type DatePickerProps = {
   placeholder?: string
@@ -35,7 +36,7 @@ const RDPC = (((RDP.default as any).default as any) ||
   (RDP.default as any) ||
   (RDP as any)) as typeof RDP.default
 
-export const DataPicker = forwardRef<FieldValues, DatePickerProps>(
+export const DatePicker = forwardRef<FieldValues, DatePickerProps>(
   (
     {
       startDate,
