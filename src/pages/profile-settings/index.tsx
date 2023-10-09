@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useRef, useState } from 'react'
+import React, { ChangeEvent, useCallback, useRef, useState } from 'react'
 
 import s from './profile-settings.module.scss'
 import { getMainLayout } from '@/components/layout/main-layout/main-layout'
@@ -7,23 +7,32 @@ import { useTranslation } from '@/hooks/use-translation'
 import { ProfileUpdate } from '@/components/profile-update/profile-update'
 import { Button } from '@/components/button'
 import { ImageOutline } from '@/assets/icons/image-outline'
-import { useUpdateProfileMutation } from '@/api/profile-api/profile.api'
+import {
+  useDeleteAvatarMutation,
+  useUpdateProfileMutation,
+  useUploadAvatarMutation,
+} from '@/api/profile-api/profile.api'
 import { useMeQuery } from '@/api/auth-api/auth.api'
 import { ProfileSettingsFormValues } from '@/schemas/profile-settings-schema'
 import { Avatar } from '@/components/avatar'
 import { Modal } from '@/components/modal'
 import { Typography } from '@/components/typography'
+import { RegisterError } from '@/types'
+import { ForgotPasswordSchemaType } from '@/schemas'
 
 const ProfileSettings = () => {
   const { t } = useTranslation()
 
   const [updateProfile, { error, isLoading }] = useUpdateProfileMutation()
+  const [uploadAvatar, { error: uploadAvatarError }] = useUploadAvatarMutation()
+  const [deleteAvatar, { error: deleteAvatarError }] = useDeleteAvatarMutation()
   const { data: me, isLoading: dataLoading, isError } = useMeQuery()
   const updateProfileHandler = (data: ProfileSettingsFormValues) => {
     updateProfile(data)
   }
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [url, setUrl] = useState('')
+  const [newAvatarFile, setNewAvatarFile] = useState(null)
   const permittedFileTypes = ['jpg', 'jpeg', 'png']
   const permittedFileSize = 10485760 // 10Mb in bytes
   const [previewAvatar, setPreviewAvatar] = useState('')
@@ -54,6 +63,7 @@ const ProfileSettings = () => {
 
         reader.addEventListener('load', previewPhoto.bind(this, reader))
         reader.readAsDataURL(file)
+        setNewAvatarFile(file)
       } else if (!matches) {
         setUploadError(t.errors.imageFormatError)
       } else {
@@ -63,21 +73,46 @@ const ProfileSettings = () => {
   }
 
   const handleOpenModal = () => {
+    setUploadError('')
     setPreviewAvatar(url)
   }
 
   const handleCloseModal = () => {
-    setUploadError('')
     setPreviewAvatar('')
     setIsModalOpen(false)
     setAvatarEditMode(false)
   }
 
-  const handleSaveCloseModal = () => {
-    setUploadError('')
-    setUrl(previewAvatar)
-    setIsModalOpen(false)
-    setAvatarEditMode(false)
+  const onAvatarUpload = useCallback(
+    async (data: ForgotPasswordSchemaType) => {
+      try {
+        await uploadAvatar({
+          avatars: [
+            {
+              url: 'https://example.com/image.jpg',
+              width: 300,
+              height: 300,
+              fileSize: 300,
+            },
+          ],
+        }).unwrap()
+        setUrl(previewAvatar)
+        setIsModalOpen(false)
+        setAvatarEditMode(false)
+      } catch (e: unknown) {
+        const error = e as RegisterError
+
+        setUploadError(error)
+      }
+    },
+    [uploadAvatar]
+  )
+
+  const handleSaveCloseModal = async () => {
+    onAvatarUpload()
+    // setUrl(previewAvatar)
+    // setIsModalOpen(false)
+    // setAvatarEditMode(false)
   }
 
   const profileTabs = [
