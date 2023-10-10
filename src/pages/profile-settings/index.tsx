@@ -13,7 +13,6 @@ import { Avatar } from '@/components/avatar'
 import { Modal } from '@/components/modal'
 import { Typography } from '@/components/typography'
 import { RegisterError } from '@/types'
-import { ForgotPasswordSchemaType } from '@/schemas'
 import { DeleteAvatarIcon } from '@/assets/icons/delete-avatar-cross'
 
 import s from './profile-settings.module.scss'
