@@ -4,27 +4,13 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 
-<<<<<<< Updated upstream
-import { useLoginMutation } from '@/api/auth-api/auth.api'
+import { useLazyMeQuery, useLoginMutation } from '@/api/auth-api/auth.api'
 import { GitHubIcon, GoogleIcon } from '@/assets/icons'
 import { Button, Card, ControlledTextField, Typography } from '@/components'
-=======
-import { useLazyMeQuery, useLoginMutation } from '@/api/auth-api/auth.api'
-import { GitHubIcon } from '@/assets/icons/github-icon'
-import { GoogleIcon } from '@/assets/icons/google-icon'
-import { Button } from '@/components/button'
-import { Card } from '@/components/card'
-import { ControlledTextField } from '@/components/controlled/controlled-text-field'
-import { Typography } from '@/components/typography'
->>>>>>> Stashed changes
 import { PATH } from '@/consts/route-paths'
-import { FormFields, triggerZodFieldError } from '@/helpers'
+import { FormFields, tokenSetterToLocalStorage, triggerZodFieldError } from '@/helpers'
 import { useTranslation } from '@/hooks'
 import { LoginFormValues, loginSchema } from '@/schemas'
-<<<<<<< Updated upstream
-=======
-import { tokenSetterToLocalStorage } from '@/helpers/tokenSetterToLocalStorage'
->>>>>>> Stashed changes
 
 import s from './login.module.scss'
 
@@ -54,14 +40,6 @@ export const Login: FC<LoginProps> = ({ onGoogleAuth, onGithubAuth }) => {
 
   const onSubmit = async (data: LoginFormValues) => {
     try {
-<<<<<<< Updated upstream
-      await signIn(data).unwrap()
-
-      router.push(PATH.PROFILE)
-    } catch (error) {
-      const e = error as any // TODO add type
-
-=======
       const { accessToken } = await signIn(data).unwrap()
 
       if (accessToken) {
@@ -70,7 +48,7 @@ export const Login: FC<LoginProps> = ({ onGoogleAuth, onGithubAuth }) => {
         router.push(PATH.PROFILE)
       }
     } catch (e: any) {
->>>>>>> Stashed changes
+      console.log(e)
       if (
         e.data.messages[0].message === 'Authorization error' ||
         e.data.messages === 'invalid password or email'

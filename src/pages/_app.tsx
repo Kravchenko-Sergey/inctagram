@@ -8,14 +8,9 @@ import type { AppProps } from 'next/app'
 import { Inter } from 'next/font/google'
 import { Provider } from 'react-redux'
 
-<<<<<<< Updated upstream
 import { useLoader } from '@/hooks'
 import { store } from '@/store'
-=======
-import { useLoader } from '@/hooks/useLoader'
-import { store } from '@/store/store'
-import { AuthProvider } from '@/components/auth-provider'
->>>>>>> Stashed changes
+import { AuthProvider } from '@/components'
 
 export const inter = Inter({
   subsets: ['latin', 'cyrillic'],

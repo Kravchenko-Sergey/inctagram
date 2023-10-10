@@ -1,12 +1,9 @@
 import React from 'react'
 
 import s from './profile-settings.module.scss'
-import { getMainLayout } from '@/components/layout/main-layout/main-layout'
-import { Tabs } from '@/components/tabs'
-import { useTranslation } from '@/hooks/use-translation'
-import { ProfileUpdate } from '@/components/profile-update/profile-update'
-import { Button } from '@/components/button'
-import { ImageOutline } from '@/assets/icons/image-outline'
+import { getMainLayout, Tabs, ProfileUpdate, Button } from '@/components'
+import { useTranslation } from '@/hooks'
+import { ImageOutline } from '@/assets/icons'
 import { useUpdateProfileMutation } from '@/api/profile-api/profile.api'
 import { ProfileSettingsFormType } from '@/schemas'
 

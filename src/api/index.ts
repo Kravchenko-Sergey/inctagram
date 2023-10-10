@@ -8,7 +8,7 @@ import {
 import { Mutex } from 'async-mutex'
 
 import { TOKEN_LOCAL_STORAGE_KEY } from '@/consts/localstorage'
-import { tokenSetterToLocalStorage } from '@/helpers/tokenSetterToLocalStorage'
+import { tokenSetterToLocalStorage } from '@/helpers/token-setter-to-local-storage'
 
 export const baseUrl = process.env.NEXT_PUBLIC_BASE_API_URL ?? ''
 
@@ -53,8 +53,9 @@ export const baseQueryWithReauth: BaseQueryFn<
           api,
           extraOptions
         )
+        const data = refreshResult.data as { accessToken: string } // TODO add type
 
-        tokenSetterToLocalStorage(refreshResult.data.accessToken)
+        tokenSetterToLocalStorage(data.accessToken)
 
         if (refreshResult.meta?.response?.status === 200) {
           result = await baseQuery(args, api, extraOptions)

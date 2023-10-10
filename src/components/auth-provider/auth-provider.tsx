@@ -3,22 +3,20 @@ import { FC, ReactNode, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import { useMeQuery } from '@/api/auth-api/auth.api'
-import { PATH } from '@/consts/route-paths'
+import { PATH, commonRoutes } from '@/consts/route-paths'
 
 export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const router = useRouter()
   const { data: user, isLoading, isError, isFetching } = useMeQuery()
-  const isAuthPage = router.pathname === PATH.LOGIN
-  const isGithubPage = router.pathname === PATH.GITHUB
+  const isProtectedPage = !commonRoutes.includes(router.pathname)
 
-  console.log({ user })
   useEffect(() => {
-    if (!isLoading && !user && !isAuthPage && !isFetching && !isGithubPage) {
+    if (!isLoading && !user && isProtectedPage && !isFetching) {
       router.push(PATH.LOGIN)
     }
-  }, [user, isError, isLoading, isAuthPage, isFetching, router, isGithubPage])
+  }, [user, isError, isLoading, isProtectedPage, isFetching, router])
 
-  if (isLoading || (!user && !isAuthPage && !isGithubPage)) {
+  if (isLoading || (!user && isProtectedPage)) {
     return <div>Loading....</div>
   }
 

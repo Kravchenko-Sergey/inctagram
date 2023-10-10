@@ -91,7 +91,15 @@ export const Registration = memo(() => {
     flow: 'auth-code',
   })
 
-  const githubRegister = () => push('https://inctagram.work/api/v1/auth/github/login')
+  const githubLoginAndRegister = () => {
+    if (process.env.NEXT_PUBLIC_GITHUB_AUTH_URL) {
+      window.location.assign(process.env.NEXT_PUBLIC_GITHUB_AUTH_URL)
+
+      return
+    }
+
+    console.log('Please, provide url in .env for github authorization')
+  }
 
   return (
     <>
@@ -101,7 +109,7 @@ export const Registration = memo(() => {
         </Typography>
         <div className={s.icons}>
           <GoogleIcon onClick={googleLoginAndRegister} className={s.icon} />
-          <GitHubIcon onClick={githubRegister} className={s.icon} />
+          <GitHubIcon onClick={githubLoginAndRegister} className={s.icon} />
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className={s.form}>

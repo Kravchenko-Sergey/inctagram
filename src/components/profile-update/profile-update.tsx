@@ -1,14 +1,16 @@
 import React, { memo, useCallback, useEffect } from 'react'
 
-import { ControlledTextField } from '@/components/controlled/controlled-text-field'
-import { ControlledTextArea } from '@/components/controlled/controlled-text-area'
+import {
+  ControlledTextField,
+  ControlledTextArea,
+  Button,
+  ControlledDataPicker,
+  ControlledSelect,
+} from '@/components'
 import { useForm } from 'react-hook-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslation } from '@/hooks/use-translation'
-import { ControlledDataPicker } from '@/components/controlled/controlled-data-picker'
-import { Button } from '@/components/button'
-import { ControlledSelect } from '@/components/controlled/controlled-select'
 import s from './profile-update.module.scss'
 import { ProfileSettingsFormType, profileSettingsSchema } from '@/schemas'
 import { FormFields, triggerZodFieldError } from '@/helpers'
