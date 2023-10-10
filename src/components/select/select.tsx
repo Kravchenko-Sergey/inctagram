@@ -3,7 +3,7 @@ import { CSSProperties, ElementRef, forwardRef, ReactElement } from 'react'
 import * as SelectRadix from '@radix-ui/react-select'
 import { clsx } from 'clsx'
 
-import { Typography } from '@/components'
+import { Typography } from '@/components/typography'
 
 import { ArrowDownIcon } from '@/assets/icons'
 import { useTranslation } from '@/hooks'
@@ -36,7 +36,6 @@ type CommonProps = {
 }
 export type SelectProps = CommonProps & ConditionalMultipleProps
 
-// export const Select = forwardRef<FieldValues, SelectProps>(
 export const Select = forwardRef<ElementRef<typeof SelectRadix.Root>, SelectProps>(
   (
     {
