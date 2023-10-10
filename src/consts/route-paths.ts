@@ -4,6 +4,7 @@ export const PATH = {
   HOME: '/',
   CREATE: '/create',
   PROFILE: '/profile',
+  PROFILE_SETTINGS: '/profile-settings',
   MESSENGER: '/messenger',
   SEARCH: '/search',
   STATISTIC: '/statistic',
