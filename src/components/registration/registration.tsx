@@ -73,7 +73,7 @@ export const Registration = memo(() => {
 
         if (error?.data.messages[0].message === 'User with this email is already exist') {
           setError('email', { type: 'email', message: t.errors.emailExists })
-        } else if (error?.data.messages[0].message === 'User with this name is already exist') {
+        } else if (error?.data.messages[0].message === 'User with this userName is already exist') {
           setError('username', { type: 'username', message: t.errors.usernameExists })
         }
       }
