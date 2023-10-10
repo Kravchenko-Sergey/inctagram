@@ -1,6 +1,7 @@
 import { FC, ReactNode } from 'react'
 
 import { Scrollbar } from '@/components'
+
 import s from './sidebar.module.scss'
 
 type SidebarProps = {

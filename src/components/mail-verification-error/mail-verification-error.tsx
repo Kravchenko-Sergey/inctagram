@@ -21,7 +21,7 @@ export const MailVerificationError = memo(({ email }: MailVerificationErrorProps
   const [resendEmail] = useResendEmailMutation()
   const { push } = useRouter()
 
-  const buttonHandler = async () => {
+  const resendPasswordClick = async () => {
     try {
       await resendEmail({ baseUrl: baseUrl, email })
       push(PATH.LOGIN)
@@ -40,7 +40,7 @@ export const MailVerificationError = memo(({ email }: MailVerificationErrorProps
         <Typography variant="regular_text_16" className={s.description}>
           {t.auth.expiredDescription}
         </Typography>
-        <Button variant="primary" onClick={buttonHandler} className={s.button}>
+        <Button variant="primary" onClick={resendPasswordClick} className={s.button}>
           <Typography variant="h3" className={s.signin}>
             {t.auth.resendLink}
           </Typography>

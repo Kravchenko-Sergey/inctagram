@@ -1,5 +1,4 @@
 import { LocaleType } from './ru'
-import { ReactElement } from 'react'
 
 export const en: LocaleType = {
   test: 'Lorem Ipsum is simply dummy text of the printing',
@@ -15,10 +14,10 @@ export const en: LocaleType = {
     loginIncorrectData: 'The email or password are incorrect. Try again please',
     loginFailed: 'Login Failed',
     loginIncorrectPassword: `The password is incorrect. Try again please`,
-    regexUsername: 'Username must contain  1-9, a-z, A-Z, . _ -',
+    regexUsername: 'Username must contain  0-9, a-z, A-Z, . _ -',
     regexFirstname: 'Firstname must contain a-z, A-Z',
     regexLastname: 'Lastname must contain a-z, A-Z',
-    regexAboutMe: 'Field must contain 1-9, a-z, A-Z, . _ -',
+    regexAboutMe: 'Field must contain 0-9, a-z, A-Z, . _ -',
     nonemptyUsername: 'Enter your Username',
     nonemptyFirstname: 'Enter your name',
     nonemptyLastname: 'Enter your last name',
@@ -35,7 +34,7 @@ export const en: LocaleType = {
     nonemptyPassword: 'Enter your password',
     nonemptyConfirm: 'Confirm your password',
     regexPasswordMustContain:
-      'Password must contain 1-9, a-z, A-Z, ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^' +
+      'Password must contain 0-9, a-z, A-Z, ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^' +
       ' _` { | } ~',
     minPassword: (min: number) => `Password must be at least ${min} characters`,
     maxPassword: 'Maximum number of characters 20',

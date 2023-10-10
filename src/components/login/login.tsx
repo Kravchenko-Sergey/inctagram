@@ -4,11 +4,11 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 
-import { useLoginMutation } from '@/api/auth-api/auth.api'
+import { useLazyMeQuery, useLoginMutation } from '@/api/auth-api/auth.api'
 import { GitHubIcon, GoogleIcon } from '@/assets/icons'
 import { Button, Card, ControlledTextField, Typography } from '@/components'
 import { PATH } from '@/consts/route-paths'
-import { FormFields, triggerZodFieldError } from '@/helpers'
+import { FormFields, tokenSetterToLocalStorage, triggerZodFieldError } from '@/helpers'
 import { useTranslation } from '@/hooks'
 import { LoginFormValues, loginSchema } from '@/schemas'
 
@@ -21,9 +21,10 @@ type LoginProps = {
 
 export const Login: FC<LoginProps> = ({ onGoogleAuth, onGithubAuth }) => {
   const { t } = useTranslation()
-  const router = useRouter()
+  const { push } = useRouter()
 
   const [signIn] = useLoginMutation()
+  const [getUser] = useLazyMeQuery()
 
   const {
     handleSubmit,
@@ -39,12 +40,15 @@ export const Login: FC<LoginProps> = ({ onGoogleAuth, onGithubAuth }) => {
 
   const onSubmit = async (data: LoginFormValues) => {
     try {
-      await signIn(data).unwrap()
+      const { accessToken } = await signIn(data).unwrap()
 
-      router.push(PATH.PROFILE)
-    } catch (error) {
-      const e = error as any // TODO add type
-
+      if (accessToken) {
+        tokenSetterToLocalStorage(accessToken)
+        await getUser()
+        push(PATH.PROFILE)
+      }
+    } catch (e: any) {
+      console.log(e)
       if (
         e.data.messages[0].message === 'Authorization error' ||
         e.data.messages === 'invalid password or email'

@@ -1,11 +1,12 @@
 import { Button, HeadMeta, getMainLayout } from '@/components'
+import { PATH } from '@/consts/route-paths'
 
 const Profile = () => {
   return (
     <>
       <HeadMeta title="Profile" />
       <main>Profile</main>
-      <Button href={'/profile-settings'} as="a" variant="secondary">
+      <Button href={PATH.PROFILE_SETTINGS} as="a" variant="secondary">
         Profile Settings
       </Button>
     </>

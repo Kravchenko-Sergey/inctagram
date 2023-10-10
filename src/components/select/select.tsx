@@ -3,12 +3,12 @@ import { CSSProperties, ElementRef, forwardRef, ReactElement } from 'react'
 import * as SelectRadix from '@radix-ui/react-select'
 import { clsx } from 'clsx'
 
-import { Typography } from '@/components'
-
-import s from './select.module.scss'
+import { Typography } from '@/components/typography'
 
 import { ArrowDownIcon } from '@/assets/icons'
-import { useTranslation } from '@/hooks/use-translation'
+import { useTranslation } from '@/hooks'
+
+import s from './select.module.scss'
 
 export type Option = { label: string | ReactElement; value: string }
 
@@ -36,7 +36,6 @@ type CommonProps = {
 }
 export type SelectProps = CommonProps & ConditionalMultipleProps
 
-// export const Select = forwardRef<FieldValues, SelectProps>(
 export const Select = forwardRef<ElementRef<typeof SelectRadix.Root>, SelectProps>(
   (
     {
@@ -77,7 +76,7 @@ export const Select = forwardRef<ElementRef<typeof SelectRadix.Root>, SelectProp
 
     return (
       <div className={classNames.root}>
-        <Typography variant={'regular_text_16'} as="label" className={classNames.label}>
+        <Typography variant="regular_text_16" as="label" className={classNames.label}>
           {label}
         </Typography>
         <SelectRadix.Root value={value as any} disabled={disabled} onValueChange={onChange}>
@@ -95,7 +94,7 @@ export const Select = forwardRef<ElementRef<typeof SelectRadix.Root>, SelectProp
             </SelectRadix.Icon>
           </SelectRadix.Trigger>
           <SelectRadix.Portal>
-            <SelectRadix.Content className={classNames.content} position={'popper'}>
+            <SelectRadix.Content className={classNames.content} position="popper">
               <SelectRadix.Viewport>
                 {options.map(option => (
                   <SelectRadix.Item
@@ -114,7 +113,7 @@ export const Select = forwardRef<ElementRef<typeof SelectRadix.Root>, SelectProp
             </SelectRadix.Content>
           </SelectRadix.Portal>
           <div className={s.errorContainer}>
-            {showError && <Typography variant={'error'}>{errorMessage}</Typography>}
+            {showError && <Typography variant="error">{errorMessage}</Typography>}
           </div>
         </SelectRadix.Root>
       </div>

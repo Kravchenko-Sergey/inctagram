@@ -1,45 +1,35 @@
 import { useEffect } from 'react'
 
-import { useRouter } from 'next/router'
-
 import { useCheckRecoveryCodeMutation } from '@/api/auth-api/auth.api'
 import { CreateNewPassword, HeadMeta, RecoveryLinkExpired, getHeaderLayout } from '@/components'
-import { checkValidQuery } from '@/helpers'
-
-type ExpectedQuery = {
-  code: string
-  email: string
-}
+import { useTypedRouter } from '@/hooks'
+import { routerRecoverySchema } from '@/schemas'
 
 const Recovery = () => {
-  const { query, isReady } = useRouter()
+  const { query, isReady } = useTypedRouter(routerRecoverySchema)
   const [checkRecoveryCode, { isLoading, data, isError, isUninitialized }] =
     useCheckRecoveryCodeMutation()
 
-  const isValidQuery = checkValidQuery<ExpectedQuery>(query)
-
   useEffect(() => {
     const fetch = async () => {
-      if (isValidQuery) {
-        if (isReady && isValidQuery) {
-          try {
-            await checkRecoveryCode({ recoveryCode: query.code })
-          } catch (error) {
-            console.log('Error occured', error) // TODO display error notification
-          }
+      if (isReady && query.code) {
+        try {
+          await checkRecoveryCode({ recoveryCode: query.code })
+        } catch (error) {
+          console.log('Error occured', error) // TODO display error notification
         }
       }
     }
 
     fetch()
-  }, [checkRecoveryCode, isReady, isValidQuery, query.code])
+  }, [checkRecoveryCode, isReady, query])
 
   if (isLoading || !isReady || isUninitialized) {
     // TODO Replace with custom loader
     return <div>Loading...</div>
   }
 
-  if (!isValidQuery || isError || (data && data.email !== query.email)) {
+  if (!query.code || isError || (data && data.email !== query.email)) {
     return <RecoveryLinkExpired />
   }
 
