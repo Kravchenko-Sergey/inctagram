@@ -1,4 +1,4 @@
-import React, { ComponentProps, forwardRef } from 'react'
+import { ComponentProps, forwardRef } from 'react'
 import 'react-datepicker/dist/react-datepicker.min.css'
 import { ReactDatePickerCustomHeaderProps } from 'react-datepicker'
 import { clsx } from 'clsx'
@@ -168,7 +168,7 @@ const CustomHeader = ({ date, decreaseMonth, increaseMonth }: ReactDatePickerCus
     <div className={classNames.header}>
       <Typography variant="bold_text_16">{headerText}</Typography>
       <div className={classNames.buttonBox}>
-        <button className={classNames.button} type={'button'} onClick={decreaseMonth}>
+        <button className={classNames.button} type="button" onClick={decreaseMonth}>
           <ArrowLeft />
         </button>
 

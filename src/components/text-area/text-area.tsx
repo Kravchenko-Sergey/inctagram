@@ -24,8 +24,8 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, r
   return (
     <div className={classNames.root}>
       <Typography
-        variant={'regular_text_14'}
-        as={'label'}
+        variant="regular_text_14"
+        as="label"
         className={`${s.label} ${disabled && s.disabled}`}
       >
         {label}
@@ -33,7 +33,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, r
       <div className={`${s.container} ${error ? s.error : ''} ${disabled ? s.disabled : ''}`}>
         <textarea ref={ref} disabled={disabled} {...rest} className={classNames.textArea} />
       </div>
-      <Typography variant={'regular_text_14'} as={'div'} color="error" className={s.error}>
+      <Typography variant="regular_text_14" as="div" color="error" className={s.error}>
         {error}
       </Typography>
     </div>

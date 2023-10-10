@@ -1,11 +1,10 @@
-import React from 'react'
-
-import s from './profile-settings.module.scss'
 import { getMainLayout, Tabs, ProfileUpdate, Button } from '@/components'
 import { useTranslation } from '@/hooks'
 import { ImageOutline } from '@/assets/icons'
 import { useUpdateProfileMutation } from '@/api/profile-api/profile.api'
 import { ProfileSettingsFormType } from '@/schemas'
+
+import s from './profile-settings.module.scss'
 
 const ProfileSettings = () => {
   const { t } = useTranslation()

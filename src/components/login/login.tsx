@@ -21,7 +21,7 @@ type LoginProps = {
 
 export const Login: FC<LoginProps> = ({ onGoogleAuth, onGithubAuth }) => {
   const { t } = useTranslation()
-  const router = useRouter()
+  const { push } = useRouter()
 
   const [signIn] = useLoginMutation()
   const [getUser] = useLazyMeQuery()
@@ -45,7 +45,7 @@ export const Login: FC<LoginProps> = ({ onGoogleAuth, onGithubAuth }) => {
       if (accessToken) {
         tokenSetterToLocalStorage(accessToken)
         await getUser()
-        router.push(PATH.PROFILE)
+        push(PATH.PROFILE)
       }
     } catch (e: any) {
       console.log(e)

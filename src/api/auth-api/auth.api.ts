@@ -86,11 +86,6 @@ export const authAPI = instagramAPI.injectEndpoints({
         body,
       }),
     }),
-    githubLogin: build.query<void, void>({
-      query: () => ({
-        url: 'auth/github/login',
-      }),
-    }),
   }),
 })
 
@@ -99,7 +94,6 @@ export const {
   useMeQuery,
   useLoginMutation,
   useLogoutMutation,
-  useLazyGithubLoginQuery,
   useGoogleLoginMutation,
   useRegistrationMutation,
   useVerifyMailMutation,

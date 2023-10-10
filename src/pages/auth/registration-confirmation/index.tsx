@@ -1,13 +1,13 @@
 import { useLayoutEffect } from 'react'
 
-import { useRouter } from 'next/router'
-
 import { useVerifyMailMutation } from '@/api/auth-api/auth.api'
 import { MailVerificationError, MailVerificationSuccess } from '@/components'
+import { routerRecoverySchema } from '@/schemas'
+import { useTypedRouter } from '@/hooks'
 
 const Confirm = () => {
   const [verify, { isSuccess }] = useVerifyMailMutation()
-  const { query } = useRouter()
+  const { query } = useTypedRouter(routerRecoverySchema)
 
   useLayoutEffect(() => {
     verify({ confirmationCode: query.code as string })

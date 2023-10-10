@@ -1,4 +1,5 @@
-import React, { memo, useCallback, useEffect } from 'react'
+import { memo, useCallback, useEffect } from 'react'
+import { useForm } from 'react-hook-form'
 
 import {
   ControlledTextField,
@@ -7,13 +8,13 @@ import {
   ControlledDataPicker,
   ControlledSelect,
 } from '@/components'
-import { useForm } from 'react-hook-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslation } from '@/hooks/use-translation'
-import s from './profile-update.module.scss'
 import { ProfileSettingsFormType, profileSettingsSchema } from '@/schemas'
 import { FormFields, triggerZodFieldError } from '@/helpers'
+
+import s from './profile-update.module.scss'
 
 const Cities = [
   { label: 'Grodno', value: 'Grodno' },
@@ -68,19 +69,19 @@ export const ProfileUpdate = memo(({ updateProfileHandler }: ProfileUpdateProps)
     <div className={s.container}>
       <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={s.wrap}>
-          <ControlledTextField label={t.auth.username} control={control} name={'userName'} />
+          <ControlledTextField label={t.auth.username} control={control} name="userName" />
         </div>
         <div className={s.wrap}>
-          <ControlledTextField label={t.profile.firstName} control={control} name={'firstName'} />
+          <ControlledTextField label={t.profile.firstName} control={control} name="firstName" />
         </div>
         <div className={s.wrap}>
-          <ControlledTextField label={t.profile.lastName} control={control} name={'lastName'} />
+          <ControlledTextField label={t.profile.lastName} control={control} name="lastName" />
         </div>
         <ControlledDataPicker
           label={t.profile.dateOfBirth}
           className={s.dataPicker}
           control={control}
-          name={'dateOfBirth'}
+          name="dateOfBirth"
           errorMessage={errors.dateOfBirth?.message}
         />
         <div className={s.wrap}>
@@ -89,7 +90,7 @@ export const ProfileUpdate = memo(({ updateProfileHandler }: ProfileUpdateProps)
             label={t.profile.citySelect}
             control={control}
             placeholder={t.profile.citySelect}
-            name={'city'}
+            name="city"
             className={s.selectWrapper}
           />
         </div>
@@ -98,10 +99,10 @@ export const ProfileUpdate = memo(({ updateProfileHandler }: ProfileUpdateProps)
           classNameTextArea={s.textAreaEl}
           label={t.profile.aboutMe}
           control={control}
-          name={'aboutMe'}
+          name="aboutMe"
         />
         <div className={s.bottomLine} />
-        <Button disabled={!isValid} className={s.submitBtn} variant="primary" type={'submit'}>
+        <Button disabled={!isValid} className={s.submitBtn} variant="primary" type="submit">
           {t.profile.saveChanges}
         </Button>
       </form>

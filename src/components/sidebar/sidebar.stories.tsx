@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import s from './sidebar.module.scss'
-
 import { Sidebar } from './'
+
+import s from './sidebar.module.scss'
 
 import {
   BookmarkOutline,
