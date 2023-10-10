@@ -1,17 +1,19 @@
 import { useGoogleLogin } from '@react-oauth/google'
 import { useRouter } from 'next/router'
 
-import { useGoogleLoginMutation, useLazyMeQuery } from '@/api/auth-api/auth.api'
+import { useGoogleLoginMutation, useMeQuery } from '@/api/auth-api/auth.api'
 import { HeadMeta, getHeaderLayout, Login } from '@/components'
 import { PATH } from '@/consts/route-paths'
 import { tokenSetterToLocalStorage } from '@/helpers'
 
 import s from './sign-in.module.scss'
+import { useGetProfileQuery } from '@/api/profile-api/profile.api'
 
 const SignIn = () => {
   const router = useRouter()
+  const { data: me } = useMeQuery()
+  const { data: profile, refetch } = useGetProfileQuery({ profileId: me?.userId })
   const [googleLogin] = useGoogleLoginMutation()
-  const [getUser] = useLazyMeQuery()
 
   const onGoogleAuth = useGoogleLogin({
     onSuccess: async tokenResponse => {
@@ -19,8 +21,8 @@ const SignIn = () => {
 
       if (accessToken) {
         tokenSetterToLocalStorage(accessToken)
-        await getUser()
-        router.push(PATH.PROFILE)
+        refetch()
+        router.push(profile?.firstName === null ? PATH.PROFILE_SETTINGS : PATH.PROFILE)
       }
     },
     flow: 'auth-code',
