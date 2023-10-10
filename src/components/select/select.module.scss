@@ -49,6 +49,8 @@
   border: 1px solid var(--dark-100);
   border-radius: 0.125rem;
 
+  transition: 0.2s ease-out;
+
   &:focus-visible {
     cursor: pointer;
     border-color: var(--light-100);
@@ -187,6 +189,8 @@
 }
 
 .label {
+  user-select: none;
+
   display: block;
 
   margin-bottom: 4px;

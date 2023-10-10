@@ -1,11 +1,9 @@
-import React from 'react'
-
-import { HeadMeta } from '@/components/head-meta'
+import { HeadMeta } from '@/components'
 
 const Messenger = () => {
   return (
     <>
-      <HeadMeta title="Sign-in" />
+      <HeadMeta title="Messenger" />
       <main>messenger</main>
     </>
   )

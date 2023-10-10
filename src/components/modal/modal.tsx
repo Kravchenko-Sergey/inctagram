@@ -1,13 +1,11 @@
 import { ComponentProps, FC, ReactNode } from 'react'
 
+import { CloseModal } from '@/assets/icons'
+import { Typography } from '@/components'
 import * as Dialog from '@radix-ui/react-dialog'
 import { clsx } from 'clsx'
 
-import { Typography } from '../typography'
-
 import s from './modal.module.scss'
-
-import { CloseModal } from '@/assets/icons'
 
 export type ModalType = {
   children?: ReactNode
@@ -17,18 +15,18 @@ export type ModalType = {
 } & ComponentProps<'div'>
 
 export const Modal: FC<ModalType> = ({ children, title, onOpenChange, isOpen, className }) => {
-  const classNames = clsx(s.DialogContent, className && className)
+  const classNames = clsx(s.dialogContent, className && className)
 
   return (
     <Dialog.Root onOpenChange={onOpenChange} open={isOpen}>
       <Dialog.Portal>
-        <Dialog.Overlay className={s.DialogOverlay} />
+        <Dialog.Overlay className={s.dialogOverlay} />
         <Dialog.Content className={classNames}>
           <div className={s.header}>
             <Dialog.Title>
-              <Typography variant={'h1'}>{title}</Typography>
+              <Typography variant="h1">{title}</Typography>
             </Dialog.Title>
-            <Dialog.Close className={s.IconButton} aria-label={'Close'}>
+            <Dialog.Close className={s.iconButton} aria-label="Close">
               <CloseModal />
             </Dialog.Close>
           </div>

@@ -1,1 +1,1 @@
-export * from './scrollbar'
+export { Scrollbar } from './scrollbar'

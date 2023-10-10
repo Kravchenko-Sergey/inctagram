@@ -7,16 +7,17 @@ import { useForm } from 'react-hook-form'
 
 import { useGoogleLoginMutation, useRegistrationMutation } from '@/api/auth-api/auth.api'
 import { GitHubIcon, GoogleIcon } from '@/assets/icons'
-import { Button } from '@/components/button'
-import { ControlledCheckbox } from '@/components/controlled/controlled-checkbox'
-import { ControlledTextField } from '@/components/controlled/controlled-text-field'
-import { Modal } from '@/components/modal'
-import { Trans } from '@/components/trans/trans'
-import { Typography } from '@/components/typography'
+import {
+  Button,
+  ControlledCheckbox,
+  ControlledTextField,
+  Modal,
+  Trans,
+  Typography,
+} from '@/components'
 import { PATH } from '@/consts/route-paths'
-import { tokenSetterToLocalStorage } from '@/helpers/tokenSetterToLocalStorage'
-import { FormFields, triggerZodFieldError } from '@/helpers/updateZodErrors'
-import { useTranslation } from '@/hooks/use-translation'
+import { tokenSetterToLocalStorage, FormFields, triggerZodFieldError } from '@/helpers'
+import { useTranslation } from '@/hooks'
 import { RegisterFormType, createRegisterSchema } from '@/schemas'
 import { RegisterError } from '@/types'
 
@@ -108,26 +109,22 @@ export const Registration = memo(() => {
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
-          <ControlledTextField label={t.auth.username} control={control} name={'username'} />
-          <ControlledTextField label={t.auth.emailLabel} control={control} name={'email'} />
+          <ControlledTextField label={t.auth.username} control={control} name="username" />
+          <ControlledTextField label={t.auth.emailLabel} control={control} name="email" />
           <ControlledTextField
-            type={'password'}
+            type="password"
             label={t.auth.passwordLabel}
             control={control}
-            name={'password'}
+            name="password"
           />
           <ControlledTextField
-            type={'password'}
+            type="password"
             label={t.auth.passwordConfirmation}
             control={control}
-            name={'confirm'}
+            name="confirm"
           />
           <div className={s.checkboxWrap}>
-            <ControlledCheckbox
-              errorMessage={errors.read?.message}
-              control={control}
-              name={'read'}
-            />
+            <ControlledCheckbox errorMessage={errors.read?.message} control={control} name="read" />
 
             <Typography variant="small_text">
               <Trans
@@ -152,7 +149,7 @@ export const Registration = memo(() => {
             className={s.btnSingUp}
             fullWidth
             variant="primary"
-            type={'submit'}
+            type="submit"
           >
             <Typography color="inherit" variant="h3">
               {t.auth.signUp}

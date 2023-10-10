@@ -1,7 +1,6 @@
 import { FC, Fragment } from 'react'
 
-const tagsRegex = /(<\d+>[^<>]*<\/\d+>)/
-const openCloseTagRegex = /<(\d+)>([^<>]*)<\/(\d+)>/
+import { openCloseTagRegex, tagsRegex } from '@/consts/regex'
 
 type TransType = {
   text: string

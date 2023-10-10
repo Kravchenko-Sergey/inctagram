@@ -5,7 +5,7 @@ import { clsx } from 'clsx'
 
 import s from './label.module.scss'
 
-export type LabelProps = {
+type LabelProps = {
   label?: ReactNode
 } & ComponentPropsWithoutRef<'label'>
 

@@ -15,7 +15,8 @@ export const ControlledSelect = <T extends FieldValues>({
   ...rest
 }: ControlledSelectProps<T>) => {
   const {
-    field: { value, onChange, ...restField },
+    field: { value, onBlur, onChange, ...restField },
+    fieldState: { error },
   } = useController({
     name,
     rules,
@@ -24,5 +25,14 @@ export const ControlledSelect = <T extends FieldValues>({
     defaultValue,
   })
 
-  return <Select value={value} onChange={onChange} {...restField} {...rest} />
+  return (
+    <Select
+      value={value}
+      errorMessage={error?.message}
+      onBlur={onBlur}
+      onChange={onChange}
+      {...restField}
+      {...rest}
+    />
+  )
 }

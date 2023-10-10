@@ -1,14 +1,13 @@
-import { CSSProperties, forwardRef, ReactElement } from 'react'
+import { CSSProperties, ElementRef, forwardRef, ReactElement } from 'react'
 
 import * as SelectRadix from '@radix-ui/react-select'
 import { clsx } from 'clsx'
 
-import { Typography } from '../typography'
+import { Typography } from '@/components'
 
 import s from './select.module.scss'
 
 import { ArrowDownIcon } from '@/assets/icons'
-import { FieldValues } from 'react-hook-form'
 import { useTranslation } from '@/hooks/use-translation'
 
 export type Option = { label: string | ReactElement; value: string }
@@ -21,6 +20,7 @@ type ConditionalMultipleProps = {
 
 type CommonProps = {
   className?: string
+  onBlur?: () => void
   disabled?: boolean
   secondary?: boolean
   name?: string
@@ -36,11 +36,13 @@ type CommonProps = {
 }
 export type SelectProps = CommonProps & ConditionalMultipleProps
 
-export const Select = forwardRef<FieldValues, SelectProps>(
+// export const Select = forwardRef<FieldValues, SelectProps>(
+export const Select = forwardRef<ElementRef<typeof SelectRadix.Root>, SelectProps>(
   (
     {
       variant = 'primary',
       placeholder,
+      onBlur,
       value,
       disabled,
       className,
@@ -78,8 +80,13 @@ export const Select = forwardRef<FieldValues, SelectProps>(
         <Typography variant={'regular_text_16'} as="label" className={classNames.label}>
           {label}
         </Typography>
-        <SelectRadix.Root disabled={disabled} onValueChange={onChange}>
-          <SelectRadix.Trigger className={classNames.trigger} style={rootStyles}>
+        <SelectRadix.Root value={value as any} disabled={disabled} onValueChange={onChange}>
+          <SelectRadix.Trigger
+            onBlur={onBlur}
+            ref={ref}
+            className={classNames.trigger}
+            style={rootStyles}
+          >
             <SelectRadix.Value placeholder={placeholder || withoutPlaceholder}>
               {value}
             </SelectRadix.Value>

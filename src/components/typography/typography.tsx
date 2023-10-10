@@ -1,11 +1,11 @@
-import React, { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
+import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
 
 import { clsx } from 'clsx'
 import Link from 'next/link'
 
 import s from './typography.module.scss'
 
-export type TypographyProps<T extends ElementType = 'p'> = {
+type TypographyProps<T extends ElementType = 'p'> = {
   as?: T
   color?: 'primary' | 'secondary' | 'inherit' | 'error' | 'link'
   variant?:
@@ -38,18 +38,12 @@ export const Typography = <T extends ElementType = 'p'>(
     href,
     ...rest
   } = props
-  // const classNames = useMemo(
-  //   () => clsx(s[variant], color && s[color], className),
-  //   [className, color, variant]
-  // )
 
   const classNames = clsx(s[variant], color && s[color], className)
 
   if (Component === 'a' || variant === 'regular_link' || variant === 'small_link') {
     return <Link href={href} className={`${s[variant]} ${className}`} {...rest} />
   }
-
-  // const classNames = clsx(s[variant], color && s[color], className)
 
   return <Component className={classNames} {...rest} />
 }

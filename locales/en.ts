@@ -49,6 +49,8 @@ export const en: LocaleType = {
     imageFormatError: 'File must be jpeg or png type',
     imageSizeError: 'File must be less than 10 MB.',
     // under13: (elem: ReactElement) => `A user under 13 cannot create a profile. ${elem} `,
+    tellUsSomethingAboutYou: 'The field must not be empty',
+    whereAreYouLive: 'Please indicate which city you live in',
   },
   components: {
     selectPlaceholder: 'Select Box',

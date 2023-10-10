@@ -1,1 +1,1 @@
-import { ProfileUpdate } from './profile-update'
+export { ProfileUpdate } from './profile-update'

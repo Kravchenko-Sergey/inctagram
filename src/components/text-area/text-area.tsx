@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, forwardRef } from 'react'
 
-import { Typography } from '../typography'
+import { Typography } from '@/components'
 
 import { clsx } from 'clsx'
 import s from './text-area.module.scss'
@@ -14,7 +14,7 @@ export type TextAreaProps = {
   errorMessage?: string
 } & ComponentPropsWithoutRef<'textarea'>
 
-const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, ref) => {
+export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, ref) => {
   const { label, disabled, className, classNameTextArea, error, ...rest } = props
   const classNames = {
     root: clsx(s.root, className),
@@ -31,15 +31,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, ref) => 
         {label}
       </Typography>
       <div className={`${s.container} ${error ? s.error : ''} ${disabled ? s.disabled : ''}`}>
-        <textarea
-          ref={ref}
-          disabled={disabled}
-          {...rest}
-          // className={`${s.textarea} ${error ? s.error : ''} ${
-          //   classNameTextArea ? s.classNameTextArea : ''
-          // }`}
-          className={classNames.textArea}
-        />
+        <textarea ref={ref} disabled={disabled} {...rest} className={classNames.textArea} />
       </div>
       <Typography variant={'regular_text_14'} as={'div'} color="error" className={s.error}>
         {error}
@@ -47,5 +39,3 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, ref) => 
     </div>
   )
 })
-
-export default TextArea

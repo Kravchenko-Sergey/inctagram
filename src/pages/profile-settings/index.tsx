@@ -12,8 +12,7 @@ import {
   useUpdateProfileMutation,
   useUploadAvatarMutation,
 } from '@/api/profile-api/profile.api'
-import { useMeQuery } from '@/api/auth-api/auth.api'
-import { ProfileSettingsFormValues } from '@/schemas/profile-settings-schema'
+import { ProfileSettingsFormType } from '@/schemas'
 import { Avatar } from '@/components/avatar'
 import { Modal } from '@/components/modal'
 import { Typography } from '@/components/typography'
@@ -24,11 +23,10 @@ import { DeleteAvatarIcon } from '@/assets/icons/delete-avatar-cross'
 const ProfileSettings = () => {
   const { t } = useTranslation()
 
-  const [updateProfile, { error, isLoading }] = useUpdateProfileMutation()
+  const [updateProfile] = useUpdateProfileMutation()
   const [uploadAvatar, { error: uploadAvatarError }] = useUploadAvatarMutation()
   const [deleteAvatar, { error: deleteAvatarError }] = useDeleteAvatarMutation()
-  const { data: me, isLoading: dataLoading, isError } = useMeQuery()
-  const updateProfileHandler = (data: ProfileSettingsFormValues) => {
+  const updateProfileHandler = (data: ProfileSettingsFormType) => {
     updateProfile(data)
   }
   const [isModalOpen, setIsModalOpen] = useState(false)

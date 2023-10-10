@@ -1,1 +1,1 @@
-export * from './controlled-text-area'
+export { ControlledTextArea } from './controlled-text-area'

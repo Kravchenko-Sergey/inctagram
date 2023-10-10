@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import { PATH } from '@/consts/route-paths'
-import { tokenSetterToLocalStorage } from '@/helpers/tokenSetterToLocalStorage'
+import { tokenSetterToLocalStorage } from '@/helpers'
 
 const Github = () => {
   const router = useRouter()

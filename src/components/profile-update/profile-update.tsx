@@ -3,16 +3,15 @@ import React, { memo, useCallback, useEffect } from 'react'
 import { ControlledTextField } from '@/components/controlled/controlled-text-field'
 import { ControlledTextArea } from '@/components/controlled/controlled-text-area'
 import { useForm } from 'react-hook-form'
-import { ProfileSettingsFormValues, profileSettingsSchema } from '@/schemas/profile-settings-schema'
+
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslation } from '@/hooks/use-translation'
 import { ControlledDataPicker } from '@/components/controlled/controlled-data-picker'
 import { Button } from '@/components/button'
 import { ControlledSelect } from '@/components/controlled/controlled-select'
 import s from './profile-update.module.scss'
-import { FormFields, triggerZodFieldError } from '@/helpers/updateZodErrors'
-import { useUpdateProfileMutation } from '@/api/profile-api/profile.api'
-import { useMeQuery } from '@/api/auth-api/auth.api'
+import { ProfileSettingsFormType, profileSettingsSchema } from '@/schemas'
+import { FormFields, triggerZodFieldError } from '@/helpers'
 
 const Cities = [
   { label: 'Grodno', value: 'Grodno' },
@@ -20,11 +19,11 @@ const Cities = [
   { label: 'Baghdad', value: 'Baghdad' },
 ]
 
-type ProfileUpdatePropps = {
-  updateProfileHandler: (data: ProfileSettingsFormValues) => void
+type ProfileUpdateProps = {
+  updateProfileHandler: (data: ProfileSettingsFormType) => void
 }
 
-export const ProfileUpdate = memo(({ updateProfileHandler }: ProfileUpdatePropps) => {
+export const ProfileUpdate = memo(({ updateProfileHandler }: ProfileUpdateProps) => {
   const { t } = useTranslation()
   // const [updateProfile, { error, isLoading }] = useUpdateProfileMutation()
   // const { data: me, isLoading, isError } = useMeQuery()
@@ -34,10 +33,17 @@ export const ProfileUpdate = memo(({ updateProfileHandler }: ProfileUpdatePropps
     formState: { isValid, errors, touchedFields },
     handleSubmit,
     trigger,
-  } = useForm<ProfileSettingsFormValues>({
+  } = useForm<ProfileSettingsFormType>({
     resolver: zodResolver(profileSettingsSchema(t)),
     mode: 'onBlur',
-    defaultValues: { firstName: '', userName: '', lastName: '', city: '', dateOfBirth: new Date() },
+    defaultValues: {
+      firstName: '',
+      userName: '',
+      lastName: '',
+      city: '',
+      dateOfBirth: new Date(),
+      aboutMe: '',
+    },
   })
 
   useEffect(() => {
@@ -46,7 +52,7 @@ export const ProfileUpdate = memo(({ updateProfileHandler }: ProfileUpdatePropps
     triggerZodFieldError(touchedFieldNames, trigger)
   }, [t, touchedFields, trigger])
   const onSubmit = useCallback(
-    async (data: ProfileSettingsFormValues) => {
+    async (data: ProfileSettingsFormType) => {
       try {
         updateProfileHandler(data)
       } catch (e: unknown) {

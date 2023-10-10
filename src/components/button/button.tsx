@@ -31,7 +31,7 @@ export const Button = <T extends ElementType = 'button'>(props: ButtonPropsType<
     btn: clsx(s.btn, s[variant], fullWidth && s.fullWidth, disabled && s.disabled, className),
   }
 
-  if (Component === 'a' || variant === 'link') {
+  if (Component === 'a') {
     return (
       <Link href={href} passHref className={classNames.btn} {...restProps}>
         {children}
