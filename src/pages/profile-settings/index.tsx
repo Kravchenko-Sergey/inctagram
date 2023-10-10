@@ -89,11 +89,9 @@ const ProfileSettings = () => {
     }
   }, [deleteAvatar])
 
-  const onAvatarUpload = async () => {
+  const onAvatarUpload = async avatarFile => {
     try {
-      await uploadAvatar({
-        avatars: newAvatarFile,
-      }).unwrap()
+      await uploadAvatar(avatarFile).unwrap()
       setUrl(previewAvatar)
       setIsModalOpen(false)
       setAvatarEditMode(false)
@@ -104,9 +102,9 @@ const ProfileSettings = () => {
     }
   }
 
-  const handleSaveCloseModal = async () => {
+  const handleSaveCloseModal = () => {
     console.log(newAvatarFile)
-    onAvatarUpload()
+    onAvatarUpload(newAvatarFile)
     // setUrl(previewAvatar)
     // setIsModalOpen(false)
     // setAvatarEditMode(false)
