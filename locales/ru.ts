@@ -1,5 +1,3 @@
-import { ReactElement } from 'react'
-
 export const ru = {
   test: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати ',
   ok: 'OK',
@@ -14,10 +12,10 @@ export const ru = {
     loginIncorrectData: 'Неправильный email или пароль',
     loginFailed: 'Ошибка входа',
     loginIncorrectPassword: `Неправильный пароль. Попробуйте ещё раз`,
-    regexUsername: 'Имя пользователя должно содержать 1-9, a-z, A-Z, . _ -',
+    regexUsername: 'Имя пользователя должно содержать 0-9, a-z, A-Z, . _ -',
     regexFirstname: 'Имя должно содержать а-я, А-Я',
     regexLastname: 'Фамилия должна содержать а-я, А-Я',
-    regexAboutMe: 'Поле должно содержать 1-9, a-z, A-Z, . _ -',
+    regexAboutMe: 'Поле должно содержать 0-9, a-z, A-Z, . _ -',
     nonemptyUsername: 'Введите имя пользователя',
     nonemptyFirstname: 'Введите имя',
     nonemptyLastname: 'Введите фамилию',
@@ -32,7 +30,7 @@ export const ru = {
     nonemptyPassword: 'Введите пароль',
     nonemptyConfirm: 'Повторно введите пароль',
     regexPasswordMustContain:
-      'Пароль должен содержать следующие символы 1-9, a-z, A-Z, ! " # $ % & \' ( ) * + , - . / :' +
+      'Пароль должен содержать следующие символы 0-9, a-z, A-Z, ! " # $ % & \' ( ) * + , - . / :' +
       ' ; < = > ? @ [ \\ ] ^ _` { | } ~',
     minPassword: (min: number) => `Пароль должен должен быть длиной не менее ${min} символов`,
     maxPassword: 'Пароль должен быть не более 20 символов',

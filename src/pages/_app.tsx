@@ -10,6 +10,7 @@ import { Provider } from 'react-redux'
 
 import { useLoader } from '@/hooks'
 import { store } from '@/store'
+import { AuthProvider } from '@/components'
 
 export const inter = Inter({
   subsets: ['latin', 'cyrillic'],
@@ -38,10 +39,13 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           font-family: ${inter.style.fontFamily};
         }
       `}</style>
+
       <Provider store={store}>
-        <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_ID ?? ''}>
-          {getLayout(<Component {...pageProps} />)}
-        </GoogleOAuthProvider>
+        <AuthProvider>
+          <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_ID ?? ''}>
+            {getLayout(<Component {...pageProps} />)}
+          </GoogleOAuthProvider>
+        </AuthProvider>
       </Provider>
     </>
   )

@@ -1,24 +1,20 @@
-import React, { ComponentProps, forwardRef } from 'react'
-
+import { ComponentProps, forwardRef } from 'react'
+import 'react-datepicker/dist/react-datepicker.min.css'
+import { ReactDatePickerCustomHeaderProps } from 'react-datepicker'
 import { clsx } from 'clsx'
-// import { ru } from 'date-fns/locale'
+// eslint-disable-next-line import/no-duplicates
 import { format } from 'date-fns'
+// eslint-disable-next-line import/no-duplicates
 import { ru } from 'date-fns/locale'
 import * as RDP from 'react-datepicker'
-import { ReactDatePickerCustomHeaderProps } from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.min.css'
+
 import { PATH } from '@/consts/route-paths'
-import { Label } from '@/components'
-import textFieldStyles from './../text-field/text-field.module.scss'
-
-import { ArrowLeft } from '@/assets/icons/arrow-left'
-import { ArrowRight } from '@/assets/icons/arrow-right'
-import { CalendarIcon } from '@/assets/icons/calendar'
-
-import { Typography } from '@/components/typography'
+import { ArrowLeft, ArrowRight, CalendarIcon } from '@/assets/icons'
+import { Typography, Label } from '@/components'
 import { FieldValues } from 'react-hook-form'
-import { useTranslation } from '@/hooks/use-translation'
+import { useTranslation } from '@/hooks'
 
+import textFieldStyles from '@/components/text-field/text-field.module.scss'
 import s from './date-picker.module.scss'
 
 export type DatePickerProps = {
@@ -172,7 +168,7 @@ const CustomHeader = ({ date, decreaseMonth, increaseMonth }: ReactDatePickerCus
     <div className={classNames.header}>
       <Typography variant="bold_text_16">{headerText}</Typography>
       <div className={classNames.buttonBox}>
-        <button className={classNames.button} type={'button'} onClick={decreaseMonth}>
+        <button className={classNames.button} type="button" onClick={decreaseMonth}>
           <ArrowLeft />
         </button>
 

@@ -8,8 +8,13 @@ import {
 import { Mutex } from 'async-mutex'
 
 import { TOKEN_LOCAL_STORAGE_KEY } from '@/consts/localstorage'
+import { tokenSetterToLocalStorage } from '@/helpers/token-setter-to-local-storage'
 
-export const baseUrl = 'https://inctagram.work/api/v1/'
+export const baseUrl = process.env.NEXT_PUBLIC_BASE_API_URL ?? ''
+
+if (!baseUrl) {
+  console.log('Please, provide api url in .env')
+}
 
 const baseQuery = fetchBaseQuery({
   baseUrl,
@@ -48,9 +53,11 @@ export const baseQueryWithReauth: BaseQueryFn<
           api,
           extraOptions
         )
+        const data = refreshResult.data as { accessToken: string } // TODO add type
 
-        // localStorage.setItem('token', refreshResult.data.accessToken)
-        if (refreshResult.meta?.response?.status === 204) {
+        tokenSetterToLocalStorage(data.accessToken)
+
+        if (refreshResult.meta?.response?.status === 200) {
           result = await baseQuery(args, api, extraOptions)
         } else {
           await baseQuery(
@@ -77,7 +84,6 @@ export const baseQueryWithReauth: BaseQueryFn<
 export const instagramAPI = createApi({
   reducerPath: 'instagramAPI',
   baseQuery: baseQueryWithReauth,
-  // baseQuery: baseQuery,
   endpoints: () => ({}),
   tagTypes: [],
 })

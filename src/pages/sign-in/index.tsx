@@ -1,8 +1,8 @@
 import { useGoogleLogin } from '@react-oauth/google'
 import { useRouter } from 'next/router'
 
-import { useGoogleLoginMutation } from '@/api/auth-api/auth.api'
-import { HeadMeta, Login, getHeaderLayout } from '@/components'
+import { useGoogleLoginMutation, useLazyMeQuery } from '@/api/auth-api/auth.api'
+import { HeadMeta, getHeaderLayout, Login } from '@/components'
 import { PATH } from '@/consts/route-paths'
 import { tokenSetterToLocalStorage } from '@/helpers'
 
@@ -10,22 +10,29 @@ import s from './sign-in.module.scss'
 
 const SignIn = () => {
   const router = useRouter()
-  const [googleLogin, { data: googleToken }] = useGoogleLoginMutation()
+  const [googleLogin] = useGoogleLoginMutation()
+  const [getUser] = useLazyMeQuery()
 
   const onGoogleAuth = useGoogleLogin({
-    onSuccess: tokenResponse => {
-      googleLogin({ code: tokenResponse.code })
-      router.push(PATH.PROFILE)
+    onSuccess: async tokenResponse => {
+      const { accessToken } = await googleLogin({ code: tokenResponse.code }).unwrap()
+
+      if (accessToken) {
+        tokenSetterToLocalStorage(accessToken)
+        await getUser()
+        router.push(PATH.PROFILE)
+      }
     },
     flow: 'auth-code',
   })
-
   const onGithubAuth = () => {
-    window.location.assign('https://inctagram.work/api/v1/auth/github/login')
-  }
+    if (process.env.NEXT_PUBLIC_GITHUB_AUTH_URL) {
+      window.location.assign(process.env.NEXT_PUBLIC_GITHUB_AUTH_URL)
 
-  if (googleToken && googleToken.accessToken) {
-    tokenSetterToLocalStorage(googleToken.accessToken)
+      return
+    }
+
+    console.log('Please, provide url in .env for github authorization')
   }
 
   return (
