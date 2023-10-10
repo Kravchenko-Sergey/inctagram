@@ -28,7 +28,7 @@ const ProfileSettings = () => {
   }
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [url, setUrl] = useState('')
-  const [newAvatarFile, setNewAvatarFile] = useState(null)
+  const [newAvatarFile, setNewAvatarFile] = useState<File | null>(null)
   const permittedFileTypes = ['jpg', 'jpeg', 'png']
   const permittedFileSize = 10485760 // 10Mb in bytes
   const [previewAvatar, setPreviewAvatar] = useState('')
@@ -50,7 +50,7 @@ const ProfileSettings = () => {
 
       if (matches && file.size <= permittedFileSize) {
         setUploadError('')
-        let previewPhoto = function (reader) {
+        let previewPhoto = function (reader: any) {
           setPreviewAvatar(reader.result)
           setAvatarEditMode(true)
         }
@@ -90,17 +90,23 @@ const ProfileSettings = () => {
   }, [deleteAvatar])
 
   const onAvatarUpload = async () => {
+    console.log('onAvatarUpload')
+
+    const formData = new FormData()
+
+    if (newAvatarFile) {
+      formData.append('file', newAvatarFile)
+    }
     try {
-      await uploadAvatar({
-        avatars: newAvatarFile,
-      }).unwrap()
+      await uploadAvatar(formData).unwrap()
       setUrl(previewAvatar)
       setIsModalOpen(false)
       setAvatarEditMode(false)
     } catch (e: unknown) {
-      const error = e as RegisterError
+      // const error = e as RegisterError
+      const error = e as any
 
-      setUploadError(error)
+      setUploadError(error.data.message)
     }
   }
 

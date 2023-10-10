@@ -48,7 +48,6 @@ export const Login: FC<LoginProps> = ({ onGoogleAuth, onGithubAuth }) => {
         push(PATH.PROFILE)
       }
     } catch (e: any) {
-      console.log(e)
       if (
         e.data.messages[0].message === 'Authorization error' ||
         e.data.messages === 'invalid password or email'
