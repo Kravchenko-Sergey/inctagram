@@ -88,9 +88,11 @@ export const Login: FC<LoginProps> = ({ onGoogleAuth, onGithubAuth }) => {
             type="password"
           />
         </div>
-        <Typography href={PATH.FORGOT_PASSWORD} as="a" className={s.forgotPassLink}>
-          {t.auth.forgotPassword}
-        </Typography>
+        <div className={s.btnWrap}>
+          <Typography href={PATH.FORGOT_PASSWORD} as="a" className={s.forgotPassLink}>
+            {t.auth.forgotPassword}
+          </Typography>
+        </div>
         <Button variant="primary" fullWidth type="submit" className={s.submitBtn}>
           <Typography variant="h3">{t.auth.signIn}</Typography>
         </Button>
