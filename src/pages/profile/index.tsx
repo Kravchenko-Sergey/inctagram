@@ -21,9 +21,9 @@ const Profile = () => {
       <main className={s.root}>
         <div className={s.profile}>
           {profile?.avatars.length !== 0 ? (
-            <img
+            <img //TODO изменить img на Image
               src={String(profile?.avatars[0]?.url)}
-              alt="Аватар пользователя"
+              alt="Аватар"
               className={s.photo}
             />
           ) : (
