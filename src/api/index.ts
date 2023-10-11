@@ -7,7 +7,7 @@ import {
 } from '@reduxjs/toolkit/query/react'
 import { Mutex } from 'async-mutex'
 
-import { TOKEN_LOCAL_STORAGE_KEY } from '@/consts/localstorage'
+import { TOKEN_LOCAL_STORAGE_KEY } from '@/consts/local-storage'
 import { tokenSetterToLocalStorage } from '@/helpers/token-setter-to-local-storage'
 
 export const baseUrl = process.env.NEXT_PUBLIC_BASE_API_URL ?? ''
