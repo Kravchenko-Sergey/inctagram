@@ -3,7 +3,11 @@ import Image from 'next/image'
 import s from './loader.module.scss'
 import { clsx } from 'clsx'
 
-export const Loader = ({ className }) => {
+type LoaderProps = {
+  className?: string
+}
+
+export const Loader = ({ className }: LoaderProps) => {
   const classNames = {
     loader: clsx(s.loader, className),
   }

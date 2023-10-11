@@ -169,5 +169,7 @@ export const en: LocaleType = {
     selectImage: 'Select from computer',
     dateOfBirth: 'Date of birth',
     backToProfile: 'Back to profile page',
+    logOut: 'Are you really want to log out of your account ',
+    titleLogOut: 'Log Out',
   },
 }
