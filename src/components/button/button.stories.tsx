@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Button } from './button'
+import { Button } from './'
 
 const meta = {
-  title: 'Components/Button',
+  title: 'Components/UI/Button',
   component: Button,
   tags: ['autodocs'],
   argTypes: {
     variant: {
-      options: ['primary', 'secondary', 'ghost', 'link'],
+      options: ['primary', 'secondary', 'ghost', 'link', 'link-btn'],
       control: { type: 'radio' },
     },
   },
@@ -51,5 +51,15 @@ export const AsLink: Story = {
     variant: 'link',
     children: 'Link as a button',
     as: 'a',
+    href: '',
+  },
+}
+
+export const LinkAsButton: Story = {
+  args: {
+    variant: 'link-btn',
+    children: 'Button as link',
+    as: 'a',
+    href: '',
   },
 }

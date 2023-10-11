@@ -1,2 +1,2 @@
-export * from './pagination'
-export * from './use-pagination'
+export { Pagination } from './pagination'
+export { usePagination } from './use-pagination'

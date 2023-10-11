@@ -22,6 +22,13 @@
   // }
 }
 
+.errorContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 23px;
+}
+
 .trigger {
   cursor: pointer;
 
@@ -41,6 +48,8 @@
   background-color: var(--dark-700);
   border: 1px solid var(--dark-100);
   border-radius: 0.125rem;
+
+  transition: 0.2s ease-out;
 
   &:focus-visible {
     cursor: pointer;
@@ -97,7 +106,7 @@
   }
 
   &[data-placeholder] {
-    color: var(--light-100);
+    color: var(--light-900);
   }
 
   &[data-disabled] {
@@ -180,9 +189,11 @@
 }
 
 .label {
+  user-select: none;
+
   display: block;
 
-  margin-bottom: 3px;
+  margin-bottom: 4px;
 
   font-size: var(--font-size-s);
   line-height: var(--font-line-m);

@@ -1,0 +1,59 @@
+.root {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  // align-items: center;
+  max-width: 378px;
+  padding: 24px;
+
+  background: var(--dark-500);
+  border: 1px solid var(--dark-300);
+  border-radius: 2px;
+}
+
+.title.title {
+  // .title {
+  align-self: center;
+  margin-bottom: 13px;
+}
+
+.checkboxWrap {
+  display: flex;
+  align-items: center;
+  margin-bottom: 35px;
+}
+
+.btnSingUp {
+  margin-bottom: 18px;
+}
+
+.footerTitle {
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.btnSignIn {
+  align-self: center;
+  margin: 0 auto 4px;
+}
+
+.modalButton {
+  align-self: flex-end;
+}
+
+.modal {
+  width: 378px;
+}
+
+.icons {
+  display: flex;
+  gap: 60px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.icon {
+  cursor: pointer;
+}

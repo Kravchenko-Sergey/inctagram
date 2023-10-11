@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { TextField } from './text-field'
 
 const meta = {
-  title: 'Components/TextField',
+  title: 'Components/UI/TextField',
   component: TextField,
   tags: ['autodocs'],
   argTypes: {
@@ -41,7 +41,7 @@ export const TextFieldWithPlaceHolder: Story = {
       setValue(event.currentTarget.value)
     }
 
-    return <TextField placeholder={'Type Something'} onChange={onChange} value={value} />
+    return <TextField placeholder="Type Something" onChange={onChange} value={value} />
   },
   args: {
     label: 'Click here',
@@ -56,7 +56,7 @@ export const TextFieldPassword: Story = {
       setValue(event.currentTarget.value)
     }
 
-    return <TextField type={'password'} onChange={onChange} value={value} />
+    return <TextField type="password" onChange={onChange} value={value} />
   },
   args: {
     value: '',

@@ -2,16 +2,19 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { Sidebar } from './'
 
-import { BookmarkOutline } from '@/src/assets/icons/bookmark-outline'
-import { HomeOutline } from '@/src/assets/icons/home-outline'
-import { LogOutOutline } from '@/src/assets/icons/log-out-outline'
-import { MessageCircleOutline } from '@/src/assets/icons/message-circle-outline'
-import { PersonOutline } from '@/src/assets/icons/person-outline'
-import { PlusSquareOutline } from '@/src/assets/icons/plus-square-outline'
-import { SearchIcon } from '@/src/assets/icons/search-icon'
-import { TrendingUpOutline } from '@/src/assets/icons/trending-up-outline'
-import s from '@/src/components/sidebar/sidebar.module.scss'
-import { Typography } from '@/src/components/typography'
+import s from './sidebar.module.scss'
+
+import {
+  BookmarkOutline,
+  HomeOutline,
+  LogOutOutline,
+  MessageCircleOutline,
+  PersonOutline,
+  PlusSquareOutline,
+  SearchIcon,
+  TrendingUpOutline,
+} from '@/assets/icons'
+import { Typography } from '@/components'
 
 const meta = {
   title: 'Components/UI/Sidebar',

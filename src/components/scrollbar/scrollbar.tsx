@@ -11,13 +11,7 @@ export type ScrollbarProps = {
   maxWidth?: number | string
 } & ComponentPropsWithoutRef<'div'>
 
-export const Scrollbar: FC<ScrollbarProps> = ({
-  children,
-  className,
-  maxHeight,
-  maxWidth,
-  ...rest
-}) => {
+export const Scrollbar: FC<ScrollbarProps> = ({ children, maxHeight, maxWidth, ...rest }) => {
   const maxHeightConverted = typeof maxHeight === 'number' ? `${maxHeight}px` : maxHeight
   const maxWidthConverted = typeof maxWidth === 'number' ? `${maxWidth}px` : maxWidth
 

@@ -1,14 +1,18 @@
-import React from 'react'
+import { HeadMeta, Registration, getHeaderLayout } from '@/components'
 
-import { HeadMeta } from '@/src/components/head-meta'
+import s from './sign-up.module.scss'
 
 const SignUp = () => {
   return (
-    <>
-      <HeadMeta title={'/Sign-up'} />
-      <div>sign up</div>
-    </>
+    <div className={s.pageWrapper}>
+      <HeadMeta title="Registration" />
+      <div className={s.wrapper}>
+        <Registration />
+      </div>
+    </div>
   )
 }
+
+SignUp.getLayout = getHeaderLayout
 
 export default SignUp

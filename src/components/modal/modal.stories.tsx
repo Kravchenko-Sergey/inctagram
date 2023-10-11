@@ -2,12 +2,11 @@ import { useState } from 'react'
 
 import type { Meta } from '@storybook/react'
 
-import { Button } from '@/src/components/button'
-import { Modal, ModalType } from '@/src/components/modal/modal'
-import { Typography } from '@/src/components/typography'
+import { Button, Typography } from '@/components'
+import { Modal, ModalType } from './'
 
 export default {
-  title: 'Components/Modal',
+  title: 'Components/UI/Modal',
   component: Modal,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
@@ -16,7 +15,7 @@ export default {
 const commonArgs = {
   children: (
     <>
-      <Typography variant={'regular_text_16'}>
+      <Typography variant="regular_text_16">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
         labore et dolore magna aliqua.
       </Typography>
@@ -42,7 +41,7 @@ export const DefaultModal = {
           Open modal
         </Button>
         <Modal {...args} isOpen={open} onOpenChange={handleModalClosed}>
-          <Typography variant={'regular_text_16'}>
+          <Typography variant="regular_text_16">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
             incididunt ut labore et dolore magna aliqua.
           </Typography>
@@ -73,7 +72,7 @@ export const ModalWithSaveButton = {
         </Button>
         <Modal {...args} isOpen={open} onOpenChange={handleModalClosed}>
           <>
-            <Typography variant={'regular_text_16'}>
+            <Typography variant="regular_text_16">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
               incididunt ut labore et dolore magna aliqua.
             </Typography>
@@ -94,7 +93,7 @@ export const ModalWithSaveButton = {
 }
 
 export const ModalWithDoubleButton = {
-  render: (args: ModalType) => {
+  render: () => {
     const [open, setOpen] = useState(false)
     const handleModalClosed = () => {
       setOpen(false)
@@ -108,9 +107,9 @@ export const ModalWithDoubleButton = {
         <Button variant="primary" onClick={handleModalOpened}>
           Open modal
         </Button>
-        <Modal isOpen={open} title={'With two Buttons'} onOpenChange={handleModalClosed}>
+        <Modal isOpen={open} title="With two Buttons" onOpenChange={handleModalClosed}>
           <>
-            <Typography variant={'regular_text_16'}>
+            <Typography variant="regular_text_16">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
               incididunt ut labore et dolore magna aliqua.
             </Typography>

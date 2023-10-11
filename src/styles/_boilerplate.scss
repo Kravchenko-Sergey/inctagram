@@ -28,32 +28,23 @@ option {
   color: inherit;
 }
 
+a {
+  text-decoration: none;
+}
+
 input:-webkit-autofill {
-  -webkit-background-clip: text;
+  background-clip: text;
 }
 
 body {
   margin: 0;
   padding: 0;
 
-  font: var(--font-m);
-  font-family: 'Inter', sans-serif;
+  font-family: Inter, sans-serif;
+  font-size: var(--font-size-m);
   color: var(--light-100);
 
   background-color: var(--dark-900);
-}
-
-input,
-button,
-select,
-textarea,
-optgroup,
-option {
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  font-style: inherit;
-  color: inherit;
 }
 
 button {
@@ -69,6 +60,10 @@ input {
   background: none;
   border: none;
 
+  &::-webkit-autofill {
+    background-clip: text;
+  }
+
   &:active,
   &:focus,
   &:focus-visible {
@@ -76,8 +71,35 @@ input {
   }
 }
 
-p,
-button {
-  margin: 0;
-  padding: 0;
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  font-family: Inter, sans-serif;
+
+  border: 0;
+  box-shadow: 0 0 0 1000px transparent inset;
+
+  transition: background-color 5000s ease-in-out 0s;
+
+  -webkit-text-fill-color: var(--light-900);
+
+  &:active {
+    color: var(--light-100) !important;
+  }
+
+  &:focus-visible {
+    color: var(--light-100) !important;
+  }
+}
+
+select:-webkit-autofill:focus,
+textarea:-webkit-autofill:focus,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--light-100);
 }

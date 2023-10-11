@@ -1,0 +1,46 @@
+.title {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.backButton {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  margin-right: auto;
+  padding: 6px 0;
+
+  color: var(--light-100);
+
+  border: 1px solid transparent;
+
+  &:hover {
+    color: var(--primary-100);
+    border: 1px solid transparent;
+  }
+}
+
+.buttonIcon {
+  color: inherit;
+
+  // color: var(--light-100)
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 110px;
+}
+
+.text {
+  padding: 0 73px;
+}
+
+.paragrhaph {
+  margin-bottom: 8px;
+}
+
+.span p {
+  margin-bottom: 8px;
+}

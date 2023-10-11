@@ -1,1 +1,1 @@
-export * from './recaptcha'
+export { Recaptcha } from './recaptcha'

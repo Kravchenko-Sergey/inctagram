@@ -1,6 +1,7 @@
 .btn {
   cursor: pointer;
 
+  width: fit-content;
   padding: 6px 24px;
 
   font-weight: 600;
@@ -15,7 +16,13 @@
     background-color 0.3s ease;
 }
 
-.primary {
+.link-btn {
+  display: block;
+  width: fit-content;
+}
+
+.primary,
+.link-btn {
   background: var(--primary-500);
   border: 2px solid transparent;
 

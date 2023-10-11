@@ -1,16 +1,11 @@
-import React from 'react'
+import { forwardRef } from 'react'
 
 import GoogleRecaptcha from 'react-google-recaptcha'
 
-export const Recaptcha = () => {
+export const Recaptcha = forwardRef<HTMLDivElement, any>((props, ref) => {
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_LOCALHOST_KEY
-  const handleRecaptchaChange = (value: string | null) => {
-    console.log('Captcha value:', value)
-  }
 
   !siteKey && console.error('RECAPTCHA_SITE_KEY не задан')
 
-  return siteKey ? (
-    <GoogleRecaptcha sitekey={siteKey} onChange={handleRecaptchaChange} theme="dark" />
-  ) : null
-}
+  return siteKey ? <GoogleRecaptcha {...props} {...ref} sitekey={siteKey} theme="dark" /> : null
+})

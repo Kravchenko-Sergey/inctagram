@@ -1,12 +1,9 @@
 import { FC } from 'react'
 
-import { Select } from '../select'
+import { ArrowLeft, ArrowRight } from '@/assets/icons'
+import { Select, usePagination } from '@/components'
 
 import s from './pagination.module.scss'
-
-import { ArrowLeft } from '@/src/assets/icons/arrow-left'
-import { ArrowRight } from '@/src/assets/icons/arrow-right'
-import { usePagination } from '@/src/components/pagination'
 
 export type PaginationProps = {
   count: number

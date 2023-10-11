@@ -1,0 +1,10 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: calc(100vh - 60px);
+  padding-right: 24px;
+  padding-left: 24px;
+}
