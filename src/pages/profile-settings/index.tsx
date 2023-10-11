@@ -3,7 +3,6 @@ import { useMeQuery } from '@/api/auth-api/auth.api'
 import { getMainLayout, Tabs, ProfileUpdate, ProfileImage } from '@/components'
 import { useTranslation } from '@/hooks'
 import { ProfileSettingsFormType } from '@/schemas'
-import { PROFILE_DEFAULT_VALUES } from '@/consts/default-form-values'
 
 import s from './profile-settings.module.scss'
 import { Loader } from '@/components/loader'

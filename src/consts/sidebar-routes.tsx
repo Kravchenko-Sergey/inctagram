@@ -20,5 +20,5 @@ export const sidebarItems = [
   { href: PATH.STATISTIC, icon: <TrendingUpOutline />, title: 'Statistics' },
   { href: PATH.FAVORITES, icon: <BookmarkOutline />, title: 'Favorites' },
   { href: PATH.CONFIRM, icon: <BookmarkOutline />, title: 'Confirm' },
-  { href: PATH.LOGOUT, icon: <LogOutOutline />, title: 'Log Out' },
+  // { href: PATH.LOGOUT, icon: <LogOutOutline />, title: 'Log Out' },
 ]

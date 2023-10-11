@@ -31,6 +31,7 @@ export const authAPI = instagramAPI.injectEndpoints({
         return {
           method: 'POST',
           url: 'auth/logout',
+          credentials: 'include',
         }
       },
     }),

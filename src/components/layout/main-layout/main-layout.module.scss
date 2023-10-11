@@ -47,3 +47,18 @@
 .active svg {
   color: var(--primary-700);
 }
+
+.logout {
+  cursor: pointer;
+  display: flex;
+  gap: 13px;
+  padding: 0 3px;
+
+  &:hover {
+    color: var(--primary-100);
+  }
+}
+
+.modalContent {
+  max-width: 438px;
+}
