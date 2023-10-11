@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 
-import { useLoginMutation, useMeQuery } from '@/api/auth-api/auth.api'
+import { useLazyMeQuery, useLoginMutation } from '@/api/auth-api/auth.api'
 import { GitHubIcon, GoogleIcon } from '@/assets/icons'
 import { Button, Card, ControlledTextField, Typography } from '@/components'
 import { PATH } from '@/consts/route-paths'
@@ -13,7 +13,6 @@ import { useTranslation } from '@/hooks'
 import { LoginFormValues, loginSchema } from '@/schemas'
 
 import s from './login.module.scss'
-import { useGetProfileQuery } from '@/api/profile-api/profile.api'
 
 type LoginProps = {
   onGoogleAuth?: () => void
@@ -23,9 +22,8 @@ type LoginProps = {
 export const Login: FC<LoginProps> = ({ onGoogleAuth, onGithubAuth }) => {
   const { t } = useTranslation()
   const { push } = useRouter()
+  const [getUser] = useLazyMeQuery()
 
-  const { data: me } = useMeQuery()
-  const { data: profile, refetch } = useGetProfileQuery({ profileId: me?.userId })
   const [signIn] = useLoginMutation()
 
   const {
@@ -44,11 +42,10 @@ export const Login: FC<LoginProps> = ({ onGoogleAuth, onGithubAuth }) => {
     try {
       const { accessToken } = await signIn(data).unwrap()
 
-      refetch()
-
       if (accessToken) {
         tokenSetterToLocalStorage(accessToken)
-        push(profile?.firstName === null ? PATH.PROFILE_SETTINGS : PATH.PROFILE)
+        await getUser().unwrap() // TODO check if it is necessary
+        push(PATH.PROFILE)
       }
     } catch (e: any) {
       if (

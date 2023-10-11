@@ -5,6 +5,15 @@ const nextConfig = {
     locales: ['en', 'ru'],
     defaultLocale: 'ru',
   },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/profile',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig
