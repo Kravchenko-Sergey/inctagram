@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 
-import { useLazyMeQuery, useLoginMutation } from '@/api/auth-api/auth.api'
+import { useLoginMutation, useMeQuery } from '@/api/auth-api/auth.api'
 import { GitHubIcon, GoogleIcon } from '@/assets/icons'
 import { Button, Card, ControlledTextField, Typography } from '@/components'
 import { PATH } from '@/consts/route-paths'
@@ -13,6 +13,7 @@ import { useTranslation } from '@/hooks'
 import { LoginFormValues, loginSchema } from '@/schemas'
 
 import s from './login.module.scss'
+import { useGetProfileQuery } from '@/api/profile-api/profile.api'
 
 type LoginProps = {
   onGoogleAuth?: () => void
@@ -23,8 +24,9 @@ export const Login: FC<LoginProps> = ({ onGoogleAuth, onGithubAuth }) => {
   const { t } = useTranslation()
   const { push } = useRouter()
 
+  const { data: me } = useMeQuery()
+  const { data: profile, refetch } = useGetProfileQuery({ profileId: me?.userId })
   const [signIn] = useLoginMutation()
-  const [getUser] = useLazyMeQuery()
 
   const {
     handleSubmit,
@@ -42,16 +44,17 @@ export const Login: FC<LoginProps> = ({ onGoogleAuth, onGithubAuth }) => {
     try {
       const { accessToken } = await signIn(data).unwrap()
 
+      refetch()
+
       if (accessToken) {
         tokenSetterToLocalStorage(accessToken)
-        await getUser()
-        push(PATH.PROFILE)
+        push(profile?.firstName === null ? PATH.PROFILE_SETTINGS : PATH.PROFILE)
       }
     } catch (e: any) {
-      console.log(e)
       if (
-        e.data.messages[0].message === 'Authorization error' ||
-        e.data.messages === 'invalid password or email'
+        e.data &&
+        (e.data.messages[0].message === 'Authorization error' ||
+          e.data.messages === 'invalid password or email')
       ) {
         setError('password', { type: 'password', message: t.errors.loginIncorrectData })
       }

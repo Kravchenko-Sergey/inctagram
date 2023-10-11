@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import {
@@ -15,6 +15,9 @@ import { ProfileSettingsFormType, profileSettingsSchema } from '@/schemas'
 import { FormFields, triggerZodFieldError } from '@/helpers'
 
 import s from './profile-update.module.scss'
+import { useMeQuery } from '@/api/auth-api/auth.api'
+import { useGetProfileQuery } from '@/api/profile-api/profile.api'
+import { parseISO } from 'date-fns'
 
 const Cities = [
   { label: 'Grodno', value: 'Grodno' },
@@ -28,8 +31,15 @@ type ProfileUpdateProps = {
 
 export const ProfileUpdate = memo(({ updateProfileHandler }: ProfileUpdateProps) => {
   const { t } = useTranslation()
-  // const [updateProfile, { error, isLoading }] = useUpdateProfileMutation()
-  // const { data: me, isLoading, isError } = useMeQuery()
+
+  const { data: me } = useMeQuery()
+  const { data: profile } = useGetProfileQuery({ profileId: me?.userId })
+
+  const [profileData, setProfileData] = useState<ProfileSettingsFormType>(() => {
+    const storedProfileData = localStorage.getItem('profileData')
+
+    return storedProfileData ? JSON.parse(storedProfileData) : {}
+  })
 
   const {
     control,
@@ -40,12 +50,13 @@ export const ProfileUpdate = memo(({ updateProfileHandler }: ProfileUpdateProps)
     resolver: zodResolver(profileSettingsSchema(t)),
     mode: 'onBlur',
     defaultValues: {
-      firstName: '',
-      userName: '',
-      lastName: '',
-      city: '',
-      dateOfBirth: new Date(),
-      aboutMe: '',
+      firstName: profileData.firstName || profile?.firstName,
+      userName: profileData.userName || profile?.userName,
+      lastName: profileData.lastName || profile?.lastName,
+      city: profileData.city || profile?.city,
+      dateOfBirth:
+        parseISO(String(profileData.dateOfBirth)) || parseISO(String(profile?.dateOfBirth)),
+      aboutMe: profileData.aboutMe || profile?.aboutMe,
     },
   })
 
@@ -54,9 +65,11 @@ export const ProfileUpdate = memo(({ updateProfileHandler }: ProfileUpdateProps)
 
     triggerZodFieldError(touchedFieldNames, trigger)
   }, [t, touchedFields, trigger])
+
   const onSubmit = useCallback(
     async (data: ProfileSettingsFormType) => {
       try {
+        localStorage.setItem('profileData', JSON.stringify(data))
         updateProfileHandler(data)
       } catch (e: unknown) {
         console.log('error', e)
