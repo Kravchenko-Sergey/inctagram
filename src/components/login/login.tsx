@@ -22,9 +22,9 @@ type LoginProps = {
 export const Login: FC<LoginProps> = ({ onGoogleAuth, onGithubAuth }) => {
   const { t } = useTranslation()
   const { push } = useRouter()
+  const [getUser] = useLazyMeQuery()
 
   const [signIn] = useLoginMutation()
-  const [getUser] = useLazyMeQuery()
 
   const {
     handleSubmit,
@@ -44,13 +44,14 @@ export const Login: FC<LoginProps> = ({ onGoogleAuth, onGithubAuth }) => {
 
       if (accessToken) {
         tokenSetterToLocalStorage(accessToken)
-        await getUser()
+        await getUser().unwrap() // TODO check if it is necessary
         push(PATH.PROFILE)
       }
     } catch (e: any) {
       if (
-        e.data.messages[0].message === 'Authorization error' ||
-        e.data.messages === 'invalid password or email'
+        e.data &&
+        (e.data.messages[0].message === 'Authorization error' ||
+          e.data.messages === 'invalid password or email')
       ) {
         setError('password', { type: 'password', message: t.errors.loginIncorrectData })
       }
@@ -87,9 +88,11 @@ export const Login: FC<LoginProps> = ({ onGoogleAuth, onGithubAuth }) => {
             type="password"
           />
         </div>
-        <Typography href={PATH.FORGOT_PASSWORD} as="a" className={s.forgotPassLink}>
-          {t.auth.forgotPassword}
-        </Typography>
+        <div className={s.btnWrap}>
+          <Typography href={PATH.FORGOT_PASSWORD} as="a" className={s.forgotPassLink}>
+            {t.auth.forgotPassword}
+          </Typography>
+        </div>
         <Button variant="primary" fullWidth type="submit" className={s.submitBtn}>
           <Typography variant="h3">{t.auth.signIn}</Typography>
         </Button>

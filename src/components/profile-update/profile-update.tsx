@@ -15,6 +15,7 @@ import { ProfileSettingsFormType, profileSettingsSchema } from '@/schemas'
 import { FormFields, triggerZodFieldError } from '@/helpers'
 
 import s from './profile-update.module.scss'
+import { parseISO } from 'date-fns'
 
 const Cities = [
   { label: 'Grodno', value: 'Grodno' },
@@ -24,12 +25,11 @@ const Cities = [
 
 type ProfileUpdateProps = {
   updateProfileHandler: (data: ProfileSettingsFormType) => void
+  profile?: ProfileSettingsFormType //TODO fix undefined in Profile
 }
 
-export const ProfileUpdate = memo(({ updateProfileHandler }: ProfileUpdateProps) => {
+export const ProfileUpdate = memo(({ updateProfileHandler, profile }: ProfileUpdateProps) => {
   const { t } = useTranslation()
-  // const [updateProfile, { error, isLoading }] = useUpdateProfileMutation()
-  // const { data: me, isLoading, isError } = useMeQuery()
 
   const {
     control,
@@ -40,12 +40,12 @@ export const ProfileUpdate = memo(({ updateProfileHandler }: ProfileUpdateProps)
     resolver: zodResolver(profileSettingsSchema(t)),
     mode: 'onBlur',
     defaultValues: {
-      firstName: '',
-      userName: '',
-      lastName: '',
-      city: '',
-      dateOfBirth: new Date(),
-      aboutMe: '',
+      firstName: profile?.firstName ?? '',
+      userName: profile?.userName ?? '',
+      lastName: profile?.lastName ?? '',
+      city: profile?.city ?? '',
+      dateOfBirth: profile?.dateOfBirth ? parseISO(`${profile.dateOfBirth}`) : new Date(),
+      aboutMe: profile?.aboutMe ?? '',
     },
   })
 
@@ -54,14 +54,9 @@ export const ProfileUpdate = memo(({ updateProfileHandler }: ProfileUpdateProps)
 
     triggerZodFieldError(touchedFieldNames, trigger)
   }, [t, touchedFields, trigger])
+
   const onSubmit = useCallback(
-    async (data: ProfileSettingsFormType) => {
-      try {
-        updateProfileHandler(data)
-      } catch (e: unknown) {
-        console.log('error', e)
-      }
-    },
+    (data: ProfileSettingsFormType) => updateProfileHandler(data),
     [updateProfileHandler]
   )
 

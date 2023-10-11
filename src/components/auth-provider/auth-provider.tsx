@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 
 import { useMeQuery } from '@/api/auth-api/auth.api'
 import { PATH, commonRoutes } from '@/consts/route-paths'
+import { Loader } from '@/components/loader'
 
 export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const router = useRouter()
@@ -17,7 +18,7 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   }, [user, isError, isLoading, isProtectedPage, isFetching, router])
 
   if (isLoading || (!user && isProtectedPage)) {
-    return <div>Loading....</div>
+    return <Loader />
   }
 
   return <>{children}</>

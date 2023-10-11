@@ -1,5 +1,6 @@
 .card {
   width: 100%;
+  min-width: 378px;
   max-width: 378px;
   padding: 24px;
 
@@ -31,11 +32,17 @@
   margin-bottom: 36px;
 }
 
-.forgotPassLink {
+.btnWrap {
   display: flex;
   justify-content: flex-end;
+}
+
+.forgotPassLink {
+  display: inline-flex;
   padding-bottom: 24px;
   color: var(--light-900) !important;
+
+  // justify-content: flex-end;
 }
 
 .submitBtn {
