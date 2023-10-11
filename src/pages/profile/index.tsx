@@ -4,6 +4,7 @@ import s from './profile.module.scss'
 import { ImageOutline } from '@/assets/icons'
 import { useGetProfileQuery } from '@/api/profile-api/profile.api'
 import { useMeQuery } from '@/api/auth-api/auth.api'
+import Image from 'next/image'
 
 const Profile = () => {
   const { data: me } = useMeQuery()
@@ -21,10 +22,13 @@ const Profile = () => {
       <main className={s.root}>
         <div className={s.profile}>
           {profile?.avatars.length !== 0 ? (
-            <img //TODO изменить img на Image
+            <Image
               src={String(profile?.avatars[0]?.url)}
-              alt="Аватар"
+              alt="userImage"
+              width={198}
+              height={198}
               className={s.photo}
+              priority
             />
           ) : (
             <ImageOutline className={s.photo} />
