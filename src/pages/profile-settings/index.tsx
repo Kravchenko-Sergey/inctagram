@@ -7,6 +7,7 @@ import { ProfileSettingsFormType } from '@/schemas'
 import { PROFILE_DEFAULT_VALUES } from '@/consts/default-form-values'
 
 import s from './profile-settings.module.scss'
+import { Loader } from '@/components/loader'
 
 const ProfileSettings = () => {
   const { t } = useTranslation()
@@ -27,7 +28,7 @@ const ProfileSettings = () => {
   ]
 
   if (isLoading) {
-    return <div>Loading....</div>
+    return <Loader />
   }
 
   return (
