@@ -1,18 +1,24 @@
-import { Button, HeadMeta, getMainLayout, Typography } from '@/components'
+import { useRouter } from 'next/router'
+
+import { Button, HeadMeta, getMainLayout, Typography, Loader } from '@/components'
 import { PATH } from '@/consts/route-paths'
-import s from './profile.module.scss'
 import { ImageOutline } from '@/assets/icons'
-import { useGetProfileQuery } from '@/api/profile-api/profile.api'
 import { useMeQuery } from '@/api/auth-api/auth.api'
+import { useGetProfileQuery } from '@/api/profile-api/profile.api'
+
+import s from './profile.module.scss'
 
 const Profile = () => {
+  const { push } = useRouter()
   const { data: me } = useMeQuery()
-  const { data: profile, isLoading } = useGetProfileQuery({ profileId: me?.userId })
+  const { data: profile, isLoading, isSuccess } = useGetProfileQuery({ profileId: me?.userId })
 
-  console.log(profile)
+  if (isSuccess && !Object.values(profile).every(value => value !== null)) {
+    push(PATH.PROFILE_SETTINGS)
+  }
 
   if (isLoading) {
-    return <div>Loading....</div>
+    return <Loader />
   }
 
   return (
