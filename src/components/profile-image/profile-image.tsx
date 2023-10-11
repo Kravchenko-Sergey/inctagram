@@ -1,6 +1,6 @@
-import { Button, getMainLayout } from '@/components'
+import { Button } from '@/components'
 import { useDeleteAvatarMutation, useUploadAvatarMutation } from '@/api/profile-api/profile.api'
-import { ChangeEvent, useCallback, useRef, useState } from 'react'
+import { ChangeEvent, memo, useCallback, useRef, useState } from 'react'
 import { RegisterError } from '@/types'
 import { Avatar } from '@/components/avatar'
 import { DeleteAvatarIcon } from '@/assets/icons/delete-avatar-cross'
@@ -10,7 +10,7 @@ import { Modal } from '@/components/modal'
 import s from './profile-image.module.scss'
 import { useTranslation } from '@/hooks'
 
-const ProfileImage = () => {
+export const ProfileImage = memo(() => {
   const { t } = useTranslation()
   const [uploadAvatar, { error: uploadAvatarError }] = useUploadAvatarMutation()
   const [deleteAvatar, { error: deleteAvatarError }] = useDeleteAvatarMutation()
@@ -165,7 +165,4 @@ const ProfileImage = () => {
       </Modal>
     </>
   )
-}
-
-ProfileImage.getLayout = getMainLayout
-export default ProfileImage
+})

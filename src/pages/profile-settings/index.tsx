@@ -1,10 +1,9 @@
-import { getMainLayout, Tabs, ProfileUpdate, Button } from '@/components'
+import { getMainLayout, Tabs, ProfileUpdate, ProfileImage } from '@/components'
 import { useTranslation } from '@/hooks'
 import { useUpdateProfileMutation } from '@/api/profile-api/profile.api'
 import { ProfileSettingsFormType } from '@/schemas'
 
 import s from './profile-settings.module.scss'
-import ProfileImage from '@/components/profile-image/profile-image'
 
 const ProfileSettings = () => {
   const { t } = useTranslation()
