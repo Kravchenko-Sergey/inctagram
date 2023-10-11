@@ -1,7 +1,6 @@
 import {
   BookmarkOutline,
   HomeOutline,
-  LogOutOutline,
   MessageCircleOutline,
   PersonOutline,
   PlusSquareOutline,
