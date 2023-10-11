@@ -39,4 +39,10 @@ export const profileAPI = instagramAPI.injectEndpoints({
   }),
 })
 
-export const { useGetProfileQuery, useLazyGetProfileQuery, useUpdateProfileMutation } = profileAPI
+export const {
+  useGetProfileQuery,
+  useLazyGetProfileQuery,
+  useUpdateProfileMutation,
+  useUploadAvatarMutation,
+  useDeleteAvatarMutation,
+} = profileAPI

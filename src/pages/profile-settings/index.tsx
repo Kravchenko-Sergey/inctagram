@@ -1,12 +1,12 @@
 import { useGetProfileQuery, useUpdateProfileMutation } from '@/api/profile-api/profile.api'
 import { useMeQuery } from '@/api/auth-api/auth.api'
-import { getMainLayout, Tabs, ProfileUpdate, Button } from '@/components'
+import { getMainLayout, Tabs, ProfileUpdate, ProfileImage } from '@/components'
 import { useTranslation } from '@/hooks'
-import { ImageOutline } from '@/assets/icons'
 import { ProfileSettingsFormType } from '@/schemas'
 import { PROFILE_DEFAULT_VALUES } from '@/consts/default-form-values'
 
 import s from './profile-settings.module.scss'
+import { Loader } from '@/components/loader'
 
 const ProfileSettings = () => {
   const { t } = useTranslation()
@@ -18,7 +18,6 @@ const ProfileSettings = () => {
   const updateProfileHandler = (data: ProfileSettingsFormType) => {
     updateProfile(data)
   }
-
   const profileTabs = [
     { value: 'tab1', title: t.profile.generalInfo },
     { value: 'tab2', title: t.profile.devices },
@@ -27,7 +26,7 @@ const ProfileSettings = () => {
   ]
 
   if (isLoading) {
-    return <div>Loading....</div>
+    return <Loader />
   }
 
   return (
@@ -36,13 +35,7 @@ const ProfileSettings = () => {
         <Tabs tabsList={profileTabs} />
       </div>
       <div className={s.formContent}>
-        <div className={s.userImageBox}>
-          <div className={s.userImage}>
-            <ImageOutline />
-          </div>
-          <Button variant="ghost">{t.profile.addAvatar}</Button>
-          <div className={s.line2}></div>
-        </div>
+        <ProfileImage />
         <div className={s.form}>
           <ProfileUpdate updateProfileHandler={updateProfileHandler} profile={profile} />
         </div>

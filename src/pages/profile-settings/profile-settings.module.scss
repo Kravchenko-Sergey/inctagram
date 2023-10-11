@@ -19,29 +19,6 @@
   padding-top: 24px;
 }
 
-.userImageBox {
-  position: relative;
-
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  align-items: center;
-
-  padding-top: 48px;
-}
-
-.userImage {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 198px;
-  height: 198px;
-
-  background-color: var(--dark-500);
-  border-radius: 50%;
-}
-
 .userInfo {
   display: flex;
   flex-direction: column;
@@ -79,19 +56,6 @@
   bottom: 36px;
 
   width: 100%;
-  height: 1px;
-  margin-bottom: 24px;
-
-  background-color: var(--dark-300);
-}
-
-.line2 {
-  position: absolute;
-  right: 0;
-  bottom: 36px;
-  left: 0;
-
-  width: 120%;
   height: 1px;
   margin-bottom: 24px;
 
