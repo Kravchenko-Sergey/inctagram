@@ -1,10 +1,15 @@
 import LoadingGif from '@/assets/image/loading.gif'
 import Image from 'next/image'
 import s from './loader.module.scss'
+import { clsx } from 'clsx'
 
-export const Loader = () => {
+export const Loader = ({ className }) => {
+  const classNames = {
+    loader: clsx(s.loader, className),
+  }
+
   return (
-    <div className={s.loader}>
+    <div className={classNames.loader}>
       <Image width={24} height={24} src={LoadingGif} alt="Loading..." />
     </div>
   )

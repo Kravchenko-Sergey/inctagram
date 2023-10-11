@@ -9,10 +9,12 @@ import { Typography } from '@/components/typography'
 import { Modal } from '@/components/modal'
 import s from './profile-image.module.scss'
 import { useTranslation } from '@/hooks'
+import { Loader } from '@/components/loader'
 
 export const ProfileImage = memo(() => {
   const { t } = useTranslation()
-  const [uploadAvatar, { error: uploadAvatarError }] = useUploadAvatarMutation()
+  const [uploadAvatar, { error: uploadAvatarError, isLoading: isAvatarUploading }] =
+    useUploadAvatarMutation()
   const [deleteAvatar, { error: deleteAvatarError }] = useDeleteAvatarMutation()
 
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -136,29 +138,35 @@ export const ProfileImage = memo(() => {
         onOpenChange={handleCloseModal}
       >
         <div className={s.modalInnerContent}>
-          <div className={s.addUserImage}>
-            {previewAvatar ? (
-              <Avatar photo={previewAvatar} name="avatar" size={316} />
-            ) : (
-              <ImageOutline />
-            )}
-            {uploadError && <div className={s.uploadError}>{uploadError}</div>}
-          </div>
-          {avatarEditMode ? (
-            <Button variant={'primary'} onClick={handleSaveCloseModal} className={s.saveButton}>
-              <Typography variant={'h3'}>{t.profile.saveChanges}</Typography>
-            </Button>
+          {isAvatarUploading ? (
+            <Loader className={s.modalLoader} />
           ) : (
             <>
-              <Button variant={'primary'} onClick={() => inputRef && inputRef.current?.click()}>
-                {t.profile.selectImage}
-              </Button>
-              <input
-                ref={inputRef}
-                type="file"
-                onChange={uploadHandler}
-                style={{ display: 'none' }}
-              />
+              <div className={s.addUserImage}>
+                {previewAvatar ? (
+                  <Avatar photo={previewAvatar} name="avatar" size={316} />
+                ) : (
+                  <ImageOutline />
+                )}
+                {uploadError && <div className={s.uploadError}>{uploadError}</div>}
+              </div>
+              {avatarEditMode ? (
+                <Button variant={'primary'} onClick={handleSaveCloseModal} className={s.saveButton}>
+                  <Typography variant={'h3'}>{t.profile.saveChanges}</Typography>
+                </Button>
+              ) : (
+                <>
+                  <Button variant={'primary'} onClick={() => inputRef && inputRef.current?.click()}>
+                    {t.profile.selectImage}
+                  </Button>
+                  <input
+                    ref={inputRef}
+                    type="file"
+                    onChange={uploadHandler}
+                    style={{ display: 'none' }}
+                  />
+                </>
+              )}
             </>
           )}
         </div>
