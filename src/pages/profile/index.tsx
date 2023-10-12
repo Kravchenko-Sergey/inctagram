@@ -10,17 +10,21 @@ import { useGetProfileQuery } from '@/api/profile-api/profile.api'
 import s from './profile.module.scss'
 
 const Profile = () => {
-  const { push } = useRouter()
   const { data: me } = useMeQuery()
   const { data: profile, isLoading, isSuccess } = useGetProfileQuery({ profileId: me?.userId })
 
-  if (isSuccess && !Object.values(profile).every(value => value !== null)) {
-    push(PATH.PROFILE_SETTINGS)
-  }
+  // const isFilledProfile = useMemo(() => {
+  //   if (profile) return Object.values(profile).some(value => value === null)
+  // }, [profile])
 
-  if (isLoading) {
+  // if (isSuccess && isFilledProfile) {
+  //   push(PATH.PROFILE_SETTINGS)
+  // }
+
+  if (isLoading || !isSuccess) {
     return <Loader />
   }
+  // if (isSuccess && isFilledProfile) return
 
   return (
     <>
@@ -29,7 +33,7 @@ const Profile = () => {
         <div className={s.profile}>
           {profile?.avatars.length !== 0 ? (
             <Image
-              src={String(profile?.avatars[0]?.url)}
+              src={profile?.avatars[0]?.url}
               alt="userImage"
               width={198}
               height={198}
@@ -37,7 +41,9 @@ const Profile = () => {
               priority
             />
           ) : (
-            <ImageOutline className={s.photo} />
+            <div className={s.photo}>
+              <ImageOutline />
+            </div>
           )}
 
           <div className={s.info}>

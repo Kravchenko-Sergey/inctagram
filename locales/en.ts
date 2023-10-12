@@ -172,4 +172,13 @@ export const en: LocaleType = {
     logOut: 'Are you really want to log out of your account ',
     titleLogOut: 'Log Out',
   },
+  sidebars: {
+    home: 'Home',
+    myProfile: 'My Profile',
+    messenger: 'Messenger',
+    search: 'Search',
+    statistics: 'Statistics',
+    favorites: 'Favorites',
+    logout: 'Log Out',
+  },
 }

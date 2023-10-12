@@ -162,6 +162,15 @@ export const ru = {
     logOut: 'Вы действительно хотите выйти из аккаунта ',
     titleLogOut: 'Выйти',
   },
+  sidebars: {
+    home: 'Главная',
+    myProfile: 'Мой профиль',
+    messenger: 'Мессенджер',
+    search: 'Поиск',
+    statistics: 'Статистика',
+    favorites: 'Избранное',
+    logout: 'Выйти',
+  },
 }
 
 export type LocaleType = typeof ru

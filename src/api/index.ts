@@ -53,9 +53,12 @@ export const baseQueryWithReauth: BaseQueryFn<
           api,
           extraOptions
         )
-        const data = refreshResult.data as { accessToken: string } // TODO add type
 
-        tokenSetterToLocalStorage(data.accessToken)
+        if (refreshResult.data) {
+          const data = refreshResult.data as { accessToken: string } // TODO add type
+
+          tokenSetterToLocalStorage(data.accessToken)
+        }
 
         if (refreshResult.meta?.response?.status === 200) {
           result = await baseQuery(args, api, extraOptions)
@@ -85,5 +88,5 @@ export const instagramAPI = createApi({
   reducerPath: 'instagramAPI',
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),
-  tagTypes: [],
+  tagTypes: ['getProfile'],
 })

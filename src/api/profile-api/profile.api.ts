@@ -7,6 +7,7 @@ export const profileAPI = instagramAPI.injectEndpoints({
       query: ({ profileId: profileId }) => ({
         url: `users/profile/${profileId}`,
       }),
+      providesTags: ['getProfile'],
     }),
     updateProfile: build.mutation<any, ArgUpdateProfile>({
       query: body => ({
@@ -14,6 +15,7 @@ export const profileAPI = instagramAPI.injectEndpoints({
         method: 'PUT',
         body,
       }),
+      invalidatesTags: ['getProfile'],
     }),
     deleteProfile: build.mutation<void, void>({
       query: body => ({
@@ -28,6 +30,7 @@ export const profileAPI = instagramAPI.injectEndpoints({
         method: 'POST',
         body,
       }),
+      invalidatesTags: ['getProfile'],
     }),
     deleteAvatar: build.mutation<void, void>({
       query: body => ({
@@ -35,6 +38,7 @@ export const profileAPI = instagramAPI.injectEndpoints({
         method: 'DELETE',
         body,
       }),
+      invalidatesTags: ['getProfile'],
     }),
   }),
 })

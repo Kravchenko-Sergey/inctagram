@@ -10,9 +10,9 @@ export type GetProfileResponse = {
   userName: string
   firstName: string
   lastName: string
-  city: string
+  city: string | null
   dateOfBirth: Date
-  aboutMe: string
+  aboutMe: string | null
   avatars: Avatar[]
 }
 
