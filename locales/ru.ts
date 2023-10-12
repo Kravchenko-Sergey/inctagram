@@ -161,6 +161,10 @@ export const ru = {
     backToProfile: 'Вернуться на страницу профиля',
     logOut: 'Вы действительно хотите выйти из аккаунта ',
     titleLogOut: 'Выйти',
+    following: 'Читаемых',
+    followers: 'Читателя',
+    publications: 'Постов',
+    profileSettings: 'Настройки профиля',
   },
 }
 

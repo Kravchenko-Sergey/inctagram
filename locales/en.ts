@@ -171,5 +171,9 @@ export const en: LocaleType = {
     backToProfile: 'Back to profile page',
     logOut: 'Are you really want to log out of your account ',
     titleLogOut: 'Log Out',
+    following: 'Following',
+    followers: 'Followers',
+    publications: 'Publications',
+    profileSettings: 'Profile Settings',
   },
 }
