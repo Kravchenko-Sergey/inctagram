@@ -8,11 +8,13 @@ import { useMeQuery } from '@/api/auth-api/auth.api'
 import { useGetProfileQuery } from '@/api/profile-api/profile.api'
 
 import s from './profile.module.scss'
+import { useTranslation } from '@/hooks'
 
 const Profile = () => {
   const { push } = useRouter()
   const { data: me } = useMeQuery()
   const { data: profile, isLoading, isSuccess } = useGetProfileQuery({ profileId: me?.userId })
+  const { t } = useTranslation()
 
   if (isSuccess && !Object.values(profile).every(value => value !== null)) {
     push(PATH.PROFILE_SETTINGS)
@@ -45,20 +47,20 @@ const Profile = () => {
             <div className={s.items}>
               <div>
                 <Typography>2 218</Typography>
-                <Typography>Following</Typography>
+                <Typography>{t.profile.following}</Typography>
               </div>
               <div>
                 <Typography>2 358</Typography>
-                <Typography>Followers</Typography>
+                <Typography>{t.profile.followers}</Typography>
               </div>
               <div>
                 <Typography>2 764</Typography>
-                <Typography>Publications</Typography>
+                <Typography>{t.profile.publications}</Typography>
               </div>
             </div>
             <Typography>{profile?.aboutMe}</Typography>
             <Button href={PATH.PROFILE_SETTINGS} as="a" variant="secondary" className={s.btn}>
-              Profile Settings
+              {t.profile.profileSettings}
             </Button>
           </div>
         </div>
