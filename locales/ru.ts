@@ -166,6 +166,15 @@ export const ru = {
     publications: 'Постов',
     profileSettings: 'Настройки профиля',
   },
+  sidebars: {
+    home: 'Главная',
+    myProfile: 'Мой профиль',
+    messenger: 'Мессенджер',
+    search: 'Поиск',
+    statistics: 'Статистика',
+    favorites: 'Избранное',
+    logout: 'Выйти',
+  },
 }
 
 export type LocaleType = typeof ru

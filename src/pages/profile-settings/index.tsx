@@ -34,7 +34,7 @@ const ProfileSettings = () => {
         <Tabs tabsList={profileTabs} />
       </div>
       <div className={s.formContent}>
-        <ProfileImage />
+        <ProfileImage avatars={profile?.avatars[0]?.url} />
         <div className={s.form}>
           <ProfileUpdate updateProfileHandler={updateProfileHandler} profile={profile} />
         </div>

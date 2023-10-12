@@ -11,14 +11,18 @@ import s from './profile-image.module.scss'
 import { useTranslation } from '@/hooks'
 import { Loader } from '@/components/loader'
 
-export const ProfileImage = memo(() => {
+type ProfileImageProps = {
+  avatars?: string
+}
+
+export const ProfileImage = memo(({ avatars = '' }: ProfileImageProps) => {
   const { t } = useTranslation()
   const [uploadAvatar, { error: uploadAvatarError, isLoading: isAvatarUploading }] =
     useUploadAvatarMutation()
   const [deleteAvatar, { error: deleteAvatarError }] = useDeleteAvatarMutation()
 
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [url, setUrl] = useState('')
+  const [url, setUrl] = useState(avatars)
   const [newAvatarFile, setNewAvatarFile] = useState<File | null>(null)
   const permittedFileTypes = ['jpg', 'jpeg', 'png']
   const permittedFileSize = 10485760 // 10Mb in bytes
@@ -73,6 +77,7 @@ export const ProfileImage = memo(() => {
   const deleteAvatarHandler = useCallback(async () => {
     try {
       await deleteAvatar().unwrap()
+      setUrl('')
     } catch (e: unknown) {
       // const error = e as RegisterError
       const error = e as any

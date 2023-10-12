@@ -25,25 +25,41 @@ export const profileSettingsSchema = (t: LocaleType) => {
       .nonempty(t.errors.nonemptyLastname)
       .max(50, t.errors.maxLastname(50))
       .regex(lastNameRegex, t.errors.regexLastname),
+    // dateOfBirth: z.nullable(
     dateOfBirth: z.date().refine(
       data => {
-        const dob = new Date(data)
-        const today = new Date()
-        const age = today.getFullYear() - dob.getFullYear()
+        if (data) {
+          const dob = new Date(data)
+          const today = new Date()
+          const age = today.getFullYear() - dob.getFullYear()
 
-        return age >= 13
+          // if (
+          //   data.getFullYear() === today.getFullYear() &&
+          //   data.getMonth() === today.getMonth() &&
+          //   data.getDate() === today.getDate()
+          // ) {
+          //   console.log('return')
+          //
+          //   return true
+          // }
+          // console.log('age >= 13')
+
+          return age >= 13
+        }
       },
       {
         message: t.errors.under13,
       }
+      // )
     ),
-    city: z.string().trim().nonempty(t.errors.whereAreYouLive),
-    aboutMe: z
-      .string()
-      .trim()
-      .max(200, t.errors.maxFieldLength(200))
-      .regex(aboutMeRegex, t.errors.regexAboutMe)
-      .nonempty(t.errors.whereAreYouLive),
+    city: z.nullable(z.string().trim()),
+    aboutMe: z.nullable(
+      z
+        .string()
+        .trim()
+        .max(200, t.errors.maxFieldLength(200))
+        .regex(aboutMeRegex, t.errors.regexAboutMe)
+    ),
   })
 }
 

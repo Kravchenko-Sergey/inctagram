@@ -176,4 +176,13 @@ export const en: LocaleType = {
     publications: 'Publications',
     profileSettings: 'Profile Settings',
   },
+  sidebars: {
+    home: 'Home',
+    myProfile: 'My Profile',
+    messenger: 'Messenger',
+    search: 'Search',
+    statistics: 'Statistics',
+    favorites: 'Favorites',
+    logout: 'Log Out',
+  },
 }
