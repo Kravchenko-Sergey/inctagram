@@ -43,9 +43,7 @@ const SidebarLayout: FC<SidebarLayoutProps> = ({ children }) => {
     // { href: PATH.LOGOUT, icon: <LogOutOutline />, title: 'Log Out' },
   ]
   const handleModalSubmit = async () => {
-    setModalOpen(false)
     await logOut().unwrap()
-    localStorage.clear()
     router.push(PATH.LOGIN)
   }
   const handleModalClosed = () => {

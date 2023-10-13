@@ -34,9 +34,10 @@ export const authAPI = instagramAPI.injectEndpoints({
           credentials: 'include',
         }
       },
-      async onQueryStarted(_, { dispatch, getState, queryFulfilled }) {
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
           await queryFulfilled
+          localStorage.clear()
           dispatch(instagramAPI.util.resetApiState())
         } catch {
           console.log('value')
