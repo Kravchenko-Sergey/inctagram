@@ -1,10 +1,16 @@
 import { instagramAPI } from '@/api'
-import { ArgUpdateProfile, GetProfileResponse, UploadAvatarResponse } from '@/api/profile-api/types'
+import {
+  ArgGetProfile,
+  ArgUpdateProfile,
+  ArgUploadAvatar,
+  GetProfileResponse,
+  UploadAvatarResponse,
+} from '@/api/profile-api/types'
 
 export const profileAPI = instagramAPI.injectEndpoints({
   endpoints: build => ({
-    getProfile: build.query<GetProfileResponse, { profileId: number | undefined }>({
-      query: ({ profileId: profileId }) => ({
+    getProfile: build.query<GetProfileResponse, ArgGetProfile>({
+      query: ({ profileId }) => ({
         url: `users/profile/${profileId}`,
       }),
       providesTags: ['getProfile'],
@@ -24,7 +30,7 @@ export const profileAPI = instagramAPI.injectEndpoints({
         body,
       }),
     }),
-    uploadAvatar: build.mutation<UploadAvatarResponse, any>({
+    uploadAvatar: build.mutation<UploadAvatarResponse, ArgUploadAvatar>({
       query: body => ({
         url: `users/profile/avatar`,
         method: 'POST',
@@ -45,7 +51,6 @@ export const profileAPI = instagramAPI.injectEndpoints({
 
 export const {
   useGetProfileQuery,
-  useLazyGetProfileQuery,
   useUpdateProfileMutation,
   useUploadAvatarMutation,
   useDeleteAvatarMutation,

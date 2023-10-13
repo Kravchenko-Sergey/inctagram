@@ -1,7 +1,6 @@
 import { Button } from '@/components'
 import { useDeleteAvatarMutation, useUploadAvatarMutation } from '@/api/profile-api/profile.api'
 import { ChangeEvent, memo, useCallback, useRef, useState } from 'react'
-import { RegisterError } from '@/types'
 import { Avatar } from '@/components/avatar'
 import { DeleteAvatarIcon } from '@/assets/icons/delete-avatar-cross'
 import { ImageOutline } from '@/assets/icons'
