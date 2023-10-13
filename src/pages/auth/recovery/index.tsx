@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
-import { useCheckRecoveryCodeMutation } from '@/api/auth-api/auth.api'
+import { useCheckRecoveryCodeMutation } from '@/services/auth/auth-api'
 import { CreateNewPassword, HeadMeta, RecoveryLinkExpired, getHeaderLayout } from '@/components'
 import { useTypedRouter } from '@/hooks'
 import { routerRecoverySchema } from '@/schemas'
-import { Loader } from '@/components/loader'
+import { Loader } from 'src/components/ui/loader'
 const Recovery = () => {
   const { query, isReady } = useTypedRouter(routerRecoverySchema)
   const [checkRecoveryCode, { isLoading, data, isError, isUninitialized }] =

@@ -1,16 +1,15 @@
 import { useRouter } from 'next/router'
-import Image from 'next/image'
 
 import { Button, HeadMeta, getMainLayout, Typography, Loader } from '@/components'
 import { PATH } from '@/consts/route-paths'
 import { ImageOutline } from '@/assets/icons'
-import { useMeQuery } from '@/api/auth-api/auth.api'
-import { useGetProfileQuery } from '@/api/profile-api/profile.api'
+import { useMeQuery } from '@/services/auth/auth-api'
+import { useGetProfileQuery } from '@/services/profile/profile-api'
 
 import s from './profile.module.scss'
 import { useTranslation } from '@/hooks'
 import Link from 'next/link'
-import { Avatar } from '@/components/avatar'
+import { Avatar } from 'src/components/ui/avatar'
 
 const Profile = () => {
   const { data: me } = useMeQuery()

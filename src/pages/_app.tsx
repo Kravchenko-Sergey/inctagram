@@ -9,8 +9,8 @@ import { Inter } from 'next/font/google'
 import { Provider } from 'react-redux'
 
 import { useLoader } from '@/hooks'
-import { store } from '@/store'
 import { AuthProvider } from '@/components'
+import { store } from '@/services'
 
 export const inter = Inter({
   subsets: ['latin', 'cyrillic'],
