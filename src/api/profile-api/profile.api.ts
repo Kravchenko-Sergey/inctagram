@@ -9,7 +9,7 @@ export const profileAPI = instagramAPI.injectEndpoints({
       }),
       providesTags: ['getProfile'],
     }),
-    updateProfile: build.mutation<any, ArgUpdateProfile>({
+    updateProfile: build.mutation<void, ArgUpdateProfile>({
       query: body => ({
         url: `users/profile`,
         method: 'PUT',

@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
+import { ComponentPropsWithoutRef, ElementType, ForwardedRef, forwardRef, ReactNode } from 'react'
 
 import { clsx } from 'clsx'
 import Link from 'next/link'
@@ -11,18 +11,16 @@ export type ButtonPropsType<T extends ElementType = 'button'> = {
   fullWidth?: boolean
   disabled?: boolean
   className?: string
-  // buttonType?: string тут тс ошибку выдает.
   children: ReactNode
 } & ComponentPropsWithoutRef<T>
 
-export const Button = <T extends ElementType = 'button'>(props: ButtonPropsType<T>) => {
+const ButtonPolymorph = <T extends ElementType = 'button'>(props: ButtonPropsType<T>, ref: any) => {
   const {
     variant = 'primary',
     fullWidth,
     disabled,
     className,
     children,
-    href,
     as: Component = 'button',
     ...restProps
   } = props
@@ -31,17 +29,16 @@ export const Button = <T extends ElementType = 'button'>(props: ButtonPropsType<
     btn: clsx(s.btn, s[variant], fullWidth && s.fullWidth, disabled && s.disabled, className),
   }
 
-  if (Component === 'a') {
-    return (
-      <Link href={href} passHref className={classNames.btn} {...restProps}>
-        {children}
-      </Link>
-    )
-  }
-
   return (
-    <Component className={classNames.btn} {...restProps} disabled={disabled}>
+    <Component className={classNames.btn} {...restProps} disabled={disabled} ref={ref}>
       {children}
     </Component>
   )
 }
+
+export const Button = forwardRef(ButtonPolymorph) as <T extends ElementType>(
+  props: ButtonPropsType<T> &
+    Omit<ComponentPropsWithoutRef<T>, keyof ButtonPropsType<T>> & {
+      ref?: ForwardedRef<ElementType<T>>
+    }
+) => ReturnType<typeof ButtonPolymorph>

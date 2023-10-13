@@ -9,10 +9,16 @@ import { useGetProfileQuery } from '@/api/profile-api/profile.api'
 
 import s from './profile.module.scss'
 import { useTranslation } from '@/hooks'
+import Link from 'next/link'
 
 const Profile = () => {
   const { data: me } = useMeQuery()
-  const { data: profile, isLoading, isSuccess } = useGetProfileQuery({ profileId: me?.userId })
+  const {
+    data: profile,
+    isLoading,
+    isFetching,
+    isSuccess,
+  } = useGetProfileQuery({ profileId: me?.userId })
   const { t } = useTranslation()
 
   // const isFilledProfile = useMemo(() => {
@@ -23,17 +29,21 @@ const Profile = () => {
   //   push(PATH.PROFILE_SETTINGS)
   // }
 
-  if (isLoading || !isSuccess) {
+  if (isLoading || isFetching) {
+    // убрать из саксес а то если упадет запрос будет лоадинг постоянный
     return <Loader />
   }
   // if (isSuccess && isFilledProfile) return
+
+  const followers = '123'
+  const isProfile = profile?.avatars.length !== 0
 
   return (
     <>
       <HeadMeta title="Profile" />
       <main className={s.root}>
         <div className={s.profile}>
-          {profile?.avatars.length !== 0 ? (
+          {isProfile ? (
             <Image
               src={profile?.avatars[0]?.url}
               alt="userImage"
@@ -56,7 +66,7 @@ const Profile = () => {
                 <Typography>{t.profile.following}</Typography>
               </div>
               <div>
-                <Typography>2 358</Typography>
+                <Typography>{followers}</Typography>
                 <Typography>{t.profile.followers}</Typography>
               </div>
               <div>
@@ -65,9 +75,11 @@ const Profile = () => {
               </div>
             </div>
             <Typography>{profile?.aboutMe}</Typography>
-            <Button href={PATH.PROFILE_SETTINGS} as="a" variant="secondary" className={s.btn}>
-              {t.profile.profileSettings}
-            </Button>
+            <Link passHref legacyBehavior href={PATH.PROFILE_SETTINGS}>
+              <Button as="a" variant="secondary" className={s.btn}>
+                {t.profile.profileSettings}
+              </Button>
+            </Link>
           </div>
         </div>
       </main>
