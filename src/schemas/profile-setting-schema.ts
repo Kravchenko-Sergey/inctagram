@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { LocaleType } from 'locales/ru'
 
 import { aboutMeRegex, firstNameRegex, lastNameRegex, usernameRegex } from '@/consts/regex'
+import { tr } from 'date-fns/locale'
 
 export const profileSettingsSchema = (t: LocaleType) => {
   return z.object({
@@ -28,6 +29,7 @@ export const profileSettingsSchema = (t: LocaleType) => {
     // dateOfBirth: z.nullable(
     dateOfBirth: z.date().refine(
       data => {
+        if (data === null) return true
         if (data) {
           const dob = new Date(data)
           const today = new Date()

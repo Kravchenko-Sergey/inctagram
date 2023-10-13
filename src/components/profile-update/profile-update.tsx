@@ -38,7 +38,7 @@ export const ProfileUpdate = memo(({ updateProfileHandler, profile }: ProfileUpd
     trigger,
   } = useForm<ProfileSettingsFormType>({
     resolver: zodResolver(profileSettingsSchema(t)),
-    mode: 'onBlur',
+    mode: 'onChange',
     defaultValues: {
       firstName: profile?.firstName ?? '',
       userName: profile?.userName ?? '',

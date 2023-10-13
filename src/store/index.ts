@@ -2,9 +2,9 @@ import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
+import { profileAPI } from '@/api/profile-api/profile.api'
 import { instagramAPI } from '@/api'
 import { authAPI } from '@/api/auth-api/auth.api'
-import { profileAPI } from '@/api/profile-api/profile.api'
 
 export const store = configureStore({
   reducer: {

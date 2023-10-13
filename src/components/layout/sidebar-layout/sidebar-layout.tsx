@@ -4,18 +4,11 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { Button, Modal, Sidebar, Typography } from '@/components'
+import { sidebarItems } from '@/consts/sidebar-routes'
 
 import s from '@/components/layout/main-layout/main-layout.module.scss'
 import { useLogoutMutation, useMeQuery } from '@/api/auth-api/auth.api'
-import {
-  BookmarkOutline,
-  HomeOutline,
-  LogOutOutline,
-  MessageCircleOutline,
-  PersonOutline,
-  SearchIcon,
-  TrendingUpOutline,
-} from '@/assets/icons'
+import { LogOutOutline } from '@/assets/icons'
 import { useTranslation } from '@/hooks'
 import { PATH } from '@/consts/route-paths'
 
@@ -30,23 +23,16 @@ const SidebarLayout: FC<SidebarLayoutProps> = ({ children }) => {
   const [modalOpen, setModalOpen] = useState(false)
   const { t } = useTranslation()
   const { data: me } = useMeQuery()
-  const sidebarItems = [
-    { href: PATH.HOME, icon: <HomeOutline />, title: t.sidebars.home },
-    // { href: PATH.REGISTRATION, icon: <PlusSquareOutline />, title: 'Registration' },
-    // { href: PATH.LOGIN, icon: <PlusSquareOutline />, title: 'Login' },
-    { href: PATH.PROFILE, icon: <PersonOutline />, title: t.sidebars.myProfile },
-    { href: PATH.MESSENGER, icon: <MessageCircleOutline />, title: t.sidebars.messenger },
-    { href: PATH.SEARCH, icon: <SearchIcon />, title: t.sidebars.search },
-    { href: PATH.STATISTIC, icon: <TrendingUpOutline />, title: t.sidebars.statistics },
-    { href: PATH.FAVORITES, icon: <BookmarkOutline />, title: t.sidebars.favorites },
-    // { href: PATH.CONFIRM, icon: <BookmarkOutline />, title: 'Confirm' },
-    // { href: PATH.LOGOUT, icon: <LogOutOutline />, title: 'Log Out' },
-  ]
+
   const handleModalClosed = async () => {
     setModalOpen(false)
     await logOut().unwrap()
     localStorage.clear()
     router.push(PATH.LOGIN)
+  }
+
+  const handleNoModalClosed = () => {
+    setModalOpen(false)
   }
 
   return (
@@ -63,15 +49,16 @@ const SidebarLayout: FC<SidebarLayoutProps> = ({ children }) => {
           <Button onClick={handleModalClosed} variant="ghost">
             Yes
           </Button>
-          <Button onClick={handleModalClosed} variant="primary">
+          <Button onClick={handleNoModalClosed} variant="primary">
             No
           </Button>
         </div>
       </Modal>
       <Sidebar>
         {sidebarItems.map((item, index) => (
-          <div key={index}>
+          <>
             <Link
+              key={index}
               href={item.href}
               className={`${s.item} ${router.pathname === item.href ? s.active : ''}`}
             >
@@ -80,12 +67,12 @@ const SidebarLayout: FC<SidebarLayoutProps> = ({ children }) => {
                 <Typography color="inherit">{item.title}</Typography>
               </>
             </Link>
-          </div>
+          </>
         ))}
         <div className={s.logout}>
           <LogOutOutline color={'inherit'} />
           <Typography onClick={() => setModalOpen(!modalOpen)} color="inherit">
-            {t.sidebars.logout}
+            Log Out
           </Typography>
         </div>
       </Sidebar>
