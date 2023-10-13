@@ -16,6 +16,10 @@ export type GetProfileResponse = {
   avatars: Avatar[]
 }
 
+export type ArgGetProfile = { profileId: number | undefined }
+
 export type ArgUpdateProfile = Omit<GetProfileResponse, 'id' | 'avatars'>
 
 export type UploadAvatarResponse = { avatars: Avatar[] }
+
+export type ArgUploadAvatar = FormData
