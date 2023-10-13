@@ -1,7 +1,6 @@
 import { Button } from '@/components'
 import { useDeleteAvatarMutation, useUploadAvatarMutation } from '@/api/profile-api/profile.api'
 import { ChangeEvent, memo, useCallback, useRef, useState } from 'react'
-import { RegisterError } from '@/types'
 import { Avatar } from '@/components/avatar'
 import { DeleteAvatarIcon } from '@/assets/icons/delete-avatar-cross'
 import { ImageOutline } from '@/assets/icons'
@@ -10,6 +9,7 @@ import { Modal } from '@/components/modal'
 import s from './profile-image.module.scss'
 import { useTranslation } from '@/hooks'
 import { Loader } from '@/components/loader'
+import { permittedFileSize, permittedFileTypes } from '@/consts/consts'
 
 type ProfileImageProps = {
   avatars?: string
@@ -21,13 +21,11 @@ export const ProfileImage = memo(({ avatars = '' }: ProfileImageProps) => {
     useUploadAvatarMutation()
   const [deleteAvatar, { error: deleteAvatarError }] = useDeleteAvatarMutation()
 
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [url, setUrl] = useState(avatars)
+  const [isModalOpen, setIsModalOpen] = useState<Boolean>(false)
+  const [url, setUrl] = useState<String>(avatars)
   const [newAvatarFile, setNewAvatarFile] = useState<File | null>(null)
-  const permittedFileTypes = ['jpg', 'jpeg', 'png']
-  const permittedFileSize = 10485760 // 10Mb in bytes
-  const [previewAvatar, setPreviewAvatar] = useState('')
-  const [uploadError, setUploadError] = useState('')
+  const [previewAvatar, setPreviewAvatar] = useState<String>('')
+  const [uploadError, setUploadError] = useState<String>('')
   const [avatarEditMode, setAvatarEditMode] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
