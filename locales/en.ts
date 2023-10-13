@@ -175,6 +175,7 @@ export const en: LocaleType = {
     followers: 'Followers',
     publications: 'Publications',
     profileSettings: 'Profile Settings',
+    avatarAlt: 'User avatar',
   },
   sidebars: {
     home: 'Home',

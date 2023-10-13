@@ -165,6 +165,7 @@ export const ru = {
     followers: 'Читателя',
     publications: 'Постов',
     profileSettings: 'Настройки профиля',
+    avatarAlt: 'Аватар пользователя',
   },
   sidebars: {
     home: 'Главная',
