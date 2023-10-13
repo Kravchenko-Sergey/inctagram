@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useVerifyMailMutation } from '@/api/auth-api/auth.api'
+import { useVerifyMailMutation } from '@/services/auth/auth.api'
 import {
   HeadMeta,
   Loader,

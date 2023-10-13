@@ -1,11 +1,11 @@
-import { useGetProfileQuery, useUpdateProfileMutation } from '@/api/profile-api/profile.api'
-import { useMeQuery } from '@/api/auth-api/auth.api'
+import { useGetProfileQuery, useUpdateProfileMutation } from '@/services/profile/profile.api'
+import { useMeQuery } from '@/services/auth/auth.api'
 import { getMainLayout, Tabs, ProfileUpdate, ProfileImage } from '@/components'
 import { useTranslation } from '@/hooks'
 import { ProfileSettingsFormType } from '@/schemas'
 
 import s from './profile-settings.module.scss'
-import { Loader } from '@/components/loader'
+import { Loader } from 'src/components/ui/loader'
 
 const ProfileSettings = () => {
   const { t } = useTranslation()

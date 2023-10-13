@@ -1,4 +1,4 @@
-import { LoginFormType } from '@/api/auth-api/types'
+import { LoginFormType } from '@/services/auth/types'
 import { PasswordRecoveryFormType, ProfileSettingsFormType, RegisterFormType } from '@/schemas'
 
 // add your form manual type
