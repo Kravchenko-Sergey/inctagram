@@ -10,7 +10,7 @@ import { PATH } from '@/consts/route-paths'
 import { useTranslation } from '@/hooks'
 
 import s from './mail-verification-error.module.scss'
-import { baseUrl } from '@/services'
+import { baseUrl } from '@/services/base-api-with-reauth'
 
 type MailVerificationErrorProps = {
   email: string
