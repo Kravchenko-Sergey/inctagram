@@ -179,6 +179,7 @@ export const en: LocaleType = {
   },
   sidebars: {
     home: 'Home',
+    create: 'Create',
     myProfile: 'My Profile',
     messenger: 'Messenger',
     search: 'Search',

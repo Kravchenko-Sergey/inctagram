@@ -169,6 +169,7 @@ export const ru = {
   },
   sidebars: {
     home: 'Главная',
+    create: 'Создать',
     myProfile: 'Мой профиль',
     messenger: 'Мессенджер',
     search: 'Поиск',

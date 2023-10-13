@@ -13,6 +13,7 @@ import {
   LogOutOutline,
   MessageCircleOutline,
   PersonOutline,
+  PlusSquareOutline,
   SearchIcon,
   TrendingUpOutline,
 } from '@/assets/icons'
@@ -26,21 +27,23 @@ type SidebarLayoutProps = {
 
 const SidebarLayout: FC<SidebarLayoutProps> = ({ children }) => {
   const router = useRouter()
-  const [logOut] = useLogoutMutation()
-  const [modalOpen, setModalOpen] = useState(false)
   const { t } = useTranslation()
+  const [modalOpen, setModalOpen] = useState(false)
   const { data: me } = useMeQuery()
+  const [logOut] = useLogoutMutation()
   const sidebarItems = [
     { href: PATH.HOME, icon: <HomeOutline />, title: t.sidebars.home },
-    // { href: PATH.REGISTRATION, icon: <PlusSquareOutline />, title: 'Registration' },
-    // { href: PATH.LOGIN, icon: <PlusSquareOutline />, title: 'Login' },
+    { href: PATH.LOGIN, icon: <PlusSquareOutline />, title: t.sidebars.create },
     { href: PATH.PROFILE, icon: <PersonOutline />, title: t.sidebars.myProfile },
     { href: PATH.MESSENGER, icon: <MessageCircleOutline />, title: t.sidebars.messenger },
     { href: PATH.SEARCH, icon: <SearchIcon />, title: t.sidebars.search },
-    { href: PATH.STATISTIC, icon: <TrendingUpOutline />, title: t.sidebars.statistics },
+    {
+      href: PATH.STATISTIC,
+      icon: <TrendingUpOutline />,
+      title: t.sidebars.statistics,
+      className: s.statisticsItem,
+    },
     { href: PATH.FAVORITES, icon: <BookmarkOutline />, title: t.sidebars.favorites },
-    // { href: PATH.CONFIRM, icon: <BookmarkOutline />, title: 'Confirm' },
-    // { href: PATH.LOGOUT, icon: <LogOutOutline />, title: 'Log Out' },
   ]
   const handleModalSubmit = async () => {
     await logOut().unwrap()
@@ -71,17 +74,18 @@ const SidebarLayout: FC<SidebarLayoutProps> = ({ children }) => {
       </Modal>
       <Sidebar>
         {sidebarItems.map((item, index) => (
-          <div key={index}>
-            <Link
-              href={item.href}
-              className={`${s.item} ${router.pathname === item.href ? s.active : ''}`}
-            >
-              <>
-                {item.icon}
-                <Typography color="inherit">{item.title}</Typography>
-              </>
-            </Link>
-          </div>
+          <Link
+            key={index}
+            href={item.href}
+            className={`${item.className ? item.className : s.item} ${
+              router.pathname === item.href ? s.active : ''
+            }`}
+          >
+            <>
+              {item.icon}
+              <Typography color="inherit">{item.title}</Typography>
+            </>
+          </Link>
         ))}
         <div className={s.logout}>
           <LogOutOutline color={'inherit'} />
