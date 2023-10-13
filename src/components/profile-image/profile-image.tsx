@@ -20,13 +20,13 @@ export const ProfileImage = memo(({ avatars = '' }: ProfileImageProps) => {
     useUploadAvatarMutation()
   const [deleteAvatar, { error: deleteAvatarError }] = useDeleteAvatarMutation()
 
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [url, setUrl] = useState(avatars)
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+  const [url, setUrl] = useState<string>(avatars)
   const [newAvatarFile, setNewAvatarFile] = useState<File | null>(null)
+  const [previewAvatar, setPreviewAvatar] = useState<string>('')
+  const [uploadError, setUploadError] = useState<string>('')
   const permittedFileTypes = ['jpg', 'jpeg', 'png']
   const permittedFileSize = 10485760 // 10Mb in bytes
-  const [previewAvatar, setPreviewAvatar] = useState('')
-  const [uploadError, setUploadError] = useState('')
   const [avatarEditMode, setAvatarEditMode] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {

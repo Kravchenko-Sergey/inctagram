@@ -10,6 +10,7 @@ import { useGetProfileQuery } from '@/api/profile-api/profile.api'
 import s from './profile.module.scss'
 import { useTranslation } from '@/hooks'
 import Link from 'next/link'
+import { Avatar } from '@/components/avatar'
 
 const Profile = () => {
   const { data: me } = useMeQuery()
@@ -30,7 +31,6 @@ const Profile = () => {
   // }
 
   if (isLoading || isFetching) {
-    // убрать из саксес а то если упадет запрос будет лоадинг постоянный
     return <Loader />
   }
   // if (isSuccess && isFilledProfile) return
@@ -44,13 +44,11 @@ const Profile = () => {
       <main className={s.root}>
         <div className={s.profile}>
           {isProfile ? (
-            <Image
-              src={profile?.avatars[0]?.url}
-              alt="userImage"
-              width={198}
-              height={198}
+            <Avatar
+              photo={profile?.avatars[0]?.url}
+              size={198}
+              name={t.profile.avatarAlt}
               className={s.photo}
-              priority
             />
           ) : (
             <div className={s.photo}>
