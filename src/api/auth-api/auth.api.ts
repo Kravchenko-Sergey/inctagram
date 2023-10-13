@@ -35,48 +35,11 @@ export const authAPI = instagramAPI.injectEndpoints({
         }
       },
       async onQueryStarted(_, { dispatch, getState, queryFulfilled }) {
-        // const state = getState() as RootState
-
-        // const { nameToSearch, sort, page, pageSize, range, authorId } = state.decksReducer
-
         try {
           await queryFulfilled
-
-          dispatch(
-            authAPI.util.updateQueryData('me', undefined, () => {
-              return {} as UserType
-            })
-          )
-
-          // dispatch(instagramAPI.util.resetApiState())
-          // dispatch(authAPI.util.updateQueryData("getProfile", { "profileId" }, () => {
-          // }));
-
-          // dispatch(
-          //   decksAPI.util.updateQueryData(
-          //     'getDecks',
-          //     {
-          //       minCardsCount: range[0].toString(),
-          //       maxCardsCount: range[1].toString(),
-          //       orderBy: sort ? `${sort['key']}-${sort['direction']}` : '',
-          //       name: nameToSearch,
-          //       currentPage: page.toString(),
-          //       itemsPerPage: pageSize,
-          //       authorId,
-          //     },
-          //     draft => {
-          //       draft.items.pop()
-          //       draft.items.unshift(res.data)
-          //     }
-          //   )
-          // )
+          dispatch(instagramAPI.util.resetApiState())
         } catch {
-          // patchResult.undo()
-          /**
-           * Alternatively, on failure you can invalidate the corresponding cache tags
-           * to trigger a re-fetch:
-           * dispatch(api.util.invalidateTags(['Post']))
-           */
+          console.log('value')
         }
       },
     }),
