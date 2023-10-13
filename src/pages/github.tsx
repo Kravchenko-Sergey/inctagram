@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 import { PATH } from '@/consts/route-paths'
 import { tokenSetterToLocalStorage } from '@/helpers'
-import { useLazyMeQuery } from '@/services/auth/auth.api'
+import { useLazyMeQuery } from '@/services/auth/auth-api'
 import { useTypedRouter } from '@/hooks'
 import { routerGithubSchema } from '@/schemas'
 

@@ -1,5 +1,5 @@
-import { useGetProfileQuery, useUpdateProfileMutation } from '@/services/profile/profile.api'
-import { useMeQuery } from '@/services/auth/auth.api'
+import { useGetProfileQuery, useUpdateProfileMutation } from '@/services/profile/profile-api'
+import { useMeQuery } from '@/services/auth/auth-api'
 import { getMainLayout, Tabs, ProfileUpdate, ProfileImage } from '@/components'
 import { useTranslation } from '@/hooks'
 import { ProfileSettingsFormType } from '@/schemas'

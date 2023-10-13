@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useCheckRecoveryCodeMutation } from '@/services/auth/auth.api'
+import { useCheckRecoveryCodeMutation } from '@/services/auth/auth-api'
 import { CreateNewPassword, HeadMeta, RecoveryLinkExpired, getHeaderLayout } from '@/components'
 import { useTypedRouter } from '@/hooks'
 import { routerRecoverySchema } from '@/schemas'

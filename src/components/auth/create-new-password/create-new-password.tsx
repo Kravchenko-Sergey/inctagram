@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 
-import { useCreateNewPasswordMutation } from '@/services/auth/auth.api'
+import { useCreateNewPasswordMutation } from '@/services/auth/auth-api'
 import { Button, Card, ControlledTextField, Typography } from '@/components'
 import { PATH } from '@/consts/route-paths'
 import { useTranslation } from '@/hooks'

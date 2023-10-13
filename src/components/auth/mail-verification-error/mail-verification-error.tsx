@@ -3,7 +3,7 @@ import { memo } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
-import { useResendEmailMutation } from '@/services/auth/auth.api'
+import { useResendEmailMutation } from '@/services/auth/auth-api'
 import ConfirmImg from '@/assets/image/confirm-error.png'
 import { Button, Typography } from '@/components'
 import { PATH } from '@/consts/route-paths'

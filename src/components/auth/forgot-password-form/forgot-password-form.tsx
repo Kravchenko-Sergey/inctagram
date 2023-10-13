@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller, useForm } from 'react-hook-form'
 
-import { useRecoverPasswordMutation } from '@/services/auth/auth.api'
+import { useRecoverPasswordMutation } from '@/services/auth/auth-api'
 import { Button, Card, ControlledTextField, Modal, Recaptcha, Typography } from '@/components'
 import { PATH } from '@/consts/route-paths'
 import { useTranslation } from '@/hooks'

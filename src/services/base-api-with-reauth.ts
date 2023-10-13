@@ -1,10 +1,9 @@
 import {
   BaseQueryFn,
-  createApi,
   FetchArgs,
   fetchBaseQuery,
   FetchBaseQueryError,
-} from '@reduxjs/toolkit/query'
+} from '@reduxjs/toolkit/query/react'
 import { Mutex } from 'async-mutex'
 
 import { TOKEN_LOCAL_STORAGE_KEY } from '@/consts/local-storage'
@@ -15,6 +14,8 @@ export const baseUrl = process.env.NEXT_PUBLIC_BASE_API_URL ?? ''
 if (!baseUrl) {
   console.log('Please, provide api url in .env')
 }
+
+const mutex = new Mutex()
 
 const baseQuery = fetchBaseQuery({
   baseUrl,
@@ -29,8 +30,6 @@ const baseQuery = fetchBaseQuery({
     return headers
   },
 })
-
-const mutex = new Mutex()
 
 export const baseQueryWithReauth: BaseQueryFn<
   string | FetchArgs,

@@ -2,7 +2,7 @@ import { FC, ReactNode, useEffect } from 'react'
 
 import { useRouter } from 'next/router'
 
-import { useMeQuery } from '@/services/auth/auth.api'
+import { useMeQuery } from '@/services/auth/auth-api'
 import { PATH, commonRoutes } from '@/consts/route-paths'
 import { Loader } from '@/components/ui/loader'
 

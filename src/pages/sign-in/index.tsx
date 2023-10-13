@@ -1,7 +1,7 @@
 import { useGoogleLogin } from '@react-oauth/google'
 import { useRouter } from 'next/router'
 
-import { useGoogleLoginMutation } from '@/services/auth/auth.api'
+import { useGoogleLoginMutation } from '@/services/auth/auth-api'
 import { HeadMeta, getHeaderLayout, Login } from '@/components'
 import { PATH } from '@/consts/route-paths'
 import { tokenSetterToLocalStorage } from '@/helpers'

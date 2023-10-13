@@ -5,7 +5,7 @@ import { useGoogleLogin } from '@react-oauth/google'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 
-import { useGoogleLoginMutation, useRegistrationMutation } from '@/services/auth/auth.api'
+import { useGoogleLoginMutation, useRegistrationMutation } from '@/services/auth/auth-api'
 import { GitHubIcon, GoogleIcon } from '@/assets/icons'
 import {
   Button,

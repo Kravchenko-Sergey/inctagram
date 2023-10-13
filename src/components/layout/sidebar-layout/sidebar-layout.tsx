@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import { Button, Modal, Sidebar, Typography } from '@/components'
 
 import s from '@/components/layout/main-layout/main-layout.module.scss'
-import { useLogoutMutation, useMeQuery } from '@/services/auth/auth.api'
+import { useLogoutMutation, useMeQuery } from '@/services/auth/auth-api'
 import {
   BookmarkOutline,
   HomeOutline,

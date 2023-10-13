@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 
-import { useLazyMeQuery, useLoginMutation } from '@/services/auth/auth.api'
+import { useLazyMeQuery, useLoginMutation } from '@/services/auth/auth-api'
 import { GitHubIcon, GoogleIcon } from '@/assets/icons'
 import { Button, Card, ControlledTextField, Typography } from '@/components'
 import { PATH } from '@/consts/route-paths'
