@@ -161,6 +161,20 @@ export const ru = {
     backToProfile: 'Вернуться на страницу профиля',
     logOut: 'Вы действительно хотите выйти из аккаунта ',
     titleLogOut: 'Выйти',
+    following: 'Читаемых',
+    followers: 'Читателя',
+    publications: 'Постов',
+    profileSettings: 'Настройки профиля',
+    avatarAlt: 'Аватар пользователя',
+  },
+  sidebars: {
+    home: 'Главная',
+    myProfile: 'Мой профиль',
+    messenger: 'Мессенджер',
+    search: 'Поиск',
+    statistics: 'Статистика',
+    favorites: 'Избранное',
+    logout: 'Выйти',
   },
 }
 
