@@ -82,11 +82,13 @@
 }
 
 .zoomRange::-moz-range-thumb {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
 
   appearance: none;
-  background: #3f51b5;
+
+  // background: #3f51b5;
+  background: var(--light-100);
   border: 1px solid #3f51b5;
   border-radius: 50%;
 
@@ -94,12 +96,12 @@
 }
 
 .zoomRange::-webkit-slider-thumb {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
 
   appearance: none;
-  background: #3f51b5;
-  border: 1px solid #3f51b5;
+  background: var(--light-100);
+  border: 3px solid #3f51b5;
   border-radius: 50%;
 
   transition: box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
@@ -114,7 +116,7 @@
   box-shadow: 0 0 0 8px rgb(63 81 181 / 16%);
 }
 
-.cropArea {
-  border: none;
-  box-shadow: none;
-}
+// .cropArea {
+//  border: none;
+//  box-shadow: none;
+// }
