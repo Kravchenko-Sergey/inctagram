@@ -13,6 +13,7 @@ import {
   LogOutOutline,
   MessageCircleOutline,
   PersonOutline,
+  PlusSquareOutline,
   SearchIcon,
   TrendingUpOutline,
 } from '@/assets/icons'
@@ -35,6 +36,7 @@ const SidebarLayout: FC<SidebarLayoutProps> = ({ children }) => {
     // { href: PATH.REGISTRATION, icon: <PlusSquareOutline />, title: 'Registration' },
     // { href: PATH.LOGIN, icon: <PlusSquareOutline />, title: 'Login' },
     { href: PATH.PROFILE, icon: <PersonOutline />, title: t.sidebars.myProfile },
+    { href: PATH.CREATE, icon: <PlusSquareOutline />, title: t.sidebars.create },
     { href: PATH.MESSENGER, icon: <MessageCircleOutline />, title: t.sidebars.messenger },
     { href: PATH.SEARCH, icon: <SearchIcon />, title: t.sidebars.search },
     { href: PATH.STATISTIC, icon: <TrendingUpOutline />, title: t.sidebars.statistics },

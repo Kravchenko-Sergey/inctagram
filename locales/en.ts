@@ -185,5 +185,6 @@ export const en: LocaleType = {
     statistics: 'Statistics',
     favorites: 'Favorites',
     logout: 'Log Out',
+    create: 'Сreate',
   },
 }

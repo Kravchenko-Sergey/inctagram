@@ -175,6 +175,7 @@ export const ru = {
     statistics: 'Статистика',
     favorites: 'Избранное',
     logout: 'Выйти',
+    create: 'Создать пост',
   },
 }
 
