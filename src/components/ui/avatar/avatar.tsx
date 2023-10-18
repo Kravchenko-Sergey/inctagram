@@ -20,21 +20,23 @@ export const Avatar = ({ name = 'Your avatar', photo, size = 198, className }: A
   }
 
   return (
-    <AvatarRadix.Root className={classNames.avatar}>
-      <AvatarRadix.Image
-        width={size}
-        height={size}
-        src={photo}
-        className={s.avatarImage}
-        alt={`${name} avatar`}
-        title={`${name} avatar`}
-      />
-      <AvatarRadix.Fallback
-        style={{ height: `${size}px`, width: `${size}px` }}
-        className={s.avatarFallback}
-      >
-        {getFirstLetter(name)}
-      </AvatarRadix.Fallback>
-    </AvatarRadix.Root>
+    <div>
+      <AvatarRadix.Root className={classNames.avatar}>
+        <AvatarRadix.Image
+          width={size}
+          height={size}
+          src={photo}
+          className={s.avatarImage}
+          alt={`${name} avatar`}
+          title={`${name} avatar`}
+        />
+        <AvatarRadix.Fallback
+          style={{ height: `${size}px`, width: `${size}px` }}
+          className={s.avatarFallback}
+        >
+          {getFirstLetter(name)}
+        </AvatarRadix.Fallback>
+      </AvatarRadix.Root>
+    </div>
   )
 }

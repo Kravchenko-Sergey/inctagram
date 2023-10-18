@@ -1,12 +1,13 @@
-import { HeadMeta } from '@/components'
+import { getMainLayout, HeadMeta } from '@/components'
 
 const Favorites = () => {
   return (
     <>
-      <HeadMeta title="Sign-in" />
-      <main>favorites</main>
+      <HeadMeta title="Favorites" />
+      <main>Favorites</main>
     </>
   )
 }
 
+Favorites.getLayout = getMainLayout
 export default Favorites

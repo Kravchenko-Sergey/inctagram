@@ -1,12 +1,12 @@
 import { HeadMeta } from '@/components'
 
-const Statistic = () => {
+const Logout = () => {
   return (
     <>
-      <HeadMeta title="Sign-in" />
-      <main>Statistic</main>
+      <HeadMeta title="Logout" />
+      <main>Logout</main>
     </>
   )
 }
 
-export default Statistic
+export default Logout

@@ -5,7 +5,7 @@ import { useTranslation } from '@/hooks'
 import { ProfileSettingsFormType } from '@/schemas'
 
 import s from './profile-settings.module.scss'
-import { Loader } from 'src/components/ui/loader'
+import { Loader } from '@/components/ui/loader'
 
 const ProfileSettings = () => {
   const { t } = useTranslation()

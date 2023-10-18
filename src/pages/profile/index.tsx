@@ -10,6 +10,7 @@ import s from './profile.module.scss'
 import { useTranslation } from '@/hooks'
 import Link from 'next/link'
 import { Avatar } from 'src/components/ui/avatar'
+import { FC, useState } from 'react'
 
 const Profile = () => {
   const { data: me } = useMeQuery()
@@ -34,7 +35,9 @@ const Profile = () => {
   }
   // if (isSuccess && isFilledProfile) return
 
-  const followers = '123'
+  const following = 2218
+  const followers = 2358
+  const publications = 2764
   const isProfile = profile?.avatars.length !== 0
 
   return (
@@ -45,7 +48,6 @@ const Profile = () => {
           {isProfile ? (
             <Avatar
               photo={profile?.avatars[0]?.url}
-              size={198}
               name={t.profile.avatarAlt}
               className={s.photo}
             />
@@ -59,19 +61,19 @@ const Profile = () => {
             <Typography variant="large">{profile?.userName}</Typography>
             <div className={s.items}>
               <div>
-                <Typography>2 218</Typography>
-                <Typography>{t.profile.following}</Typography>
+                <Typography>{following}</Typography>
+                <Typography>{t.profile.following(following)}</Typography>
               </div>
               <div>
                 <Typography>{followers}</Typography>
-                <Typography>{t.profile.followers}</Typography>
+                <Typography>{t.profile.followers(followers)}</Typography>
               </div>
               <div>
-                <Typography>2 764</Typography>
-                <Typography>{t.profile.publications}</Typography>
+                <Typography>{publications}</Typography>
+                <Typography>{t.profile.publications(publications)}</Typography>
               </div>
             </div>
-            <Typography>{profile?.aboutMe}</Typography>
+            <ExpandableText text={profile?.aboutMe} />
             <Link passHref legacyBehavior href={PATH.PROFILE_SETTINGS}>
               <Button as="a" variant="secondary" className={s.btn}>
                 {t.profile.profileSettings}
@@ -86,3 +88,32 @@ const Profile = () => {
 
 Profile.getLayout = getMainLayout
 export default Profile
+
+type ExpandableTextProps = {
+  text: string | null | undefined
+}
+
+const ExpandableText: FC<ExpandableTextProps> = ({ text }) => {
+  const [isExpanded, setIsExpanded] = useState(false)
+
+  const sentences = text?.split('. ')
+  const closedText = sentences && sentences[0].split(' ')
+  const preTriggerText = closedText && closedText.slice(0, -1).join(' ')
+  const openTrigger = closedText && closedText.slice(-1).join(' ')
+  const restText = sentences && sentences.slice(1).join('. ')
+
+  return (
+    sentences && (
+      <div>
+        <span>{preTriggerText}</span>
+        <span
+          onClick={() => setIsExpanded(true)}
+          className={!isExpanded ? s.expandDescription : ''}
+        >
+          {isExpanded ? ` ${openTrigger}. ` : ` ${openTrigger}...`}
+        </span>
+        <span>{isExpanded ? restText : ''}</span>
+      </div>
+    )
+  )
+}

@@ -1,12 +1,13 @@
-import { HeadMeta } from '@/components'
+import { getMainLayout, HeadMeta } from '@/components'
 
 const Messenger = () => {
   return (
     <>
       <HeadMeta title="Messenger" />
-      <main>messenger</main>
+      <main>Messenger</main>
     </>
   )
 }
 
+Messenger.getLayout = getMainLayout
 export default Messenger
