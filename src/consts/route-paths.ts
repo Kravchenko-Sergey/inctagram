@@ -7,7 +7,7 @@ export const PATH = {
   PROFILE_SETTINGS: '/profile-settings',
   MESSENGER: '/messenger',
   SEARCH: '/search',
-  STATISTIC: '/statistic',
+  STATISTIC: '/statistics',
   REGISTRATION: '/sign-up',
   LOGIN: '/sign-in',
   FAVORITES: '/favorites',
