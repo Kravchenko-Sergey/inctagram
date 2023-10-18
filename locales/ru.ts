@@ -1,3 +1,5 @@
+import { pluralizeRu } from '@/helpers/createPluralize'
+
 export const ru = {
   test: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати ',
   ok: 'OK',
@@ -161,11 +163,44 @@ export const ru = {
     backToProfile: 'Вернуться на страницу профиля',
     logOut: 'Вы действительно хотите выйти из аккаунта ',
     titleLogOut: 'Выйти',
-    following: 'Читаемых',
-    followers: 'Читателя',
-    publications: 'Постов',
     profileSettings: 'Настройки профиля',
     avatarAlt: 'Аватар пользователя',
+    following(count: number) {
+      const str = pluralizeRu(count)
+
+      switch (str) {
+        case 'one':
+          return `подписка`
+        case 'few':
+          return `подписки`
+        case 'many':
+          return `подписок`
+      }
+    },
+    followers(count: number) {
+      const str = pluralizeRu(count)
+
+      switch (str) {
+        case 'one':
+          return `подписчик`
+        case 'few':
+          return `подписчика`
+        case 'many':
+          return `подписчиков`
+      }
+    },
+    publications(count: number) {
+      const str = pluralizeRu(count)
+
+      switch (str) {
+        case 'one':
+          return `пост`
+        case 'few':
+          return `поста`
+        case 'many':
+          return `постов`
+      }
+    },
   },
   sidebars: {
     home: 'Главная',

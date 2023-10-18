@@ -1,4 +1,5 @@
 import { LocaleType } from './ru'
+import { pluralizeEn, pluralizeRu } from '@/helpers/createPluralize'
 
 export const en: LocaleType = {
   test: 'Lorem Ipsum is simply dummy text of the printing',
@@ -171,11 +172,42 @@ export const en: LocaleType = {
     backToProfile: 'Back to profile page',
     logOut: 'Are you really want to log out of your account ',
     titleLogOut: 'Log Out',
-    following: 'Following',
-    followers: 'Followers',
-    publications: 'Publications',
     profileSettings: 'Profile Settings',
     avatarAlt: 'User avatar',
+    following(count: number) {
+      const str = pluralizeEn(count)
+
+      switch (str) {
+        case 'one':
+          return `Following`
+        case 'other':
+          return `Following`
+      }
+    },
+    followers(count: number) {
+      const str = pluralizeRu(count)
+
+      switch (str) {
+        case 'one':
+          return `Follower`
+        case 'few':
+          return `Followers`
+        case 'many':
+          return `Followers`
+      }
+    },
+    publications(count: number) {
+      const str = pluralizeRu(count)
+
+      switch (str) {
+        case 'one':
+          return `Publication`
+        case 'few':
+          return `Publications`
+        case 'many':
+          return `Publications`
+      }
+    },
   },
   sidebars: {
     home: 'Home',

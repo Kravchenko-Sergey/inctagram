@@ -35,7 +35,9 @@ const Profile = () => {
   }
   // if (isSuccess && isFilledProfile) return
 
-  const followers = '123'
+  const following = 2218
+  const followers = 2358
+  const publications = 2764
   const isProfile = profile?.avatars.length !== 0
 
   return (
@@ -59,16 +61,16 @@ const Profile = () => {
             <Typography variant="large">{profile?.userName}</Typography>
             <div className={s.items}>
               <div>
-                <Typography>2 218</Typography>
-                <Typography>{t.profile.following}</Typography>
+                <Typography>{following}</Typography>
+                <Typography>{t.profile.following(following)}</Typography>
               </div>
               <div>
                 <Typography>{followers}</Typography>
-                <Typography>{t.profile.followers}</Typography>
+                <Typography>{t.profile.followers(followers)}</Typography>
               </div>
               <div>
-                <Typography>2 764</Typography>
-                <Typography>{t.profile.publications}</Typography>
+                <Typography>{publications}</Typography>
+                <Typography>{t.profile.publications(publications)}</Typography>
               </div>
             </div>
             <ExpandableText text={profile?.aboutMe} />
