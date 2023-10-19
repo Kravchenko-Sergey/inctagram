@@ -20,6 +20,12 @@ const meta = {
   title: 'Components/UI/Sidebar',
   component: Sidebar,
   tags: ['autodocs'],
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/M7753HAzy0tm9rQWyRBrnI/Inctagram?type=design&node-id=314-6048&mode=dev',
+    },
+  },
 } satisfies Meta<typeof Sidebar>
 
 export default meta

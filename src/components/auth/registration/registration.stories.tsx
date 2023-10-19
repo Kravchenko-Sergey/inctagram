@@ -9,6 +9,12 @@ const meta = {
   title: 'Page Components/Registration',
   component: Registration,
   tags: ['autodocs'],
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/M7753HAzy0tm9rQWyRBrnI/Inctagram?type=design&node-id=1632-8892&mode=dev',
+    },
+  },
 } satisfies Meta<typeof Registration>
 
 export default meta

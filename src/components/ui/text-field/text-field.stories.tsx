@@ -14,6 +14,12 @@ const meta = {
       control: { type: 'radio' },
     },
   },
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/M7753HAzy0tm9rQWyRBrnI/Inctagram?type=design&node-id=316-7901&mode=dev',
+    },
+  },
 } satisfies Meta<typeof TextField>
 
 export default meta

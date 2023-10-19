@@ -6,6 +6,12 @@ const meta = {
   title: 'Components/UI/Pagination',
   component: Pagination,
   tags: ['autodocs'],
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/M7753HAzy0tm9rQWyRBrnI/Inctagram?type=design&node-id=1787-9974&mode=dev',
+    },
+  },
 }
 
 export default meta

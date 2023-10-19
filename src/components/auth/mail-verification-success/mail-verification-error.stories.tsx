@@ -9,6 +9,12 @@ const meta = {
   title: 'Page Components/Mail Verification Success',
   component: MailVerificationSuccess,
   tags: ['autodocs'],
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/M7753HAzy0tm9rQWyRBrnI/Inctagram?type=design&node-id=301-5874&mode=dev',
+    },
+  },
 } satisfies Meta<typeof MailVerificationSuccess>
 
 export default meta
