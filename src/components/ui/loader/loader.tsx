@@ -17,7 +17,7 @@ export const Loader: FC<LoaderProps> = ({ className }) => {
 
   return (
     <div className={classNames.loader}>
-      <Image width={24} height={24} src={LoadingGif} alt="Loading..." />
+      <Image width={40} height={40} src={LoadingGif} alt="Loading..." />
     </div>
   )
 }

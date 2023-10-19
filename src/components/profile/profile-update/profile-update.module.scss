@@ -11,13 +11,6 @@
   padding: 6px 12px;
 }
 
-.bottomLine {
-  width: 100%;
-  height: 1px;
-  margin-bottom: 23px;
-  background: var(--dark-300);
-}
-
 .submitBtn {
   align-self: flex-end;
 }
@@ -25,6 +18,12 @@
 .form {
   display: flex;
   flex-direction: column;
+}
+
+.formWrap {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .dataPicker {
@@ -38,4 +37,10 @@
 .selectWrapper {
   width: 100%;
   color: var(--light-900);
+}
+
+.innerContainer {
+  display: flex;
+  margin-bottom: 23px;
+  border-bottom: 1px solid var(--dark-300);
 }
