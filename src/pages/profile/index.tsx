@@ -1,5 +1,3 @@
-import { useRouter } from 'next/router'
-
 import { Button, HeadMeta, getMainLayout, Typography, Loader } from '@/components'
 import { PATH } from '@/consts/route-paths'
 import { ImageOutline } from '@/assets/icons'

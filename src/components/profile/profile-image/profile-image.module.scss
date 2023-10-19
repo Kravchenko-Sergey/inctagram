@@ -1,3 +1,7 @@
+.profileImageContainer {
+  margin-right: 40px;
+}
+
 .userImageBox {
   position: relative;
 
@@ -33,19 +37,6 @@
   margin-bottom: 60px;
 
   background-color: var(--dark-500);
-}
-
-.line2 {
-  position: absolute;
-  right: 0;
-  bottom: 36px;
-  left: 0;
-
-  width: 120%;
-  height: 1px;
-  margin-bottom: 24px;
-
-  background-color: var(--dark-300);
 }
 
 .modalContent {
@@ -88,9 +79,20 @@
 }
 
 .uploadError {
-  position: absolute;
-  bottom: -30px;
-  color: var(--danger-500);
+  width: 100%;
+  margin-bottom: 24px;
+  padding: 5px;
+
+  font-size: 14px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 24px;
+  color: var(--light-100);
+  text-align: center;
+
+  background: var(--danger-900);
+  border: 1px solid var(--danger-500);
+  border-radius: 2px;
 }
 
 .modalLoader {
