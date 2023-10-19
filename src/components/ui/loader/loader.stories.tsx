@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { LanguageSelect } from './language-select'
+import { Loader } from './index'
 
 const meta = {
-  title: 'UI Components/LanguageSelect',
-  component: LanguageSelect,
+  title: 'UI Components/Loader',
+  component: Loader,
   tags: ['autodocs'],
-} satisfies Meta<typeof LanguageSelect>
+} satisfies Meta<typeof Loader>
 
 export default meta
 type Story = StoryObj<typeof meta>

@@ -17,7 +17,7 @@ import {
 import { Typography } from '@/components'
 
 const meta = {
-  title: 'Components/UI/Scrollbar',
+  title: 'UI Components/Scrollbar',
   component: Scrollbar,
   tags: ['autodocs'],
 } satisfies Meta<typeof Scrollbar>

@@ -5,7 +5,6 @@ import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 
 import { useLazyMeQuery, useLoginMutation } from '@/services/auth/auth-api'
-import { GitHubIcon, GoogleIcon } from '@/assets/icons'
 import { Button, Card, ControlledTextField, Typography } from '@/components'
 import { PATH } from '@/consts/route-paths'
 import { FormFields, tokenSetterToLocalStorage, triggerZodFieldError } from '@/helpers'
@@ -13,13 +12,9 @@ import { useTranslation } from '@/hooks'
 import { LoginFormValues, loginSchema } from '@/schemas'
 
 import s from './login.module.scss'
+import { SocialMediaAuth } from '../social-media-auth'
 
-type LoginProps = {
-  onGoogleAuth?: () => void
-  onGithubAuth?: () => void
-}
-
-export const Login: FC<LoginProps> = ({ onGoogleAuth, onGithubAuth }) => {
+export const Login: FC = () => {
   const { t } = useTranslation()
   const { push } = useRouter()
   const [getUser] = useLazyMeQuery()
@@ -69,10 +64,7 @@ export const Login: FC<LoginProps> = ({ onGoogleAuth, onGithubAuth }) => {
       <Typography variant="h1" as="h1" className={s.title}>
         {t.auth.signIn}
       </Typography>
-      <div className={s.icons}>
-        <GoogleIcon onClick={onGoogleAuth} />
-        <GitHubIcon onClick={onGithubAuth} />
-      </div>
+      <SocialMediaAuth />
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={s.fields}>
           <ControlledTextField
