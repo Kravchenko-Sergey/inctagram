@@ -11,7 +11,7 @@ export const Filters = ({ addedImages }: FilterProps) => {
   return (
     <div className={s.container}>
       {addedImages.map(item => (
-        <Image src={item.image} width={100} height={100} alt="" />
+        <Image key={item.id} src={item.image} width={100} height={100} alt="" />
       ))}
     </div>
   )
