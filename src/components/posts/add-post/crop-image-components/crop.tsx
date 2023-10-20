@@ -1,4 +1,4 @@
-import { CropArgType } from '@/pages/create/test/easy-crop'
+import { CropArgType } from '@/components/posts/add-post/add-post'
 
 export const createImage = (url: string | null): Promise<HTMLImageElement> =>
   new Promise((resolve, reject) => {
