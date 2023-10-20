@@ -7,6 +7,7 @@ import {
   Button,
   ControlledDataPicker,
   ControlledSelect,
+  ProfileImage,
 } from '@/components'
 
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -63,40 +64,44 @@ export const ProfileUpdate = memo(({ updateProfileHandler, profile }: ProfileUpd
   return (
     <div className={s.container}>
       <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-        <div className={s.wrap}>
-          <ControlledTextField label={t.auth.username} control={control} name="userName" />
+        <div className={s.innerContainer}>
+          <ProfileImage avatars={profile?.avatars[0]?.url} />
+          <div className={s.formWrap}>
+            <div className={s.wrap}>
+              <ControlledTextField label={t.auth.username} control={control} name="userName" />
+            </div>
+            <div className={s.wrap}>
+              <ControlledTextField label={t.profile.firstName} control={control} name="firstName" />
+            </div>
+            <div className={s.wrap}>
+              <ControlledTextField label={t.profile.lastName} control={control} name="lastName" />
+            </div>
+            <ControlledDataPicker
+              label={t.profile.dateOfBirth}
+              className={s.dataPicker}
+              control={control}
+              name="dateOfBirth"
+              errorMessage={errors.dateOfBirth?.message}
+            />
+            <div className={s.wrap}>
+              <ControlledSelect
+                options={Cities}
+                label={t.profile.citySelect}
+                control={control}
+                placeholder={t.profile.citySelect}
+                name="city"
+                className={s.selectWrapper}
+              />
+            </div>
+            <ControlledTextArea
+              className={s.textArea}
+              classNameTextArea={s.textAreaEl}
+              label={t.profile.aboutMe}
+              control={control}
+              name="aboutMe"
+            />
+          </div>
         </div>
-        <div className={s.wrap}>
-          <ControlledTextField label={t.profile.firstName} control={control} name="firstName" />
-        </div>
-        <div className={s.wrap}>
-          <ControlledTextField label={t.profile.lastName} control={control} name="lastName" />
-        </div>
-        <ControlledDataPicker
-          label={t.profile.dateOfBirth}
-          className={s.dataPicker}
-          control={control}
-          name="dateOfBirth"
-          errorMessage={errors.dateOfBirth?.message}
-        />
-        <div className={s.wrap}>
-          <ControlledSelect
-            options={Cities}
-            label={t.profile.citySelect}
-            control={control}
-            placeholder={t.profile.citySelect}
-            name="city"
-            className={s.selectWrapper}
-          />
-        </div>
-        <ControlledTextArea
-          className={s.textArea}
-          classNameTextArea={s.textAreaEl}
-          label={t.profile.aboutMe}
-          control={control}
-          name="aboutMe"
-        />
-        <div className={s.bottomLine} />
         <Button disabled={!isValid} className={s.submitBtn} variant="primary" type="submit">
           {t.profile.saveChanges}
         </Button>
