@@ -8,6 +8,7 @@ import { Mutex } from 'async-mutex'
 
 import { TOKEN_LOCAL_STORAGE_KEY } from '@/consts/local-storage'
 import { tokenSetterToLocalStorage } from '@/helpers/token-setter-to-local-storage'
+import { UpdateTokenResult } from './profile'
 
 export const baseUrl = process.env.NEXT_PUBLIC_BASE_API_URL ?? ''
 
@@ -54,7 +55,7 @@ export const baseQueryWithReauth: BaseQueryFn<
         )
 
         if (refreshResult.data) {
-          const data = refreshResult.data as { accessToken: string } // TODO add type
+          const data = refreshResult.data as UpdateTokenResult
 
           tokenSetterToLocalStorage(data.accessToken)
         }
@@ -62,14 +63,17 @@ export const baseQueryWithReauth: BaseQueryFn<
         if (refreshResult.meta?.response?.status === 200) {
           result = await baseQuery(args, api, extraOptions)
         } else {
-          await baseQuery(
-            {
-              url: 'auth/logout',
-              method: 'POST',
-            },
-            api,
-            extraOptions
-          )
+          const accessToken = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)
+
+          accessToken &&
+            (await baseQuery(
+              {
+                url: 'auth/logout',
+                method: 'POST',
+              },
+              api,
+              extraOptions
+            ))
         }
       } finally {
         release()

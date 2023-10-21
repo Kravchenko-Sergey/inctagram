@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { TextArea } from './index'
 
 const meta = {
-  title: 'Components/UI/TextArea',
+  title: 'UI Components/TextArea',
   component: TextArea,
   tags: ['autodocs'],
   parameters: {

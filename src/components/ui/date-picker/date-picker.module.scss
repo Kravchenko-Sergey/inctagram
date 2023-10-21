@@ -106,10 +106,6 @@
 .icon {
   position: absolute;
   right: 12px;
-
-  &.disabled {
-    //  color: var(--color-text-disabled);
-  }
 }
 
 .input {
@@ -154,8 +150,6 @@
 
   &.error {
     border-color: var(--danger-300);
-
-    // outline: 1px solid var(--danger-300);
   }
 
   &.error:focus-within {

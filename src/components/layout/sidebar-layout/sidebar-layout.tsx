@@ -88,7 +88,7 @@ const SidebarLayout: FC<SidebarLayoutProps> = ({ children }) => {
           </Link>
         ))}
         <div className={s.logout}>
-          <LogOutOutline color={'inherit'} />
+          <LogOutOutline color="inherit" />
           <Typography onClick={() => setModalOpen(!modalOpen)} color="inherit">
             {t.sidebars.logout}
           </Typography>

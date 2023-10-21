@@ -6,7 +6,7 @@ import { Button, Typography } from '@/components'
 import { Modal, ModalType } from './index'
 
 export default {
-  title: 'Components/UI/Modal',
+  title: 'UI Components/Modal',
   component: Modal,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },

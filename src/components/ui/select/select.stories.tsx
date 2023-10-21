@@ -6,7 +6,7 @@ import type { Meta } from '@storybook/react'
 import { Select } from './index'
 
 export default {
-  title: 'Components/UI/Select',
+  title: 'UI Components/Select',
   component: Select,
   tags: ['autodocs'],
   parameters: {

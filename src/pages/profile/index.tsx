@@ -12,12 +12,7 @@ import { FC, useState } from 'react'
 
 const Profile = () => {
   const { data: me } = useMeQuery()
-  const {
-    data: profile,
-    isLoading,
-    isFetching,
-    isSuccess,
-  } = useGetProfileQuery({ profileId: me?.userId })
+  const { data: profile, isLoading, isFetching } = useGetProfileQuery({ profileId: me?.userId })
   const { t } = useTranslation()
 
   // const isFilledProfile = useMemo(() => {

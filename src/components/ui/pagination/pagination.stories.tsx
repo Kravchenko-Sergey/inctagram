@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Pagination } from '@/components'
 
 const meta = {
-  title: 'Components/UI/Pagination',
+  title: 'UI Components/Pagination',
   component: Pagination,
   tags: ['autodocs'],
   parameters: {

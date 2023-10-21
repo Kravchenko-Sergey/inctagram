@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Checkbox } from './index'
 
 const meta = {
-  title: 'Components/UI/Checkbox',
+  title: 'UI Components/Checkbox',
   component: Checkbox,
   tags: ['autodocs'],
   argTypes: {

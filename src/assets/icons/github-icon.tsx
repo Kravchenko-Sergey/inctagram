@@ -1,14 +1,7 @@
 import { SVGProps, memo } from 'react'
 
-const GitHubIcon = (props: SVGProps<SVGSVGElement>) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 36 36"
-    width={36}
-    height={36}
-    fill="none"
-    {...props}
-  >
+const GitHubIcon = ({ width, height, ...props }: SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 36 36" width={width} height={height} fill="none" {...props}>
     <g>
       <path
         fill="#fff"
