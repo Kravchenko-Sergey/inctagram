@@ -113,9 +113,9 @@ export const ProfileImage = memo(({ avatars = '', className }: ProfileImageProps
             <div className={s.profileAvatar}>
               <Avatar photo={url} name="avatar" size={198} />
               <Button
-                variant={'withIcon'}
+                variant="withIcon"
                 className={s.deleteAvatarIcon}
-                type={'button'}
+                type="button"
                 onClick={deleteAvatarHandler}
               >
                 <DeleteAvatarIcon />
@@ -125,7 +125,13 @@ export const ProfileImage = memo(({ avatars = '', className }: ProfileImageProps
             <ImageOutline />
           )}
         </div>
-        <Button variant={'ghost'} fullWidth onClick={handleOpenModal} type="button">
+        <Button
+          variant="ghost"
+          fullWidth
+          onClick={() => {
+            setIsModalOpen(true)
+          }}
+        >
           {t.profile.addAvatar}
         </Button>
       </div>
@@ -149,12 +155,12 @@ export const ProfileImage = memo(({ avatars = '', className }: ProfileImageProps
                 )}
               </div>
               {avatarEditMode ? (
-                <Button variant={'primary'} onClick={handleSaveCloseModal} className={s.saveButton}>
-                  <Typography variant={'h3'}>{t.profile.saveChanges}</Typography>
+                <Button variant="primary" onClick={handleSaveCloseModal} className={s.saveButton}>
+                  <Typography variant="h3">{t.profile.saveChanges}</Typography>
                 </Button>
               ) : (
                 <>
-                  <Button variant={'primary'} onClick={() => inputRef && inputRef.current?.click()}>
+                  <Button variant="primary" onClick={() => inputRef && inputRef.current?.click()}>
                     {t.profile.selectImage}
                   </Button>
                   <input

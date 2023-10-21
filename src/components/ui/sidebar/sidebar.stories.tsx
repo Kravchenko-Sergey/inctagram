@@ -17,7 +17,7 @@ import {
 import { Typography } from '@/components'
 
 const meta = {
-  title: 'Components/UI/Sidebar',
+  title: 'UI Components/Sidebar',
   component: Sidebar,
   tags: ['autodocs'],
 } satisfies Meta<typeof Sidebar>

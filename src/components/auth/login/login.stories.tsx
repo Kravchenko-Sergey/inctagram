@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import { GoogleOAuthProvider } from '@react-oauth/google'
 
 import { Provider } from 'react-redux'
 import { store } from '@/services/store'
@@ -17,13 +18,11 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   render: args => {
     return (
-      <Provider store={store}>
-        <Login {...args} />
-      </Provider>
+      <GoogleOAuthProvider clientId="test">
+        <Provider store={store}>
+          <Login {...args} />
+        </Provider>
+      </GoogleOAuthProvider>
     )
-  },
-  args: {
-    onGoogleAuth: () => console.log('Google auth clicked'),
-    onGithubAuth: () => console.log('GitHub auth clicked'),
   },
 }

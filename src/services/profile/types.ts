@@ -23,3 +23,5 @@ export type ArgUpdateProfile = Omit<GetProfileResponse, 'id' | 'avatars'>
 export type UploadAvatarResponse = { avatars: Avatar[] }
 
 export type ArgUploadAvatar = FormData
+
+export type UpdateTokenResult = { accessToken: string }
