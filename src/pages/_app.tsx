@@ -2,6 +2,8 @@ import { ReactElement, ReactNode } from 'react'
 
 import '@/styles/index.scss'
 import '@/styles/nprogress.css'
+import '@/styles/slider.css'
+
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import { NextPage } from 'next'
 import type { AppProps } from 'next/app'

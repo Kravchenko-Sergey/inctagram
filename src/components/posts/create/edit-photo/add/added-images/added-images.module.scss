@@ -1,0 +1,43 @@
+.addedPhoto {
+  margin: 0 0 12px 12px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.wrapperForImg {
+  display: flex;
+  flex-direction: row;
+  margin-right: 12px;
+}
+
+.closeIcon {
+  position: relative;
+  top: 5px;
+  left: -11px;
+
+  width: 12px;
+  height: 12px;
+  margin-left: 64px;
+  padding-top: 10px;
+}
+
+.close {
+  background-color: var(--dark-500);
+
+  // filter: brightness(0) invert(1);
+
+  // &:hover {
+  //  filter: invert(0.5) sepia(1) saturate(5) hue-rotate(175deg);
+  // }
+}
+
+.image {
+  margin-bottom: 12px;
+}
+
+.oneImage {
+  margin: 12px 12px 12px 0;
+}
