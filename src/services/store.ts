@@ -10,7 +10,7 @@ export const store = configureStore({
   },
   devTools: true,
   // preloadedState: initialState,
-  // middleware: gDM => gDM().concat(auth-api.middleware).concat(profileAPI.middleware),
+  // middleware: gDM => gDM().concat(auth-api.middleware).concat(postsApi.middleware),
   middleware: gDM => gDM().concat(baseApi.middleware),
 })
 

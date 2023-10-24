@@ -1,0 +1,78 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.addBtn {
+  width: 36px;
+  height: 36px;
+
+  cursor: pointer;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 11px 11px;
+
+  color: var(--light-700);
+
+  opacity: 0.8;
+  background-color: var(--dark-500);
+  border-radius: 2px;
+}
+
+.blue {
+  filter: brightness(0) invert(1);
+
+  &:hover {
+    filter: invert(0.5) sepia(1) saturate(5) hue-rotate(175deg);
+  }
+}
+
+.addContainer {
+  cursor: pointer;
+
+  display: flex;
+
+  min-width: 162px;
+  height: 106px;
+  margin-top: -154px;
+  margin-right: 11px;
+
+  color: var(--light-700);
+
+  opacity: 0.8;
+  background-color: var(--dark-500);
+  border-radius: 2px;
+}
+
+.addedPhoto {
+  width: 80px;
+  height: 82px;
+
+  margin: 12px;
+}
+
+.addPhotoBtn {
+  width: 36px;
+  height: 36px;
+
+  margin: 12px;
+}
+
+.addTheSecondPhoto {
+  width: 36px;
+  height: 36px;
+
+  margin: 12px 12px 12px 5px;
+}
+
+.carouselPhoto {
+  width: 80px;
+  height: 82px;
+  margin: 12px;
+}

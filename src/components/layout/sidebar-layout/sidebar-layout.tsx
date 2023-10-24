@@ -35,6 +35,7 @@ const SidebarLayout: FC<SidebarLayoutProps> = ({ children }) => {
     { href: PATH.HOME, icon: <HomeOutline />, title: t.sidebars.home },
     { href: PATH.LOGIN, icon: <PlusSquareOutline />, title: t.sidebars.create },
     { href: PATH.PROFILE, icon: <PersonOutline />, title: t.sidebars.myProfile },
+    { href: PATH.CREATE, icon: <PlusSquareOutline />, title: t.sidebars.create },
     { href: PATH.MESSENGER, icon: <MessageCircleOutline />, title: t.sidebars.messenger },
     { href: PATH.SEARCH, icon: <SearchIcon />, title: t.sidebars.search },
     {
