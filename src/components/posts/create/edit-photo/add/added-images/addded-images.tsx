@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import Image from 'next/image'
 
@@ -15,17 +15,12 @@ type PropsType = {
   croppedImage: string | null
 }
 
-export const AddedImages: FC<PropsType> = ({
-  addedImages,
-  setAddedImages,
-  croppedImage,
-  image,
-}) => {
+export const AddedImages = ({ addedImages, setAddedImages, croppedImage, image }: PropsType) => {
   const imagesToShow = addedImages.slice(-2)
 
   useEffect(() => {
     setAddedImages(addedImages)
-  }, [addedImages])
+  }, [addedImages, setAddedImages])
 
   const onDeleteImage = (i: number) => {
     const image = i === 0 ? imagesToShow.slice(1) : imagesToShow.slice(0, -1)

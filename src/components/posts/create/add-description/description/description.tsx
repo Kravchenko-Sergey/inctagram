@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import s from './description.module.scss'
 
 import { useTranslation } from '@/hooks'
-import { ControlledTextArea, Typography } from '@/components'
+import { Button, ControlledTextArea, Typography } from '@/components'
 import { Avatar } from '@/components/ui/avatar'
 import { DescriptionFormType, descriptionSchema } from '@/schemas/description-schema'
 import { FormFields, getBinaryImageData, triggerZodFieldError } from '@/helpers'
@@ -27,11 +27,7 @@ type DescriptionFormTypeProps = {
   addedImages: ImageType[]
 }
 
-export const PostDescription = ({
-  onSubmitHandler,
-  addedImages,
-  defaultValue,
-}: DescriptionFormTypeProps) => {
+export const PostDescription = ({ addedImages, defaultValue }: DescriptionFormTypeProps) => {
   const { t } = useTranslation()
   const { data: me } = useMeQuery()
   const { data: profile, isLoading, isFetching } = useGetProfileQuery({ profileId: me?.userId })
@@ -103,23 +99,20 @@ export const PostDescription = ({
         </div>
         <div className={s.userName}>
           <Typography variant={'h3'} color="primary">
-            User Name
+            {profile?.userName}
           </Typography>
         </div>
       </div>
       <form id={'form1'} method={'get'} className={s.wrapper} onSubmit={handleSubmit(onSubmit)}>
         <div className={s.mainContent}>
           <ControlledTextArea
+            counter={true}
             control={control}
             classNameTextArea={s.textArea}
             name={'description'}
-            label={'Add Description'}
+            label={t.addNewPost.addDescription}
           />
-          <div className={s.counter}>
-            <Typography variant={'small_text'} color="secondary">
-              {getValues('description').length}/500
-            </Typography>
-          </div>
+          <div className={s.counter}></div>
         </div>
       </form>
     </div>

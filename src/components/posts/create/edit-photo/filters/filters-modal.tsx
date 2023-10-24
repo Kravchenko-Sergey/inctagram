@@ -96,7 +96,7 @@ export const FiltersModal: FC<ModalProps> = ({
   return (
     <div>
       <Button variant="link" className={s.nextButton} onClick={handleNext}>
-        {'Next'}
+        {t.addNewPost.next}
       </Button>
       <Dialog open={isFiltersModalOpen} onOpenChange={open => !open && setOpenSureModal(true)}>
         <DialogPortal>
@@ -116,7 +116,7 @@ export const FiltersModal: FC<ModalProps> = ({
                   isModalOpen={isModalOpen}
                   setIsModalOpen={setIsModalOpen}
                   onCancel={cancelButtonHandler}
-                  title={'Publication'}
+                  title={t.addNewPost.publication}
                   isFiltersModalOpen={isFiltersModalOpen}
                   setIsFiltersModalOpen={setIsFiltersModalOpen}
                   setOpenSureModal={setOpenSureModal}

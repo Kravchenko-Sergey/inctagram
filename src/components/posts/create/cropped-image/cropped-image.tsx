@@ -13,6 +13,7 @@ import { ImageType } from '@/components/posts/create/create-post-modal'
 import { Add } from '@/components/posts/create/edit-photo/add/add'
 import { Crop } from '@/components/posts/create/edit-photo/crop/crop'
 import { Zoom } from '@/components/posts/create/edit-photo/zoom/zoom'
+import { useTranslation } from '@/hooks'
 
 // eslint-disable-next-line import/order
 
@@ -30,6 +31,7 @@ export const CroppedImage: FC<PropsType> = ({ image, addedImages, setAddedImages
   const [aspectRatio, setAspectRatio] = useState(4 / 3)
   const [croppedImage, setCroppedImage] = useState<string | null>(null)
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<CropArgType | null>(null)
+  const { t } = useTranslation()
 
   const settings = {
     dots: true,
@@ -70,7 +72,7 @@ export const CroppedImage: FC<PropsType> = ({ image, addedImages, setAddedImages
 
   useEffect(() => {
     setAddedImages(addedImages)
-  }, [addedImages])
+  }, [addedImages, setAddedImages])
 
   const showCroppedImg = async (image: string, croppedAreaPixels: CropArgType | null) => {
     if (croppedAreaPixels && image) {
@@ -127,7 +129,7 @@ export const CroppedImage: FC<PropsType> = ({ image, addedImages, setAddedImages
                     color="primary"
                     className={s.button}
                   >
-                    Show Result
+                    {t.addNewPost.showResult}
                   </button>
                 </div>
               )

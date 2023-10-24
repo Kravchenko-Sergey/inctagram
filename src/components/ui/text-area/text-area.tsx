@@ -12,10 +12,11 @@ export type TextAreaProps = {
   classNameTextArea?: string
   onClearClick?: () => void
   errorMessage?: string
+  counter?: boolean
 } & ComponentPropsWithoutRef<'textarea'>
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, ref) => {
-  const { label, disabled, className, classNameTextArea, error, ...rest } = props
+  const { label, counter, disabled, className, classNameTextArea, error, ...rest } = props
   const classNames = {
     root: clsx(s.root, className),
     textArea: clsx(s.textarea, error && s.error, classNameTextArea),
@@ -33,9 +34,25 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, r
       <div className={`${s.container} ${error ? s.error : ''} ${disabled ? s.disabled : ''}`}>
         <textarea ref={ref} disabled={disabled} {...rest} className={classNames.textArea} />
       </div>
-      <Typography variant="regular_text_14" as="div" color="error" className={s.error}>
-        {error}
-      </Typography>
+      <div className={s.footer}>
+        <div className={s.errorContainer}>
+          {error && (
+            <Typography variant="regular_text_14" as="div" color="error" className={s.error}>
+              {error}
+            </Typography>
+          )}
+        </div>
+        {counter && (
+          <Typography
+            as="span"
+            style={{ textAlign: 'end', marginTop: '3px' }}
+            variant={'small_text'}
+            color="secondary"
+          >
+            {rest?.value?.toString().length}/500
+          </Typography>
+        )}
+      </div>
     </div>
   )
 })

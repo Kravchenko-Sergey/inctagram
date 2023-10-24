@@ -41,7 +41,7 @@ export const Crop: FC<PropsType> = ({ setAspectRatio }) => {
       {isOpen && (
         <div className={s.cropOptions}>
           <div className={s.cropOption1} onClick={() => setAspectRatio(4 / 3)}>
-            {'Original'}
+            {t.addNewPost.original}
             <Image src={img} alt={'image'} width={24} height={24} />
           </div>
           <div className={s.cropOption} onClick={() => setAspectRatio(1)}>

@@ -5,11 +5,13 @@ import { TextArea, TextAreaProps } from '@/components'
 export type ControlledTextFieldProps<T extends FieldValues> = {
   name: FieldPath<T>
   control: Control<T>
+  counter?: boolean
 } & Omit<TextAreaProps, 'onChange' | 'value' | 'id'>
 
 export const ControlledTextArea = <T extends FieldValues>({
   control,
   name,
+  counter,
   className,
   ...rest
 }: ControlledTextFieldProps<T>) => {
@@ -19,6 +21,12 @@ export const ControlledTextArea = <T extends FieldValues>({
   } = useController({ name, control })
 
   return (
-    <TextArea error={error?.message} className={className ? className : ''} {...field} {...rest} />
+    <TextArea
+      error={error?.message}
+      counter={counter}
+      className={className ? className : ''}
+      {...field}
+      {...rest}
+    />
   )
 }

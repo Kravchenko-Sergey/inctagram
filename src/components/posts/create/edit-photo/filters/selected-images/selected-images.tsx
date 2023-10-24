@@ -1,10 +1,9 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 
 import Slider from 'react-slick'
 
 import airBalloon from '@/assets/image/air-balloon.jpg'
 // import settings from '@/src/components/profile/new-post/create-post/cropped-image/cropped-image'
-
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 // eslint-disable-next-line import/order
@@ -25,13 +24,13 @@ type PropsType = {
   setAddedImages: (addedImages: ImageType[]) => void
 }
 
-export const SelectedImages: FC<PropsType> = ({
+export const SelectedImages = ({
   image,
   addedImages,
   activeFilter,
   setActiveFilter,
   setAddedImages,
-}) => {
+}: PropsType) => {
   const settings = {
     dots: true,
     swipe: false,

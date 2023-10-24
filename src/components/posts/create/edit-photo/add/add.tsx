@@ -1,12 +1,4 @@
-import React, {
-  useEffect,
-  useState,
-  useRef,
-  MutableRefObject,
-  Dispatch,
-  SetStateAction,
-  FC,
-} from 'react'
+import React, { MutableRefObject, useEffect, useRef, useState } from 'react'
 
 import Image from 'next/image'
 
@@ -24,7 +16,7 @@ type PropsType = {
   croppedImage: string | null
 }
 
-export const Add: FC<PropsType> = ({ image, addedImages, setAddedImages, croppedImage }) => {
+export const Add = ({ image, addedImages, setAddedImages, croppedImage }: PropsType) => {
   const [isAddOpen, setIsAddOpen] = useState(false)
   const addRef = useRef() as MutableRefObject<HTMLDivElement>
   const inputRef = useRef<HTMLInputElement>(null)
@@ -43,18 +35,15 @@ export const Add: FC<PropsType> = ({ image, addedImages, setAddedImages, cropped
 
   useEffect(() => {
     setAddedImages(addedImages)
-  }, [addedImages])
+  }, [addedImages, setAddedImages])
 
   const selectFileHandler = () => {
     inputRef && inputRef.current?.click()
   }
 
   const handleImageUpload = async (e: any) => {
-    //console.log(addedImages)
     setAddedImages([...addedImages, { image: URL.createObjectURL(e.target.files[0]) }])
   }
-
-  //console.log(addedImages)
 
   return (
     <div ref={addRef} className={s.wrapper}>

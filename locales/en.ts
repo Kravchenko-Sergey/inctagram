@@ -51,6 +51,7 @@ export const en: LocaleType = {
     // under13: (elem: ReactElement) => `A user under 13 cannot create a profile. ${elem} `,
     tellUsSomethingAboutYou: 'The field must not be empty',
     whereAreYouLive: 'Please indicate which city you live in',
+    maxLengthPost: 'Max number of characters 500',
   },
   components: {
     selectPlaceholder: 'Select Box',
@@ -204,6 +205,19 @@ export const en: LocaleType = {
           return `Publications`
       }
     },
+  },
+  addNewPost: {
+    cropping: 'Cropping',
+    filters: 'Filters',
+    publication: 'Publication',
+    addPhoto: 'Add Photo',
+    next: 'Next',
+    original: 'Original',
+    showResult: 'Show Result',
+    close: 'Close',
+    areYouSure: 'Are You Sure',
+    publish: 'Publish',
+    addDescription: 'Add Description',
   },
   sidebars: {
     home: 'Home',

@@ -113,7 +113,7 @@ export const DescriptionModal: FC<ModalProps> = ({
   return (
     <div>
       <Button variant="primary" className={s.nextButton} onClick={handlePublish}>
-        {'Next'}
+        {t.addNewPost.next}
       </Button>
       <Dialog open={isDescriptionModalOpen} onOpenChange={open => !open && setOpenSureModal(true)}>
         <DialogPortal>
@@ -131,7 +131,7 @@ export const DescriptionModal: FC<ModalProps> = ({
                   className={s.nextButton}
                   onClick={() => showFilteredImg(activeFilter)}
                 >
-                  {'Publish'}
+                  {t.addNewPost.publish}
                 </Button>
               </div>
               <DialogTitle className={s.DialogTitle}>

@@ -37,7 +37,7 @@ export const AreYouSureModal: FC<ModalProps> = ({
       <BaseModal
         id={'areYouSureModal'}
         modalWidth={'sm'}
-        title={'Close'}
+        title={t.addNewPost.close}
         open={openSureModal}
         cancelButtonName={'SaveDraft'}
         actionButtonName={'Discard'}
@@ -45,7 +45,7 @@ export const AreYouSureModal: FC<ModalProps> = ({
         onCancel={onModalClose}
         onAction={discardHandler}
       >
-        <Typography variant={'h3'}>{'Are You Sure'}</Typography>
+        <Typography variant={'h3'}>{t.addNewPost.areYouSure}</Typography>
       </BaseModal>
     </div>
   )

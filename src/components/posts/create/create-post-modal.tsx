@@ -67,14 +67,14 @@ export const CreatePostModal = () => {
           modalWidth={'md'}
           open={isBaseModalOpen}
           onClose={handleButtonClick}
-          title="Add Photo"
+          title={t.addNewPost.addPhoto}
         >
           <div className={`${s.photoContainer} ${image === null ? s.emptyPhotoContainer : ''}`}>
             <ImageOutline />
           </div>
           <div>
             <Button variant={'primary'} onClick={selectFileHandler} className={s.btn}>
-              <Typography variant={'h3'}>Select from Computer</Typography>
+              <Typography variant={'h3'}>{t.profile.selectImage}</Typography>
             </Button>
             <input
               type="file"
@@ -92,7 +92,7 @@ export const CreatePostModal = () => {
           open={isModalOpen}
           onClose={handleButtonClick}
           onCancel={cancelButtonClick}
-          title={'Crop Image'}
+          title={t.addNewPost.cropping}
           addedImages={addedImages}
           setAddedImages={setAddedImages}
           isBaseModalOpen={isBaseModalOpen}
