@@ -1,5 +1,5 @@
 import { LocaleType } from './ru'
-import { pluralizeEn, pluralizeRu } from '@/helpers/createPluralize'
+import { pluralizeEn } from '@/helpers/createPluralize'
 
 export const en: LocaleType = {
   test: 'Lorem Ipsum is simply dummy text of the printing',

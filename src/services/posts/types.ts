@@ -24,3 +24,16 @@ export type CreatePostImageResponse = {
   images: Image[]
 }
 export type CreatePostImageRequest = FormData
+
+export type GetAllPostsRequest = {
+  idLastUploadedPost?: number
+  pageSize?: number
+  sortBy?: string
+  sortDirection?: string
+}
+
+export type GetAllPostsResponse = {
+  totalCount: number
+  pageSize: number
+  items: CreatePostCommentResponse[]
+}
