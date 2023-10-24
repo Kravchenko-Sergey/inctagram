@@ -9,7 +9,7 @@ import { useTranslation } from '@/hooks'
 import { ControlledTextArea, Typography } from '@/components'
 import { Avatar } from '@/components/ui/avatar'
 import { DescriptionFormType, descriptionSchema } from '@/schemas/description-schema'
-import { FormFields, triggerZodFieldError } from '@/helpers'
+import { FormFields, getBinaryImageData, triggerZodFieldError } from '@/helpers'
 import { useMeQuery } from '@/services/auth'
 import { useGetProfileQuery } from '@/services/profile'
 import { ImageType } from '@/components/posts/create/create-post-modal'
@@ -33,7 +33,6 @@ export const PostDescription = ({
   defaultValue,
 }: DescriptionFormTypeProps) => {
   const { t } = useTranslation()
-  // const [value, setValue] = useState('')
   const { data: me } = useMeQuery()
   const { data: profile, isLoading, isFetching } = useGetProfileQuery({ profileId: me?.userId })
   const [createPostComment, {}] = useCreatePostCommentsMutation()
@@ -59,38 +58,40 @@ export const PostDescription = ({
 
     triggerZodFieldError(touchedFieldNames, trigger)
   }, [t, touchedFields, trigger])
-  // const onSubmit = handleSubmit((data: DescriptionFormType) => {
-  //   console.log('data', data)
-  //   console.log('addedImages', addedImages)
-  //   // onSubmitHandler?.(data)
-  // })
 
   const onSubmit = async (data: DescriptionFormType) => {
-    console.log('data', data)
-    console.log('addedImages', addedImages)
+    const res = await getBinaryImageData(addedImages)
 
-    const formData = new FormData()
+    function createFormData(res: Uint8Array[]) {
+      const formData = new FormData()
 
-    addedImages.forEach(item => formData.append('file', item.image))
+      res.forEach((binaryData, index) => {
+        const blob = new Blob([binaryData], { type: 'image/jpeg' })
+
+        formData.append(`file`, blob)
+      })
+
+      return formData
+    }
+
+    const formData = createFormData(res)
 
     if (addedImages.length) {
       try {
-        await createPostPhoto(formData)
+        const responsePhotoStore = await createPostPhoto(formData).unwrap()
+
+        const imageId = responsePhotoStore.images.map(item => ({ uploadId: item.uploadId }))
+        const requestBody: CreatePostCommentRequest = {
+          description: data.description,
+          childrenMetadata: imageId ? imageId : ({} as [{ uploadId: string }]),
+        }
+
+        if (responsePhotoStore.images) {
+          await createPostComment(requestBody)
+        }
       } catch (e: unknown) {
         const error = e as any
-
-        console.log('error', error)
       }
-    }
-    console.log('photoData', photoData)
-    const imageId = photoData?.images.map(item => ({ uploadId: item.uploadId }))
-    const requestBody: CreatePostCommentRequest = {
-      description: data.description,
-      childrenMetadata: imageId ? imageId : ({} as [{ uploadId: string }]),
-    }
-
-    if (photoData?.images) {
-      await createPostComment(requestBody)
     }
   }
 
