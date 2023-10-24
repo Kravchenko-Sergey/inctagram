@@ -4,6 +4,8 @@ import {
   CreatePostCommentResponse,
   CreatePostImageRequest,
   CreatePostImageResponse,
+  GetAllPostsRequest,
+  GetAllPostsResponse,
 } from '@/services/posts/types'
 
 export const postAPI = baseApi.injectEndpoints({
@@ -22,7 +24,16 @@ export const postAPI = baseApi.injectEndpoints({
         body,
       }),
     }),
+    getUserPosts: build.query<GetAllPostsResponse, GetAllPostsRequest>({
+      query: ({ idLastUploadedPost, pageSize }) => ({
+        url: `posts/user/${idLastUploadedPost}`,
+        params: {
+          pageSize,
+        },
+      }),
+    }),
   }),
 })
 
-export const { useCreatePostCommentsMutation, useCreatePostPhotoMutation } = postAPI
+export const { useCreatePostCommentsMutation, useCreatePostPhotoMutation, useGetUserPostsQuery } =
+  postAPI

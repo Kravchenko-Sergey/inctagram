@@ -9,11 +9,25 @@ import { useTranslation } from '@/hooks'
 import Link from 'next/link'
 import { Avatar } from 'src/components/ui/avatar'
 import { FC, useState } from 'react'
+import Image from 'next/image'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import { CreatePostCommentResponse, useGetUserPostsQuery } from '@/services/posts'
 
 const Profile = () => {
+  const [pageSize, setPageSize] = useState(8)
+  const [hasMorePosts, setHasMorePosts] = useState(true)
+  const { t } = useTranslation()
+
   const { data: me } = useMeQuery()
   const { data: profile, isLoading, isFetching } = useGetProfileQuery({ profileId: me?.userId })
-  const { t } = useTranslation()
+  const { data: posts } = useGetUserPostsQuery({ pageSize })
+
+  const loadMorePosts = () => {
+    setPageSize(prev => prev + 8)
+    pageSize > publications && setHasMorePosts(false)
+  }
+
+  console.log(posts)
 
   // const isFilledProfile = useMemo(() => {
   //   if (profile) return Object.values(profile).some(value => value === null)
@@ -30,7 +44,7 @@ const Profile = () => {
 
   const following = 2218
   const followers = 2358
-  const publications = 2764
+  const publications = posts?.items.length as number
   const isProfile = profile?.avatars.length !== 0
 
   return (
@@ -40,7 +54,7 @@ const Profile = () => {
         <div className={s.profile}>
           {isProfile ? (
             <Avatar
-              photo={profile?.avatars[0]?.url}
+              photo={profile?.avatars[1]?.url}
               name={t.profile.avatarAlt}
               className={s.photo}
             />
@@ -74,6 +88,25 @@ const Profile = () => {
             </Link>
           </div>
         </div>
+        <InfiniteScroll
+          dataLength={publications || 0}
+          next={loadMorePosts}
+          hasMore={hasMorePosts}
+          loader={<Loader className={s.loader} />}
+          className={s.posts}
+        >
+          {posts?.items.map((post: CreatePostCommentResponse) => (
+            <Image
+              src={post?.images[1]?.url}
+              alt={`post ${post.id} image`}
+              width={228}
+              height={228}
+              key={post.id}
+              className={s.post}
+            />
+          ))}
+        </InfiniteScroll>
+        <div className={s.scrollableContent}></div>
       </main>
     </>
   )
