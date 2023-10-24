@@ -9,7 +9,14 @@ const meta = {
   argTypes: {
     variant: {
       options: ['primary', 'secondary', 'ghost', 'link', 'link-btn'],
-      control: { type: 'radio' },
+      control: { type: 'inline-radio' },
+    },
+    onClick: { action: 'clicked' },
+  },
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/M7753HAzy0tm9rQWyRBrnI/Inctagram?type=design&node-id=303-3570&mode=dev',
     },
   },
 } satisfies Meta<typeof Button>

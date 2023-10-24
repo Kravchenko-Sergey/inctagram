@@ -10,6 +10,12 @@ const meta = {
   title: 'Page Components/Login',
   component: Login,
   tags: ['autodocs'],
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/M7753HAzy0tm9rQWyRBrnI/Inctagram?type=design&node-id=3800-11366&mode=dev',
+    },
+  },
 } satisfies Meta<typeof Login>
 
 export default meta

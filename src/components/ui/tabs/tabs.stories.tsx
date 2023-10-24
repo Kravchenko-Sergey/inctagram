@@ -6,6 +6,12 @@ const meta = {
   title: 'UI Components/Tabs',
   component: Tabs,
   tags: ['autodocs'],
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/M7753HAzy0tm9rQWyRBrnI/Inctagram?type=design&node-id=306-7411&mode=dev',
+    },
+  },
 } satisfies Meta<typeof Tabs>
 
 export default meta

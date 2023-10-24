@@ -17,17 +17,20 @@ import { FormFields, triggerZodFieldError } from '@/helpers'
 
 import s from './profile-update.module.scss'
 import { parseISO } from 'date-fns'
+import { Avatar } from '@/services/profile'
+
+type ProfileAvatar = { avatars: Avatar[] }
+
+type ProfileUpdateProps = {
+  updateProfileHandler: (data: ProfileSettingsFormType) => void
+  profile?: ProfileSettingsFormType & ProfileAvatar
+}
 
 const Cities = [
   { label: 'Grodno', value: 'Grodno' },
   { label: 'Chita', value: 'Chita' },
   { label: 'Baghdad', value: 'Baghdad' },
 ]
-
-type ProfileUpdateProps = {
-  updateProfileHandler: (data: ProfileSettingsFormType) => void
-  profile?: ProfileSettingsFormType //TODO fix undefined in Profile
-}
 
 export const ProfileUpdate = memo(({ updateProfileHandler, profile }: ProfileUpdateProps) => {
   const { t } = useTranslation()

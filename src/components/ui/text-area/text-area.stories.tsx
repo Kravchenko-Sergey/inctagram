@@ -6,6 +6,12 @@ const meta = {
   title: 'UI Components/TextArea',
   component: TextArea,
   tags: ['autodocs'],
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/M7753HAzy0tm9rQWyRBrnI/Inctagram?type=design&node-id=316-8163&mode=dev',
+    },
+  },
 } satisfies Meta<typeof TextArea>
 
 export default meta

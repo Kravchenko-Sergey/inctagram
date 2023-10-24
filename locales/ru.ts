@@ -204,14 +204,13 @@ export const ru = {
   },
   sidebars: {
     home: 'Главная',
-    create: 'Создать',
+    create: 'Создать пост',
     myProfile: 'Мой профиль',
     messenger: 'Мессенджер',
     search: 'Поиск',
     statistics: 'Статистика',
     favorites: 'Избранное',
     logout: 'Выйти',
-    create: 'Создать пост',
   },
 }
 

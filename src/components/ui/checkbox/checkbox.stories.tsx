@@ -11,6 +11,12 @@ const meta = {
   argTypes: {
     label: [''],
   },
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/M7753HAzy0tm9rQWyRBrnI/Inctagram?type=design&node-id=5783-12902&mode=dev',
+    },
+  },
 } satisfies Meta<typeof Checkbox>
 
 export default meta

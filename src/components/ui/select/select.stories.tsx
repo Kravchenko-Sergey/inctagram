@@ -9,6 +9,12 @@ export default {
   title: 'UI Components/Select',
   component: Select,
   tags: ['autodocs'],
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/M7753HAzy0tm9rQWyRBrnI/Inctagram?type=design&node-id=376-8933&mode=dev',
+    },
+  },
 } satisfies Meta<typeof Select>
 
 const optionsPrimary = [
