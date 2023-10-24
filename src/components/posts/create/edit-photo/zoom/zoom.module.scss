@@ -1,0 +1,49 @@
+.zoomBtn {
+  cursor: pointer;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  color: var(--light-700);
+
+  opacity: 0.8;
+  background-color: var(--dark-500);
+  border-radius: 2px;
+}
+
+.slider {
+  cursor: pointer;
+
+  position: absolute;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 124px;
+  height: 36px;
+  margin-top: -74px;
+
+  opacity: 0.8;
+  background-color: var(--dark-500);
+  border-radius: 2px;
+}
+
+.range {
+  width: 100px;
+  height: 12px;
+}
+
+.blue {
+  filter: brightness(0) invert(1);
+
+  &:hover {
+    filter: invert(0.5) sepia(1) saturate(5) hue-rotate(175deg);
+  }
+}

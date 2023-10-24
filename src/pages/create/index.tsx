@@ -1,12 +1,12 @@
 import React from 'react'
-import { AddPost } from '@/components/posts'
 import { getMainLayout } from '@/components'
 import s from './create.module.scss'
+import { CreatePostModal } from '@/components/posts/create'
 
 const Create = () => {
   return (
     <div className={s.container}>
-      <AddPost />
+      <CreatePostModal />
     </div>
   )
 }
