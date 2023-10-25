@@ -32,7 +32,7 @@ const Profile = () => {
     pageSize > publications && setHasMorePosts(false)
   }
 
-  const deletePostHandler = async postId => {
+  const deletePostHandler = async (postId: number) => {
     deletePost({ postId }).unwrap()
   }
 
