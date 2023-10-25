@@ -8,10 +8,14 @@ import s from './profile.module.scss'
 import { useTranslation } from '@/hooks'
 import Link from 'next/link'
 import { Avatar } from 'src/components/ui/avatar'
-import { FC, useState } from 'react'
+import { FC, useCallback, useState } from 'react'
 import Image from 'next/image'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { CreatePostCommentResponse, useGetUserPostsQuery } from '@/services/posts'
+import {
+  CreatePostCommentResponse,
+  useDeleteUserPostMutation,
+  useGetUserPostsQuery,
+} from '@/services/posts'
 
 const Profile = () => {
   const [pageSize, setPageSize] = useState(8)
@@ -21,10 +25,15 @@ const Profile = () => {
   const { data: me } = useMeQuery()
   const { data: profile, isLoading, isFetching } = useGetProfileQuery({ profileId: me?.userId })
   const { data: posts } = useGetUserPostsQuery({ pageSize })
+  const [deletePost, { error: deletePostError }] = useDeleteUserPostMutation()
 
   const loadMorePosts = () => {
     setPageSize(prev => prev + 8)
     pageSize > publications && setHasMorePosts(false)
+  }
+
+  const deletePostHandler = async (postId: number) => {
+    deletePost({ postId }).unwrap()
   }
 
   console.log(posts)
@@ -54,7 +63,7 @@ const Profile = () => {
         <div className={s.profile}>
           {isProfile ? (
             <Avatar
-              photo={profile?.avatars[1]?.url}
+              photo={profile?.avatars[0]?.url}
               name={t.profile.avatarAlt}
               className={s.photo}
             />
@@ -96,14 +105,25 @@ const Profile = () => {
           className={s.posts}
         >
           {posts?.items.map((post: CreatePostCommentResponse) => (
-            <Image
-              src={post?.images[1]?.url}
-              alt={`post ${post.id} image`}
-              width={228}
-              height={228}
-              key={post.id}
-              className={s.post}
-            />
+            <div key={post.id} className={s.postWrapper}>
+              <Image
+                src={post?.images[0]?.url}
+                alt={`post ${post.id} image`}
+                width={228}
+                height={228}
+                key={post.id}
+                className={s.post}
+              />
+              <Button
+                variant="primary"
+                type="button"
+                onClick={() => {
+                  deletePostHandler(post.id)
+                }}
+              >
+                Удалить пост
+              </Button>
+            </div>
           ))}
         </InfiniteScroll>
         <div className={s.scrollableContent}></div>
