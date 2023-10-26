@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
-import { MAX_CHARS } from '@/consts/input-limits'
+import { MAX_CHARS_POST } from '@/consts/input-limits'
 import { useTranslation } from '@/hooks'
 import { ControlledTextArea } from '@/components'
 import { DescriptionFormType, descriptionSchema } from '@/schemas'
@@ -92,7 +92,7 @@ export const PostDescription = ({ addedImages, defaultValue }: DescriptionFormTy
       <form id="form1" method="get" className={s.wrapper} onSubmit={handleSubmit(onSubmit)}>
         <div className={s.mainContent}>
           <ControlledTextArea
-            counter={MAX_CHARS}
+            counter={MAX_CHARS_POST}
             control={control}
             classNameTextArea={s.textArea}
             name="description"
