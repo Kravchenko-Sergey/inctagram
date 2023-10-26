@@ -12,7 +12,7 @@ export type TextAreaProps = {
   classNameTextArea?: string
   onClearClick?: () => void
   errorMessage?: string
-  counter?: boolean
+  counter?: number
 } & ComponentPropsWithoutRef<'textarea'>
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, ref) => {
@@ -46,10 +46,10 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, r
           <Typography
             as="span"
             style={{ textAlign: 'end', marginTop: '3px' }}
-            variant={'small_text'}
+            variant="small_text"
             color="secondary"
           >
-            {rest?.value?.toString().length}/500
+            {rest?.value?.toString().length}/{counter}
           </Typography>
         )}
       </div>

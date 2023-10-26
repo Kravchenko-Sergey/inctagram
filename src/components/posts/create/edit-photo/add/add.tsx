@@ -1,13 +1,12 @@
-import React, { MutableRefObject, useEffect, useRef, useState } from 'react'
-
+import { MutableRefObject, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 
-import s from './add.module.scss'
-
-import img from './../../../../../assets/icons/image-ouline.svg'
-import { ImageType } from '@/components/posts/create/create-post-modal'
-import { AddedImages } from '@/components/posts/create/edit-photo/add/added-images/addded-images'
 import { PlusSquareOutline } from '@/assets/icons'
+import imageOutline from '@/assets/icons/image-ouline.svg'
+import { ImageType } from '@/components/posts/create'
+import { AddedImages } from './added-images'
+
+import s from './add.module.scss'
 
 type PropsType = {
   addedImages: ImageType[]
@@ -49,8 +48,8 @@ export const Add = ({ image, addedImages, setAddedImages, croppedImage }: PropsT
     <div ref={addRef} className={s.wrapper}>
       <div className={s.addBtn}>
         <Image
-          src={img}
-          alt={'add photo'}
+          src={imageOutline}
+          alt="add photo"
           onClick={() => setIsAddOpen(true)}
           width={24}
           height={24}

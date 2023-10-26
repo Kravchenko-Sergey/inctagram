@@ -1,23 +1,21 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
-import s from './description.module.scss'
-
+import { MAX_CHARS } from '@/consts/input-limits'
 import { useTranslation } from '@/hooks'
-import { Button, ControlledTextArea, Typography } from '@/components'
-import { Avatar } from '@/components/ui/avatar'
-import { DescriptionFormType, descriptionSchema } from '@/schemas/description-schema'
+import { ControlledTextArea } from '@/components'
+import { DescriptionFormType, descriptionSchema } from '@/schemas'
 import { FormFields, getBinaryImageData, triggerZodFieldError } from '@/helpers'
-import { useMeQuery } from '@/services/auth'
-import { useGetProfileQuery } from '@/services/profile'
-import { ImageType } from '@/components/posts/create/create-post-modal'
 import {
   CreatePostCommentRequest,
   useCreatePostCommentsMutation,
   useCreatePostPhotoMutation,
 } from '@/services/posts'
+import { ImageType } from '@/components/posts/create'
+
+import s from './description.module.scss'
 
 type DescriptionFormTypeProps = {
   onSubmitHandler?: (data: DescriptionFormType) => void
@@ -29,17 +27,15 @@ type DescriptionFormTypeProps = {
 
 export const PostDescription = ({ addedImages, defaultValue }: DescriptionFormTypeProps) => {
   const { t } = useTranslation()
-  const { data: me } = useMeQuery()
-  const { data: profile, isLoading, isFetching } = useGetProfileQuery({ profileId: me?.userId })
-  const [createPostComment, {}] = useCreatePostCommentsMutation()
-  const [createPostPhoto, { data: photoData }] = useCreatePostPhotoMutation()
+  const [createPostComment] = useCreatePostCommentsMutation()
+  const [createPostPhoto] = useCreatePostPhotoMutation()
 
   const {
     control,
     handleSubmit,
-    formState,
+
     trigger,
-    getValues,
+
     formState: { touchedFields },
   } = useForm<DescriptionFormType>({
     resolver: zodResolver(descriptionSchema(t)),
@@ -61,7 +57,7 @@ export const PostDescription = ({ addedImages, defaultValue }: DescriptionFormTy
     function createFormData(res: Uint8Array[]) {
       const formData = new FormData()
 
-      res.forEach((binaryData, index) => {
+      res.forEach(binaryData => {
         const blob = new Blob([binaryData], { type: 'image/jpeg' })
 
         formData.append(`file`, blob)
@@ -93,23 +89,13 @@ export const PostDescription = ({ addedImages, defaultValue }: DescriptionFormTy
 
   return (
     <div className={s.wrap}>
-      <div className={s.userInfo}>
-        <div>
-          <Avatar photo={profile?.avatars[0].url} size={36} className={s.ava} />
-        </div>
-        <div className={s.userName}>
-          <Typography variant={'h3'} color="primary">
-            {profile?.userName}
-          </Typography>
-        </div>
-      </div>
-      <form id={'form1'} method={'get'} className={s.wrapper} onSubmit={handleSubmit(onSubmit)}>
+      <form id="form1" method="get" className={s.wrapper} onSubmit={handleSubmit(onSubmit)}>
         <div className={s.mainContent}>
           <ControlledTextArea
-            counter={true}
+            counter={MAX_CHARS}
             control={control}
             classNameTextArea={s.textArea}
-            name={'description'}
+            name="description"
             label={t.addNewPost.addDescription}
           />
           <div className={s.counter}></div>

@@ -1,4 +1,4 @@
-import React, { ComponentProps, FC, ReactNode, useRef, useState } from 'react'
+import { ComponentProps, ReactNode, useRef, useState } from 'react'
 
 import {
   Dialog,
@@ -12,12 +12,11 @@ import { clsx } from 'clsx'
 
 import { useTranslation } from '@/hooks'
 import { Typography } from '@/components'
-import { ImageType } from '@/components/posts/create/create-post-modal'
+import { ImageType } from '@/components/posts/create'
 import { ArrowBack } from '@/assets/icons'
-import { AreYouSureModal } from '@/components/posts/create/are-you-sure/are-you-sure'
+import { AreYouSureModal } from '../are-you-sure'
 import s from './crop-modal.module.scss'
-import { FiltersModal } from '@/components/posts/create/edit-photo/filters/filters-modal'
-import { SelectedImages } from '@/components/posts/create/edit-photo/filters/selected-images/selected-images'
+import { SelectedImages, FiltersModal } from '../edit-photo'
 
 export type ModalProps = {
   image: string | null
@@ -38,7 +37,7 @@ export type ModalProps = {
   setImage: (image: string | null) => void
 } & ComponentProps<'div'>
 
-export const CropModal: FC<ModalProps> = ({
+export const CropModal = ({
   image,
   showSeparator = true,
   onAction,
@@ -54,7 +53,7 @@ export const CropModal: FC<ModalProps> = ({
   isBaseModalOpen,
   setIsBaseModalOpen,
   setImage,
-}) => {
+}: ModalProps) => {
   const classNames = {
     content: getContentClassName(className),
     separator: clsx(s.separator, !showSeparator && s.separatorHide),
@@ -91,7 +90,7 @@ export const CropModal: FC<ModalProps> = ({
           <DialogPortal>
             <DialogOverlay className={s.DialogOverlay} />
             <DialogContent className={classNames.content}>
-              <div className={s.titleWrapper} id={'titleWrap'}>
+              <div className={s.titleWrapper} id="titleWrap">
                 <button className={s.arrowButton} onClick={onCancelHandler}>
                   <ArrowBack />
                 </button>
@@ -121,7 +120,7 @@ export const CropModal: FC<ModalProps> = ({
                   </FiltersModal>
                 </div>
                 <DialogTitle className={s.DialogTitle}>
-                  <Typography variant={'h1'}>{title}</Typography>
+                  <Typography variant="h1">{title}</Typography>
                   <Separator className={classNames.separator} />
                 </DialogTitle>
               </div>

@@ -1,17 +1,25 @@
-import { Button, HeadMeta, getMainLayout, Typography, Loader } from '@/components'
+import { useState } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import InfiniteScroll from 'react-infinite-scroll-component'
+
+import {
+  Button,
+  HeadMeta,
+  getMainLayout,
+  Typography,
+  Loader,
+  ExpandableText,
+  Avatar,
+} from '@/components'
 import { PATH } from '@/consts/route-paths'
 import { ImageOutline } from '@/assets/icons'
 import { useMeQuery } from '@/services/auth/auth-api'
 import { useGetProfileQuery } from '@/services/profile/profile-api'
+import { useTranslation } from '@/hooks'
+import { CreatePostCommentResponse, useGetUserPostsQuery } from '@/services/posts'
 
 import s from './profile.module.scss'
-import { useTranslation } from '@/hooks'
-import Link from 'next/link'
-import { Avatar } from 'src/components/ui/avatar'
-import { FC, useState } from 'react'
-import Image from 'next/image'
-import InfiniteScroll from 'react-infinite-scroll-component'
-import { CreatePostCommentResponse, useGetUserPostsQuery } from '@/services/posts'
 
 const Profile = () => {
   const [pageSize, setPageSize] = useState(8)
@@ -29,18 +37,9 @@ const Profile = () => {
 
   console.log(posts)
 
-  // const isFilledProfile = useMemo(() => {
-  //   if (profile) return Object.values(profile).some(value => value === null)
-  // }, [profile])
-
-  // if (isSuccess && isFilledProfile) {
-  //   push(PATH.PROFILE_SETTINGS)
-  // }
-
   if (isLoading || isFetching) {
     return <Loader />
   }
-  // if (isSuccess && isFilledProfile) return
 
   const following = 2218
   const followers = 2358
@@ -54,7 +53,7 @@ const Profile = () => {
         <div className={s.profile}>
           {isProfile ? (
             <Avatar
-              photo={profile?.avatars[1]?.url}
+              photo={profile?.avatars[0]?.url}
               name={t.profile.avatarAlt}
               className={s.photo}
             />
@@ -80,7 +79,7 @@ const Profile = () => {
                 <Typography>{t.profile.publications(publications)}</Typography>
               </div>
             </div>
-            <ExpandableText text={profile?.aboutMe} />
+            <ExpandableText text={profile?.aboutMe ?? null} />
             <Link passHref legacyBehavior href={PATH.PROFILE_SETTINGS}>
               <Button as="a" variant="secondary" className={s.btn}>
                 {t.profile.profileSettings}
@@ -114,32 +113,3 @@ const Profile = () => {
 
 Profile.getLayout = getMainLayout
 export default Profile
-
-type ExpandableTextProps = {
-  text: string | null | undefined
-}
-
-const ExpandableText: FC<ExpandableTextProps> = ({ text }) => {
-  const [isExpanded, setIsExpanded] = useState(false)
-
-  const sentences = text?.split('. ')
-  const closedText = sentences && sentences[0].split(' ')
-  const preTriggerText = closedText && closedText.slice(0, -1).join(' ')
-  const openTrigger = closedText && closedText.slice(-1).join(' ')
-  const restText = sentences && sentences.slice(1).join('. ')
-
-  return (
-    sentences && (
-      <div>
-        <span>{preTriggerText}</span>
-        <span
-          onClick={() => setIsExpanded(true)}
-          className={!isExpanded ? s.expandDescription : ''}
-        >
-          {isExpanded ? ` ${openTrigger}. ` : ` ${openTrigger}...`}
-        </span>
-        <span>{isExpanded ? restText : ''}</span>
-      </div>
-    )
-  )
-}

@@ -1,4 +1,4 @@
-import React, { ComponentProps, FC, ReactNode, useState } from 'react'
+import { ComponentProps, ReactNode, useState } from 'react'
 
 import {
   Dialog,
@@ -10,15 +10,17 @@ import {
 import { Separator } from '@radix-ui/react-separator'
 import { clsx } from 'clsx'
 
-import s from './filters-modal.module.scss'
-
 import { useTranslation } from '@/hooks'
 import { Button, Typography } from '@/components'
 import { ImageType } from '@/components/posts/create/create-post-modal'
 import { ArrowBack } from '@/assets/icons'
-import { PostDescription } from '@/components/posts/create/add-description/description/description'
-import { DescriptionModal } from '@/components/posts/create/add-description/add-description-modal'
-import { FilteredImages } from '@/components/posts/create/add-description/images-with-filters/images-with-filter'
+import {
+  PostDescription,
+  DescriptionModal,
+  FilteredImages,
+} from '@/components/posts/create/add-description'
+
+import s from './filters-modal.module.scss'
 
 export type ModalProps = {
   image: string | null
@@ -43,7 +45,7 @@ export type ModalProps = {
   setIsModalOpen: (open: boolean) => void
 } & ComponentProps<'div'>
 
-export const FiltersModal: FC<ModalProps> = ({
+export const FiltersModal = ({
   image,
   showSeparator = true,
   onAction,
@@ -61,7 +63,7 @@ export const FiltersModal: FC<ModalProps> = ({
   setOpenSureModal,
   setIsBaseModalOpen,
   setIsModalOpen,
-}) => {
+}: ModalProps) => {
   const classNames = {
     content: getContentClassName(className),
     separator: clsx(s.separator, !showSeparator && s.separatorHide),
@@ -127,7 +129,7 @@ export const FiltersModal: FC<ModalProps> = ({
               </div>
 
               <DialogTitle className={s.DialogTitle}>
-                <Typography variant={'h1'}>{title}</Typography>
+                <Typography variant="h1">{title}</Typography>
                 <Separator className={classNames.separator} />
               </DialogTitle>
             </div>

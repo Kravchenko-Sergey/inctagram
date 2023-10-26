@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 import Image from 'next/image'
 
-import s from './added-images.module.scss'
-
-// import { CloseIcon } from '@/src/assets/icons/close-icon'
 import { CloseModal } from '@/assets/icons'
-import { ImageType } from '@/components/posts/create/create-post-modal'
+import { ImageType } from '@/components/posts/create'
+
+import s from './added-images.module.scss'
 
 type PropsType = {
   addedImages: ImageType[]
@@ -34,13 +33,7 @@ export const AddedImages = ({ addedImages, setAddedImages, croppedImage, image }
         ? addedImages.map((el, idx) => {
             return (
               <div key={idx} className={s.addedPhoto}>
-                <Image
-                  className={s.oneImage}
-                  src={el.image}
-                  alt={'photos'}
-                  height={82}
-                  width={80}
-                />
+                <Image className={s.oneImage} src={el.image} alt="photos" height={82} width={80} />
               </div>
             )
           })
@@ -50,7 +43,7 @@ export const AddedImages = ({ addedImages, setAddedImages, croppedImage, image }
                 <div className={s.closeIcon} onClick={() => onDeleteImage(i)}>
                   <CloseModal className={s.close} />
                 </div>
-                <Image className={s.image} src={el.image} alt={'photos'} height={82} width={80} />
+                <Image className={s.image} src={el.image} alt="photos" height={82} width={80} />
               </div>
             )
           })}

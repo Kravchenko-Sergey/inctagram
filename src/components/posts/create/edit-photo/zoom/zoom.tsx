@@ -1,8 +1,8 @@
-import React, { ChangeEvent, FC, MutableRefObject, useEffect, useRef, useState } from 'react'
-
-// import { Slider } from '@mui/base/Slider'
+import { ChangeEvent, FC, MutableRefObject, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
-import maximize from './../../../../../assets/icons/maximize-outline.svg'
+
+import maximize from '@/assets/icons/maximize-outline.svg'
+
 import s from './zoom.module.scss'
 
 type PropsType = {
@@ -38,7 +38,7 @@ export const Zoom: FC<PropsType> = ({ className, zoom, setZoom }) => {
   return (
     <div ref={zoomRef}>
       <div onClick={() => setIsOpen(true)} className={s.zoomBtn}>
-        <Image src={maximize} alt={'zoom'} width={24} height={24} className={s.blue} />
+        <Image src={maximize} alt="zoom" width={24} height={24} className={s.blue} />
       </div>
 
       {isOpen && (

@@ -1,20 +1,14 @@
-import React, { FC } from 'react'
-
 import Slider from 'react-slick'
+import Image from 'next/image'
 
 import airBalloon from '@/assets/image/air-balloon.jpg'
-// import settings from '@/src/components/profile/new-post/create-post/cropped-image/cropped-image'
+import { Typography } from '@/components'
+import { ImageType } from '@/components/posts/create'
+import { filters } from '@/components/posts/create/edit-photo'
+
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-// eslint-disable-next-line import/order
 import s from './selected-images.module.scss'
-
-// eslint-disable-next-line import/order
-import Image from 'next/image'
-// eslint-disable-next-line import/order
-import { Typography } from '@/components'
-import { ImageType } from '@/components/posts/create/create-post-modal'
-import { filters } from '@/components/posts/create/edit-photo/filters/filters'
 
 type PropsType = {
   addedImages: ImageType[]
@@ -114,7 +108,7 @@ export const SelectedImages = ({
             return (
               <div key={idx} className={s.carousel}>
                 <Image
-                  alt={'img'}
+                  alt="img"
                   style={{ filter: activeFilter }}
                   src={el.image}
                   width={490}
@@ -131,14 +125,14 @@ export const SelectedImages = ({
             <div key={idx} className={s.imgWithFilter} onClick={() => onActiveFilter(el.name)}>
               <Image
                 src={airBalloon}
-                alt={'image-with-filter'}
+                alt="image-with-filter"
                 width={108}
                 height={108}
                 style={{ filter: el.filter }}
                 className={s.image}
               />
               <div className={s.filterName}>
-                <Typography variant={'h3'}>{el.name}</Typography>
+                <Typography variant="h3">{el.name}</Typography>
               </div>
             </div>
           )

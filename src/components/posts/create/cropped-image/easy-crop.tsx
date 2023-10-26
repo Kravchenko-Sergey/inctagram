@@ -38,7 +38,7 @@ export const EasyCrop: FC<PropsType> = ({
   return (
     <ReactCrop
       image={image}
-      objectFit={'cover'} //zoom and crop doesn't work correctly without it
+      objectFit="cover" //zoom and crop doesn't work correctly without it
       crop={crop}
       zoom={zoom}
       zoomWithScroll={true}

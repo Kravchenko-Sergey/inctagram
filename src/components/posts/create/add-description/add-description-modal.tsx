@@ -1,4 +1,4 @@
-import React, { ComponentProps, FC, ReactNode, useState } from 'react'
+import { ComponentProps, ReactNode, useState } from 'react'
 
 import {
   Dialog,
@@ -10,13 +10,13 @@ import {
 import { Separator } from '@radix-ui/react-separator'
 import { clsx } from 'clsx'
 
-import s from './add-description-modal.module.scss'
-
 import { Button, Typography } from '@/components'
-import { ImageType } from '@/components/posts/create/create-post-modal'
+import { ImageType } from '@/components/posts/create'
 import { useTranslation } from '@/hooks'
 import { ArrowBack } from '@/assets/icons'
-import getFilteredImg from '@/components/posts/create/edit-photo/filters/Filter'
+import { getFilteredImg } from '@/components/posts/create/edit-photo'
+
+import s from './add-description-modal.module.scss'
 
 export type ModalProps = {
   image: string | null
@@ -40,7 +40,7 @@ export type ModalProps = {
   setAddedImages: (addedImages: Awaited<{ image: string }>[]) => void
 } & ComponentProps<'div'>
 
-export const DescriptionModal: FC<ModalProps> = ({
+export const DescriptionModal = ({
   isModalOpen,
   setIsModalOpen,
   image,
@@ -59,7 +59,7 @@ export const DescriptionModal: FC<ModalProps> = ({
   className,
   children,
   setOpenSureModal,
-}) => {
+}: ModalProps) => {
   const classNames = {
     content: getContentClassName(className),
     separator: clsx(s.separator, !showSeparator && s.separatorHide),
@@ -125,8 +125,8 @@ export const DescriptionModal: FC<ModalProps> = ({
               </button>
               <div className={s.next}>
                 <Button
-                  type={'submit'}
-                  form={'form1'}
+                  type="submit"
+                  form="form1"
                   variant="primary"
                   className={s.nextButton}
                   onClick={() => showFilteredImg(activeFilter)}
@@ -135,7 +135,7 @@ export const DescriptionModal: FC<ModalProps> = ({
                 </Button>
               </div>
               <DialogTitle className={s.DialogTitle}>
-                <Typography variant={'h1'}>{title}</Typography>
+                <Typography variant="h1">{title}</Typography>
                 <Separator className={classNames.separator} />
               </DialogTitle>
             </div>

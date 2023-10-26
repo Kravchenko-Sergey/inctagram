@@ -1,8 +1,6 @@
-import React, { FC } from 'react'
-
 import { Typography } from '@/components'
 import { useTranslation } from '@/hooks'
-import { BaseModal } from '@/components/posts/create/base-modal/base-modal'
+import { BaseModal } from '../base-modal'
 
 export type ModalProps = {
   openSureModal: boolean
@@ -13,13 +11,13 @@ export type ModalProps = {
   setImage: (image: string | null) => void
 }
 
-export const AreYouSureModal: FC<ModalProps> = ({
+export const AreYouSureModal = ({
   openSureModal,
   setOpenSureModal,
   setIsModalOpen,
   setIsBaseModalOpen,
   setImage,
-}) => {
+}: ModalProps) => {
   const { t } = useTranslation()
   const onModalClose = () => {
     setOpenSureModal(false)
@@ -35,17 +33,17 @@ export const AreYouSureModal: FC<ModalProps> = ({
   return (
     <div hidden={!openSureModal}>
       <BaseModal
-        id={'areYouSureModal'}
-        modalWidth={'sm'}
+        id="areYouSureModal"
+        modalWidth="sm"
         title={t.addNewPost.close}
         open={openSureModal}
-        cancelButtonName={'SaveDraft'}
-        actionButtonName={'Discard'}
+        cancelButtonName="SaveDraft"
+        actionButtonName="Discard"
         onClose={onModalClose}
         onCancel={onModalClose}
         onAction={discardHandler}
       >
-        <Typography variant={'h3'}>{t.addNewPost.areYouSure}</Typography>
+        <Typography variant="h3">{t.addNewPost.areYouSure}</Typography>
       </BaseModal>
     </div>
   )

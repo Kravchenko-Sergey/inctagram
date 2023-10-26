@@ -1,21 +1,15 @@
-import React, { FC, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import Slider from 'react-slick'
 
 import getCroppedImg from './Crop'
-import s from './croped-image.module.scss'
 
-// import 'slick-carousel/slick/slick.css'
-// import 'slick-carousel/slick/slick-theme.css'
-
-import { CropArgType, EasyCrop } from '@/components/posts/create/cropped-image/easy-crop'
-import { ImageType } from '@/components/posts/create/create-post-modal'
-import { Add } from '@/components/posts/create/edit-photo/add/add'
-import { Crop } from '@/components/posts/create/edit-photo/crop/crop'
-import { Zoom } from '@/components/posts/create/edit-photo/zoom/zoom'
+import { CropArgType, EasyCrop } from './easy-crop'
+import { ImageType } from '@/components/posts/create'
+import { Add, Crop, Zoom } from '@/components/posts/create/edit-photo'
 import { useTranslation } from '@/hooks'
 
-// eslint-disable-next-line import/order
+import s from './croped-image.module.scss'
 
 type PropsType = {
   image: string | null
@@ -24,7 +18,7 @@ type PropsType = {
   setAddedImages: (addedImages: ImageType[]) => void
 }
 
-export const CroppedImage: FC<PropsType> = ({ image, addedImages, setAddedImages }) => {
+export const CroppedImage = ({ image, addedImages, setAddedImages }: PropsType) => {
   const [index, setIndex] = useState<number>(0)
   const [zoomValue, setZoomValue] = useState(1)
   const [crop, setCrop] = useState({ x: 0, y: 0 })
@@ -101,7 +95,7 @@ export const CroppedImage: FC<PropsType> = ({ image, addedImages, setAddedImages
                 <div key={idx} className={s.carousel} onClick={() => setIndex(idx)}>
                   <EasyCrop
                     image={el.image}
-                    objectFit={'fill'}
+                    objectFit="fill"
                     crop={crop}
                     zoom={zoomValue}
                     setZoom={setZoomValue}

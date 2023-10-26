@@ -1,4 +1,4 @@
-import React, { ComponentProps, ComponentPropsWithoutRef, FC, ReactNode } from 'react'
+import { ComponentPropsWithoutRef, ReactNode } from 'react'
 
 import {
   Dialog,
@@ -10,11 +10,10 @@ import {
 import { Separator } from '@radix-ui/react-separator'
 import { clsx } from 'clsx'
 
-// eslint-disable-next-line import/no-named-as-default
-
-import s from './base-modal.module.scss'
 import { Button, Typography } from '@/components'
 import { CloseModal } from '@/assets/icons'
+
+import s from './base-modal.module.scss'
 
 export type ModalSize = 'sm' | 'md' | 'lg'
 
@@ -32,7 +31,7 @@ export type ModalProps = {
   className?: string
 } & ComponentPropsWithoutRef<'div'>
 
-export const BaseModal: FC<ModalProps> = ({
+export const BaseModal = ({
   showSeparator = true,
   onClose,
   onAction,
@@ -45,7 +44,7 @@ export const BaseModal: FC<ModalProps> = ({
   className,
   children,
   ...rest
-}) => {
+}: ModalProps) => {
   const classNames = {
     content: getContentClassName(modalWidth, className),
     separator: clsx(s.separator, !showSeparator && s.separatorHide),
@@ -78,7 +77,7 @@ export const BaseModal: FC<ModalProps> = ({
               <CloseModal />
             </button>
             <DialogTitle className={s.DialogTitle}>
-              <Typography variant={'h1'}>{title}</Typography>
+              <Typography variant="h1">{title}</Typography>
               <Separator className={classNames.separator} />
             </DialogTitle>
           </div>
