@@ -63,6 +63,11 @@
   border-radius: 2px;
 }
 
+.postWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .scrollableContent {
   overflow: auto;
   height: 200px;
