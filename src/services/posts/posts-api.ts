@@ -16,6 +16,7 @@ export const postAPI = baseApi.injectEndpoints({
         method: 'POST',
         body,
       }),
+      invalidatesTags: ['getUserPosts'],
     }),
     createPostPhoto: build.mutation<CreatePostImageResponse, CreatePostImageRequest>({
       query: body => ({

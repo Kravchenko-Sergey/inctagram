@@ -4,11 +4,11 @@ import Image from 'next/image'
 
 import s from './crop.module.scss'
 
-import expandOutline from './../../../../..//assets/icons/expand-outline.svg'
-import img from './../../../../../assets/icons/image-ouline.svg'
-import rectangle11 from './../../../../../assets/icons/rectangle11.svg'
-import rectangle169 from './../../../../../assets/icons/rectangle169.svg'
-import rectangle45 from './../../../../../assets/icons/rectangle45.svg'
+import expandOutline from '@/assets/icons/expand-outline.svg'
+import img from '@/assets/icons/image-ouline.svg'
+import rectangle11 from '@/assets/icons/rectangle11.svg'
+import rectangle169 from '@/assets/icons/rectangle169.svg'
+import rectangle45 from '@/assets/icons/rectangle45.svg'
 import { useTranslation } from '@/hooks'
 
 type PropsType = {
@@ -35,14 +35,26 @@ export const Crop: FC<PropsType> = ({ setAspectRatio }) => {
 
   return (
     <div ref={cropRef}>
-      <div onClick={() => setIsOpen(true)} className={s.cropBtn}>
-        <Image src={expandOutline} alt={'crop'} width={24} height={24} className={s.blue} />
+      <div onClick={() => setIsOpen(!isOpen)} className={s.cropBtn}>
+        <Image
+          src={expandOutline}
+          alt={'crop'}
+          width={24}
+          height={24}
+          className={isOpen ? s.blueActive : s.blue}
+        />
       </div>
       {isOpen && (
         <div className={s.cropOptions}>
           <div className={s.cropOption1} onClick={() => setAspectRatio(4 / 3)}>
             {'Original'}
-            <Image src={img} alt={'image'} width={24} height={24} />
+            <Image
+              src={img}
+              alt={'image'}
+              style={{ position: 'relative', left: '3px' }}
+              width={24}
+              height={24}
+            />
           </div>
           <div className={s.cropOption} onClick={() => setAspectRatio(1)}>
             1:1

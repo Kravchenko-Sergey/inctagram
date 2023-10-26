@@ -1,4 +1,4 @@
-import { Button, HeadMeta, getMainLayout, Typography, Loader } from '@/components'
+import { Button, getMainLayout, HeadMeta, Loader, Typography } from '@/components'
 import { PATH } from '@/consts/route-paths'
 import { ImageOutline } from '@/assets/icons'
 import { useMeQuery } from '@/services/auth/auth-api'
@@ -8,7 +8,7 @@ import s from './profile.module.scss'
 import { useTranslation } from '@/hooks'
 import Link from 'next/link'
 import { Avatar } from 'src/components/ui/avatar'
-import { FC, useCallback, useState } from 'react'
+import { FC, useState } from 'react'
 import Image from 'next/image'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import {
@@ -36,7 +36,7 @@ const Profile = () => {
     deletePost({ postId }).unwrap()
   }
 
-  console.log(posts)
+  // console.log(posts)
 
   // const isFilledProfile = useMemo(() => {
   //   if (profile) return Object.values(profile).some(value => value === null)
@@ -101,7 +101,7 @@ const Profile = () => {
           dataLength={publications || 0}
           next={loadMorePosts}
           hasMore={hasMorePosts}
-          loader={<Loader className={s.loader} />}
+          loader={publications > 0 ? <Loader className={s.loader} /> : null}
           className={s.posts}
         >
           {posts?.items.map((post: CreatePostCommentResponse) => (

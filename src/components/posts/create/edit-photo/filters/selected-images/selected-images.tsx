@@ -1,13 +1,11 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 
 import Slider from 'react-slick'
 
-import airBalloon from '@/assets/image/air-balloon.jpg'
+import airBalloon from '/public/image/air-balloon.jpg'
 // import settings from '@/src/components/profile/new-post/create-post/cropped-image/cropped-image'
-
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-// eslint-disable-next-line import/order
 import s from './selected-images.module.scss'
 
 // eslint-disable-next-line import/order

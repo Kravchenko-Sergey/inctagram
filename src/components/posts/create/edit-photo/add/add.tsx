@@ -12,7 +12,7 @@ import Image from 'next/image'
 
 import s from './add.module.scss'
 
-import img from './../../../../../assets/icons/image-ouline.svg'
+import img from '@/assets/icons/image-ouline.svg'
 import { ImageType } from '@/components/posts/create/create-post-modal'
 import { AddedImages } from '@/components/posts/create/edit-photo/add/added-images/addded-images'
 import { PlusSquareOutline } from '@/assets/icons'
@@ -62,10 +62,10 @@ export const Add: FC<PropsType> = ({ image, addedImages, setAddedImages, cropped
         <Image
           src={img}
           alt={'add photo'}
-          onClick={() => setIsAddOpen(true)}
+          onClick={() => setIsAddOpen(!isAddOpen)}
           width={24}
           height={24}
-          className={s.blue}
+          className={isAddOpen ? s.blueActive : s.blue}
         />
       </div>
       {isAddOpen && (
