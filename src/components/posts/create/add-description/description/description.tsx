@@ -18,6 +18,8 @@ import {
   useCreatePostCommentsMutation,
   useCreatePostPhotoMutation,
 } from '@/services/posts'
+import { useRouter } from 'next/router'
+import { PATH } from '@/consts/route-paths'
 
 type DescriptionFormTypeProps = {
   onSubmitHandler?: (data: DescriptionFormType) => void
@@ -37,7 +39,7 @@ export const PostDescription = ({
   const { data: profile, isLoading, isFetching } = useGetProfileQuery({ profileId: me?.userId })
   const [createPostComment, {}] = useCreatePostCommentsMutation()
   const [createPostPhoto, { data: photoData }] = useCreatePostPhotoMutation()
-
+  const { push } = useRouter()
   const {
     control,
     handleSubmit,
@@ -89,6 +91,7 @@ export const PostDescription = ({
         if (responsePhotoStore.images) {
           await createPostComment(requestBody)
         }
+        push(PATH.PROFILE)
       } catch (e: unknown) {
         const error = e as any
       }
