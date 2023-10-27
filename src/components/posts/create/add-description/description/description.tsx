@@ -1,25 +1,23 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/router'
 
-import s from './description.module.scss'
-
+import { MAX_CHARS_POST } from '@/consts/input-limits'
 import { useTranslation } from '@/hooks'
-import { ControlledTextArea, Typography } from '@/components'
-import { Avatar } from '@/components/ui/avatar'
-import { DescriptionFormType, descriptionSchema } from '@/schemas/description-schema'
+import { ControlledTextArea } from '@/components'
+import { DescriptionFormType, descriptionSchema } from '@/schemas'
 import { FormFields, getBinaryImageData, triggerZodFieldError } from '@/helpers'
-import { useMeQuery } from '@/services/auth'
-import { useGetProfileQuery } from '@/services/profile'
-import { ImageType } from '@/components/posts/create/create-post-modal'
 import {
   CreatePostCommentRequest,
   useCreatePostCommentsMutation,
   useCreatePostPhotoMutation,
 } from '@/services/posts'
-import { useRouter } from 'next/router'
 import { PATH } from '@/consts/route-paths'
+import { ImageType } from '@/components/posts/create'
+
+import s from './description.module.scss'
 
 type DescriptionFormTypeProps = {
   onSubmitHandler?: (data: DescriptionFormType) => void
@@ -29,23 +27,18 @@ type DescriptionFormTypeProps = {
   addedImages: ImageType[]
 }
 
-export const PostDescription = ({
-  onSubmitHandler,
-  addedImages,
-  defaultValue,
-}: DescriptionFormTypeProps) => {
+export const PostDescription = ({ addedImages, defaultValue }: DescriptionFormTypeProps) => {
   const { t } = useTranslation()
-  const { data: me } = useMeQuery()
-  const { data: profile, isLoading, isFetching } = useGetProfileQuery({ profileId: me?.userId })
-  const [createPostComment, {}] = useCreatePostCommentsMutation()
-  const [createPostPhoto, { data: photoData }] = useCreatePostPhotoMutation()
   const { push } = useRouter()
+  const [createPostComment] = useCreatePostCommentsMutation()
+  const [createPostPhoto] = useCreatePostPhotoMutation()
+
   const {
     control,
     handleSubmit,
-    formState,
+
     trigger,
-    getValues,
+
     formState: { touchedFields },
   } = useForm<DescriptionFormType>({
     resolver: zodResolver(descriptionSchema(t)),
@@ -67,7 +60,7 @@ export const PostDescription = ({
     function createFormData(res: Uint8Array[]) {
       const formData = new FormData()
 
-      res.forEach((binaryData, index) => {
+      res.forEach(binaryData => {
         const blob = new Blob([binaryData], { type: 'image/jpeg' })
 
         formData.append(`file`, blob)
@@ -100,29 +93,16 @@ export const PostDescription = ({
 
   return (
     <div className={s.wrap}>
-      <div className={s.userInfo}>
-        <div>
-          <Avatar photo={profile?.avatars[0].url} size={36} className={s.ava} />
-        </div>
-        <div className={s.userName}>
-          <Typography variant={'h3'} color="primary">
-            User Name
-          </Typography>
-        </div>
-      </div>
-      <form id={'form1'} method={'get'} className={s.wrapper} onSubmit={handleSubmit(onSubmit)}>
+      <form id="form1" method="get" className={s.wrapper} onSubmit={handleSubmit(onSubmit)}>
         <div className={s.mainContent}>
           <ControlledTextArea
+            counter={MAX_CHARS_POST}
             control={control}
             classNameTextArea={s.textArea}
-            name={'description'}
-            label={'Add Description'}
+            name="description"
+            label={t.addNewPost.addDescription}
           />
-          <div className={s.counter}>
-            <Typography variant={'small_text'} color="secondary">
-              {getValues('description').length}/500
-            </Typography>
-          </div>
+          <div className={s.counter}></div>
         </div>
       </form>
     </div>

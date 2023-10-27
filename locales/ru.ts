@@ -48,6 +48,7 @@ export const ru = {
     // under13: (elem: ReactElement) => `Возраст пользователя должен быть старше 13 лет. ${elem} `,
     tellUsSomethingAboutYou: 'Поле не должно быть пустым',
     whereAreYouLive: 'Укажите в каком городе вы живете',
+    maxLengthPost: 'Максимальное количество символов для поста равно 500',
   },
   components: {
     selectPlaceholder: 'Выберете опцию',
@@ -201,6 +202,19 @@ export const ru = {
           return `постов`
       }
     },
+  },
+  addNewPost: {
+    cropping: 'Редактирование',
+    filters: 'Фильтры',
+    publication: 'Публикация',
+    addPhoto: 'Добавить фото',
+    next: 'Далее',
+    original: 'Оригинал',
+    showResult: 'Показать результаты',
+    close: 'Закрыть',
+    areYouSure: 'Вы уверены?',
+    publish: 'Опубликовать',
+    addDescription: 'Добавить описание',
   },
   sidebars: {
     home: 'Главная',

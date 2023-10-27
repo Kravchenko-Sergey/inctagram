@@ -9,7 +9,7 @@ import { Modal } from '@/components/ui/modal'
 import s from './profile-image.module.scss'
 import { useTranslation } from '@/hooks'
 import { Loader } from '@/components/ui/loader'
-import { permittedFileSize, permittedFileTypes } from '@/consts/consts'
+import { permittedFileSize, permittedFileTypes } from '@/consts/image'
 
 type ProfileImageProps = {
   avatars?: string

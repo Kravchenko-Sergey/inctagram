@@ -1,12 +1,11 @@
-import React, { FC, useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 import Image from 'next/image'
 
-import s from './added-images.module.scss'
-
-// import { CloseIcon } from '@/src/assets/icons/close-icon'
 import { CloseModal } from '@/assets/icons'
-import { ImageType } from '@/components/posts/create/create-post-modal'
+import { ImageType } from '@/components/posts/create'
+
+import s from './added-images.module.scss'
 
 type PropsType = {
   addedImages: ImageType[]
@@ -15,17 +14,12 @@ type PropsType = {
   croppedImage: string | null
 }
 
-export const AddedImages: FC<PropsType> = ({
-  addedImages,
-  setAddedImages,
-  croppedImage,
-  image,
-}) => {
+export const AddedImages = ({ addedImages, setAddedImages, croppedImage, image }: PropsType) => {
   const imagesToShow = addedImages.slice(-2)
 
   useEffect(() => {
     setAddedImages(addedImages)
-  }, [addedImages])
+  }, [addedImages, setAddedImages])
 
   const onDeleteImage = (i: number) => {
     const image = i === 0 ? imagesToShow.slice(1) : imagesToShow.slice(0, -1)
@@ -39,13 +33,7 @@ export const AddedImages: FC<PropsType> = ({
         ? addedImages.map((el, idx) => {
             return (
               <div key={idx} className={s.addedPhoto}>
-                <Image
-                  className={s.oneImage}
-                  src={el.image}
-                  alt={'photos'}
-                  height={82}
-                  width={80}
-                />
+                <Image className={s.oneImage} src={el.image} alt="photos" height={82} width={80} />
               </div>
             )
           })
@@ -55,7 +43,7 @@ export const AddedImages: FC<PropsType> = ({
                 <div className={s.closeIcon} onClick={() => onDeleteImage(i)}>
                   <CloseModal className={s.close} />
                 </div>
-                <Image className={s.image} src={el.image} alt={'photos'} height={82} width={80} />
+                <Image className={s.image} src={el.image} alt="photos" height={82} width={80} />
               </div>
             )
           })}

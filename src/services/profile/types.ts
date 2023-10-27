@@ -1,4 +1,4 @@
-export type Avatar = {
+export type AvatarType = {
   url: string
   width: number
   height: number
@@ -13,14 +13,14 @@ export type GetProfileResponse = {
   city: string | null
   dateOfBirth: Date
   aboutMe: string | null
-  avatars: Avatar[]
+  avatars: AvatarType[]
 }
 
 export type ArgGetProfile = { profileId: number | undefined }
 
 export type ArgUpdateProfile = Omit<GetProfileResponse, 'id' | 'avatars'>
 
-export type UploadAvatarResponse = { avatars: Avatar[] }
+export type UploadAvatarResponse = { avatars: AvatarType[] }
 
 export type ArgUploadAvatar = FormData
 

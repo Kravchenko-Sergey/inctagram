@@ -1,21 +1,12 @@
-import React, {
-  useEffect,
-  useState,
-  useRef,
-  MutableRefObject,
-  Dispatch,
-  SetStateAction,
-  FC,
-} from 'react'
-
+import { MutableRefObject, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 
-import s from './add.module.scss'
-
-import img from '@/assets/icons/image-ouline.svg'
-import { ImageType } from '@/components/posts/create/create-post-modal'
-import { AddedImages } from '@/components/posts/create/edit-photo/add/added-images/addded-images'
 import { PlusSquareOutline } from '@/assets/icons'
+import imageOutline from '@/assets/icons/image-ouline.svg'
+import { ImageType } from '@/components/posts/create'
+import { AddedImages } from './added-images'
+
+import s from './add.module.scss'
 
 type PropsType = {
   addedImages: ImageType[]
@@ -24,7 +15,7 @@ type PropsType = {
   croppedImage: string | null
 }
 
-export const Add: FC<PropsType> = ({ image, addedImages, setAddedImages, croppedImage }) => {
+export const Add = ({ image, addedImages, setAddedImages, croppedImage }: PropsType) => {
   const [isAddOpen, setIsAddOpen] = useState(false)
   const addRef = useRef() as MutableRefObject<HTMLDivElement>
   const inputRef = useRef<HTMLInputElement>(null)
@@ -43,25 +34,22 @@ export const Add: FC<PropsType> = ({ image, addedImages, setAddedImages, cropped
 
   useEffect(() => {
     setAddedImages(addedImages)
-  }, [addedImages])
+  }, [addedImages, setAddedImages])
 
   const selectFileHandler = () => {
     inputRef && inputRef.current?.click()
   }
 
   const handleImageUpload = async (e: any) => {
-    //console.log(addedImages)
     setAddedImages([...addedImages, { image: URL.createObjectURL(e.target.files[0]) }])
   }
-
-  //console.log(addedImages)
 
   return (
     <div ref={addRef} className={s.wrapper}>
       <div className={s.addBtn}>
         <Image
-          src={img}
-          alt={'add photo'}
+          src={imageOutline}
+          alt="add photo"
           onClick={() => setIsAddOpen(!isAddOpen)}
           width={24}
           height={24}

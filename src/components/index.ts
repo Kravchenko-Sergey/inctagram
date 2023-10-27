@@ -31,6 +31,8 @@ export type { InputPropsType } from './ui/text-field'
 export { Trans } from './trans'
 export { Typography } from './ui/typography'
 export { Loader } from './ui/loader'
+export { Avatar } from './ui/avatar'
+export { ExpandableText } from './ui/expandable-text'
 
 export { CreateNewPassword } from './auth/create-new-password'
 export { ForgotPasswordForm } from './auth/forgot-password-form'

@@ -1,21 +1,18 @@
-import React, { FC, useEffect, useState } from 'react'
-
 import Slider from 'react-slick'
+import Image from 'next/image'
+
+import { ImageType } from '@/components/posts/create/create-post-modal'
 
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import s from './images-with-filters.module.scss'
-
-// eslint-disable-next-line import/order
-import Image from 'next/image'
-import { ImageType } from '@/components/posts/create/create-post-modal'
 
 type PropsType = {
   addedImages: ImageType[]
   activeFilter: string
 }
 
-export const FilteredImages: FC<PropsType> = ({ addedImages, activeFilter }) => {
+export const FilteredImages = ({ addedImages, activeFilter }: PropsType) => {
   const settings = {
     dots: true,
     swipe: false,
@@ -61,7 +58,7 @@ export const FilteredImages: FC<PropsType> = ({ addedImages, activeFilter }) => 
             return (
               <div key={idx} className={s.carousel}>
                 <Image
-                  alt={'img'}
+                  alt="img"
                   src={el.image}
                   width={490}
                   height={503}

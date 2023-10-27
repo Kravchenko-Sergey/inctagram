@@ -1,8 +1,6 @@
 import { z } from 'zod'
 
-import { LocaleType } from 'locales/ru'
-
-export const publicationSchema = (t: LocaleType) => {
+export const publicationSchema = () => {
   return z.object({
     comment: z.string().trim().nonempty(),
     location: z.string().optional(),
