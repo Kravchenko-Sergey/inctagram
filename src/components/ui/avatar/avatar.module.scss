@@ -1,14 +1,13 @@
 .avatarRoot {
   user-select: none;
 
-  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
   vertical-align: middle;
 
-  background-color: var(dark-500);
+  background-color: var(--dark-500);
   border-radius: 50%;
 
   .avatarImage {
@@ -21,14 +20,6 @@
     align-items: center;
     justify-content: center;
 
-    width: 100%;
-    height: 100%;
-
-    font-size: 25px;
-    font-weight: 500;
-    line-height: 1;
     color: var(--light-100);
-
-    background-color: var(--light-500);
   }
 }

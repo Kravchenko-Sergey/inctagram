@@ -13,7 +13,6 @@ import {
   Avatar,
 } from '@/components'
 import { PATH } from '@/consts/route-paths'
-import { ImageOutline } from '@/assets/icons'
 import { useMeQuery } from '@/services/auth/auth-api'
 import { useGetProfileQuery } from '@/services/profile/profile-api'
 import { useTranslation } from '@/hooks'
@@ -33,7 +32,7 @@ const Profile = () => {
   const { data: me } = useMeQuery()
   const { data: profile, isLoading, isFetching } = useGetProfileQuery({ profileId: me?.userId })
   const { data: posts } = useGetUserPostsQuery({ pageSize })
-  const [deletePost, { error: deletePostError }] = useDeleteUserPostMutation()
+  const [deletePost] = useDeleteUserPostMutation()
 
   const loadMorePosts = () => {
     setPageSize(prev => prev + 8)
@@ -53,25 +52,13 @@ const Profile = () => {
   const following = 2218
   const followers = 2358
   const publications = posts?.items.length as number
-  const isProfile = profile?.avatars.length !== 0
 
   return (
     <>
       <HeadMeta title="Profile" />
       <main className={s.root}>
         <div className={s.profile}>
-          {isProfile ? (
-            <Avatar
-              photo={profile?.avatars[0]?.url}
-              name={t.profile.avatarAlt}
-              className={s.photo}
-            />
-          ) : (
-            <div className={s.photo}>
-              <ImageOutline />
-            </div>
-          )}
-
+          <Avatar photo={profile?.avatars[0]?.url} />
           <div className={s.info}>
             <Typography variant="large">{profile?.userName}</Typography>
             <div className={s.items}>
