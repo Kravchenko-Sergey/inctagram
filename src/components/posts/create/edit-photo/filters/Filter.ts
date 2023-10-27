@@ -23,7 +23,7 @@ function rotateSize(width: number, height: number, rotation: number): Size {
   }
 }
 
-export default async function getFilteredImg(
+export async function getFilteredImg(
   imageSrc: string,
   filter: string = 'none',
   rotation = 0,

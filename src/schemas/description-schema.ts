@@ -1,9 +1,9 @@
 import { z } from 'zod'
-import { LocaleType } from '../../locales/ru'
+import { LocaleType } from 'locales/ru'
 
 export function descriptionSchema(t: LocaleType) {
   return z.object({
-    description: z.string().max(500, 'Max 500 simbols'),
+    description: z.string().max(500, t.errors.maxLengthPost),
   })
 }
 

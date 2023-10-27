@@ -1,5 +1,7 @@
 import { memo, useCallback, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { parseISO } from 'date-fns'
 
 import {
   ControlledTextField,
@@ -10,16 +12,15 @@ import {
   ProfileImage,
 } from '@/components'
 
-import { zodResolver } from '@hookform/resolvers/zod'
+import { MAX_CHARS_ABOUT_ME } from '@/consts/input-limits'
 import { useTranslation } from '@/hooks/use-translation'
 import { ProfileSettingsFormType, profileSettingsSchema } from '@/schemas'
 import { FormFields, triggerZodFieldError } from '@/helpers'
+import { AvatarType } from '@/services/profile'
 
 import s from './profile-update.module.scss'
-import { parseISO } from 'date-fns'
-import { Avatar } from '@/services/profile'
 
-type ProfileAvatar = { avatars: Avatar[] }
+type ProfileAvatar = { avatars: AvatarType[] }
 
 type ProfileUpdateProps = {
   updateProfileHandler: (data: ProfileSettingsFormType) => void
@@ -102,6 +103,7 @@ export const ProfileUpdate = memo(({ updateProfileHandler, profile }: ProfileUpd
               label={t.profile.aboutMe}
               control={control}
               name="aboutMe"
+              counter={MAX_CHARS_ABOUT_ME}
             />
           </div>
         </div>
