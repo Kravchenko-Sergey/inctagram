@@ -11,7 +11,7 @@ type PropsType = {
   setZoom: (zoom: number) => void
 }
 
-export const Zoom: FC<PropsType> = ({ className, zoom, setZoom }) => {
+export const Zoom: FC<PropsType> = ({ zoom, setZoom }) => {
   const [isOpen, setIsOpen] = useState(false)
   const zoomRef = useRef() as MutableRefObject<HTMLDivElement>
 
@@ -33,12 +33,16 @@ export const Zoom: FC<PropsType> = ({ className, zoom, setZoom }) => {
     setZoom(scale)
   }
 
-  //console.log(zoom)
-
   return (
     <div ref={zoomRef}>
-      <div onClick={() => setIsOpen(true)} className={s.zoomBtn}>
-        <Image src={maximize} alt="zoom" width={24} height={24} className={s.blue} />
+      <div onClick={() => setIsOpen(!isOpen)} className={s.zoomBtn}>
+        <Image
+          src={maximize}
+          alt={'zoom'}
+          width={24}
+          height={24}
+          className={isOpen ? s.blueActive : s.blue}
+        />
       </div>
 
       {isOpen && (

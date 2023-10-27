@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect, MutableRefObject } from 'react'
-import { useTranslation } from '@/hooks'
 
 import Image from 'next/image'
 
@@ -18,7 +17,6 @@ type PropsType = {
 export const Crop = ({ setAspectRatio }: PropsType) => {
   const [isOpen, setIsOpen] = useState(false)
   const cropRef = useRef() as MutableRefObject<HTMLDivElement>
-  const { t } = useTranslation()
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -34,14 +32,26 @@ export const Crop = ({ setAspectRatio }: PropsType) => {
 
   return (
     <div ref={cropRef}>
-      <div onClick={() => setIsOpen(true)} className={s.cropBtn}>
-        <Image src={expandOutline} alt="crop" width={24} height={24} className={s.blue} />
+      <div onClick={() => setIsOpen(!isOpen)} className={s.cropBtn}>
+        <Image
+          src={expandOutline}
+          alt="crop"
+          width={24}
+          height={24}
+          className={isOpen ? s.blueActive : s.blue}
+        />
       </div>
       {isOpen && (
         <div className={s.cropOptions}>
           <div className={s.cropOption1} onClick={() => setAspectRatio(4 / 3)}>
-            {t.addNewPost.original}
-            <Image src={imageOutline} alt="image" width={24} height={24} />
+            {'Original'}
+            <Image
+              src={imageOutline}
+              alt="image"
+              style={{ position: 'relative', left: '3px' }}
+              width={24}
+              height={24}
+            />
           </div>
           <div className={s.cropOption} onClick={() => setAspectRatio(1)}>
             1:1

@@ -5,9 +5,6 @@
 }
 
 .addBtn {
-  width: 36px;
-  height: 36px;
-
   cursor: pointer;
 
   position: relative;
@@ -16,6 +13,8 @@
   align-items: center;
   justify-content: center;
 
+  width: 36px;
+  height: 36px;
   margin: 0 11px 11px;
 
   color: var(--light-700);
@@ -53,21 +52,18 @@
 .addedPhoto {
   width: 80px;
   height: 82px;
-
   margin: 12px;
 }
 
 .addPhotoBtn {
   width: 36px;
   height: 36px;
-
   margin: 12px;
 }
 
 .addTheSecondPhoto {
   width: 36px;
   height: 36px;
-
   margin: 12px 12px 12px 5px;
 }
 
@@ -75,4 +71,8 @@
   width: 80px;
   height: 82px;
   margin: 12px;
+}
+
+.blueActive {
+  filter: invert(0.5) sepia(1) saturate(5) hue-rotate(175deg);
 }

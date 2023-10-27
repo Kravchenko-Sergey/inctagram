@@ -2,7 +2,7 @@ import { memo } from 'react'
 
 import Image from 'next/image'
 
-import ConfirmImg from '@/assets/image/confirm-success.png'
+import ConfirmImg from '/public/image/confirm-success.png'
 import { Button, Typography } from '@/components'
 import { PATH } from '@/consts/route-paths'
 import { useTranslation } from '@/hooks'

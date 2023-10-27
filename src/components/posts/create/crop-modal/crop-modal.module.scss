@@ -160,19 +160,19 @@
   border: none;
 
   &:hover {
-    color: tomato;
+    color: var(--primary-500);
     outline: 0;
     outline-offset: 0;
   }
 
   &:focus-within {
-    color: red;
+    color: var(--primary-500);
     outline: 0;
     outline-offset: 0;
   }
 
   &:active {
-    color: tomato;
+    color: var(--primary-500);
     outline: 0;
     outline-offset: 0;
   }

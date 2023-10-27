@@ -44,7 +44,7 @@ const Profile = () => {
     deletePost({ postId }).unwrap()
   }
 
-  console.log(posts)
+  // console.log(posts)
 
   if (isLoading || isFetching) {
     return <Loader />
@@ -100,7 +100,7 @@ const Profile = () => {
           dataLength={publications || 0}
           next={loadMorePosts}
           hasMore={hasMorePosts}
-          loader={<Loader className={s.loader} />}
+          loader={publications > 0 ? <Loader className={s.loader} /> : null}
           className={s.posts}
         >
           {posts?.items.map((post: CreatePostCommentResponse) => (

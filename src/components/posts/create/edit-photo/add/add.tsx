@@ -50,10 +50,10 @@ export const Add = ({ image, addedImages, setAddedImages, croppedImage }: PropsT
         <Image
           src={imageOutline}
           alt="add photo"
-          onClick={() => setIsAddOpen(true)}
+          onClick={() => setIsAddOpen(!isAddOpen)}
           width={24}
           height={24}
-          className={s.blue}
+          className={isAddOpen ? s.blueActive : s.blue}
         />
       </div>
       {isAddOpen && (
