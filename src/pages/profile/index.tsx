@@ -36,14 +36,12 @@ const Profile = () => {
 
   const loadMorePosts = () => {
     setPageSize(prev => prev + 8)
-    pageSize > publications && setHasMorePosts(false)
+    pageSize > uploadedPosts && setHasMorePosts(false)
   }
 
   const deletePostHandler = async (postId: number) => {
     deletePost({ postId }).unwrap()
   }
-
-  // console.log(posts)
 
   if (isLoading || isFetching) {
     return <Loader />
@@ -51,7 +49,8 @@ const Profile = () => {
 
   const following = 2218
   const followers = 2358
-  const publications = posts?.items.length as number
+  const totalCountPosts = posts?.totalCount as number
+  const uploadedPosts = posts?.items.length as number
 
   return (
     <>
@@ -71,8 +70,8 @@ const Profile = () => {
                 <Typography>{t.profile.followers(followers)}</Typography>
               </div>
               <div>
-                <Typography>{publications}</Typography>
-                <Typography>{t.profile.publications(publications)}</Typography>
+                <Typography>{totalCountPosts}</Typography>
+                <Typography>{t.profile.publications(totalCountPosts)}</Typography>
               </div>
             </div>
             <ExpandableText text={profile?.aboutMe ?? null} />
@@ -84,10 +83,10 @@ const Profile = () => {
           </div>
         </div>
         <InfiniteScroll
-          dataLength={publications || 0}
+          dataLength={uploadedPosts || 0}
           next={loadMorePosts}
           hasMore={hasMorePosts}
-          loader={publications > 0 ? <Loader className={s.loader} /> : null}
+          loader={totalCountPosts !== uploadedPosts ? <Loader className={s.loader} /> : null}
           className={s.posts}
         >
           {posts?.items.map((post: CreatePostCommentResponse) => (
