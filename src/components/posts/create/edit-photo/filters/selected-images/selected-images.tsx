@@ -9,8 +9,7 @@ import { filters } from '@/components/posts/create/edit-photo'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import s from './selected-images.module.scss'
-import { SampleNextArrow } from '@/components/posts/create/cropped-image/sample-next-arrow'
-import { SamplePrevArrow } from '@/components/posts/create/cropped-image/sample-prev-arrow'
+import { getSliderSettings } from '@/helpers'
 
 type PropsType = {
   addedImages: ImageType[]
@@ -21,19 +20,7 @@ type PropsType = {
 }
 
 export const SelectedImages = ({ addedImages, activeFilter, setActiveFilter }: PropsType) => {
-  const settings = {
-    dots: true,
-    swipe: false,
-    arrows: true,
-    dotsClass: 'slick-dots slick-thumb',
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-  }
-
+  const settings = getSliderSettings()
   const onActiveFilter = (filter: string) => {
     switch (filter) {
       case 'No filter':

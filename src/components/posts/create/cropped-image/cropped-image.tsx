@@ -12,6 +12,7 @@ import { useTranslation } from '@/hooks'
 import s from './croped-image.module.scss'
 import { SamplePrevArrow } from '@/components/posts/create/cropped-image/sample-prev-arrow'
 import { SampleNextArrow } from '@/components/posts/create/cropped-image/sample-next-arrow'
+import { getSliderSettings } from '@/helpers'
 
 type PropsType = {
   image: string | null
@@ -29,18 +30,18 @@ export const CroppedImage = ({ image, addedImages, setAddedImages }: PropsType) 
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<CropArgType | null>(null)
   const { t } = useTranslation()
 
-  const settings = {
-    dots: true,
-    swipe: false,
-    arrows: true,
-    dotsClass: `slick-dots ${s.dots}`,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-  }
+  // const settings = {
+  //   dots: true,
+  //   swipe: false,
+  //   arrows: true,
+  //   dotsClass: `slick-dots ${s.dots}`,
+  //   infinite: true,
+  //   speed: 500,
+  //   slidesToShow: 1,
+  //   slidesToScroll: 1,
+  //   nextArrow: <SampleNextArrow />,
+  //   prevArrow: <SamplePrevArrow />,
+  // }
 
   useEffect(() => {
     setAddedImages(addedImages)
@@ -62,6 +63,7 @@ export const CroppedImage = ({ image, addedImages, setAddedImages }: PropsType) 
       }
     }
   }
+  const settings = getSliderSettings(s.dots)
 
   return (
     <>
