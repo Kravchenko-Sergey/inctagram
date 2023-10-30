@@ -67,6 +67,7 @@ export const SelectedImages = ({ addedImages, activeFilter, setActiveFilter }: P
             return (
               <div key={idx} className={s.carousel}>
                 <Image
+                  className={s.img}
                   alt="img"
                   style={{ filter: activeFilter }}
                   src={el.image}

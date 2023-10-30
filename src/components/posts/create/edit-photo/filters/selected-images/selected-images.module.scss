@@ -6,7 +6,12 @@
 .carousel {
   position: relative;
   width: 490px;
-  height: 467px;
+
+  // height: 467px;
+}
+
+.img {
+  object-fit: cover;
 }
 
 .filterContainer {
@@ -29,11 +34,10 @@
 }
 
 .filterName {
-  width: 108px;
-  height: 24px;
-
   display: flex;
   justify-content: center;
+  width: 108px;
+  height: 24px;
 }
 
 .slick-next {

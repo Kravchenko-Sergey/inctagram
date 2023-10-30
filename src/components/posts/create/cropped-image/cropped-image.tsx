@@ -30,19 +30,6 @@ export const CroppedImage = ({ image, addedImages, setAddedImages }: PropsType) 
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<CropArgType | null>(null)
   const { t } = useTranslation()
 
-  // const settings = {
-  //   dots: true,
-  //   swipe: false,
-  //   arrows: true,
-  //   dotsClass: `slick-dots ${s.dots}`,
-  //   infinite: true,
-  //   speed: 500,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 1,
-  //   nextArrow: <SampleNextArrow />,
-  //   prevArrow: <SamplePrevArrow />,
-  // }
-
   useEffect(() => {
     setAddedImages(addedImages)
   }, [addedImages, setAddedImages])

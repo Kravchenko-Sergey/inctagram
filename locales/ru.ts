@@ -215,6 +215,8 @@ export const ru = {
     areYouSure: 'Вы уверены?',
     publish: 'Опубликовать',
     addDescription: 'Добавить описание',
+    discard: 'Сбросить',
+    saveDraft: 'Сохранить',
   },
   sidebars: {
     home: 'Главная',
