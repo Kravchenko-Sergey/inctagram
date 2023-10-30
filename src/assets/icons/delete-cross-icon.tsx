@@ -1,6 +1,6 @@
 import { SVGProps } from 'react'
 
-export const DeleteAvatarIcon = (props: SVGProps<SVGSVGElement>) => (
+export const DeleteCrossIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     width={24}
     height={24}
