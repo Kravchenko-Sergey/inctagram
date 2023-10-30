@@ -1,0 +1,17 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+
+  border-radius: 2px;
+  border: 1px solid var(--dark-100);
+  background: var(--dark-500);
+
+  padding: 12px;
+
+
+.item{
+  display: flex;
+  column-gap: 12px;
+}
+}
