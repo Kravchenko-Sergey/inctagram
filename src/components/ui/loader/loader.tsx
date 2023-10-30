@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import { clsx } from 'clsx'
 
 import Image from 'next/image'
@@ -10,7 +9,7 @@ type LoaderProps = {
   className?: string
 }
 
-export const Loader: FC<LoaderProps> = ({ className }) => {
+export const Loader = ({ className }: LoaderProps) => {
   const classNames = {
     loader: clsx(s.loader, className),
   }

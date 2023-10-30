@@ -10,6 +10,8 @@ import { Add, Crop, Zoom } from '@/components/posts/create/edit-photo'
 import { useTranslation } from '@/hooks'
 
 import s from './croped-image.module.scss'
+import { SamplePrevArrow } from '@/components/posts/create/cropped-image/sample-prev-arrow'
+import { SampleNextArrow } from '@/components/posts/create/cropped-image/sample-next-arrow'
 
 type PropsType = {
   image: string | null
@@ -38,30 +40,6 @@ export const CroppedImage = ({ image, addedImages, setAddedImages }: PropsType) 
     slidesToScroll: 1,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
-  }
-
-  function SampleNextArrow(props: any) {
-    const { className, style, onClick } = props
-
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: 'block', right: 15 }}
-        onClick={onClick}
-      />
-    )
-  }
-
-  function SamplePrevArrow(props: any) {
-    const { className, style, onClick } = props
-
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: 'block', left: 15, zIndex: 1 }}
-        onClick={onClick}
-      />
-    )
   }
 
   useEffect(() => {

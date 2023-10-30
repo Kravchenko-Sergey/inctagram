@@ -21,7 +21,7 @@ export const ProfileImage = memo(({ avatars = '' }: ProfileImageProps) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [url, setUrl] = useState<string>(avatars)
   const [newAvatarFile, setNewAvatarFile] = useState<File | null>(null)
-  const [previewAvatar, setPreviewAvatar] = useState<string>('')
+  const [previewAvatar, setPreviewAvatar] = useState<string>(url) // change "" to url for default pic
   const [uploadError, setUploadError] = useState<string>('')
   const [avatarEditMode, setAvatarEditMode] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -59,7 +59,7 @@ export const ProfileImage = memo(({ avatars = '' }: ProfileImageProps) => {
   }
 
   const handleCloseModal = () => {
-    setPreviewAvatar('')
+    setPreviewAvatar(url) // change "" to url for default pic
     setIsModalOpen(false)
     setAvatarEditMode(false)
   }
