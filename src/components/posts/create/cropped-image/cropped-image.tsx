@@ -10,8 +10,6 @@ import { Add, Crop, Zoom } from '@/components/posts/create/edit-photo'
 import { useTranslation } from '@/hooks'
 
 import s from './croped-image.module.scss'
-import { SamplePrevArrow } from '@/components/posts/create/cropped-image/sample-prev-arrow'
-import { SampleNextArrow } from '@/components/posts/create/cropped-image/sample-next-arrow'
 import { getSliderSettings } from '@/helpers'
 
 type PropsType = {
