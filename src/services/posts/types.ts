@@ -6,7 +6,7 @@ type Image = {
   uploadId: string
 }
 
-export type CreatePostCommentResponse = {
+export type PostResponse = {
   id: number
   description: string
   location: string
@@ -16,7 +16,7 @@ export type CreatePostCommentResponse = {
   ownerId: number
 }
 
-export type CreatePostCommentRequest = {
+export type CreatePostRequest = {
   description: string
   childrenMetadata: { uploadId: string }[]
 }
@@ -35,5 +35,9 @@ export type GetAllPostsRequest = {
 export type GetAllPostsResponse = {
   totalCount: number
   pageSize: number
-  items: CreatePostCommentResponse[]
+  items: PostResponse[]
+}
+
+export type PostRequest = {
+  postId: number
 }

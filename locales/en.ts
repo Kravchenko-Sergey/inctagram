@@ -219,6 +219,8 @@ export const en: LocaleType = {
     publish: 'Publish',
     addDescription: 'Add Description',
   },
+  editPost: 'Edit Post',
+  deletePost: 'Delete Post',
   sidebars: {
     home: 'Home',
     create: 'Create',

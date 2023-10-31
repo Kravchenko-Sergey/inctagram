@@ -216,6 +216,8 @@ export const ru = {
     publish: 'Опубликовать',
     addDescription: 'Добавить описание',
   },
+  editPost: 'Peдактировать',
+  deletePost: 'Удалить пост',
   sidebars: {
     home: 'Главная',
     create: 'Создать пост',

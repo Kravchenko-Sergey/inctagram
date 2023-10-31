@@ -1,16 +1,17 @@
 import { baseApi } from '@/services'
 import {
-  CreatePostCommentRequest,
-  CreatePostCommentResponse,
+  CreatePostRequest,
   CreatePostImageRequest,
   CreatePostImageResponse,
   GetAllPostsRequest,
   GetAllPostsResponse,
+  PostResponse,
+  PostRequest,
 } from '@/services/posts/types'
 
 export const postAPI = baseApi.injectEndpoints({
   endpoints: build => ({
-    createPostComments: build.mutation<CreatePostCommentResponse, CreatePostCommentRequest>({
+    createPostComments: build.mutation<PostResponse, CreatePostRequest>({
       query: body => ({
         url: `posts`,
         method: 'POST',
@@ -33,7 +34,12 @@ export const postAPI = baseApi.injectEndpoints({
       }),
       providesTags: ['getUserPosts'],
     }),
-    deleteUserPost: build.mutation<void, { postId: number }>({
+    getUserPost: build.query<PostResponse, PostRequest>({
+      query: ({ postId }) => ({
+        url: `posts/p/${postId}`,
+      }),
+    }),
+    deleteUserPost: build.mutation<void, PostRequest>({
       query: ({ postId }) => ({
         url: `posts/${postId}`,
         method: 'DELETE',
@@ -47,5 +53,6 @@ export const {
   useCreatePostCommentsMutation,
   useCreatePostPhotoMutation,
   useGetUserPostsQuery,
+  useLazyGetUserPostQuery,
   useDeleteUserPostMutation,
 } = postAPI

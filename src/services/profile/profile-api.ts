@@ -9,10 +9,15 @@ import { baseApi } from '@/services'
 
 export const profileAPI = baseApi.injectEndpoints({
   endpoints: build => ({
-    getProfile: build.query<GetProfileResponse, ArgGetProfile>({
+    getProfile: build.query<GetProfileResponse & { fullName: string }, ArgGetProfile>({
       query: ({ profileId }) => ({
         url: `users/profile/${profileId}`,
       }),
+      transformResponse: (response: GetProfileResponse) => {
+        const fullName = `${response?.firstName} ${response?.lastName}`
+
+        return { ...response, fullName }
+      },
       providesTags: ['getProfile'],
     }),
     updateProfile: build.mutation<void, ArgUpdateProfile>({
