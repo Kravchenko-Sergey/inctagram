@@ -108,7 +108,7 @@ const Profile = () => {
                 variant="primary"
                 type="button"
                 onClick={() => {
-                  deletePostImageHandler(post?.images[0]?.uploadId)
+                  deletePostImageHandler(+post?.images[0]?.uploadId) // ошибка типизации исправил со стринги на намбер
                 }}
               >
                 Удалить изображение
