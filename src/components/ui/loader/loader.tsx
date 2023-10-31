@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { clsx } from 'clsx'
 
 import Image from 'next/image'
-import LoadingGif from '@/assets/image/loading.gif'
+import LoadingGif from '/public/image/loading.gif'
 
 import s from './loader.module.scss'
 

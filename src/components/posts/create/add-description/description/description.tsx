@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/router'
 
 import { MAX_CHARS_POST } from '@/consts/input-limits'
 import { useTranslation } from '@/hooks'
@@ -13,6 +14,7 @@ import {
   useCreatePostCommentsMutation,
   useCreatePostPhotoMutation,
 } from '@/services/posts'
+import { PATH } from '@/consts/route-paths'
 import { ImageType } from '@/components/posts/create'
 
 import s from './description.module.scss'
@@ -27,6 +29,7 @@ type DescriptionFormTypeProps = {
 
 export const PostDescription = ({ addedImages, defaultValue }: DescriptionFormTypeProps) => {
   const { t } = useTranslation()
+  const { push } = useRouter()
   const [createPostComment] = useCreatePostCommentsMutation()
   const [createPostPhoto] = useCreatePostPhotoMutation()
 
@@ -81,6 +84,7 @@ export const PostDescription = ({ addedImages, defaultValue }: DescriptionFormTy
         if (responsePhotoStore.images) {
           await createPostComment(requestBody)
         }
+        push(PATH.PROFILE)
       } catch (e: unknown) {
         const error = e as any
       }

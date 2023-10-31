@@ -1,7 +1,7 @@
 import Slider from 'react-slick'
 import Image from 'next/image'
 
-import airBalloon from '@/assets/image/air-balloon.jpg'
+import airBalloon from '/public/image/air-balloon.jpg'
 import { Typography } from '@/components'
 import { ImageType } from '@/components/posts/create'
 import { filters } from '@/components/posts/create/edit-photo'
@@ -14,17 +14,11 @@ type PropsType = {
   addedImages: ImageType[]
   activeFilter: string
   setActiveFilter: (activeFilter: string) => void
-  image: string | null
-  setAddedImages: (addedImages: ImageType[]) => void
+  image?: string | null
+  setAddedImages?: (addedImages: ImageType[]) => void
 }
 
-export const SelectedImages = ({
-  image,
-  addedImages,
-  activeFilter,
-  setActiveFilter,
-  setAddedImages,
-}: PropsType) => {
+export const SelectedImages = ({ addedImages, activeFilter, setActiveFilter }: PropsType) => {
   const settings = {
     dots: true,
     swipe: false,
