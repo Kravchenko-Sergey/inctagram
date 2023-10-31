@@ -18,6 +18,7 @@ import { useGetProfileQuery } from '@/services/profile/profile-api'
 import { useTranslation } from '@/hooks'
 import {
   CreatePostCommentResponse,
+  useDeletePostImageMutation,
   useDeleteUserPostMutation,
   useGetUserPostsQuery,
 } from '@/services/posts'
@@ -33,17 +34,20 @@ const Profile = () => {
   const { data: profile, isLoading, isFetching } = useGetProfileQuery({ profileId: me?.userId })
   const { data: posts } = useGetUserPostsQuery({ pageSize })
   const [deletePost] = useDeleteUserPostMutation()
+  const [deletePostImage] = useDeletePostImageMutation()
 
   const loadMorePosts = () => {
     setPageSize(prev => prev + 8)
     pageSize > publications && setHasMorePosts(false)
   }
 
+  const deletePostImageHandler = async (imageId: number) => {
+    deletePostImage({ imageId }).unwrap()
+  }
+
   const deletePostHandler = async (postId: number) => {
     deletePost({ postId }).unwrap()
   }
-
-  // console.log(posts)
 
   if (isLoading || isFetching) {
     return <Loader />
@@ -100,6 +104,15 @@ const Profile = () => {
                 key={post.id}
                 className={s.post}
               />
+              <Button
+                variant="primary"
+                type="button"
+                onClick={() => {
+                  deletePostImageHandler(post?.images[0]?.uploadId)
+                }}
+              >
+                Удалить изображение
+              </Button>
               <Button
                 variant="primary"
                 type="button"
