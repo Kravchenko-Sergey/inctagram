@@ -4,6 +4,8 @@ import { CreateNewPassword, HeadMeta, RecoveryLinkExpired, getHeaderLayout } fro
 import { useTypedRouter } from '@/hooks'
 import { routerRecoverySchema } from '@/schemas'
 import { Loader } from 'src/components/ui/loader'
+import { toast } from 'react-toastify'
+
 const Recovery = () => {
   const { query, isReady } = useTypedRouter(routerRecoverySchema)
   const [checkRecoveryCode, { isLoading, data, isError, isUninitialized }] =
@@ -14,7 +16,7 @@ const Recovery = () => {
       try {
         await checkRecoveryCode({ recoveryCode: code })
       } catch (error) {
-        console.log('Error occured', error) // TODO display error notification
+        toast.error(`Error occured, ${error}`, { icon: false })
       }
     }
 

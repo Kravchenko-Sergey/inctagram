@@ -13,6 +13,7 @@ import { PasswordRecoveryFormType, passwordRecoverySchema } from '@/schemas'
 import { FormFields, triggerZodFieldError } from '@/helpers'
 
 import s from './create-new-password.module.scss'
+import { toast } from 'react-toastify'
 
 type CreateNewPasswordProps = {
   code: string
@@ -41,7 +42,7 @@ export const CreateNewPassword: FC<CreateNewPasswordProps> = ({ code: recoveryCo
       await createNewPassword({ newPassword, recoveryCode }).unwrap()
       push(PATH.LOGIN)
     } catch (error) {
-      console.log('Error occured', error) // TODO display error notification
+      toast.error(`Error occured, ${error}`, { icon: false })
     }
   }
 

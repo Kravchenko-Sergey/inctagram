@@ -10,6 +10,7 @@ import { Add, Crop, Zoom } from '@/components/posts/create/edit-photo'
 import { useTranslation } from '@/hooks'
 
 import s from './croped-image.module.scss'
+import { toast } from 'react-toastify'
 
 type PropsType = {
   image: string | null
@@ -78,6 +79,7 @@ export const CroppedImage = ({ image, addedImages, setAddedImages }: PropsType) 
 
           // @ts-ignore
           addedImages[index] = { image: croppedImage }
+          toast.success(t.addNewPost.pictureCropped, { icon: false })
         }
       } catch (e) {
         console.error(e)
