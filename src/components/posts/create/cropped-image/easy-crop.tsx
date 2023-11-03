@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React from 'react'
 
 import ReactCrop from 'react-easy-crop'
 
@@ -21,16 +21,15 @@ export type CropArgType = {
   y: number
 }
 
-export const EasyCrop: FC<PropsType> = ({
+export const EasyCrop = ({
   zoom,
   aspectRatio,
   crop,
   image,
-  objectFit,
   setZoom,
   setCroppedAreaPixels,
   setCrop,
-}) => {
+}: PropsType) => {
   const onCropComplete = (croppedArea: CropArgType, croppedAreaPixels: CropArgType) => {
     setCroppedAreaPixels(croppedAreaPixels)
   }

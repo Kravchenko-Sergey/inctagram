@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
@@ -18,7 +18,7 @@ type CreateNewPasswordProps = {
   code: string
 }
 
-export const CreateNewPassword: FC<CreateNewPasswordProps> = ({ code: recoveryCode }) => {
+export const CreateNewPassword = ({ code: recoveryCode }: CreateNewPasswordProps) => {
   const { t } = useTranslation()
   const { push } = useRouter()
   const {

@@ -8,6 +8,7 @@ import rectangle11 from '@/assets/icons/rectangle11.svg'
 import rectangle169 from '@/assets/icons/rectangle169.svg'
 import rectangle45 from '@/assets/icons/rectangle45.svg'
 import s from './crop.module.scss'
+import { useTranslation } from '@/hooks'
 
 type PropsType = {
   setAspectRatio: (aspect: number) => void
@@ -17,6 +18,7 @@ type PropsType = {
 export const Crop = ({ setAspectRatio }: PropsType) => {
   const [isOpen, setIsOpen] = useState(false)
   const cropRef = useRef() as MutableRefObject<HTMLDivElement>
+  const { t } = useTranslation()
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -44,7 +46,7 @@ export const Crop = ({ setAspectRatio }: PropsType) => {
       {isOpen && (
         <div className={s.cropOptions}>
           <div className={s.cropOption1} onClick={() => setAspectRatio(4 / 3)}>
-            {'Original'}
+            {t.addNewPost.original}
             <Image
               src={imageOutline}
               alt="image"

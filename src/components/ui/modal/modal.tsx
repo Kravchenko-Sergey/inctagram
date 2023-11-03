@@ -1,4 +1,4 @@
-import { ComponentProps, FC, ReactNode } from 'react'
+import { ComponentProps, ReactNode } from 'react'
 
 import { CloseModal } from '@/assets/icons'
 import { Typography } from '@/components'
@@ -15,14 +15,14 @@ export type ModalType = {
   isOpen: boolean
 } & ComponentProps<'div'>
 
-export const Modal: FC<ModalType> = ({
+export const Modal = ({
   children,
   contentClassName,
   title,
   onOpenChange,
   isOpen,
   className,
-}) => {
+}: ModalType) => {
   const classNames = {
     container: clsx(s.dialogContent, className && className),
     content: clsx(s.content, contentClassName && contentClassName),
