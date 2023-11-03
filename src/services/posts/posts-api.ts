@@ -40,11 +40,18 @@ export const postAPI = baseApi.injectEndpoints({
       query: ({ postId }) => ({
         url: `posts/p/${postId}`,
       }),
-      providesTags: [`userPost`],
+      providesTags: ['userPost'],
     }),
     deleteUserPost: build.mutation<void, PostRequest>({
       query: ({ postId }) => ({
         url: `posts/${postId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['getUserPosts'],
+    }),
+    deletePostImage: build.mutation<void, { imageId: string }>({
+      query: ({ imageId }) => ({
+        url: `posts/image/${imageId}`,
         method: 'DELETE',
       }),
       invalidatesTags: ['getUserPosts'],
@@ -68,5 +75,6 @@ export const {
   useGetUserPostsQuery,
   useLazyGetUserPostQuery,
   useDeleteUserPostMutation,
+  useDeletePostImageMutation,
   useEditPostMutation,
 } = postAPI

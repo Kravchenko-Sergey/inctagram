@@ -3,7 +3,7 @@ import * as DropdownRadixMenu from '@radix-ui/react-dropdown-menu'
 import { EditPencilIcon, TrashIcon } from '@/assets/icons'
 import { Typography } from '@/components'
 import { useTranslation } from '@/hooks'
-import { Post, useDeleteUserPostMutation } from '@/services/posts'
+import { Post, useDeletePostImageMutation, useDeleteUserPostMutation } from '@/services/posts'
 
 import s from './action-options.module.scss'
 
@@ -15,10 +15,12 @@ type PropsType = {
 export const ActionOptions = ({ post, handleOpenEditMode }: PropsType) => {
   const { t } = useTranslation()
   const [deletePost] = useDeleteUserPostMutation()
+  const [deletePostImage] = useDeletePostImageMutation()
 
   const handleDeletePost = async () => {
     try {
       await deletePost({ postId: post.id }).unwrap()
+      await deletePostImage({ imageId: post?.images[0]?.uploadId }).unwrap()
     } catch (error: unknown) {
       console.error(`Some error occured when delete post with id ${post.id}, ${error}`)
     }

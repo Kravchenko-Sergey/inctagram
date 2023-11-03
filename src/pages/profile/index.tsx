@@ -26,7 +26,12 @@ const Profile = () => {
   const { t } = useTranslation()
 
   const { data: me } = useMeQuery()
-  const { data: profile, isLoading, isFetching } = useGetProfileQuery({ profileId: me?.userId })
+  const {
+    data: profile,
+    isLoading,
+    isFetching,
+    isError,
+  } = useGetProfileQuery({ profileId: me?.userId })
   const { data: posts } = useGetUserPostsQuery({ pageSize })
 
   const loadMorePosts = () => {
@@ -38,11 +43,16 @@ const Profile = () => {
     return <Loader />
   }
 
+  if (isError) {
+    console.error('Get profile is failed')
+  }
   const following = 2218
   const followers = 2358
   const publications = posts?.items.length as number
 
-  const profileName = profile?.fullName ?? profile?.userName
+  const profileName = profile?.fullName
+    ? `${profile?.firstName} ${profile?.lastName}`
+    : profile?.userName
 
   return (
     <>

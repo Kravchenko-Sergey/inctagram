@@ -39,7 +39,9 @@
 
 .postWrapper {
   display: flex;
+  flex: 0 1 24%;
   flex-direction: column;
+  gap: 4px;
 }
 
 .scrollableContent {
