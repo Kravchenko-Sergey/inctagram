@@ -2,12 +2,12 @@ import { useState } from 'react'
 import Image from 'next/image'
 
 import { ViewPostModal } from '../view'
-import { useLazyGetUserPostQuery } from '@/services/posts'
+import { Post, useLazyGetUserPostQuery } from '@/services/posts'
 
 import s from './post.module.scss'
 
 type PropsType = {
-  post: any
+  post: Post
 }
 
 export const PostCard = ({ post }: PropsType) => {
@@ -15,11 +15,13 @@ export const PostCard = ({ post }: PropsType) => {
 
   const [isViewMode, setIsViewMode] = useState(false)
 
-  const handleModalChange = (value: boolean) => setIsViewMode(value)
-
   const handleViewPost = async () => {
-    await getPost({ postId: post.id }).unwrap()
-    handleModalChange(true)
+    try {
+      await getPost({ postId: post.id }).unwrap()
+      setIsViewMode(true)
+    } catch (error: unknown) {
+      console.log(`When open post with id ${post.id} an error has occured`, error)
+    }
   }
 
   return (
@@ -32,7 +34,7 @@ export const PostCard = ({ post }: PropsType) => {
         height={228}
         className={s.post}
       />
-      <ViewPostModal post={post} isOpen={isViewMode} handleModalChange={handleModalChange} />
+      <ViewPostModal post={post} isOpen={isViewMode} handleModalChange={setIsViewMode} />
     </>
   )
 }

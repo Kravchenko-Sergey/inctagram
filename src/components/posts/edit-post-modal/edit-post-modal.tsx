@@ -5,9 +5,9 @@ import Slider from 'react-slick'
 import Image from 'next/image'
 
 import { Avatar, Button, ControlledTextArea, Modal, Typography } from '@/components'
-import { Image as ImageType, Post, useEditPostMutation } from '@/services/posts'
+import { PostImageType, Post, useEditPostMutation } from '@/services/posts'
 import { useTranslation } from '@/hooks'
-import { FormFields, triggerZodFieldError } from '@/helpers'
+import { FormFields, getSliderSettings, triggerZodFieldError } from '@/helpers'
 import { MAX_CHARS_POST } from '@/consts/input-limits'
 import { DescriptionFormType, descriptionSchema } from '@/schemas'
 
@@ -23,47 +23,12 @@ type PropsType = {
   avatar?: string
 }
 
-const settings = {
-  dots: true,
-  swipe: false,
-  arrows: true,
-  dotsClass: `slick-dots ${s.dots}`,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  nextArrow: <SampleNextArrow />,
-  prevArrow: <SamplePrevArrow />,
-}
-
-function SampleNextArrow(props: any) {
-  const { className, style, onClick } = props
-
-  return (
-    <div
-      className={className}
-      style={{ ...style, display: 'block', right: 15 }}
-      onClick={onClick}
-    />
-  )
-}
-
-function SamplePrevArrow(props: any) {
-  const { className, style, onClick } = props
-
-  return (
-    <div
-      className={className}
-      style={{ ...style, display: 'block', left: 15, zIndex: 1 }}
-      onClick={onClick}
-    />
-  )
-}
-
 export const EditPostModal = ({ post, isOpen, handleClose, userName, avatar }: PropsType) => {
   const id = useId()
   const { t } = useTranslation()
   const [editPost] = useEditPostMutation()
+
+  const settings = getSliderSettings(s.dots)
 
   const {
     control,
@@ -110,7 +75,7 @@ export const EditPostModal = ({ post, isOpen, handleClose, userName, avatar }: P
       title={t.post.edit.title}
     >
       <Slider {...settings} className={s.container}>
-        {post.images.map((image: ImageType, idx: number) => {
+        {post.images.map((image: PostImageType, idx: number) => {
           if (!(idx % 2)) {
             return (
               <div key={image.uploadId} className={s.carousel}>
@@ -129,13 +94,13 @@ export const EditPostModal = ({ post, isOpen, handleClose, userName, avatar }: P
         <form id={id} className={s.formWrapper} onSubmit={handleSubmit(onSubmit)}>
           <div className={s.mainContent}>
             <ControlledTextArea
+              autoFocus
               counter={MAX_CHARS_POST}
               control={control}
               classNameTextArea={s.textArea}
               name="description"
               label={t.post.edit.addDescription}
             />
-            <div className={s.counter}></div>
           </div>
         </form>
         <Button form={id} variant="primary" className={s.submitButton}>

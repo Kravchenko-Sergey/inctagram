@@ -1,4 +1,4 @@
-import { ComponentProps, ReactNode } from 'react'
+import { ComponentProps, ReactElement, ReactNode } from 'react'
 
 import { CloseModal } from '@/assets/icons'
 import { Typography } from '@/components'
@@ -8,7 +8,7 @@ import { clsx } from 'clsx'
 import s from './modal.module.scss'
 
 export type ModalType = {
-  content?: ReactNode
+  content?: ReactElement
   children?: ReactNode
   title?: string
   onOpenChange?: (value: boolean) => void

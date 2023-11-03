@@ -14,7 +14,7 @@ export const PostInfo = ({ avatar, userName, post }: PropsType) => {
   const date = getTimeAgo(post.createdAt)
 
   return (
-    <>
+    <div>
       <div className={s.descriptionWrapper}>
         <Avatar photo={avatar} size={36} className={s.avatar} />
         <div className={s.text}>
@@ -27,6 +27,6 @@ export const PostInfo = ({ avatar, userName, post }: PropsType) => {
       </div>
 
       <div>**** Comments ****</div>
-    </>
+    </div>
   )
 }
