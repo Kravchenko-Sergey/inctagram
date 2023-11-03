@@ -2,7 +2,7 @@ import { ChangeEvent, memo, useCallback, useRef, useState } from 'react'
 
 import { Button, Avatar, Typography, Modal, Loader } from '@/components'
 import { useDeleteAvatarMutation, useUploadAvatarMutation } from '@/services/profile/profile-api'
-import { DeleteIcon, ImageOutline } from '@/assets/icons'
+import { DeleteIcon } from '@/assets/icons'
 import { useTranslation } from '@/hooks'
 import { permittedFileSize, permittedFileTypes } from '@/consts/image'
 

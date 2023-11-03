@@ -1,4 +1,4 @@
-import { FC, Fragment } from 'react'
+import { Fragment } from 'react'
 
 import { openCloseTagRegex, tagsRegex } from '@/consts/regex'
 
@@ -7,8 +7,8 @@ type TransType = {
   tags?: Record<string, (str: string) => JSX.Element>
 }
 
-export const Trans: FC<TransType> = props => {
-  return <>{interpolateTags(props)}</>
+export const Trans = ({ text, tags }: TransType) => {
+  return <>{interpolateTags({ text, tags })}</>
 }
 
 const interpolateTags = (data: TransType) => {

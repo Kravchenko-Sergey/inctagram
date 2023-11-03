@@ -216,6 +216,8 @@ export const ru = {
     publish: 'Опубликовать',
     addDescription: 'Добавить описание',
     pictureCropped: 'Изображение успешно обрезано',
+    discard: 'Сбросить',
+    saveDraft: 'Сохранить',
   },
   sidebars: {
     home: 'Главная',

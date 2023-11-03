@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react'
-
+import { toast } from 'react-toastify'
 import Slider from 'react-slick'
 
 import getCroppedImg from './Crop'
 
+import { getSliderSettings } from '@/helpers'
 import { CropArgType, EasyCrop } from './easy-crop'
 import { ImageType } from '@/components/posts/create'
 import { Add, Crop, Zoom } from '@/components/posts/create/edit-photo'
 import { useTranslation } from '@/hooks'
 
 import s from './croped-image.module.scss'
-import { toast } from 'react-toastify'
 
 type PropsType = {
   image: string | null
@@ -27,43 +27,6 @@ export const CroppedImage = ({ image, addedImages, setAddedImages }: PropsType) 
   const [croppedImage, setCroppedImage] = useState<string | null>(null)
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<CropArgType | null>(null)
   const { t } = useTranslation()
-
-  const settings = {
-    dots: true,
-    swipe: false,
-    arrows: true,
-    dotsClass: `slick-dots ${s.dots}`,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-  }
-
-  function SampleNextArrow(props: any) {
-    const { className, style, onClick } = props
-
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: 'block', right: 15 }}
-        onClick={onClick}
-      />
-    )
-  }
-
-  function SamplePrevArrow(props: any) {
-    const { className, style, onClick } = props
-
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: 'block', left: 15, zIndex: 1 }}
-        onClick={onClick}
-      />
-    )
-  }
 
   useEffect(() => {
     setAddedImages(addedImages)
@@ -86,6 +49,7 @@ export const CroppedImage = ({ image, addedImages, setAddedImages }: PropsType) 
       }
     }
   }
+  const settings = getSliderSettings(s.dots)
 
   return (
     <>

@@ -1,4 +1,4 @@
-import { FC, ReactElement, ReactNode } from 'react'
+import { ReactElement, ReactNode } from 'react'
 
 import { Header } from '@/components'
 
@@ -7,7 +7,7 @@ type HeaderLayoutProps = {
   children?: ReactNode
 }
 
-const HeaderLayout: FC<HeaderLayoutProps> = ({ children, className }) => {
+const HeaderLayout = ({ children, className }: HeaderLayoutProps) => {
   return (
     <div className={className}>
       <Header />
