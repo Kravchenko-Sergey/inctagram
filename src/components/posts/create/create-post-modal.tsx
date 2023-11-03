@@ -41,7 +41,6 @@ export const CreatePostModal = () => {
   }
 
   const handleImageUpload = async (e: any) => {
-    // setImage(URL.createObjectURL(e.target.files[0]))
     setAddedImages([
       {
         id: (addedImages.length + 1).toString(),
@@ -50,10 +49,6 @@ export const CreatePostModal = () => {
     ])
     setIsBaseModalOpen(false)
     setIsModalOpen(true)
-  }
-
-  const handleClick = () => {
-    setIsBaseModalOpen(true)
   }
 
   const selectFileHandler = () => {

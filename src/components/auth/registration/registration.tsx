@@ -3,7 +3,7 @@ import { memo, useCallback, useEffect, useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
-
+import { toast } from 'react-toastify'
 import { useRegistrationMutation } from '@/services/auth/auth-api'
 import {
   Button,
@@ -69,10 +69,14 @@ export const Registration = memo(() => {
       } catch (e: unknown) {
         const error = e as RegisterError
 
-        if (error?.data.messages[0].message === 'User with this email is already exist') {
+        if (error?.data?.messages[0]?.message === 'User with this email is already exist') {
           setError('email', { type: 'email', message: t.errors.emailExists })
-        } else if (error?.data.messages[0].message === 'User with this userName is already exist') {
+        } else if (
+          error?.data?.messages[0]?.message === 'User with this userName is already exist'
+        ) {
           setError('username', { type: 'username', message: t.errors.usernameExists })
+        } else {
+          toast.error('Error! Server is not available', { icon: false })
         }
       }
     },
