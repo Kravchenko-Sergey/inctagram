@@ -44,7 +44,7 @@ export const Crop = ({ setAspectRatio }: PropsType) => {
       {isOpen && (
         <div className={s.cropOptions}>
           <div className={s.cropOption1} onClick={() => setAspectRatio(4 / 3)}>
-            {'Original'}
+            Original
             <Image
               src={imageOutline}
               alt="image"

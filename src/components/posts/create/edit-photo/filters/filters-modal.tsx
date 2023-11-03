@@ -77,9 +77,7 @@ export const FiltersModal = ({
   const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false)
 
   const { t } = useTranslation()
-  const actionButtonHandler = () => {
-    onAction?.()
-  }
+
   const cancelButtonHandler = () => {
     onCancel?.()
   }
@@ -98,7 +96,7 @@ export const FiltersModal = ({
   return (
     <div>
       <Button variant="link" className={s.nextButton} onClick={handleNext}>
-        {t.addNewPost.next}
+        {t.post.addNewPost.next}
       </Button>
       <Dialog open={isFiltersModalOpen} onOpenChange={open => !open && setOpenSureModal(true)}>
         <DialogPortal>
@@ -118,7 +116,7 @@ export const FiltersModal = ({
                   isModalOpen={isModalOpen}
                   setIsModalOpen={setIsModalOpen}
                   onCancel={cancelButtonHandler}
-                  title={t.addNewPost.publication}
+                  title={t.post.addNewPost.publication}
                   isFiltersModalOpen={isFiltersModalOpen}
                   setIsFiltersModalOpen={setIsFiltersModalOpen}
                   setOpenSureModal={setOpenSureModal}

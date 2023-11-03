@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
@@ -11,16 +10,13 @@ import {
   Loader,
   ExpandableText,
   Avatar,
+  PostCard,
 } from '@/components'
 import { PATH } from '@/consts/route-paths'
 import { useMeQuery } from '@/services/auth/auth-api'
 import { useGetProfileQuery } from '@/services/profile/profile-api'
 import { useTranslation } from '@/hooks'
-import {
-  CreatePostCommentResponse,
-  useDeleteUserPostMutation,
-  useGetUserPostsQuery,
-} from '@/services/posts'
+import { Post, useGetUserPostsQuery } from '@/services/posts'
 
 import s from './profile.module.scss'
 
@@ -32,18 +28,11 @@ const Profile = () => {
   const { data: me } = useMeQuery()
   const { data: profile, isLoading, isFetching } = useGetProfileQuery({ profileId: me?.userId })
   const { data: posts } = useGetUserPostsQuery({ pageSize })
-  const [deletePost] = useDeleteUserPostMutation()
 
   const loadMorePosts = () => {
     setPageSize(prev => prev + 8)
     pageSize > publications && setHasMorePosts(false)
   }
-
-  const deletePostHandler = async (postId: number) => {
-    deletePost({ postId }).unwrap()
-  }
-
-  // console.log(posts)
 
   if (isLoading || isFetching) {
     return <Loader />
@@ -53,6 +42,8 @@ const Profile = () => {
   const followers = 2358
   const publications = posts?.items.length as number
 
+  const profileName = profile?.fullName ?? profile?.userName
+
   return (
     <>
       <HeadMeta title="Profile" />
@@ -60,7 +51,7 @@ const Profile = () => {
         <div className={s.profile}>
           <Avatar photo={profile?.avatars[0]?.url} />
           <div className={s.info}>
-            <Typography variant="large">{profile?.userName}</Typography>
+            <Typography variant="large">{profileName}</Typography>
             <div className={s.items}>
               <div>
                 <Typography>{following}</Typography>
@@ -90,27 +81,7 @@ const Profile = () => {
           loader={publications > 0 ? <Loader className={s.loader} /> : null}
           className={s.posts}
         >
-          {posts?.items.map((post: CreatePostCommentResponse) => (
-            <div key={post.id} className={s.postWrapper}>
-              <Image
-                src={post?.images[0]?.url}
-                alt={`post ${post.id} image`}
-                width={228}
-                height={228}
-                key={post.id}
-                className={s.post}
-              />
-              <Button
-                variant="primary"
-                type="button"
-                onClick={() => {
-                  deletePostHandler(post.id)
-                }}
-              >
-                Удалить пост
-              </Button>
-            </div>
-          ))}
+          {posts?.items.map((post: Post) => <PostCard key={post.id} post={post} />)}
         </InfiniteScroll>
         <div className={s.scrollableContent}></div>
       </main>

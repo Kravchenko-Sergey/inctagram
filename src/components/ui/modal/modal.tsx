@@ -8,24 +8,31 @@ import { clsx } from 'clsx'
 import s from './modal.module.scss'
 
 export type ModalType = {
+  content?: ReactNode
   children?: ReactNode
   title?: string
   onOpenChange?: (value: boolean) => void
   contentClassName?: string
+  closeButtonClass?: string
   isOpen: boolean
+  postHeader?: ReactNode
 } & ComponentProps<'div'>
 
 export const Modal: FC<ModalType> = ({
+  content,
   children,
   contentClassName,
   title,
   onOpenChange,
   isOpen,
+  postHeader,
   className,
+  closeButtonClass,
 }) => {
   const classNames = {
     container: clsx(s.dialogContent, className && className),
     content: clsx(s.content, contentClassName && contentClassName),
+    closeButton: clsx(s.iconButton, closeButtonClass && closeButtonClass),
   }
 
   return (
@@ -33,15 +40,18 @@ export const Modal: FC<ModalType> = ({
       <Dialog.Portal>
         <Dialog.Overlay className={s.dialogOverlay} />
         <Dialog.Content className={classNames.container}>
-          <div className={s.header}>
-            <Dialog.Title>
-              <Typography variant="h1">{title}</Typography>
-            </Dialog.Title>
-            <Dialog.Close className={s.iconButton} aria-label="Close">
-              <CloseModal />
-            </Dialog.Close>
+          {content}
+          <div>
+            <div className={s.header}>
+              <Dialog.Title>
+                {postHeader ?? <Typography variant="h1">{title}</Typography>}
+              </Dialog.Title>
+              <Dialog.Close className={classNames.closeButton} aria-label="Close">
+                <CloseModal />
+              </Dialog.Close>
+            </div>
+            <div className={classNames.content}>{children}</div>
           </div>
-          <div className={classNames.content}>{children}</div>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

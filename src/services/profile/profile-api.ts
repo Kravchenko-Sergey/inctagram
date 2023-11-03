@@ -9,12 +9,12 @@ import { baseApi } from '@/services'
 
 export const profileAPI = baseApi.injectEndpoints({
   endpoints: build => ({
-    getProfile: build.query<GetProfileResponse & { fullName: string }, ArgGetProfile>({
+    getProfile: build.query<GetProfileResponse & { fullName: string | null }, ArgGetProfile>({
       query: ({ profileId }) => ({
         url: `users/profile/${profileId}`,
       }),
       transformResponse: (response: GetProfileResponse) => {
-        const fullName = `${response?.firstName} ${response?.lastName}`
+        const fullName = response?.firstName ? `${response?.firstName} ${response?.lastName}` : null
 
         return { ...response, fullName }
       },

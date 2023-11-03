@@ -1,0 +1,51 @@
+.contentModal {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  padding: 0;
+}
+
+.container {
+  width: 490px;
+  height: 100%;
+}
+
+.carousel {
+  position: relative;
+}
+
+.wrap {
+  width: 481px;
+  height: 503px;
+  padding: 24px 24px 24px 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dots {
+  // left: 50%;
+  bottom: 12px !important;
+  // width: auto !important;
+  background: rgba(51, 51, 51, 0.5) !important;
+
+  li button::before {
+    color: var(--light-100) !important;
+  }
+}
+
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.submitButton {
+  align-self: flex-end;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}

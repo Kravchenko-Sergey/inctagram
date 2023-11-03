@@ -10,7 +10,7 @@ import { ControlledTextArea } from '@/components'
 import { DescriptionFormType, descriptionSchema } from '@/schemas'
 import { FormFields, getBinaryImageData, triggerZodFieldError } from '@/helpers'
 import {
-  CreatePostCommentRequest,
+  CreatePostRequest,
   useCreatePostCommentsMutation,
   useCreatePostPhotoMutation,
 } from '@/services/posts'
@@ -76,7 +76,7 @@ export const PostDescription = ({ addedImages, defaultValue }: DescriptionFormTy
         const responsePhotoStore = await createPostPhoto(formData).unwrap()
 
         const imageId = responsePhotoStore.images.map(item => ({ uploadId: item.uploadId }))
-        const requestBody: CreatePostCommentRequest = {
+        const requestBody: CreatePostRequest = {
           description: data.description,
           childrenMetadata: imageId ? imageId : ({} as [{ uploadId: string }]),
         }
@@ -100,7 +100,7 @@ export const PostDescription = ({ addedImages, defaultValue }: DescriptionFormTy
             control={control}
             classNameTextArea={s.textArea}
             name="description"
-            label={t.addNewPost.addDescription}
+            label={t.post.addNewPost.addDescription}
           />
           <div className={s.counter}></div>
         </div>

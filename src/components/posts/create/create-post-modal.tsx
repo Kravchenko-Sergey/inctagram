@@ -60,7 +60,7 @@ export const CreatePostModal = () => {
           modalWidth="md"
           open={isBaseModalOpen}
           onClose={handleButtonClick}
-          title={t.addNewPost.addPhoto}
+          title={t.post.addNewPost.addPhoto}
         >
           <div className={`${s.photoContainer} ${image === null ? s.emptyPhotoContainer : ''}`}>
             <ImageOutline />
@@ -85,7 +85,7 @@ export const CreatePostModal = () => {
           open={isModalOpen}
           onClose={handleButtonClick}
           onCancel={cancelButtonClick}
-          title={t.addNewPost.cropping}
+          title={t.post.addNewPost.cropping}
           addedImages={addedImages}
           setAddedImages={setAddedImages}
           isBaseModalOpen={isBaseModalOpen}

@@ -7,7 +7,6 @@
 
   vertical-align: middle;
 
-  background-color: var(--dark-500);
   border-radius: 50%;
 
   .avatarImage {
@@ -21,5 +20,7 @@
     justify-content: center;
 
     color: var(--light-100);
+    background-color: var(--dark-500);
+    border-radius: 50%;
   }
 }

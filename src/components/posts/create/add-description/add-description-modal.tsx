@@ -91,7 +91,7 @@ export const DescriptionModal = ({
   const showFilteredImg = async (activeFilter: string) => {
     try {
       const updatedImages = await Promise.all(
-        addedImages.map(async (el, idx) => {
+        addedImages.map(async el => {
           const filteredImage = await getFilteredImg(el.image, activeFilter)
 
           return {
@@ -113,7 +113,7 @@ export const DescriptionModal = ({
   return (
     <div>
       <Button variant="primary" className={s.nextButton} onClick={handlePublish}>
-        {t.addNewPost.next}
+        {t.post.addNewPost.next}
       </Button>
       <Dialog open={isDescriptionModalOpen} onOpenChange={open => !open && setOpenSureModal(true)}>
         <DialogPortal>
@@ -131,7 +131,7 @@ export const DescriptionModal = ({
                   className={s.nextButton}
                   onClick={() => showFilteredImg(activeFilter)}
                 >
-                  {t.addNewPost.publish}
+                  {t.post.addNewPost.publish}
                 </Button>
               </div>
               <DialogTitle className={s.DialogTitle}>

@@ -123,7 +123,7 @@ export const CroppedImage = ({ image, addedImages, setAddedImages }: PropsType) 
                     color="primary"
                     className={s.button}
                   >
-                    {t.addNewPost.showResult}
+                    {t.post.addNewPost.showResult}
                   </button>
                 </div>
               )

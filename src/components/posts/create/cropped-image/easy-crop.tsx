@@ -1,5 +1,3 @@
-import React, { FC } from 'react'
-
 import ReactCrop from 'react-easy-crop'
 
 type PropsType = {
@@ -7,7 +5,7 @@ type PropsType = {
   crop: { x: number; y: number }
   zoom: number
   aspectRatio: number
-  objectFit?: string
+  objectFit?: 'contain' | 'cover' | 'horizontal-cover' | 'vertical-cover'
   setCrop: (crop: { x: number; y: number }) => void
   setZoom: (zoom: number) => void
   croppedAreaPixels: CropArgType | null
@@ -21,16 +19,16 @@ export type CropArgType = {
   y: number
 }
 
-export const EasyCrop: FC<PropsType> = ({
+export const EasyCrop = ({
   zoom,
   aspectRatio,
   crop,
   image,
-  objectFit,
+  objectFit = 'cover',
   setZoom,
   setCroppedAreaPixels,
   setCrop,
-}) => {
+}: PropsType) => {
   const onCropComplete = (croppedArea: CropArgType, croppedAreaPixels: CropArgType) => {
     setCroppedAreaPixels(croppedAreaPixels)
   }
@@ -38,7 +36,7 @@ export const EasyCrop: FC<PropsType> = ({
   return (
     <ReactCrop
       image={image}
-      objectFit="cover" //zoom and crop doesn't work correctly without it
+      objectFit={objectFit} //zoom and crop doesn't work correctly without it
       crop={crop}
       zoom={zoom}
       zoomWithScroll={true}

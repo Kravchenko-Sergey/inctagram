@@ -35,7 +35,7 @@ export const AreYouSureModal = ({
       <BaseModal
         id="areYouSureModal"
         modalWidth="sm"
-        title={t.addNewPost.close}
+        title={t.post.addNewPost.close}
         open={openSureModal}
         cancelButtonName="SaveDraft"
         actionButtonName="Discard"
@@ -43,7 +43,7 @@ export const AreYouSureModal = ({
         onCancel={onModalClose}
         onAction={discardHandler}
       >
-        <Typography variant="h3">{t.addNewPost.areYouSure}</Typography>
+        <Typography variant="h3">{t.post.addNewPost.areYouSure}</Typography>
       </BaseModal>
     </div>
   )

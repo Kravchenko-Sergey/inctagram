@@ -1,4 +1,4 @@
-type Image = {
+export type Image = {
   url: string
   width: number
   height: number
@@ -6,7 +6,7 @@ type Image = {
   uploadId: string
 }
 
-export type PostResponse = {
+export type Post = {
   id: number
   description: string
   location: string
@@ -35,9 +35,14 @@ export type GetAllPostsRequest = {
 export type GetAllPostsResponse = {
   totalCount: number
   pageSize: number
-  items: PostResponse[]
+  items: Post[]
 }
 
 export type PostRequest = {
+  postId: number
+}
+
+export type EditPostRequest = {
+  description: string
   postId: number
 }
