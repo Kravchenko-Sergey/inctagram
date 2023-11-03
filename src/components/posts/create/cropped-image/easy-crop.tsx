@@ -24,7 +24,6 @@ export const EasyCrop = ({
   aspectRatio,
   crop,
   image,
-  objectFit = 'cover',
   setZoom,
   setCroppedAreaPixels,
   setCrop,
@@ -36,7 +35,7 @@ export const EasyCrop = ({
   return (
     <ReactCrop
       image={image}
-      objectFit={objectFit} //zoom and crop doesn't work correctly without it
+      objectFit="cover" //zoom and crop doesn't work correctly without it
       crop={crop}
       zoom={zoom}
       zoomWithScroll={true}

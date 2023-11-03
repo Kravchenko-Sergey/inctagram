@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
@@ -13,12 +13,13 @@ import { PasswordRecoveryFormType, passwordRecoverySchema } from '@/schemas'
 import { FormFields, triggerZodFieldError } from '@/helpers'
 
 import s from './create-new-password.module.scss'
+import { toast } from 'react-toastify'
 
 type CreateNewPasswordProps = {
   code: string
 }
 
-export const CreateNewPassword: FC<CreateNewPasswordProps> = ({ code: recoveryCode }) => {
+export const CreateNewPassword = ({ code: recoveryCode }: CreateNewPasswordProps) => {
   const { t } = useTranslation()
   const { push } = useRouter()
   const {
@@ -41,7 +42,7 @@ export const CreateNewPassword: FC<CreateNewPasswordProps> = ({ code: recoveryCo
       await createNewPassword({ newPassword, recoveryCode }).unwrap()
       push(PATH.LOGIN)
     } catch (error) {
-      console.log('Error occured', error) // TODO display error notification
+      toast.error(`Error occured, ${error}`, { icon: false })
     }
   }
 

@@ -1,5 +1,3 @@
-import { FC } from 'react'
-
 import { ArrowLeft, ArrowRight } from '@/assets/icons'
 import { Select, usePagination } from '@/components'
 
@@ -14,7 +12,7 @@ export type PaginationProps = {
   perPageOptions?: number[]
   onPerPageChange?: (itemPerPage: string) => void
 }
-export const Pagination: FC<PaginationProps> = ({
+export const Pagination = ({
   page,
   count,
   siblings,
@@ -22,7 +20,7 @@ export const Pagination: FC<PaginationProps> = ({
   perPage,
   perPageOptions,
   onPerPageChange,
-}) => {
+}: PaginationProps) => {
   const {
     paginationRange,
     isFirstPage,

@@ -216,6 +216,9 @@ export const ru = {
       areYouSure: 'Вы уверены?',
       publish: 'Опубликовать',
       addDescription: 'Добавить описание',
+      pictureCropped: 'Изображение успешно обрезано',
+      discard: 'Сбросить',
+      saveDraft: 'Сохранить',
     },
     editPost: 'Peдактировать',
     edit: {

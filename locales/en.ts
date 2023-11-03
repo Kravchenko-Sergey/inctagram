@@ -219,6 +219,9 @@ export const en: LocaleType = {
       areYouSure: 'Are You Sure',
       publish: 'Publish',
       addDescription: 'Add Description',
+      pictureCropped: 'Picture  successfully cropped',
+      discard: 'Discard',
+      saveDraft: 'Save Draft',
     },
     edit: {
       title: 'Edit',

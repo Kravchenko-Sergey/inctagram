@@ -41,14 +41,11 @@ export type ModalProps = {
 } & ComponentProps<'div'>
 
 export const DescriptionModal = ({
-  isModalOpen,
   setIsModalOpen,
-  image,
   addedImages,
   setAddedImages,
   activeFilter,
   setActiveFilter,
-  isFiltersModalOpen,
   setIsFiltersModalOpen,
   showSeparator = true,
   onAction,

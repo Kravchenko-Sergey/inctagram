@@ -21,7 +21,7 @@ export const authApi = baseApi.injectEndpoints({
       }),
       registration: build.mutation<void, RegistrationType>({
         query: body => ({
-          url: `auth/registration`,
+          url: `auth/registration11`,
           method: 'POST',
           body,
         }),

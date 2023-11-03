@@ -8,6 +8,8 @@ import { CroppedImage } from './cropped-image'
 import { BaseModal } from './base-modal'
 
 import s from './create-post-modal.module.scss'
+import { useRouter } from 'next/router'
+import { PATH } from '@/consts/route-paths'
 
 export type ImageType = {
   image: string
@@ -23,18 +25,22 @@ export const CreatePostModal = () => {
   const [image, setImage] = useState<string | null>(null)
   const [addedImages, setAddedImages] = useState<ImageType[]>([])
 
+  const { push } = useRouter()
+
   const handleButtonClick = () => {
-    setIsBaseModalOpen(false)
+    push(PATH.PROFILE)
+
+    //setIsBaseModalOpen(false)
     setImage(null)
     setIsModalOpen(false)
   }
   const cancelButtonClick = () => {
-    setIsBaseModalOpen(false)
+    push(PATH.PROFILE)
+    //setIsBaseModalOpen(false)
     setIsModalOpen(false)
   }
 
   const handleImageUpload = async (e: any) => {
-    // setImage(URL.createObjectURL(e.target.files[0]))
     setAddedImages([
       {
         id: (addedImages.length + 1).toString(),
@@ -43,10 +49,6 @@ export const CreatePostModal = () => {
     ])
     setIsBaseModalOpen(false)
     setIsModalOpen(true)
-  }
-
-  const handleClick = () => {
-    setIsBaseModalOpen(true)
   }
 
   const selectFileHandler = () => {

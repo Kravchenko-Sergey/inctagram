@@ -9,6 +9,7 @@ import { filters } from '@/components/posts/create/edit-photo'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import s from './selected-images.module.scss'
+import { getSliderSettings } from '@/helpers'
 
 type PropsType = {
   addedImages: ImageType[]
@@ -19,43 +20,7 @@ type PropsType = {
 }
 
 export const SelectedImages = ({ addedImages, activeFilter, setActiveFilter }: PropsType) => {
-  const settings = {
-    dots: true,
-    swipe: false,
-    arrows: true,
-    dotsClass: 'slick-dots slick-thumb',
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-  }
-
-  function SampleNextArrow(props: any) {
-    const { className, style, onClick } = props
-
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: 'block', right: 15 }}
-        onClick={onClick}
-      />
-    )
-  }
-
-  function SamplePrevArrow(props: any) {
-    const { className, style, onClick } = props
-
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: 'block', left: 15, zIndex: 1 }}
-        onClick={onClick}
-      />
-    )
-  }
-
+  const settings = getSliderSettings()
   const onActiveFilter = (filter: string) => {
     switch (filter) {
       case 'No filter':
@@ -98,10 +63,11 @@ export const SelectedImages = ({ addedImages, activeFilter, setActiveFilter }: P
     <>
       <div className={s.imgContainer}>
         <Slider {...settings}>
-          {addedImages.map((el: any, idx: any) => {
+          {addedImages.map((el: ImageType, idx: number) => {
             return (
               <div key={idx} className={s.carousel}>
                 <Image
+                  className={s.img}
                   alt="img"
                   style={{ filter: activeFilter }}
                   src={el.image}

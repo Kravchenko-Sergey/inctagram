@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, FC, ReactNode } from 'react'
+import { ComponentPropsWithoutRef, ReactNode } from 'react'
 
 import * as ScrollArea from '@radix-ui/react-scroll-area'
 
@@ -11,7 +11,7 @@ export type ScrollbarProps = {
   maxWidth?: number | string
 } & ComponentPropsWithoutRef<'div'>
 
-export const Scrollbar: FC<ScrollbarProps> = ({ children, maxHeight, maxWidth, ...rest }) => {
+export const Scrollbar = ({ children, maxHeight, maxWidth, ...rest }: ScrollbarProps) => {
   const maxHeightConverted = typeof maxHeight === 'number' ? `${maxHeight}px` : maxHeight
   const maxWidthConverted = typeof maxWidth === 'number' ? `${maxWidth}px` : maxWidth
 

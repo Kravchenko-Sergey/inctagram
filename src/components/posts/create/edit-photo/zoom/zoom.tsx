@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, MutableRefObject, useEffect, useRef, useState } from 'react'
+import { ChangeEvent, MutableRefObject, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 
 import maximize from '@/assets/icons/maximize-outline.svg'
@@ -11,7 +11,7 @@ type PropsType = {
   setZoom: (zoom: number) => void
 }
 
-export const Zoom: FC<PropsType> = ({ zoom, setZoom }) => {
+export const Zoom = ({ zoom, setZoom }: PropsType) => {
   const [isOpen, setIsOpen] = useState(false)
   const zoomRef = useRef() as MutableRefObject<HTMLDivElement>
 

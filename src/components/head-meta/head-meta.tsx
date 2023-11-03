@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React from 'react'
 
 import Head from 'next/head'
 
@@ -7,7 +7,7 @@ type HeadMetaProps = {
   description?: string
 }
 
-export const HeadMeta: FC<HeadMetaProps> = ({ title, description }) => {
+export const HeadMeta = ({ title, description }: HeadMetaProps) => {
   return (
     <Head>
       <title>{title}</title>

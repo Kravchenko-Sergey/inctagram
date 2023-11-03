@@ -1,20 +1,19 @@
-import { FC, useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 
 import { useLazyMeQuery, useLoginMutation } from '@/services/auth/auth-api'
-import { Button, Card, ControlledTextField, Typography } from '@/components'
+import { Button, Card, ControlledTextField, SocialMediaAuth, Typography } from '@/components'
 import { PATH } from '@/consts/route-paths'
 import { FormFields, tokenSetterToLocalStorage, triggerZodFieldError } from '@/helpers'
 import { useTranslation } from '@/hooks'
 import { LoginFormValues, loginSchema } from '@/schemas'
 
 import s from './login.module.scss'
-import { SocialMediaAuth } from '../social-media-auth'
 
-export const Login: FC = () => {
+export const Login = () => {
   const { t } = useTranslation()
   const { push } = useRouter()
   const [getUser] = useLazyMeQuery()

@@ -70,9 +70,7 @@ export const CropModal = ({
   const areYouSureRef = useRef(null)
 
   const { t } = useTranslation()
-  const actionButtonHandler = () => {
-    onAction?.()
-  }
+
   const cancelButtonHandler = () => {
     onCancel?.()
   }
