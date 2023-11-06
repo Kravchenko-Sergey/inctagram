@@ -4,12 +4,22 @@
 }
 
 .contentModal {
-  padding: 18px 24px;
   width: 480px;
+  padding: 18px 24px;
 }
 
 .modalContainer {
-  gap: -1px;
   display: flex;
+  gap: -1px;
   max-height: 502px; // 562 - 60px
+}
+
+.deleteOptions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.deleteOptions button + button {
+  margin-left: 20px;
 }

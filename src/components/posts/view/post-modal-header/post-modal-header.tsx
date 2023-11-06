@@ -9,6 +9,7 @@ type PostHeaderPropsType = {
   avatar?: string
   post: Post
   handleOpenEditMode: () => void
+  handleDeleteMode: () => void
 }
 
 export const PostModalHeader = ({
@@ -16,6 +17,7 @@ export const PostModalHeader = ({
   avatar,
   post,
   handleOpenEditMode,
+  handleDeleteMode,
 }: PostHeaderPropsType) => {
   return (
     <div className={s.header}>
@@ -24,7 +26,11 @@ export const PostModalHeader = ({
         <Typography variant="h3">{userName}</Typography>
       </div>
       <DropdownMenu sideOffset={-5}>
-        <ActionOptions post={post} handleOpenEditMode={handleOpenEditMode} />
+        <ActionOptions
+          post={post}
+          handleOpenEditMode={handleOpenEditMode}
+          handleDeleteMode={handleDeleteMode}
+        />
       </DropdownMenu>
     </div>
   )

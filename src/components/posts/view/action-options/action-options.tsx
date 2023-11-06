@@ -3,28 +3,18 @@ import * as DropdownRadixMenu from '@radix-ui/react-dropdown-menu'
 import { EditPencilIcon, TrashIcon } from '@/assets/icons'
 import { Typography } from '@/components'
 import { useTranslation } from '@/hooks'
-import { Post, useDeletePostImageMutation, useDeleteUserPostMutation } from '@/services/posts'
+import { Post } from '@/services/posts'
 
 import s from './action-options.module.scss'
 
 type PropsType = {
   post: Post
   handleOpenEditMode: () => void
+  handleDeleteMode: () => void
 }
 
-export const ActionOptions = ({ post, handleOpenEditMode }: PropsType) => {
+export const ActionOptions = ({ post, handleOpenEditMode, handleDeleteMode }: PropsType) => {
   const { t } = useTranslation()
-  const [deletePost] = useDeleteUserPostMutation()
-  const [deletePostImage] = useDeletePostImageMutation()
-
-  const handleDeletePost = async () => {
-    try {
-      await deletePost({ postId: post.id }).unwrap()
-      await deletePostImage({ imageId: post?.images[0]?.uploadId }).unwrap()
-    } catch (error: unknown) {
-      console.error(`Some error occured when delete post with id ${post.id}, ${error}`)
-    }
-  }
 
   return (
     <>
@@ -32,7 +22,7 @@ export const ActionOptions = ({ post, handleOpenEditMode }: PropsType) => {
         <EditPencilIcon />
         <Typography variant="regular_text_14">{t.post.editPost}</Typography>
       </DropdownRadixMenu.Item>
-      <DropdownRadixMenu.Item className={s.item} onClick={handleDeletePost}>
+      <DropdownRadixMenu.Item className={s.item} onClick={handleDeleteMode}>
         <TrashIcon />
         <Typography variant="regular_text_14">{t.post.deletePost}</Typography>
       </DropdownRadixMenu.Item>

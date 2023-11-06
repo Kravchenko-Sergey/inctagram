@@ -4,6 +4,8 @@ import { pluralizeEn } from '@/helpers/createPluralize'
 export const en: LocaleType = {
   test: 'Lorem Ipsum is simply dummy text of the printing',
   ok: 'OK',
+  yes: 'Yes',
+  no: 'No',
   languageSelect: {
     russian: 'Russian',
     english: 'English',
@@ -230,6 +232,7 @@ export const en: LocaleType = {
     },
     editPost: 'Edit Post',
     deletePost: 'Delete Post',
+    areYouSureToDelete: 'Are you sure you want to delete this post?',
   },
   sidebars: {
     home: 'Home',
