@@ -1,5 +1,3 @@
-import React from 'react'
-
 import ReactCrop from 'react-easy-crop'
 
 type PropsType = {
@@ -7,7 +5,7 @@ type PropsType = {
   crop: { x: number; y: number }
   zoom: number
   aspectRatio: number
-  objectFit?: string
+  objectFit?: 'contain' | 'cover' | 'horizontal-cover' | 'vertical-cover'
   setCrop: (crop: { x: number; y: number }) => void
   setZoom: (zoom: number) => void
   croppedAreaPixels: CropArgType | null

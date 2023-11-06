@@ -1,4 +1,4 @@
-type Image = {
+export type PostImageType = {
   url: string
   width: number
   height: number
@@ -6,22 +6,22 @@ type Image = {
   uploadId: string
 }
 
-export type CreatePostCommentResponse = {
+export type Post = {
   id: number
   description: string
   location: string
-  images: Image[]
+  images: PostImageType[]
   createdAt: Date
   updatedAt: Date
   ownerId: number
 }
 
-export type CreatePostCommentRequest = {
+export type CreatePostRequest = {
   description: string
   childrenMetadata: { uploadId: string }[]
 }
 export type CreatePostImageResponse = {
-  images: Image[]
+  images: PostImageType[]
 }
 export type CreatePostImageRequest = FormData
 
@@ -35,5 +35,14 @@ export type GetAllPostsRequest = {
 export type GetAllPostsResponse = {
   totalCount: number
   pageSize: number
-  items: CreatePostCommentResponse[]
+  items: Post[]
+}
+
+export type PostRequest = {
+  postId: number
+}
+
+export type EditPostRequest = {
+  description: string
+  postId: number
 }

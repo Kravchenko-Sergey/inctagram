@@ -46,7 +46,7 @@ export const Crop = ({ setAspectRatio }: PropsType) => {
       {isOpen && (
         <div className={s.cropOptions}>
           <div className={s.cropOption1} onClick={() => setAspectRatio(4 / 3)}>
-            {t.addNewPost.original}
+            {t.post.addNewPost.original}
             <Image
               src={imageOutline}
               alt="image"

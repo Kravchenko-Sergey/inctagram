@@ -1,0 +1,17 @@
+.avatar {
+  align-items: baseline;
+}
+
+.descriptionWrapper {
+  display: flex;
+  gap: 12px;
+
+  .text {
+    display: inline;
+  }
+
+  .date {
+    margin-top: 5px;
+    color: var(--light-900);
+  }
+}

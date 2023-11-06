@@ -1,16 +1,18 @@
 import { baseApi } from '@/services'
 import {
-  CreatePostCommentRequest,
-  CreatePostCommentResponse,
+  CreatePostRequest,
   CreatePostImageRequest,
   CreatePostImageResponse,
   GetAllPostsRequest,
   GetAllPostsResponse,
+  Post,
+  PostRequest,
+  EditPostRequest,
 } from '@/services/posts/types'
 
 export const postAPI = baseApi.injectEndpoints({
   endpoints: build => ({
-    createPostComments: build.mutation<CreatePostCommentResponse, CreatePostCommentRequest>({
+    createPostComments: build.mutation<Post, CreatePostRequest>({
       query: body => ({
         url: `posts`,
         method: 'POST',
@@ -34,19 +36,35 @@ export const postAPI = baseApi.injectEndpoints({
       }),
       providesTags: ['getUserPosts'],
     }),
-    deletePostImage: build.mutation<void, { imageId: number }>({
+    getUserPost: build.query<Post, PostRequest>({
+      query: ({ postId }) => ({
+        url: `posts/p/${postId}`,
+      }),
+      providesTags: ['userPost'],
+    }),
+    deleteUserPost: build.mutation<void, PostRequest>({
+      query: ({ postId }) => ({
+        url: `posts/${postId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['getUserPosts'],
+    }),
+    deletePostImage: build.mutation<void, { imageId: string }>({
       query: ({ imageId }) => ({
         url: `posts/image/${imageId}`,
         method: 'DELETE',
       }),
       invalidatesTags: ['getUserPosts'],
     }),
-    deleteUserPost: build.mutation<void, { postId: number }>({
-      query: ({ postId }) => ({
+    editPost: build.mutation<void, EditPostRequest>({
+      query: ({ postId, description }) => ({
         url: `posts/${postId}`,
-        method: 'DELETE',
+        method: 'PUT',
+        body: {
+          description,
+        },
       }),
-      invalidatesTags: ['getUserPosts'],
+      invalidatesTags: ['userPost'],
     }),
   }),
 })
@@ -55,6 +73,8 @@ export const {
   useCreatePostCommentsMutation,
   useCreatePostPhotoMutation,
   useGetUserPostsQuery,
-  useDeletePostImageMutation,
+  useLazyGetUserPostQuery,
   useDeleteUserPostMutation,
+  useDeletePostImageMutation,
+  useEditPostMutation,
 } = postAPI

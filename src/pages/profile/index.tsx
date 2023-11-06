@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
@@ -11,17 +10,13 @@ import {
   Loader,
   ExpandableText,
   Avatar,
+  PostCard,
 } from '@/components'
 import { PATH } from '@/consts/route-paths'
 import { useMeQuery } from '@/services/auth/auth-api'
 import { useGetProfileQuery } from '@/services/profile/profile-api'
 import { useTranslation } from '@/hooks'
-import {
-  CreatePostCommentResponse,
-  useDeletePostImageMutation,
-  useDeleteUserPostMutation,
-  useGetUserPostsQuery,
-} from '@/services/posts'
+import { Post, useGetUserPostsQuery } from '@/services/posts'
 
 import s from './profile.module.scss'
 
@@ -31,32 +26,33 @@ const Profile = () => {
   const { t } = useTranslation()
 
   const { data: me } = useMeQuery()
-  const { data: profile, isLoading, isFetching } = useGetProfileQuery({ profileId: me?.userId })
+  const {
+    data: profile,
+    isLoading,
+    isFetching,
+    isError,
+  } = useGetProfileQuery({ profileId: me?.userId })
   const { data: posts } = useGetUserPostsQuery({ pageSize })
-  const [deletePost] = useDeleteUserPostMutation()
-  const [deletePostImage] = useDeletePostImageMutation()
 
   const loadMorePosts = () => {
     setPageSize(prev => prev + 8)
-    pageSize > uploadedPosts && setHasMorePosts(false)
-  }
-
-  const deletePostImageHandler = async (imageId: number) => {
-    deletePostImage({ imageId }).unwrap()
-  }
-
-  const deletePostHandler = async (postId: number) => {
-    deletePost({ postId }).unwrap()
+    pageSize > publications && setHasMorePosts(false)
   }
 
   if (isLoading || isFetching) {
     return <Loader />
   }
 
+  if (isError) {
+    console.error('Get profile is failed')
+  }
   const following = 2218
   const followers = 2358
-  const totalCountPosts = posts?.totalCount as number
-  const uploadedPosts = posts?.items.length as number
+  const publications = posts?.items.length as number
+
+  const profileName = profile?.fullName
+    ? `${profile?.firstName} ${profile?.lastName}`
+    : profile?.userName
 
   return (
     <>
@@ -65,7 +61,7 @@ const Profile = () => {
         <div className={s.profile}>
           <Avatar photo={profile?.avatars[0]?.url} />
           <div className={s.info}>
-            <Typography variant="large">{profile?.userName}</Typography>
+            <Typography variant="large">{profileName}</Typography>
             <div className={s.items}>
               <div>
                 <Typography>{following}</Typography>
@@ -76,8 +72,8 @@ const Profile = () => {
                 <Typography>{t.profile.followers(followers)}</Typography>
               </div>
               <div>
-                <Typography>{totalCountPosts}</Typography>
-                <Typography>{t.profile.publications(totalCountPosts)}</Typography>
+                <Typography>{publications}</Typography>
+                <Typography>{t.profile.publications(publications)}</Typography>
               </div>
             </div>
             <ExpandableText text={profile?.aboutMe ?? null} />
@@ -89,42 +85,13 @@ const Profile = () => {
           </div>
         </div>
         <InfiniteScroll
-          dataLength={uploadedPosts || 0}
+          dataLength={publications || 0}
           next={loadMorePosts}
           hasMore={hasMorePosts}
-          loader={totalCountPosts !== uploadedPosts ? <Loader className={s.loader} /> : null}
+          loader={publications > 0 ? <Loader className={s.loader} /> : null}
           className={s.posts}
         >
-          {posts?.items.map((post: CreatePostCommentResponse) => (
-            <div key={post.id} className={s.postWrapper}>
-              <Image
-                src={post?.images[0]?.url}
-                alt={`post ${post.id} image`}
-                width={228}
-                height={228}
-                key={post.id}
-                className={s.post}
-              />
-              <Button
-                variant="primary"
-                type="button"
-                onClick={() => {
-                  deletePostImageHandler(+post?.images[0]?.uploadId) // ошибка типизации исправил со стринги на намбер
-                }}
-              >
-                Удалить изображение
-              </Button>
-              <Button
-                variant="primary"
-                type="button"
-                onClick={() => {
-                  deletePostHandler(post.id)
-                }}
-              >
-                Удалить пост
-              </Button>
-            </div>
-          ))}
+          {posts?.items.map((post: Post) => <PostCard key={post.id} post={post} />)}
         </InfiniteScroll>
         <div className={s.scrollableContent}></div>
       </main>

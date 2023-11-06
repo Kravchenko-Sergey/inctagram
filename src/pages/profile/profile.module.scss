@@ -37,19 +37,6 @@
   margin-top: 54px;
 }
 
-.post {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 228px;
-  height: 228px;
-
-  object-fit: cover;
-  background-color: var(--primary-500);
-  border-radius: 2px;
-}
-
 .postWrapper {
   display: flex;
   flex: 0 1 24%;

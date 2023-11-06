@@ -38,7 +38,7 @@ export const Zoom = ({ zoom, setZoom }: PropsType) => {
       <div onClick={() => setIsOpen(!isOpen)} className={s.zoomBtn}>
         <Image
           src={maximize}
-          alt={'zoom'}
+          alt="zoom"
           width={24}
           height={24}
           className={isOpen ? s.blueActive : s.blue}

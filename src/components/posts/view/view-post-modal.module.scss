@@ -1,0 +1,15 @@
+.modalCloseButton {
+  top: -30px;
+  right: -42px;
+}
+
+.contentModal {
+  padding: 18px 24px;
+  width: 480px;
+}
+
+.modalContainer {
+  gap: -1px;
+  display: flex;
+  max-height: 502px; // 562 - 60px
+}

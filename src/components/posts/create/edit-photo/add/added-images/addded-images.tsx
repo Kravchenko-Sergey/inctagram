@@ -14,7 +14,7 @@ type PropsType = {
   croppedImage: string | null
 }
 
-export const AddedImages = ({ addedImages, setAddedImages, croppedImage, image }: PropsType) => {
+export const AddedImages = ({ addedImages, setAddedImages }: PropsType) => {
   const imagesToShow = addedImages.slice(-2)
 
   useEffect(() => {
