@@ -3,6 +3,8 @@ import { pluralizeRu } from '@/helpers/createPluralize'
 export const ru = {
   test: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати ',
   ok: 'OK',
+  yes: 'Да',
+  no: 'Нет',
   languageSelect: {
     russian: 'Русский',
     english: 'Английский',
@@ -227,6 +229,7 @@ export const ru = {
       addDescription: 'Добавить описание поста',
     },
     deletePost: 'Удалить пост',
+    areYouSureToDelete: 'Вы уверены что хотите удалить этот пост?',
   },
   sidebars: {
     home: 'Главная',
