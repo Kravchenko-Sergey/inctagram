@@ -5,7 +5,7 @@ type PropsType = {
   crop: { x: number; y: number }
   zoom: number
   aspectRatio: number
-  objectFit?: 'contain' | 'cover' | 'horizontal-cover' | 'vertical-cover'
+  objectFit?: 'contain' | 'cover' | 'horizontal-cover' | 'vertical-cover' | 'fill'
   setCrop: (crop: { x: number; y: number }) => void
   setZoom: (zoom: number) => void
   croppedAreaPixels: CropArgType | null

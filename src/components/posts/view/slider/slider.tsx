@@ -6,7 +6,7 @@ import { PostImageType, Post } from '@/services/posts'
 
 import s from './slider.module.scss'
 
-export const Slider = ({ post }: { post: Post }) => {
+export const Slider = ({ post }: { post: Post }): JSX.Element => {
   const settings = getSliderSettings(s.dots)
 
   return (
