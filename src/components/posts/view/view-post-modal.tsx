@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ReactElement, useState } from 'react'
 
 import { Loader, Modal } from '@/components'
 import { useGetProfileQuery } from '@/services/profile'
@@ -54,7 +54,7 @@ export const ViewPostModal = ({ isOpen, handleModalChange, post }: PropsType) =>
             post={post}
           />
         }
-        content={<Slider post={post} />}
+        contentTest={<Slider post={post} />}
       >
         <PostInfo userName={fullUserName} avatar={profile?.avatars[1]?.url} post={post} />
       </Modal>

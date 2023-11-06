@@ -8,7 +8,7 @@ import { clsx } from 'clsx'
 import s from './modal.module.scss'
 
 export type ModalType = {
-  content?: ReactElement
+  contentTest?: ReactElement
   children?: ReactNode
   title?: string
   onOpenChange?: (value: boolean) => void
@@ -19,7 +19,7 @@ export type ModalType = {
 } & ComponentProps<'div'>
 
 export const Modal = ({
-  content,
+  contentTest,
   children,
   contentClassName,
   title,
@@ -40,7 +40,7 @@ export const Modal = ({
       <Dialog.Portal>
         <Dialog.Overlay className={s.dialogOverlay} />
         <Dialog.Content className={classNames.container}>
-          {content}
+          {contentTest}
           <div>
             <div className={s.header}>
               <Dialog.Title>

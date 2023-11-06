@@ -42,7 +42,7 @@ export const CroppedImage = ({ image, addedImages, setAddedImages }: PropsType) 
 
           // @ts-ignore
           addedImages[index] = { image: croppedImage }
-          toast.success(t.addNewPost.pictureCropped, { icon: false })
+          toast.success(t.post.addNewPost.pictureCropped, { icon: false })
         }
       } catch (e) {
         console.error(e)
@@ -61,7 +61,7 @@ export const CroppedImage = ({ image, addedImages, setAddedImages }: PropsType) 
                 <div key={idx} className={s.carousel} onClick={() => setIndex(idx)}>
                   <EasyCrop
                     image={el.image}
-                    objectFit="fill"
+                    objectFit={'fill'}
                     crop={crop}
                     zoom={zoomValue}
                     setZoom={setZoomValue}
