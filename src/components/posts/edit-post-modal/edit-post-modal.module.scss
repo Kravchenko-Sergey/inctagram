@@ -14,23 +14,32 @@
   position: relative;
 }
 
+.deleteImage {
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
 .textArea {
   padding: 6px 12px;
 }
 
 .wrap {
-  width: 481px;
-  height: 503px;
-  padding: 24px 24px 24px 0px;
   display: flex;
   flex-direction: column;
+
+  width: 481px;
+  height: 503px;
+  padding: 24px 24px 24px 0;
 }
 
 .dots {
   // left: 50%;
   bottom: 12px !important;
+
   // width: auto !important;
-  background: rgba(51, 51, 51, 0.5) !important;
+  background: rgb(51 51 51 / 50%) !important;
 
   li button::before {
     color: var(--light-100) !important;
@@ -39,8 +48,8 @@
 
 .formWrapper {
   display: flex;
-  flex-direction: column;
   flex: 1;
+  flex-direction: column;
 }
 
 .submitButton {
@@ -49,7 +58,7 @@
 
 .userInfo {
   display: flex;
-  align-items: center;
   gap: 12px;
+  align-items: center;
   margin-bottom: 24px;
 }
