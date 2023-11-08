@@ -229,6 +229,9 @@ export const en: LocaleType = {
       title: 'Edit',
       saveChanges: 'Save Changes',
       addDescription: 'Add publication descriptions',
+      closePost: 'Close Post',
+      areYouSure:
+        'Do you really want to close the edition of the publication? If you close changes won’t be saved',
     },
     editPost: 'Edit Post',
     deletePost: 'Delete Post',
