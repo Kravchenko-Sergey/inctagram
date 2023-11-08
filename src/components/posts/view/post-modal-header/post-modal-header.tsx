@@ -1,13 +1,11 @@
 import { Avatar, DropdownMenu, Typography } from '@/components'
 import { ActionOptions } from '../action-options'
-import { Post } from '@/services/posts'
 
 import s from './post-modal-header.module.scss'
 
 type PostHeaderPropsType = {
   userName?: string
   avatar?: string
-  post: Post
   handleOpenEditMode: () => void
   handleDeleteMode: () => void
 }
@@ -15,7 +13,6 @@ type PostHeaderPropsType = {
 export const PostModalHeader = ({
   userName,
   avatar,
-  post,
   handleOpenEditMode,
   handleDeleteMode,
 }: PostHeaderPropsType) => {
@@ -27,7 +24,6 @@ export const PostModalHeader = ({
       </div>
       <DropdownMenu sideOffset={-5}>
         <ActionOptions
-          post={post}
           handleOpenEditMode={handleOpenEditMode}
           handleDeleteMode={handleDeleteMode}
         />

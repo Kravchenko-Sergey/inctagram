@@ -40,7 +40,7 @@ export const postAPI = baseApi.injectEndpoints({
       query: ({ postId }) => ({
         url: `posts/p/${postId}`,
       }),
-      providesTags: ['userPost'],
+      providesTags: result => [{ type: 'post' as const, id: result?.id }, 'post'],
     }),
     deleteUserPost: build.mutation<void, PostRequest>({
       query: ({ postId }) => ({
@@ -64,7 +64,20 @@ export const postAPI = baseApi.injectEndpoints({
           description,
         },
       }),
-      invalidatesTags: ['userPost'],
+      invalidatesTags: (result, error, arg) => [{ type: 'post', id: arg.postId }],
+      async onQueryStarted({ postId, ...patch }, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          postAPI.util.updateQueryData('getUserPost', { postId }, draft => {
+            Object.assign(draft, patch)
+          })
+        )
+
+        try {
+          await queryFulfilled
+        } catch {
+          patchResult.undo()
+        }
+      },
     }),
   }),
 })

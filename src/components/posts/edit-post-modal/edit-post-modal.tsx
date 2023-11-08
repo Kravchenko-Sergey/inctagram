@@ -1,4 +1,4 @@
-import { useEffect, useId } from 'react'
+import { useEffect, useId, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Slider from 'react-slick'
@@ -24,6 +24,7 @@ type PropsType = {
 }
 
 export const EditPostModal = ({ post, isOpen, handleClose, userName, avatar }: PropsType) => {
+  const [isCancelEdit, setIsCancelEdit] = useState(false)
   const id = useId()
   const { t } = useTranslation()
   const [editPost] = useEditPostMutation()
@@ -55,10 +56,28 @@ export const EditPostModal = ({ post, isOpen, handleClose, userName, avatar }: P
       }
 
       await editPost({ description, postId: post.id }).unwrap()
+      handleClose()
     } catch (error) {
       console.log(error)
     }
   }
+
+  const handleClickOutside = () => {
+    const description = getValues().description
+
+    if (description === post.description) {
+      return handleClose()
+    }
+
+    setIsCancelEdit(true)
+  }
+
+  const handleConfirmEditModal = () => {
+    handleClose()
+    handleCloseConfirmModal()
+  }
+
+  const handleCloseConfirmModal = () => setIsCancelEdit(false)
 
   useEffect(() => {
     const touchedFieldNames: FormFields[] = Object.keys(touchedFields) as FormFields[]
@@ -67,46 +86,66 @@ export const EditPostModal = ({ post, isOpen, handleClose, userName, avatar }: P
   }, [t, touchedFields, trigger])
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onOpenChange={handleClose}
-      contentClassName={s.contentModal}
-      closeButtonClass={s.modalCloseButton}
-      title={t.post.edit.title}
-    >
-      <Slider {...settings} className={s.container}>
-        {post.images.map((image: PostImageType, idx: number) => {
-          if (!(idx % 2)) {
-            return (
-              <div key={image.uploadId} className={s.carousel}>
-                <Image alt="img" src={image.url} width={490} height={503} />
-              </div>
-            )
-          }
-        })}
-      </Slider>
-      <div className={s.wrap}>
-        <div className={s.userInfo}>
-          <Avatar photo={avatar} size={36} className={s.avatar} />
-          <Typography variant="h3">{userName}</Typography>
-        </div>
-
-        <form id={id} className={s.formWrapper} onSubmit={handleSubmit(onSubmit)}>
-          <div className={s.mainContent}>
-            <ControlledTextArea
-              autoFocus
-              counter={MAX_CHARS_POST}
-              control={control}
-              classNameTextArea={s.textArea}
-              name="description"
-              label={t.post.edit.addDescription}
-            />
+    <>
+      <Modal
+        isOpen={isOpen}
+        onOpenChange={handleClickOutside}
+        contentClassName={s.contentModal}
+        closeButtonClass={s.modalCloseButton}
+        title={t.post.edit.title}
+        onInteractOutside={handleClickOutside}
+      >
+        <Slider {...settings} className={s.container}>
+          {post.images.map((image: PostImageType, idx: number) => {
+            if (!(idx % 2)) {
+              return (
+                <div key={image.uploadId} className={s.carousel}>
+                  <Image alt="img" src={image.url} width={490} height={503} />
+                </div>
+              )
+            }
+          })}
+        </Slider>
+        <div className={s.wrap}>
+          <div className={s.userInfo}>
+            <Avatar photo={avatar} size={36} className={s.avatar} />
+            <Typography variant="h3">{userName}</Typography>
           </div>
-        </form>
-        <Button form={id} variant="primary" className={s.submitButton}>
-          {t.post.edit.saveChanges}
-        </Button>
-      </div>
-    </Modal>
+
+          <form id={id} className={s.formWrapper} onSubmit={handleSubmit(onSubmit)}>
+            <div className={s.mainContent}>
+              <ControlledTextArea
+                autoFocus
+                counter={MAX_CHARS_POST}
+                control={control}
+                classNameTextArea={s.textArea}
+                name="description"
+                label={t.post.edit.addDescription}
+              />
+            </div>
+          </form>
+          <Button form={id} variant="primary" className={s.submitButton}>
+            {t.post.edit.saveChanges}
+          </Button>
+        </div>
+      </Modal>
+
+      <Modal
+        contentClassName={s.contentConfirmModal}
+        isOpen={isCancelEdit}
+        onOpenChange={handleCloseConfirmModal}
+        title={t.post.edit.closePost}
+      >
+        <Typography variant="regular_text_16"> {t.post.edit.areYouSure}</Typography>
+        <div className={s.options}>
+          <Button variant="ghost" onClick={handleConfirmEditModal}>
+            {t.yes}
+          </Button>
+          <Button variant="primary" onClick={handleCloseConfirmModal}>
+            {t.no}
+          </Button>
+        </div>
+      </Modal>
+    </>
   )
 }

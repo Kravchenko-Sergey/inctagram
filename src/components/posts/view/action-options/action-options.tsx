@@ -3,17 +3,15 @@ import * as DropdownRadixMenu from '@radix-ui/react-dropdown-menu'
 import { EditPencilIcon, TrashIcon } from '@/assets/icons'
 import { Typography } from '@/components'
 import { useTranslation } from '@/hooks'
-import { Post } from '@/services/posts'
 
 import s from './action-options.module.scss'
 
 type PropsType = {
-  post: Post
   handleOpenEditMode: () => void
   handleDeleteMode: () => void
 }
 
-export const ActionOptions = ({ post, handleOpenEditMode, handleDeleteMode }: PropsType) => {
+export const ActionOptions = ({ handleOpenEditMode, handleDeleteMode }: PropsType) => {
   const { t } = useTranslation()
 
   return (
