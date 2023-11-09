@@ -25,9 +25,19 @@ type DescriptionFormTypeProps = {
   isEditModalOpen?: boolean
   setIsEditModalOpen?: (isEditModalOpen: boolean) => void
   addedImages: ImageType[]
+
+  setIsModalOpen: (isModalOpen: boolean) => void
+  setIsFiltersModalOpen: (isFiltersModalOpen: boolean) => void
+  setIsDescriptionModalOpen: (value: boolean) => void
 }
 
-export const PostDescription = ({ addedImages, defaultValue }: DescriptionFormTypeProps) => {
+export const PostDescription = ({
+  addedImages,
+  setIsFiltersModalOpen,
+  setIsModalOpen,
+  defaultValue,
+  setIsDescriptionModalOpen,
+}: DescriptionFormTypeProps) => {
   const { t } = useTranslation()
   const { push } = useRouter()
   const [createPostComment] = useCreatePostCommentsMutation()
@@ -65,6 +75,10 @@ export const PostDescription = ({ addedImages, defaultValue }: DescriptionFormTy
 
         formData.append(`file`, blob)
       })
+      setIsFiltersModalOpen(false)
+
+      setIsModalOpen(false)
+      setIsDescriptionModalOpen(false)
 
       return formData
     }
@@ -74,6 +88,7 @@ export const PostDescription = ({ addedImages, defaultValue }: DescriptionFormTy
     if (addedImages.length) {
       try {
         const responsePhotoStore = await createPostPhoto(formData).unwrap()
+        // console.log('responsePhotoStore', responsePhotoStore)
 
         const imageId = responsePhotoStore.images.map(item => ({ uploadId: item.uploadId }))
         const requestBody: CreatePostRequest = {

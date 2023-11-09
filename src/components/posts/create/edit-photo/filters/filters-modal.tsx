@@ -21,6 +21,7 @@ import {
 } from '@/components/posts/create/add-description'
 
 import s from './filters-modal.module.scss'
+import { getFilteredImg } from '@/components/posts/create/edit-photo'
 
 export type ModalProps = {
   image: string | null
@@ -90,8 +91,8 @@ export const FiltersModal = ({
   const handleNext = () => {
     setIsFiltersModalOpen(true)
     setIsBaseModalOpen(false)
-    //setIsModalOpen(false)
   }
+  const [isDescriptionModalOpen, setIsDescriptionModalOpen] = useState(false)
 
   return (
     <div>
@@ -108,6 +109,8 @@ export const FiltersModal = ({
               </button>
               <div className={s.next}>
                 <DescriptionModal
+                  isDescriptionModalOpen={isDescriptionModalOpen}
+                  setIsDescriptionModalOpen={setIsDescriptionModalOpen}
                   image={image}
                   addedImages={addedImages}
                   setAddedImages={setAddedImages}
@@ -122,7 +125,12 @@ export const FiltersModal = ({
                   setOpenSureModal={setOpenSureModal}
                 >
                   <FilteredImages addedImages={addedImages} activeFilter={activeFilter} />
-                  <PostDescription addedImages={addedImages} />
+                  <PostDescription
+                    setIsFiltersModalOpen={setIsFiltersModalOpen}
+                    setIsModalOpen={setIsModalOpen}
+                    setIsDescriptionModalOpen={setIsDescriptionModalOpen}
+                    addedImages={addedImages}
+                  />
                 </DescriptionModal>
               </div>
 
