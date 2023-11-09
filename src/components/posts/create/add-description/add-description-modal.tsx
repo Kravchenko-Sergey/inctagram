@@ -38,6 +38,9 @@ export type ModalProps = {
   setOpenSureModal: (openSureModal: boolean) => void
   addedImages: ImageType[]
   setAddedImages: (addedImages: Awaited<{ image: string }>[]) => void
+  setIsDescriptionModalOpen: (value: boolean) => void
+
+  isDescriptionModalOpen: boolean
 } & ComponentProps<'div'>
 
 export const DescriptionModal = ({
@@ -47,10 +50,12 @@ export const DescriptionModal = ({
   activeFilter,
   setActiveFilter,
   setIsFiltersModalOpen,
+  isDescriptionModalOpen,
   showSeparator = true,
   onAction,
   onCancel,
   cancelButtonName,
+  setIsDescriptionModalOpen,
   actionButtonName,
   title,
   className,
@@ -67,7 +72,6 @@ export const DescriptionModal = ({
       s.actionButton
     ),
   }
-  const [isDescriptionModalOpen, setIsDescriptionModalOpen] = useState(false)
   const { t } = useTranslation()
   const actionButtonHandler = () => {
     onAction?.()
@@ -81,11 +85,7 @@ export const DescriptionModal = ({
     setIsFiltersModalOpen(true)
   }
 
-  const handlePublish = () => {
-    setIsDescriptionModalOpen(true)
-  }
-
-  const showFilteredImg = async (activeFilter: string) => {
+  const saveFilteredImage = async (activeFilter: string) => {
     try {
       const updatedImages = await Promise.all(
         addedImages.map(async el => {
@@ -99,9 +99,7 @@ export const DescriptionModal = ({
 
       setAddedImages(updatedImages)
       setActiveFilter('')
-      setIsFiltersModalOpen(false)
-      setIsDescriptionModalOpen(false)
-      setIsModalOpen(false)
+      setIsDescriptionModalOpen(true)
     } catch (e) {
       console.error(e)
     }
@@ -109,7 +107,11 @@ export const DescriptionModal = ({
 
   return (
     <div>
-      <Button variant="primary" className={s.nextButton} onClick={handlePublish}>
+      <Button
+        variant="primary"
+        className={s.nextButton}
+        onClick={() => saveFilteredImage(activeFilter)}
+      >
         {t.post.addNewPost.next}
       </Button>
       <Dialog open={isDescriptionModalOpen} onOpenChange={open => !open && setOpenSureModal(true)}>
@@ -121,13 +123,7 @@ export const DescriptionModal = ({
                 <ArrowBack />
               </button>
               <div className={s.next}>
-                <Button
-                  type="submit"
-                  form="form1"
-                  variant="primary"
-                  className={s.nextButton}
-                  onClick={() => showFilteredImg(activeFilter)}
-                >
+                <Button type="submit" form="form1" variant="primary" className={s.nextButton}>
                   {t.post.addNewPost.publish}
                 </Button>
               </div>

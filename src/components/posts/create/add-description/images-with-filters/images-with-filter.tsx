@@ -25,9 +25,11 @@ export const FilteredImages = ({ addedImages, activeFilter }: PropsType) => {
               <div key={idx} className={s.carousel}>
                 <Image
                   alt="img"
+                  objectFit={'cover'}
+                  layout={'fill'}
                   src={el.image}
-                  width={490}
-                  height={503}
+                  // width={490}
+                  // height={503}
                   style={{ filter: activeFilter }}
                 />
               </div>
