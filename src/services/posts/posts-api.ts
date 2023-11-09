@@ -38,8 +38,6 @@ export const postAPI = baseApi.injectEndpoints({
     }),
     getUserPost: build.query<Post, PostRequest>({
       query: ({ postId }) => {
-        console.log('postId', postId)
-
         return {
           url: `posts/p/${postId}`,
         }

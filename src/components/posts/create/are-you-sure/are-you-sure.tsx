@@ -1,6 +1,8 @@
 import { Typography } from '@/components'
 import { useTranslation } from '@/hooks'
 import { BaseModal } from '../base-modal'
+import { PATH } from '@/consts/route-paths'
+import { useRouter } from 'next/router'
 
 export type ModalProps = {
   openSureModal: boolean
@@ -19,6 +21,8 @@ export const AreYouSureModal = ({
   setImage,
 }: ModalProps) => {
   const { t } = useTranslation()
+  const { push } = useRouter()
+
   const onModalClose = () => {
     setOpenSureModal(false)
   }
@@ -28,6 +32,7 @@ export const AreYouSureModal = ({
     setIsModalOpen(false)
     setIsBaseModalOpen(true)
     setImage(null)
+    push(PATH.PROFILE)
   }
 
   return (
