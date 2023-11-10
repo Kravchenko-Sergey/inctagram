@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 
 import { useTranslation } from '@/hooks'
-import { Button, Typography } from '@/components'
+import { Button, Loader, Typography } from '@/components'
 import { ImageOutline } from '@/assets/icons'
 import { CropModal } from './crop-modal'
 import { CroppedImage } from './cropped-image'
@@ -24,7 +24,7 @@ export const CreatePostModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [image, setImage] = useState<string | null>(null)
   const [addedImages, setAddedImages] = useState<ImageType[]>([])
-
+  const [isLoadingPost, setIsLoadingPost] = useState(false)
   const { push } = useRouter()
 
   const handleButtonClick = () => {
@@ -55,6 +55,10 @@ export const CreatePostModal = () => {
     inputRef && inputRef.current?.click()
   }
 
+  if (isLoadingPost) {
+    return <Loader className={s.loader} />
+  }
+
   return (
     <div className={s.container}>
       {!addedImages.length && isBaseModalOpen ? (
@@ -83,6 +87,7 @@ export const CreatePostModal = () => {
         </BaseModal>
       ) : (
         <CropModal
+          isPostCreateLoadingHandler={setIsLoadingPost}
           image={image}
           open={isModalOpen}
           onClose={handleButtonClick}

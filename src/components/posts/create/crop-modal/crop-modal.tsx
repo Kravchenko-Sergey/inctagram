@@ -35,6 +35,7 @@ export type ModalProps = {
   isBaseModalOpen: boolean
   setIsBaseModalOpen: (isBaseModalOpen: boolean) => void
   setImage: (image: string | null) => void
+  isPostCreateLoadingHandler: (value: boolean) => void
 } & ComponentProps<'div'>
 
 export const CropModal = ({
@@ -52,6 +53,7 @@ export const CropModal = ({
   setAddedImages,
   isBaseModalOpen,
   setIsBaseModalOpen,
+  isPostCreateLoadingHandler,
   setImage,
 }: ModalProps) => {
   const classNames = {
@@ -94,6 +96,7 @@ export const CropModal = ({
                 </button>
                 <div className={s.nextButton}>
                   <FiltersModal
+                    isPostCreateLoadingHandler={isPostCreateLoadingHandler}
                     image={image}
                     addedImages={addedImages}
                     setAddedImages={setAddedImages}
