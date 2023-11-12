@@ -5,7 +5,12 @@ import Slider from 'react-slick'
 import Image from 'next/image'
 
 import { Avatar, Button, ControlledTextArea, Modal, Typography } from '@/components'
-import { PostImageType, Post, useEditPostMutation } from '@/services/posts'
+import {
+  PostImageType,
+  Post,
+  useEditPostMutation,
+  useDeletePostImageMutation,
+} from '@/services/posts'
 import { useTranslation } from '@/hooks'
 import { FormFields, getSliderSettings, triggerZodFieldError } from '@/helpers'
 import { MAX_CHARS_POST } from '@/consts/input-limits'
@@ -14,6 +19,7 @@ import { DescriptionFormType, descriptionSchema } from '@/schemas'
 import s from './edit-post-modal.module.scss'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import { DeleteIcon } from '@/assets/icons'
 
 type PropsType = {
   isOpen: boolean
@@ -28,8 +34,17 @@ export const EditPostModal = ({ post, isOpen, handleClose, userName, avatar }: P
   const id = useId()
   const { t } = useTranslation()
   const [editPost] = useEditPostMutation()
+  const [deletePostImage] = useDeletePostImageMutation()
 
   const settings = getSliderSettings(s.dots)
+
+  const handleDeletePostImage = async (uploadId: string) => {
+    try {
+      await deletePostImage({ imageId: uploadId }).unwrap()
+    } catch (error: unknown) {
+      console.error(`Some error occured when delete post with id ${post.id}, ${error}`)
+    }
+  }
 
   const {
     control,
@@ -100,6 +115,10 @@ export const EditPostModal = ({ post, isOpen, handleClose, userName, avatar }: P
             if (!(idx % 2)) {
               return (
                 <div key={image.uploadId} className={s.carousel}>
+                  <DeleteIcon
+                    className={s.deleteImage}
+                    onClick={() => handleDeletePostImage(image.uploadId)}
+                  />
                   <Image alt="img" src={image.url} width={490} height={503} />
                 </div>
               )
