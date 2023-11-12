@@ -2,13 +2,14 @@ import { ComponentProps, ReactElement, ReactNode } from 'react'
 
 import { CloseModal } from '@/assets/icons'
 import { Typography } from '@/components'
+
 import * as Dialog from '@radix-ui/react-dialog'
 import { clsx } from 'clsx'
 
 import s from './modal.module.scss'
 
 export type ModalType = {
-  content?: ReactElement
+  additionalContent?: ReactElement
   children?: ReactNode
   title?: string
   onOpenChange?: (value: boolean) => void
@@ -16,10 +17,11 @@ export type ModalType = {
   closeButtonClass?: string
   isOpen: boolean
   postHeader?: ReactNode
+  onInteractOutside?: (event: PointerDownOutsideEvent | FocusOutsideEvent) => void
 } & ComponentProps<'div'>
 
 export const Modal = ({
-  content,
+  additionalContent,
   children,
   contentClassName,
   title,
@@ -28,6 +30,7 @@ export const Modal = ({
   postHeader,
   className,
   closeButtonClass,
+  onInteractOutside,
 }: ModalType) => {
   const classNames = {
     container: clsx(s.dialogContent, className && className),
@@ -39,8 +42,8 @@ export const Modal = ({
     <Dialog.Root onOpenChange={onOpenChange} open={isOpen}>
       <Dialog.Portal>
         <Dialog.Overlay className={s.dialogOverlay} />
-        <Dialog.Content className={classNames.container}>
-          {content}
+        <Dialog.Content className={classNames.container} onInteractOutside={onInteractOutside}>
+          {additionalContent}
           <div>
             <div className={s.header}>
               <Dialog.Title>

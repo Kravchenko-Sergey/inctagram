@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { Button, Loader, Modal, Typography } from '@/components'
 import { useGetProfileQuery } from '@/services/profile'
 import { Post, useDeletePostImageMutation, useDeleteUserPostMutation } from '@/services/posts'
-import { getSliderSettings } from '@/helpers'
 import { PostModalHeader } from './post-modal-header'
 import { PostInfo } from './post-info'
 import { EditPostModal } from '../edit-post-modal'
@@ -20,9 +19,12 @@ type PropsType = {
 
 export const ViewPostModal = ({ isOpen, handleModalChange, post }: PropsType) => {
   const { t } = useTranslation()
+
   const { data: profile, isLoading } = useGetProfileQuery({ profileId: post?.ownerId })
+
   const [isEditMode, setIsEditMode] = useState(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+
   const [deletePost] = useDeleteUserPostMutation()
   const [deletePostImage] = useDeletePostImageMutation()
 
@@ -35,20 +37,21 @@ export const ViewPostModal = ({ isOpen, handleModalChange, post }: PropsType) =>
     }
   }
 
-  const handleEditModalChange = () => setIsEditMode(false)
-
-  const handleCloseModal = () => {
-    handleModalChange(false)
+  const handleEditModalChange = () => {
+    setIsEditMode(false)
+    handleModalChange(true)
   }
+
+  const handleCloseModal = () => handleModalChange(false)
 
   const handleOpenEditMode = () => {
     setIsEditMode(true)
     handleCloseModal()
   }
 
-  const handleDeleteMode = () => {
-    setIsDeleteModalOpen(true)
-  }
+  const handleDeleteMode = () => setIsDeleteModalOpen(true)
+
+  const handleCancelDeletePost = () => setIsDeleteModalOpen(false)
 
   if (isLoading) {
     return <Loader />
@@ -70,10 +73,9 @@ export const ViewPostModal = ({ isOpen, handleModalChange, post }: PropsType) =>
             handleDeleteMode={handleDeleteMode}
             userName={fullUserName}
             avatar={profile?.avatars[1]?.url}
-            post={post}
           />
         }
-        content={<Slider post={post} />}
+        additionalContent={<Slider post={post} />}
       >
         <PostInfo userName={fullUserName} avatar={profile?.avatars[1]?.url} post={post} />
       </Modal>
@@ -85,26 +87,18 @@ export const ViewPostModal = ({ isOpen, handleModalChange, post }: PropsType) =>
         avatar={profile?.avatars[1]?.url}
       />
       <Modal
-        className={s.modalContainer}
+        className={s.contentDeleteModal}
         isOpen={isDeleteModalOpen}
-        onOpenChange={() => {
-          setIsDeleteModalOpen(false)
-        }}
+        onOpenChange={handleCancelDeletePost}
         contentClassName={s.contentModal}
-        closeButtonClass={s.modalCloseButton}
         postHeader={<Typography variant="h3">{t.post.deletePost}</Typography>}
       >
         <Typography variant="h3">{t.post.areYouSureToDelete}</Typography>
         <div className={s.deleteOptions}>
-          <Button variant={'primary'} onClick={handleDeletePost}>
+          <Button variant="primary" onClick={handleDeletePost}>
             <Typography variant="h3">{t.yes}</Typography>
           </Button>
-          <Button
-            variant={'ghost'}
-            onClick={() => {
-              setIsDeleteModalOpen(false)
-            }}
-          >
+          <Button variant="ghost" onClick={handleCancelDeletePost}>
             <Typography variant="h3">{t.no}</Typography>
           </Button>
         </div>
