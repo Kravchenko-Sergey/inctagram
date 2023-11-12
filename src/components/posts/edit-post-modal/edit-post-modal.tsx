@@ -38,7 +38,7 @@ export const EditPostModal = ({ post, isOpen, handleClose, userName, avatar }: P
 
   const settings = getSliderSettings(s.dots)
 
-  const handleDeletePostImage = async uploadId => {
+  const handleDeletePostImage = async (uploadId: string) => {
     try {
       await deletePostImage({ imageId: uploadId }).unwrap()
     } catch (error: unknown) {
@@ -116,10 +116,10 @@ export const EditPostModal = ({ post, isOpen, handleClose, userName, avatar }: P
               return (
                 <div key={image.uploadId} className={s.carousel}>
                   <DeleteIcon
-                  className={s.deleteImage}
-                  onClick={() => handleDeletePostImage(image.uploadId)}
-                />
-                <Image alt="img" src={image.url} width={490} height={503} />
+                    className={s.deleteImage}
+                    onClick={() => handleDeletePostImage(image.uploadId)}
+                  />
+                  <Image alt="img" src={image.url} width={490} height={503} />
                 </div>
               )
             }
