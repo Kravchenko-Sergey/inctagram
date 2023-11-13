@@ -44,6 +44,7 @@ export type ModalProps = {
   openSureModal: boolean
   setOpenSureModal: (openSureModal: boolean) => void
   setIsModalOpen: (open: boolean) => void
+  isPostCreateLoadingHandler: (value: boolean) => void
 } & ComponentProps<'div'>
 
 export const FiltersModal = ({
@@ -54,6 +55,7 @@ export const FiltersModal = ({
   isModalOpen,
   cancelButtonName,
   actionButtonName,
+  isPostCreateLoadingHandler,
   title,
   className,
   children,
@@ -126,6 +128,7 @@ export const FiltersModal = ({
                 >
                   <FilteredImages addedImages={addedImages} activeFilter={activeFilter} />
                   <PostDescription
+                    isPostCreateLoadingHandler={isPostCreateLoadingHandler}
                     setIsFiltersModalOpen={setIsFiltersModalOpen}
                     setIsModalOpen={setIsModalOpen}
                     setIsDescriptionModalOpen={setIsDescriptionModalOpen}
