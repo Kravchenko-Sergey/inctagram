@@ -99,6 +99,10 @@
   margin-bottom: 18px;
 }
 
+.IconButton svg {
+  transform: scale(1.5);
+}
+
 .arrowButton {
   all: unset;
 
@@ -126,10 +130,6 @@
   position: absolute;
   top: 20px;
   right: 24px;
-
-  svg {
-    transform: scale(1.5);
-  }
 
   &:hover svg {
     background-color: var(--dark-500);
