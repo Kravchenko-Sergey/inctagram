@@ -86,7 +86,9 @@ const PublicProfile = () => {
           loader={publications > 0 ? <Loader className={s.loader} /> : null}
           className={s.posts}
         >
-          {profile?.posts?.items.map((post: Post) => <PostCard key={post.id} post={post} />)}
+          {profile?.posts?.items.map((post: Post) => (
+            <PostCard key={post.id} post={post} isEditable={false} />
+          ))}
         </InfiniteScroll>
         <div className={s.scrollableContent}></div>
       </main>

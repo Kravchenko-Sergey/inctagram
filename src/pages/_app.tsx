@@ -46,11 +46,12 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       `}</style>
 
       <Provider store={store}>
-        {/*<AuthProvider> </AuthProvider>*/}
-        <Toast />
-        <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_ID ?? ''}>
-          {getLayout(<Component {...pageProps} />)}
-        </GoogleOAuthProvider>
+        <AuthProvider>
+          <Toast />
+          <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_ID ?? ''}>
+            {getLayout(<Component {...pageProps} />)}
+          </GoogleOAuthProvider>
+        </AuthProvider>
       </Provider>
     </>
   )

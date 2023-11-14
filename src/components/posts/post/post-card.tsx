@@ -9,19 +9,22 @@ import { sortImagesByWidth } from '@/helpers/filterImages'
 
 type PropsType = {
   post: Post
+  isEditable: Boolean
 }
 
-export const PostCard = ({ post }: PropsType) => {
+export const PostCard = ({ post, isEditable }: PropsType) => {
   const [getPost] = useLazyGetUserPostQuery()
 
   const [isViewMode, setIsViewMode] = useState(false)
 
   const handleViewPost = async () => {
-    try {
-      await getPost({ postId: post.id }).unwrap()
-      setIsViewMode(true)
-    } catch (error: unknown) {
-      console.log(`When open post with id ${post.id} an error has occured`, error)
+    if (isEditable) {
+      try {
+        await getPost({ postId: post.id }).unwrap()
+        setIsViewMode(true)
+      } catch (error: unknown) {
+        console.log(`When open post with id ${post.id} an error has occured`, error)
+      }
     }
   }
 
@@ -36,7 +39,9 @@ export const PostCard = ({ post }: PropsType) => {
         height={228}
         className={s.post}
       />
-      <ViewPostModal post={post} isOpen={isViewMode} handleModalChange={setIsViewMode} />
+      {isEditable && (
+        <ViewPostModal post={post} isOpen={isViewMode} handleModalChange={setIsViewMode} />
+      )}
     </>
   )
 }
