@@ -21,7 +21,6 @@ import {
 } from '@/components/posts/create/add-description'
 
 import s from './filters-modal.module.scss'
-import { getFilteredImg } from '@/components/posts/create/edit-photo'
 
 export type ModalProps = {
   image: string | null
