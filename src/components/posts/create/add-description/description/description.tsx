@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 
 import { MAX_CHARS_POST } from '@/consts/input-limits'
 import { useTranslation } from '@/hooks'
-import { ControlledTextArea, Loader } from '@/components'
+import { ControlledTextArea } from '@/components'
 import { DescriptionFormType, descriptionSchema } from '@/schemas'
 import { FormFields, getBinaryImageData, triggerZodFieldError } from '@/helpers'
 import {
@@ -25,6 +25,7 @@ type DescriptionFormTypeProps = {
   isEditModalOpen?: boolean
   setIsEditModalOpen?: (isEditModalOpen: boolean) => void
   addedImages: ImageType[]
+  isPostCreateLoadingHandler: (value: boolean) => void
 
   setIsModalOpen: (isModalOpen: boolean) => void
   setIsFiltersModalOpen: (isFiltersModalOpen: boolean) => void
@@ -37,6 +38,7 @@ export const PostDescription = ({
   setIsModalOpen,
   defaultValue,
   setIsDescriptionModalOpen,
+  isPostCreateLoadingHandler,
 }: DescriptionFormTypeProps) => {
   const { t } = useTranslation()
   const { push } = useRouter()
@@ -65,6 +67,7 @@ export const PostDescription = ({
   }, [t, touchedFields, trigger])
 
   const onSubmit = async (data: DescriptionFormType) => {
+    isPostCreateLoadingHandler(true)
     const res = await getBinaryImageData(addedImages)
 
     function createFormData(res: Uint8Array[]) {
@@ -99,7 +102,7 @@ export const PostDescription = ({
         if (responsePhotoStore.images) {
           await createPostComment(requestBody)
         }
-
+        isPostCreateLoadingHandler(false)
         push(PATH.PROFILE)
       } catch (e: unknown) {
         const error = e as any
