@@ -2,6 +2,10 @@ import { ReactElement, ReactNode } from 'react'
 
 import '@/styles/index.scss'
 import '@/styles/nprogress.css'
+import '@/styles/slider.css'
+import 'react-toastify/dist/ReactToastify.css'
+import '@/styles/Toast.scss'
+
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import { NextPage } from 'next'
 import type { AppProps } from 'next/app'
@@ -11,6 +15,7 @@ import { Provider } from 'react-redux'
 import { useLoader } from '@/hooks'
 import { AuthProvider } from '@/components'
 import { store } from '@/services'
+import { Toast } from '@/components/react-toast/toast-container'
 
 export const inter = Inter({
   subsets: ['latin', 'cyrillic'],
@@ -42,6 +47,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
       <Provider store={store}>
         <AuthProvider>
+          <Toast />
           <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_ID ?? ''}>
             {getLayout(<Component {...pageProps} />)}
           </GoogleOAuthProvider>

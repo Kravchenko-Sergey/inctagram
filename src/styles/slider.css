@@ -1,0 +1,22 @@
+.slick-dots li button::before {
+  font-size: 8px !important;
+  color: var(--light-900) !important;
+  opacity: 1 !important;
+}
+
+.slick-dots li.slick-active button::before {
+  font-size: 10px !important;
+  color: var(--primary-500) !important;
+  opacity: 1 !important;
+
+  /* opacity: 0.75; */
+}
+
+.slick-dots li {
+  margin: 0 !important;
+}
+
+.reactEasyCrop_CropArea {
+  /* border: none !important; */
+  box-shadow: none !important;
+}

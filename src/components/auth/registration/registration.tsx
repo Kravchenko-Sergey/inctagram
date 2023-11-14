@@ -1,22 +1,21 @@
 import { memo, useCallback, useEffect, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useGoogleLogin } from '@react-oauth/google'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
-
-import { useGoogleLoginMutation, useRegistrationMutation } from '@/services/auth/auth-api'
-import { GitHubIcon, GoogleIcon } from '@/assets/icons'
+import { toast } from 'react-toastify'
+import { useRegistrationMutation } from '@/services/auth/auth-api'
 import {
   Button,
   ControlledCheckbox,
   ControlledTextField,
   Modal,
+  SocialMediaAuth,
   Trans,
   Typography,
 } from '@/components'
 import { PATH } from '@/consts/route-paths'
-import { tokenSetterToLocalStorage, FormFields, triggerZodFieldError } from '@/helpers'
+import { FormFields, triggerZodFieldError } from '@/helpers'
 import { useTranslation } from '@/hooks'
 import { RegisterFormType, createRegisterSchema } from '@/schemas'
 import { RegisterError } from '@/types'
@@ -28,7 +27,6 @@ export const Registration = memo(() => {
   const { push } = useRouter()
   const { t } = useTranslation()
   const [register] = useRegistrationMutation()
-  const [googleLogin, { data: googleToken }] = useGoogleLoginMutation()
   const {
     reset,
     formState: { errors, isValid, touchedFields },
@@ -71,35 +69,19 @@ export const Registration = memo(() => {
       } catch (e: unknown) {
         const error = e as RegisterError
 
-        if (error?.data.messages[0].message === 'User with this email is already exist') {
+        if (error?.data?.messages[0]?.message === 'User with this email is already exist') {
           setError('email', { type: 'email', message: t.errors.emailExists })
-        } else if (error?.data.messages[0].message === 'User with this userName is already exist') {
+        } else if (
+          error?.data?.messages[0]?.message === 'User with this userName is already exist'
+        ) {
           setError('username', { type: 'username', message: t.errors.usernameExists })
+        } else {
+          toast.error('Error! Server is not available', { icon: false })
         }
       }
     },
     [register, setError, t.errors.emailExists, t.errors.usernameExists]
   )
-
-  const googleLoginAndRegister = useGoogleLogin({
-    onSuccess: async tokenResponse => {
-      await googleLogin({ code: tokenResponse.code })
-      if (googleToken && googleToken.accessToken) {
-        tokenSetterToLocalStorage(googleToken.accessToken)
-      }
-    },
-    flow: 'auth-code',
-  })
-
-  const githubLoginAndRegister = () => {
-    if (process.env.NEXT_PUBLIC_GITHUB_AUTH_URL) {
-      window.location.assign(process.env.NEXT_PUBLIC_GITHUB_AUTH_URL)
-
-      return
-    }
-
-    console.log('Please, provide url in .env for github authorization')
-  }
 
   return (
     <>
@@ -107,11 +89,7 @@ export const Registration = memo(() => {
         <Typography className={s.title} variant="h1">
           {t.auth.signUp}
         </Typography>
-        <div className={s.icons}>
-          <GoogleIcon onClick={googleLoginAndRegister} className={s.icon} />
-          <GitHubIcon onClick={githubLoginAndRegister} className={s.icon} />
-        </div>
-
+        <SocialMediaAuth />
         <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
           <ControlledTextField label={t.auth.username} control={control} name="username" />
           <ControlledTextField label={t.auth.emailLabel} control={control} name="email" />

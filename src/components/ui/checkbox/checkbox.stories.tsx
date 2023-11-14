@@ -5,11 +5,17 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Checkbox } from './index'
 
 const meta = {
-  title: 'Components/UI/Checkbox',
+  title: 'UI Components/Checkbox',
   component: Checkbox,
   tags: ['autodocs'],
   argTypes: {
     label: [''],
+  },
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/M7753HAzy0tm9rQWyRBrnI/Inctagram?type=design&node-id=5783-12902&mode=dev',
+    },
   },
 } satisfies Meta<typeof Checkbox>
 

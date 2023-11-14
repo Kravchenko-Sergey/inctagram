@@ -5,7 +5,7 @@ import { clsx } from 'clsx'
 // eslint-disable-next-line import/no-duplicates
 import { format } from 'date-fns'
 // eslint-disable-next-line import/no-duplicates
-import { ru } from 'date-fns/locale'
+import { ru, enUS } from 'date-fns/locale'
 import * as RDP from 'react-datepicker'
 
 import { PATH } from '@/consts/route-paths'
@@ -16,6 +16,7 @@ import { useTranslation } from '@/hooks'
 
 import textFieldStyles from '@/components/ui/text-field/text-field.module.scss'
 import s from './date-picker.module.scss'
+import { useRouter } from 'next/router'
 
 export type DatePickerProps = {
   placeholder?: string
@@ -51,6 +52,7 @@ export const DatePicker = forwardRef<FieldValues, DatePickerProps>(
     const isRange = endDate !== undefined
     const showError = !!errorMessage && errorMessage.length > 0
     const { t } = useTranslation()
+    const { locale } = useRouter()
 
     const classNames = {
       root: clsx(s.root, className),
@@ -86,13 +88,15 @@ export const DatePicker = forwardRef<FieldValues, DatePickerProps>(
           selectsRange={isRange}
           formatWeekDay={formatWeekDay}
           placeholderText={placeholder}
-          renderCustomHeader={CustomHeader}
+          renderCustomHeader={params => (
+            <CustomHeader {...params} locale={locale === 'ru' ? ru : enUS} />
+          )}
           customInput={<CustomInput error={errorMessage} disabled={disabled} label={label} />}
           calendarClassName={classNames.calendar}
           className={classNames.input}
           popperClassName={classNames.popper}
           dayClassName={classNames.day}
-          locale={ru}
+          locale={locale === 'ru' ? ru : enUS}
           dateFormat="dd/MM/yyyy"
           showPopperArrow={false}
           calendarStartDay={1}
@@ -155,14 +159,23 @@ const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
   }
 )
 
-const CustomHeader = ({ date, decreaseMonth, increaseMonth }: ReactDatePickerCustomHeaderProps) => {
+const CustomHeader = ({
+  date,
+  decreaseMonth,
+  increaseMonth,
+  locale,
+}: ReactDatePickerCustomHeaderProps & {
+  locale: Locale
+}) => {
   const classNames = {
     header: s.header,
     buttonBox: s.buttonBox,
     button: s.button,
   }
 
-  const headerText = capitalizeFirstLetter(format(date, 'LLLL Y', { locale: ru }))
+  const headerText = capitalizeFirstLetter(
+    format(date, 'LLLL Y', { locale: locale.code === 'ru' ? ru : enUS })
+  )
 
   return (
     <div className={classNames.header}>

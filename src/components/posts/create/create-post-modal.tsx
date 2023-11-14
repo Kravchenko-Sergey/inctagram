@@ -1,0 +1,112 @@
+import { useRef, useState } from 'react'
+
+import { useTranslation } from '@/hooks'
+import { Button, Loader, Typography } from '@/components'
+import { ImageOutline } from '@/assets/icons'
+import { CropModal } from './crop-modal'
+import { CroppedImage } from './cropped-image'
+import { BaseModal } from './base-modal'
+
+import s from './create-post-modal.module.scss'
+import { useRouter } from 'next/router'
+import { PATH } from '@/consts/route-paths'
+
+export type ImageType = {
+  image: string
+  id?: string
+  croppedImage?: string
+}
+
+export const CreatePostModal = () => {
+  const { t } = useTranslation()
+  const inputRef = useRef<HTMLInputElement>(null)
+  const [isBaseModalOpen, setIsBaseModalOpen] = useState(true)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [image, setImage] = useState<string | null>(null)
+  const [addedImages, setAddedImages] = useState<ImageType[]>([])
+  const [isLoadingPost, setIsLoadingPost] = useState(false)
+  const { push } = useRouter()
+
+  const handleButtonClick = () => {
+    push(PATH.PROFILE)
+
+    //setIsBaseModalOpen(false)
+    setImage(null)
+    setIsModalOpen(false)
+  }
+  const cancelButtonClick = () => {
+    push(PATH.PROFILE)
+    //setIsBaseModalOpen(false)
+    setIsModalOpen(false)
+  }
+
+  const handleImageUpload = async (e: any) => {
+    setAddedImages([
+      {
+        id: (addedImages.length + 1).toString(),
+        image: URL.createObjectURL(e.target.files[0]),
+      },
+    ])
+    setIsBaseModalOpen(false)
+    setIsModalOpen(true)
+  }
+
+  const selectFileHandler = () => {
+    inputRef && inputRef.current?.click()
+  }
+
+  if (isLoadingPost) {
+    return <Loader className={s.loader} />
+  }
+
+  return (
+    <div className={s.container}>
+      {!addedImages.length && isBaseModalOpen ? (
+        <BaseModal
+          modalWidth="md"
+          open={isBaseModalOpen}
+          onClose={handleButtonClick}
+          title={t.post.addNewPost.addPhoto}
+        >
+          <div className={`${s.photoContainer} ${image === null ? s.emptyPhotoContainer : ''}`}>
+            <ImageOutline />
+          </div>
+          <div>
+            <Button variant="primary" onClick={selectFileHandler} className={s.btn}>
+              <Typography variant="h3">{t.profile.selectImage}</Typography>
+            </Button>
+            <input
+              type="file"
+              ref={inputRef}
+              name="cover"
+              onChange={handleImageUpload}
+              accept="image/png, image/jpeg, image/jpg"
+              style={{ display: 'none' }}
+            />
+          </div>
+        </BaseModal>
+      ) : (
+        <CropModal
+          isPostCreateLoadingHandler={setIsLoadingPost}
+          image={image}
+          open={isModalOpen}
+          onClose={handleButtonClick}
+          onCancel={cancelButtonClick}
+          title={t.post.addNewPost.cropping}
+          addedImages={addedImages}
+          setAddedImages={setAddedImages}
+          isBaseModalOpen={isBaseModalOpen}
+          setIsBaseModalOpen={setIsBaseModalOpen}
+          setImage={setImage}
+        >
+          <CroppedImage
+            image={image}
+            setImage={setImage}
+            addedImages={addedImages}
+            setAddedImages={setAddedImages}
+          />
+        </CropModal>
+      )}
+    </div>
+  )
+}

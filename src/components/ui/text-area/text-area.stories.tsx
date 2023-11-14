@@ -3,9 +3,15 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { TextArea } from './index'
 
 const meta = {
-  title: 'Components/UI/TextArea',
+  title: 'UI Components/TextArea',
   component: TextArea,
   tags: ['autodocs'],
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/M7753HAzy0tm9rQWyRBrnI/Inctagram?type=design&node-id=316-8163&mode=dev',
+    },
+  },
 } satisfies Meta<typeof TextArea>
 
 export default meta

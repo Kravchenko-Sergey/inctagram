@@ -1,77 +1,82 @@
-import { useRouter } from 'next/router'
+import { useState } from 'react'
+import Link from 'next/link'
+import InfiniteScroll from 'react-infinite-scroll-component'
 
-import { Button, HeadMeta, getMainLayout, Typography, Loader } from '@/components'
+import {
+  Button,
+  HeadMeta,
+  getMainLayout,
+  Typography,
+  Loader,
+  ExpandableText,
+  Avatar,
+  PostCard,
+} from '@/components'
 import { PATH } from '@/consts/route-paths'
-import { ImageOutline } from '@/assets/icons'
 import { useMeQuery } from '@/services/auth/auth-api'
 import { useGetProfileQuery } from '@/services/profile/profile-api'
+import { useTranslation } from '@/hooks'
+import { Post, useGetUserPostsQuery } from '@/services/posts'
 
 import s from './profile.module.scss'
-import { useTranslation } from '@/hooks'
-import Link from 'next/link'
-import { Avatar } from 'src/components/ui/avatar'
 
 const Profile = () => {
+  const [pageSize, setPageSize] = useState(8)
+  const [hasMorePosts, setHasMorePosts] = useState(true)
+  const { t } = useTranslation()
+
   const { data: me } = useMeQuery()
   const {
     data: profile,
     isLoading,
     isFetching,
-    isSuccess,
+    isError,
   } = useGetProfileQuery({ profileId: me?.userId })
-  const { t } = useTranslation()
+  const { data: posts } = useGetUserPostsQuery({ pageSize })
 
-  // const isFilledProfile = useMemo(() => {
-  //   if (profile) return Object.values(profile).some(value => value === null)
-  // }, [profile])
-
-  // if (isSuccess && isFilledProfile) {
-  //   push(PATH.PROFILE_SETTINGS)
-  // }
+  const loadMorePosts = () => {
+    setPageSize(prev => prev + 8)
+    pageSize > publications && setHasMorePosts(false)
+  }
 
   if (isLoading || isFetching) {
     return <Loader />
   }
-  // if (isSuccess && isFilledProfile) return
 
-  const followers = '123'
-  const isProfile = profile?.avatars.length !== 0
+  if (isError) {
+    console.error('Get profile is failed')
+  }
+  const following = 2218
+  const followers = 2358
+  const publications = posts?.items.length as number
+
+  const profileName = profile?.fullName
+    ? `${profile?.firstName} ${profile?.lastName}`
+    : profile?.userName
 
   return (
     <>
       <HeadMeta title="Profile" />
       <main className={s.root}>
         <div className={s.profile}>
-          {isProfile ? (
-            <Avatar
-              photo={profile?.avatars[0]?.url}
-              size={198}
-              name={t.profile.avatarAlt}
-              className={s.photo}
-            />
-          ) : (
-            <div className={s.photo}>
-              <ImageOutline />
-            </div>
-          )}
-
+          <Avatar photo={profile?.avatars[0]?.url} />
           <div className={s.info}>
-            <Typography variant="large">{profile?.userName}</Typography>
+            <Typography variant="large">{profileName}</Typography>
             <div className={s.items}>
               <div>
-                <Typography>2 218</Typography>
-                <Typography>{t.profile.following}</Typography>
+                <Typography>{following}</Typography>
+                <Typography>{t.profile.following(following)}</Typography>
               </div>
               <div>
                 <Typography>{followers}</Typography>
-                <Typography>{t.profile.followers}</Typography>
+                <Typography>{t.profile.followers(followers)}</Typography>
               </div>
               <div>
-                <Typography>2 764</Typography>
-                <Typography>{t.profile.publications}</Typography>
+                <Typography>{publications}</Typography>
+                <Typography>{t.profile.publications(publications)}</Typography>
               </div>
             </div>
-            <Typography>{profile?.aboutMe}</Typography>
+            <ExpandableText text={profile?.aboutMe ?? null} />
             <Link passHref legacyBehavior href={PATH.PROFILE_SETTINGS}>
               <Button as="a" variant="secondary" className={s.btn}>
                 {t.profile.profileSettings}
@@ -79,6 +84,16 @@ const Profile = () => {
             </Link>
           </div>
         </div>
+        <InfiniteScroll
+          dataLength={publications || 0}
+          next={loadMorePosts}
+          hasMore={hasMorePosts}
+          loader={publications > 0 ? <Loader className={s.loader} /> : null}
+          className={s.posts}
+        >
+          {posts?.items.map((post: Post) => <PostCard key={post.id} post={post} />)}
+        </InfiniteScroll>
+        <div className={s.scrollableContent}></div>
       </main>
     </>
   )

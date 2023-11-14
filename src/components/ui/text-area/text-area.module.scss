@@ -64,3 +64,12 @@
     color: var(--dark-100) !important; // переменной с таким цветом нет в палитре цветов
   }
 }
+
+.footer {
+  display: flex;
+}
+
+.errorContainer {
+  flex: 1;
+  height: 19px;
+}

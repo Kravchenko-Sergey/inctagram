@@ -3,7 +3,6 @@ import { z } from 'zod'
 import { LocaleType } from 'locales/ru'
 
 import { aboutMeRegex, firstNameRegex, lastNameRegex, usernameRegex } from '@/consts/regex'
-import { tr } from 'date-fns/locale'
 
 export const profileSettingsSchema = (t: LocaleType) => {
   return z.object({

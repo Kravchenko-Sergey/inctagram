@@ -1,8 +1,11 @@
 import { LocaleType } from './ru'
+import { pluralizeEn } from '@/helpers/createPluralize'
 
 export const en: LocaleType = {
   test: 'Lorem Ipsum is simply dummy text of the printing',
   ok: 'OK',
+  yes: 'Yes',
+  no: 'No',
   languageSelect: {
     russian: 'Russian',
     english: 'English',
@@ -50,6 +53,7 @@ export const en: LocaleType = {
     // under13: (elem: ReactElement) => `A user under 13 cannot create a profile. ${elem} `,
     tellUsSomethingAboutYou: 'The field must not be empty',
     whereAreYouLive: 'Please indicate which city you live in',
+    maxLengthPost: 'Max number of characters 500',
   },
   components: {
     selectPlaceholder: 'Select Box',
@@ -171,14 +175,71 @@ export const en: LocaleType = {
     backToProfile: 'Back to profile page',
     logOut: 'Are you really want to log out of your account ',
     titleLogOut: 'Log Out',
-    following: 'Following',
-    followers: 'Followers',
-    publications: 'Publications',
     profileSettings: 'Profile Settings',
     avatarAlt: 'User avatar',
+    following(count: number): any {
+      const str = pluralizeEn(count)
+
+      switch (str) {
+        case 'one':
+          return `Following`
+        case 'other':
+          return `Following`
+      }
+    },
+    followers(count: number): any {
+      const str = pluralizeEn(count)
+
+      switch (str) {
+        case 'one':
+          return `Follower`
+        case 'other':
+          return `Followers`
+      }
+    },
+    publications(count: number): any {
+      const str = pluralizeEn(count)
+
+      switch (str) {
+        case 'one':
+          return `Publication`
+        case 'other':
+          return `Publications`
+      }
+    },
+  },
+  post: {
+    addNewPost: {
+      cropping: 'Cropping',
+      filters: 'Filters',
+      publication: 'Publication',
+      addPhoto: 'Add Photo',
+      next: 'Next',
+      original: 'Original',
+      showResult: 'Show Result',
+      close: 'Close',
+      areYouSure: 'Are You Sure',
+      publish: 'Publish',
+      addDescription: 'Add Description',
+      pictureCropped: 'Picture  successfully cropped',
+      discard: 'Discard',
+      saveDraft: 'Save Draft',
+    },
+    edit: {
+      title: 'Edit',
+      saveChanges: 'Save Changes',
+      addDescription: 'Add publication descriptions',
+      closePost: 'Close Post',
+      areYouSure:
+        'Do you really want to close the edition of the publication? If you close changes won’t be saved',
+    },
+    editPost: 'Edit Post',
+    deletePost: 'Delete Post',
+    areYouSureToDelete: 'Are you sure you want to delete this post?',
   },
   sidebars: {
     home: 'Home',
+    create: 'Create',
     myProfile: 'My Profile',
     messenger: 'Messenger',
     search: 'Search',

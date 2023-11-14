@@ -1,0 +1,27 @@
+.modalCloseButton {
+  top: -30px;
+  right: -42px;
+}
+
+.contentModal {
+  width: 480px;
+  padding: 18px 24px;
+}
+
+.modalContainer {
+  display: flex;
+  gap: -1px;
+  max-height: 502px; // 562 - 60px
+}
+
+.deleteOptions {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.contentDeleteModal {
+  gap: 30px;
+  padding: 30px 24px 36px;
+}

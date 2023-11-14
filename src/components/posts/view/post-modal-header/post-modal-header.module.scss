@@ -1,0 +1,11 @@
+.header {
+  width: 430px;
+  display: flex;
+  justify-content: space-between;
+
+  .userInfo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+}

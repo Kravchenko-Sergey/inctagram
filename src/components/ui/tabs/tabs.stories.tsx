@@ -3,9 +3,15 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Tabs } from './tabs'
 
 const meta = {
-  title: 'Components/UI/Tabs',
+  title: 'UI Components/Tabs',
   component: Tabs,
   tags: ['autodocs'],
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/M7753HAzy0tm9rQWyRBrnI/Inctagram?type=design&node-id=306-7411&mode=dev',
+    },
+  },
 } satisfies Meta<typeof Tabs>
 
 export default meta

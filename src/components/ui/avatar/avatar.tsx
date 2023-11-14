@@ -1,26 +1,27 @@
+import { ReactNode } from 'react'
 import * as AvatarRadix from '@radix-ui/react-avatar'
-
-import s from './avatar.module.scss'
 import { clsx } from 'clsx'
 
+import s from './avatar.module.scss'
+import { ImageOutline } from '@/assets/icons'
+
 type AvatarPropsType = {
-  name?: string
   photo?: string
   size?: number
+  defaultImage?: ReactNode
   className?: string
 }
 
-export const Avatar = ({ name = 'Your avatar', photo, size = 198, className }: AvatarPropsType) => {
-  const classNames = {
-    avatar: clsx(s.avatarRoot, className),
-  }
-
-  function getFirstLetter(name: string | undefined) {
-    return name?.charAt(0).toUpperCase()
-  }
+export const Avatar = ({
+  photo,
+  size = 204,
+  defaultImage = <ImageOutline />,
+  className,
+}: AvatarPropsType) => {
+  const rootClass = clsx(s.avatarRoot, className)
 
   return (
-    <AvatarRadix.Root className={classNames.avatar}>
+    <AvatarRadix.Root className={rootClass}>
       <AvatarRadix.Image
         width={size}
         height={size}
@@ -33,7 +34,7 @@ export const Avatar = ({ name = 'Your avatar', photo, size = 198, className }: A
         style={{ height: `${size}px`, width: `${size}px` }}
         className={s.avatarFallback}
       >
-        {getFirstLetter(name)}
+        {defaultImage}
       </AvatarRadix.Fallback>
     </AvatarRadix.Root>
   )

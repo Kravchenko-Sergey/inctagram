@@ -5,13 +5,19 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { TextField } from './text-field'
 
 const meta = {
-  title: 'Components/UI/TextField',
+  title: 'UI Components/TextField',
   component: TextField,
   tags: ['autodocs'],
   argTypes: {
     type: {
       options: ['text', 'password'],
       control: { type: 'radio' },
+    },
+  },
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/M7753HAzy0tm9rQWyRBrnI/Inctagram?type=design&node-id=316-7901&mode=dev',
     },
   },
 } satisfies Meta<typeof TextField>

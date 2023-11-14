@@ -1,11 +1,11 @@
 import { useGetProfileQuery, useUpdateProfileMutation } from '@/services/profile/profile-api'
 import { useMeQuery } from '@/services/auth/auth-api'
-import { getMainLayout, Tabs, ProfileUpdate, ProfileImage } from '@/components'
+import { getMainLayout, Tabs, ProfileUpdate } from '@/components'
 import { useTranslation } from '@/hooks'
 import { ProfileSettingsFormType } from '@/schemas'
 
 import s from './profile-settings.module.scss'
-import { Loader } from 'src/components/ui/loader'
+import { Loader } from '@/components/ui/loader'
 
 const ProfileSettings = () => {
   const { t } = useTranslation()
@@ -34,7 +34,6 @@ const ProfileSettings = () => {
         <Tabs tabsList={profileTabs} />
       </div>
       <div className={s.formContent}>
-        <ProfileImage avatars={profile?.avatars[0]?.url} />
         <div className={s.form}>
           <ProfileUpdate updateProfileHandler={updateProfileHandler} profile={profile} />
         </div>

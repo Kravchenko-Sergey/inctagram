@@ -3,13 +3,20 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Button } from './index'
 
 const meta = {
-  title: 'Components/UI/Button',
+  title: 'UI Components/Button',
   component: Button,
   tags: ['autodocs'],
   argTypes: {
     variant: {
       options: ['primary', 'secondary', 'ghost', 'link', 'link-btn'],
-      control: { type: 'radio' },
+      control: { type: 'inline-radio' },
+    },
+    onClick: { action: 'clicked' },
+  },
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/M7753HAzy0tm9rQWyRBrnI/Inctagram?type=design&node-id=303-3570&mode=dev',
     },
   },
 } satisfies Meta<typeof Button>

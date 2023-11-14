@@ -1,32 +1,28 @@
-import { Button } from '@/components'
-import { useDeleteAvatarMutation, useUploadAvatarMutation } from '@/services/profile/profile-api'
 import { ChangeEvent, memo, useCallback, useRef, useState } from 'react'
-import { Avatar } from '@/components/ui/avatar'
-import { DeleteAvatarIcon } from '@/assets/icons/delete-avatar-cross'
-import { ImageOutline } from '@/assets/icons'
-import { Typography } from '@/components/ui/typography'
-import { Modal } from '@/components/ui/modal'
-import s from './profile-image.module.scss'
+
+import { Button, Avatar, Typography, Modal, Loader } from '@/components'
+import { useDeleteAvatarMutation, useUploadAvatarMutation } from '@/services/profile/profile-api'
+import { DeleteIcon } from '@/assets/icons'
 import { useTranslation } from '@/hooks'
-import { Loader } from '@/components/ui/loader'
+import { permittedFileSize, permittedFileTypes } from '@/consts/image'
+
+import s from './profile-image.module.scss'
 
 type ProfileImageProps = {
   avatars?: string
+  className?: string
 }
 
 export const ProfileImage = memo(({ avatars = '' }: ProfileImageProps) => {
   const { t } = useTranslation()
-  const [uploadAvatar, { error: uploadAvatarError, isLoading: isAvatarUploading }] =
-    useUploadAvatarMutation()
-  const [deleteAvatar, { error: deleteAvatarError }] = useDeleteAvatarMutation()
+  const [uploadAvatar, { isLoading: isAvatarUploading }] = useUploadAvatarMutation()
+  const [deleteAvatar] = useDeleteAvatarMutation()
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [url, setUrl] = useState<string>(avatars)
   const [newAvatarFile, setNewAvatarFile] = useState<File | null>(null)
   const [previewAvatar, setPreviewAvatar] = useState<string>('')
   const [uploadError, setUploadError] = useState<string>('')
-  const permittedFileTypes = ['jpg', 'jpeg', 'png']
-  const permittedFileSize = 10485760 // 10Mb in bytes
   const [avatarEditMode, setAvatarEditMode] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -60,11 +56,6 @@ export const ProfileImage = memo(({ avatars = '' }: ProfileImageProps) => {
         setUploadError(t.errors.imageSizeError)
       }
     }
-  }
-
-  const handleOpenModal = () => {
-    setUploadError('')
-    setPreviewAvatar(url)
   }
 
   const handleCloseModal = () => {
@@ -105,27 +96,25 @@ export const ProfileImage = memo(({ avatars = '' }: ProfileImageProps) => {
   }
 
   return (
-    <>
+    <div className={s.profileImageContainer}>
       <div className={s.userImageBox}>
         <div className={s.userImage}>
-          {url ? (
-            <div className={s.profileAvatar}>
-              <Avatar photo={url} name="avatar" size={198} />
+          <div className={s.profileAvatar}>
+            <Avatar photo={url} size={192} />
+            {url && (
               <Button
-                variant={'withIcon'}
+                variant="withIcon"
                 className={s.deleteAvatarIcon}
-                type={'button'}
+                type="button"
                 onClick={deleteAvatarHandler}
               >
-                <DeleteAvatarIcon />
+                <DeleteIcon />
               </Button>
-            </div>
-          ) : (
-            <ImageOutline />
-          )}
+            )}
+          </div>
         </div>
         <Button
-          variant={'ghost'}
+          variant="ghost"
           fullWidth
           onClick={() => {
             setIsModalOpen(true)
@@ -133,7 +122,6 @@ export const ProfileImage = memo(({ avatars = '' }: ProfileImageProps) => {
         >
           {t.profile.addAvatar}
         </Button>
-        <div className={s.line2}></div>
       </div>
       <Modal
         isOpen={isModalOpen}
@@ -146,21 +134,17 @@ export const ProfileImage = memo(({ avatars = '' }: ProfileImageProps) => {
             <Loader className={s.modalLoader} />
           ) : (
             <>
+              {uploadError && <div className={s.uploadError}>{uploadError}</div>}
               <div className={s.addUserImage}>
-                {previewAvatar ? (
-                  <Avatar photo={previewAvatar} name="avatar" size={316} />
-                ) : (
-                  <ImageOutline />
-                )}
-                {uploadError && <div className={s.uploadError}>{uploadError}</div>}
+                <Avatar photo={previewAvatar} size={316} />
               </div>
               {avatarEditMode ? (
-                <Button variant={'primary'} onClick={handleSaveCloseModal} className={s.saveButton}>
-                  <Typography variant={'h3'}>{t.profile.saveChanges}</Typography>
+                <Button variant="primary" onClick={handleSaveCloseModal} className={s.saveButton}>
+                  <Typography variant="h3">{t.profile.saveChanges}</Typography>
                 </Button>
               ) : (
                 <>
-                  <Button variant={'primary'} onClick={() => inputRef && inputRef.current?.click()}>
+                  <Button variant="primary" onClick={() => inputRef && inputRef.current?.click()}>
                     {t.profile.selectImage}
                   </Button>
                   <input
@@ -175,6 +159,6 @@ export const ProfileImage = memo(({ avatars = '' }: ProfileImageProps) => {
           )}
         </div>
       </Modal>
-    </>
+    </div>
   )
 })

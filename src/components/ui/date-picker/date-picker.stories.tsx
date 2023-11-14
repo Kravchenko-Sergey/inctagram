@@ -5,9 +5,15 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { DatePicker } from './index'
 
 const meta = {
-  title: 'Components/UI/DataPicker',
+  title: 'UI Components/DataPicker',
   component: DatePicker,
   tags: ['autodocs'],
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/M7753HAzy0tm9rQWyRBrnI/Inctagram?type=design&node-id=348-7008&mode=dev',
+    },
+  },
 } satisfies Meta<typeof DatePicker>
 
 export default meta

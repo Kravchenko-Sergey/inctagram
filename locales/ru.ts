@@ -1,6 +1,10 @@
+import { pluralizeRu } from '@/helpers/createPluralize'
+
 export const ru = {
   test: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати ',
   ok: 'OK',
+  yes: 'Да',
+  no: 'Нет',
   languageSelect: {
     russian: 'Русский',
     english: 'Английский',
@@ -46,6 +50,7 @@ export const ru = {
     // under13: (elem: ReactElement) => `Возраст пользователя должен быть старше 13 лет. ${elem} `,
     tellUsSomethingAboutYou: 'Поле не должно быть пустым',
     whereAreYouLive: 'Укажите в каком городе вы живете',
+    maxLengthPost: 'Максимальное количество символов для поста равно 500',
   },
   components: {
     selectPlaceholder: 'Выберете опцию',
@@ -161,14 +166,77 @@ export const ru = {
     backToProfile: 'Вернуться на страницу профиля',
     logOut: 'Вы действительно хотите выйти из аккаунта ',
     titleLogOut: 'Выйти',
-    following: 'Читаемых',
-    followers: 'Читателя',
-    publications: 'Постов',
     profileSettings: 'Настройки профиля',
     avatarAlt: 'Аватар пользователя',
+    following(count: number) {
+      const str = pluralizeRu(count)
+
+      switch (str) {
+        case 'one':
+          return `подписка`
+        case 'few':
+          return `подписки`
+        case 'many':
+          return `подписок`
+      }
+    },
+    followers(count: number) {
+      const str = pluralizeRu(count)
+
+      switch (str) {
+        case 'one':
+          return `подписчик`
+        case 'few':
+          return `подписчика`
+        case 'many':
+          return `подписчиков`
+      }
+    },
+    publications(count: number) {
+      const str = pluralizeRu(count)
+
+      switch (str) {
+        case 'one':
+          return `пост`
+        case 'few':
+          return `поста`
+        case 'many':
+          return `постов`
+      }
+    },
+  },
+  post: {
+    addNewPost: {
+      cropping: 'Редактирование',
+      filters: 'Фильтры',
+      publication: 'Публикация',
+      addPhoto: 'Добавить фото',
+      next: 'Далее',
+      original: 'Оригинал',
+      showResult: 'Показать результаты',
+      close: 'Закрыть',
+      areYouSure: 'Вы уверены?',
+      publish: 'Опубликовать',
+      addDescription: 'Добавить описание',
+      pictureCropped: 'Изображение успешно обрезано',
+      discard: 'Сбросить',
+      saveDraft: 'Сохранить',
+    },
+    editPost: 'Peдактировать',
+    edit: {
+      saveChanges: 'Сохранить изменения',
+      title: 'Peдактировать',
+      addDescription: 'Добавить описание поста',
+      closePost: 'Закрыть пост',
+      areYouSure:
+        'Вы уверены, что хотите закрыть редактирование поста? После закрытия изменения не сохранятся',
+    },
+    deletePost: 'Удалить пост',
+    areYouSureToDelete: 'Вы уверены что хотите удалить этот пост?',
   },
   sidebars: {
     home: 'Главная',
+    create: 'Создать пост',
     myProfile: 'Мой профиль',
     messenger: 'Мессенджер',
     search: 'Поиск',

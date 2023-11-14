@@ -9,6 +9,12 @@ const meta = {
   title: 'Page Components/Mail Verification Error',
   component: MailVerificationError,
   tags: ['autodocs'],
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/M7753HAzy0tm9rQWyRBrnI/Inctagram?type=design&node-id=301-6009&mode=dev',
+    },
+  },
 } satisfies Meta<typeof MailVerificationError>
 
 export default meta

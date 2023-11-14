@@ -1,0 +1,85 @@
+.cropBtn {
+  width: 36px;
+  height: 36px;
+
+  cursor: pointer;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 24px 11px 11px;
+
+  color: var(--light-700);
+
+  opacity: 0.8;
+  background-color: var(--dark-500);
+  border-radius: 2px;
+
+  &:hover {
+    color: var(--light-100);
+  }
+}
+
+.cropOptions {
+  width: 156px;
+  height: 152px;
+
+  position: absolute;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  margin-top: -200px;
+  margin-left: 11px;
+
+  color: var(--light-900);
+
+  opacity: 0.8;
+  background-color: var(--dark-500);
+  border-radius: 2px;
+}
+
+.cropOption {
+  width: 128px;
+  height: 26px;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin: 1px 12px 11px;
+
+  &:hover {
+    color: var(--light-100);
+  }
+}
+
+.cropOption1 {
+  width: 128px;
+  height: 26px;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin: 8px 12px 11px;
+}
+
+.blue {
+  filter: brightness(0) invert(1);
+
+  &:hover {
+    filter: invert(0.5) sepia(1) saturate(5) hue-rotate(175deg);
+  }
+}
+.blueActive {
+  filter: invert(0.5) sepia(1) saturate(5) hue-rotate(175deg);
+}

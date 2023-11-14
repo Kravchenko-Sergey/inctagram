@@ -8,7 +8,7 @@
   }
 }
 
-.item {
+%item {
   display: flex;
   column-gap: 12px;
   align-items: center;
@@ -48,10 +48,23 @@
   color: var(--primary-700);
 }
 
+.item {
+  @extend %item;
+}
+
+.statisticsItem {
+  @extend %item;
+
+  margin-top: 60px;
+}
+
 .logout {
   cursor: pointer;
+
   display: flex;
   gap: 13px;
+
+  margin-top: 180px;
   padding: 0 3px;
 
   &:hover {

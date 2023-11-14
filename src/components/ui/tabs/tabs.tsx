@@ -1,4 +1,4 @@
-import { FC, MouseEventHandler } from 'react'
+import { MouseEventHandler } from 'react'
 
 import * as TabsRadixUI from '@radix-ui/react-tabs'
 
@@ -15,7 +15,7 @@ type TabsProps = {
   tabsList: Tab[]
 }
 
-export const Tabs: FC<TabsProps> = ({ tabsList }) => {
+export const Tabs = ({ tabsList }: TabsProps) => {
   const defaultValue = tabsList[0].value
 
   return (

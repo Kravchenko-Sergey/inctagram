@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { ReactNode } from 'react'
 
 import { Scrollbar } from '@/components'
 
@@ -9,7 +9,7 @@ type SidebarProps = {
   className?: string
 }
 
-export const Sidebar: FC<SidebarProps> = ({ children, className }) => {
+export const Sidebar = ({ children, className }: SidebarProps) => {
   return (
     <div className={`${s.root} ${className}`}>
       <Scrollbar>{children}</Scrollbar>
