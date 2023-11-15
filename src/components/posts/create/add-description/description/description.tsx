@@ -42,8 +42,8 @@ export const PostDescription = ({
 }: DescriptionFormTypeProps) => {
   const { t } = useTranslation()
   const { push } = useRouter()
-  const [createPostComment] = useCreatePostCommentsMutation()
-  const [createPostPhoto] = useCreatePostPhotoMutation()
+  const [createPostComment, { isLoading: isPostCreateLoading }] = useCreatePostCommentsMutation()
+  const [createPostPhoto, { isLoading: isPostPhotoLoading }] = useCreatePostPhotoMutation()
 
   const {
     control,
