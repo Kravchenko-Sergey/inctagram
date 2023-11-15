@@ -18,6 +18,7 @@ export const PATH = {
   CONFIRM: '/auth/registration-confirmation',
   GITHUB: '/github',
   RECOVERY_PASSWORD: '/auth/recovery',
+  MAIN: '/main',
 }
 
 export const commonRoutes = [
@@ -30,4 +31,5 @@ export const commonRoutes = [
   PATH.LOGOUT,
   PATH.SERVICE,
   PATH.RECOVERY_PASSWORD,
+  PATH.MAIN,
 ]

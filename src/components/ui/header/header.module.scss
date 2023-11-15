@@ -25,10 +25,22 @@
   margin: 12px 64px 12px 60px;
 }
 
+.logo {
+  flex: 1;
+}
+
+.buttons {
+  margin-left: 35px;
+}
+
 .menuContainer {
   display: flex;
   gap: 48px;
   align-items: center;
+}
+
+.btn {
+  margin-right: 25px;
 }
 
 // MEDIA REQUESTS
