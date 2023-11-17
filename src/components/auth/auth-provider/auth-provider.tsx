@@ -17,8 +17,8 @@ export const AuthProvider = ({ children }: PropsType) => {
 
   useEffect(() => {
     if (!isLoading && !user && isProtectedPage && !isFetching) {
-      // router.push(PATH.MAIN)
-      router.push(PATH.LOGIN)
+      router.push(PATH.MAIN)
+      // router.push(PATH.LOGIN)
 
       return
     }

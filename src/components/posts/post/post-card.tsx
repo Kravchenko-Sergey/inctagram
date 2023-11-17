@@ -32,7 +32,7 @@ export const PostCard = ({ post }: PropsType) => {
         // src={post?.images[0]?.url}
         src={sortImagesByWidth(post?.images)[1].url}
         alt={`post ${post.id} image`}
-        width={234}
+        width={232}
         height={228}
         className={s.post}
       />

@@ -34,7 +34,6 @@ const Profile = () => {
   } = useGetProfileQuery({ profileId: me?.userId })
   const { data: posts } = useGetUserPostsQuery({ pageSize })
 
-  console.log('value', me)
   const loadMorePosts = () => {
     setPageSize(prev => prev + 8)
     pageSize > publications && setHasMorePosts(false)

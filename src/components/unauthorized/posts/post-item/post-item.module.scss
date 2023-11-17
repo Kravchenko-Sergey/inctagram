@@ -1,0 +1,21 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  width: 234px;
+}
+
+.header {
+  display: flex;
+  gap: 13px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.image {
+  margin-bottom: 12px;
+  border-radius: 5px;
+}
+
+.status {
+  margin-bottom: 5px;
+}
