@@ -105,8 +105,6 @@ export const DescriptionModal = ({
     }
   }
 
-  console.log('value')
-
   return (
     <div>
       <Button
