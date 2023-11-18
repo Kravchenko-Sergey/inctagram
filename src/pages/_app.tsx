@@ -16,7 +16,6 @@ import { useLoader } from '@/hooks'
 import { AuthProvider } from '@/components'
 import { store } from '@/services'
 import { Toast } from '@/components/react-toast/toast-container'
-import MainPage from '@/pages/main'
 
 export const inter = Inter({
   subsets: ['latin', 'cyrillic'],

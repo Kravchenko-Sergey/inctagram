@@ -7,7 +7,7 @@ export const SampleNextArrow = memo((props: CustomArrowProps) => {
   return (
     <div
       className={className}
-      style={{ ...style, display: 'block', right: 15 }}
+      style={{ display: 'block', right: 15, ...style }}
       onClick={onClick}
     />
   )

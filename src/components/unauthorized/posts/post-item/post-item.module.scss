@@ -19,3 +19,21 @@
 .status {
   margin-bottom: 5px;
 }
+
+.dots {
+  bottom: 24px !important;
+  left: 50%;
+  transform: translateX(-50%) !important;
+
+  display: flex !important;
+  flex-wrap: nowrap !important;
+
+  width: auto !important;
+  max-width: 180px !important;
+
+  background: rgb(51 51 51 / 50%) !important;
+
+  li button::before {
+    color: var(--light-100) !important;
+  }
+}

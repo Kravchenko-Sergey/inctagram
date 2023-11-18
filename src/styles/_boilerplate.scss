@@ -32,6 +32,17 @@ a {
   text-decoration: none;
 }
 
+input {
+  background: none;
+  border: none;
+
+  &:active,
+  &:focus,
+  &:focus-visible {
+    outline: none;
+  }
+}
+
 input:-webkit-autofill {
   background-clip: text;
 }
@@ -57,21 +68,7 @@ button {
   }
 }
 
-input {
-  background: none;
-  border: none;
-
-  &::-webkit-autofill {
-    background-clip: text;
-  }
-
-  &:active,
-  &:focus,
-  &:focus-visible {
-    outline: none;
-  }
-}
-
+/* stylelint-disable no-descending-specificity */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -88,19 +85,20 @@ select:-webkit-autofill:focus {
 
   transition: background-color 5000s ease-in-out 0s;
 
-  -webkit-text-fill-color: var(--light-900);
+  -webkit-text-fill-color: var(--light-100);
 
-  &:active {
-    color: var(--light-100) !important;
-  }
+  // -webkit-text-fill-color: var(--light-900);
 
   &:focus-visible {
     color: var(--light-100) !important;
   }
+
+  &:active {
+    color: var(--light-100) !important;
+  }
 }
 
-select:-webkit-autofill:focus,
-textarea:-webkit-autofill:focus,
-input:-webkit-autofill:focus {
-  -webkit-text-fill-color: var(--light-100);
-}
+// select:-webkit-autofill:focus,
+// textarea:-webkit-autofill:focus {
+//  -webkit-text-fill-color: var(--light-100);
+// }

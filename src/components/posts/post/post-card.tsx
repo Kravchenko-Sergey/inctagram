@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 
 import { ViewPostModal } from '../view'
-import { Post, PostImageType, useLazyGetUserPostQuery } from '@/services/posts'
+import { Post, useLazyGetUserPostQuery } from '@/services/posts'
 
 import s from './post.module.scss'
 import { sortImagesByWidth } from '@/helpers/filterImages'

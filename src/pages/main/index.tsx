@@ -2,40 +2,41 @@ import React from 'react'
 import s from './main-page.module.scss'
 import { getHeaderUnauthorizedLayout } from '@/components/layout'
 import { HeadMeta } from '@/components'
-import { AmountUsers } from '@/components/unauthorized/posts/amount-users'
 import { wrapper } from '@/services'
-import {
-  getLastCreatedPosts,
-  getRunningQueriesThunk,
-  getUsersAmount,
-} from '@/services/public-posts'
+import { getLastCreatedPosts, getRunningQueriesThunk } from '@/services/public-posts'
 import { NextPageWithLayout } from '@/pages/_app'
-import { PostItem } from '@/components/unauthorized/posts/post-item'
 import { MainPosts } from '@/components/unauthorized/posts'
-//static props
-export const getStaticProps = wrapper.getStaticProps(store => async context => {
-  store.dispatch(getLastCreatedPosts.initiate())
-  store.dispatch(getUsersAmount.initiate())
 
-  // if () {
-  //   return {
-  //     notFound: true
-  //   };
-  // }
-  // await Promise.all(store.dispatch(getRunningQueriesThunk()))
+export const getStaticProps = wrapper.getStaticProps(store => async context => {
+  const result = await store.dispatch(
+    getLastCreatedPosts.initiate({ pageSize: 4, sortDirection: 'desc', sortBy: 'createdAt' })
+  )
+  // const UserId = await store.dispatch(getProfileData.initiate({}))
+
+  // store.dispatch(getUsersAmount.initiate())
+  // const data = await getLastCreatedPosts.initiate({ pageSize: 4, sortDirection: 'desc' })
+  if (!result) {
+    return {
+      notFound: true,
+    }
+  }
+  // store.dispatch(
+  //   getLastCreatedPosts.initiate({ pageSize: 4, sortDirection: 'desc', sortBy: 'createdAt' })
+  // )
+  await Promise.all(store.dispatch(getRunningQueriesThunk()))
 
   return {
-    props: {},
-    // revalidate: 60,
+    props: { result },
+    revalidate: 60,
   }
 })
 
-export const MainPage: NextPageWithLayout = () => {
+export const MainPage: NextPageWithLayout = (props: any) => {
   return (
     <>
       <HeadMeta title="Main Page" />
       <div className={s.root}>
-        <MainPosts />
+        <MainPosts posts={props.result.data.items} />
       </div>
     </>
   )
