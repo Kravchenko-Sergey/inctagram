@@ -5,7 +5,7 @@ export const PATH = {
   CREATE: '/create',
   PROFILE: '/profile',
   PROFILE_SETTINGS: '/profile-settings',
-  PUBLIC_PROFILE: '/profile/:id',
+  ID: '/[id]',
   MESSENGER: '/messenger',
   SEARCH: '/search',
   STATISTIC: '/statistics',
@@ -31,5 +31,5 @@ export const commonRoutes = [
   PATH.LOGOUT,
   PATH.SERVICE,
   PATH.RECOVERY_PASSWORD,
-  PATH.PUBLIC_PROFILE,
 ]
+// PATH.PROFILE + PATH.ID,
