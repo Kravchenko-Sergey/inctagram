@@ -1,4 +1,4 @@
-import { ComponentProps, ReactNode, useState } from 'react'
+import { ComponentProps, ReactNode } from 'react'
 
 import {
   Dialog,
@@ -44,7 +44,7 @@ export type ModalProps = {
 } & ComponentProps<'div'>
 
 export const DescriptionModal = ({
-  setIsModalOpen,
+  // setIsModalOpen,
   addedImages,
   setAddedImages,
   activeFilter,
@@ -52,8 +52,8 @@ export const DescriptionModal = ({
   setIsFiltersModalOpen,
   isDescriptionModalOpen,
   showSeparator = true,
-  onAction,
-  onCancel,
+  // onAction,
+  // onCancel,
   cancelButtonName,
   setIsDescriptionModalOpen,
   actionButtonName,
@@ -73,12 +73,6 @@ export const DescriptionModal = ({
     ),
   }
   const { t } = useTranslation()
-  const actionButtonHandler = () => {
-    onAction?.()
-  }
-  const cancelButtonHandler = () => {
-    onCancel?.()
-  }
 
   const handleBackClick = () => {
     setIsDescriptionModalOpen(false)

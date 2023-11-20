@@ -41,7 +41,6 @@ export type ModalProps = {
 export const CropModal = ({
   image,
   showSeparator = true,
-  onAction,
   onCancel,
   open,
   cancelButtonName,
@@ -51,7 +50,6 @@ export const CropModal = ({
   children,
   addedImages,
   setAddedImages,
-  isBaseModalOpen,
   setIsBaseModalOpen,
   isPostCreateLoadingHandler,
   setImage,

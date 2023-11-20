@@ -21,7 +21,6 @@ import {
 } from '@/components/posts/create/add-description'
 
 import s from './filters-modal.module.scss'
-import { getFilteredImg } from '@/components/posts/create/edit-photo'
 
 export type ModalProps = {
   image: string | null
@@ -50,7 +49,6 @@ export type ModalProps = {
 export const FiltersModal = ({
   image,
   showSeparator = true,
-  onAction,
   onCancel,
   isModalOpen,
   cancelButtonName,

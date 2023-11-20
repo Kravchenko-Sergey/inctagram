@@ -29,7 +29,6 @@ export const PostCard = ({ post }: PropsType) => {
     <>
       <Image
         onClick={handleViewPost}
-        // src={post?.images[0]?.url}
         src={sortImagesByWidth(post?.images)[1].url}
         alt={`post ${post.id} image`}
         width={232}
