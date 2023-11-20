@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import { memo } from 'react'
 import { CustomArrowProps } from 'react-slick'
 
 export const SampleNextArrow = memo((props: CustomArrowProps) => {

@@ -49,7 +49,6 @@ export type ModalProps = {
 export const FiltersModal = ({
   image,
   showSeparator = true,
-  onAction,
   onCancel,
   isModalOpen,
   cancelButtonName,

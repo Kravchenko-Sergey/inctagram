@@ -12,21 +12,22 @@ jobs:
         node-version: [ 17.x ]
 
     steps:
+      - name: clone repo
       - uses: actions/checkout@v2
+
       - name: Staring Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+
       - name: install modules
-        run: npm install
+        run: yarn
+
       - name: build production project
-        run: npm run build:production
+        run: yarn run build:production
+
       - name: linting typescript
-        run: npm run lint
+        run: yarn run lint
+
       - name: build storybook
-        run: npm run build-storybook
-
-
-
-
-
+      - run: yarn run build-storybook
