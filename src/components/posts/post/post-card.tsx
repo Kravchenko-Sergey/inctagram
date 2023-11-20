@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 
 import { ViewPostModal } from '../view'
-import { Post, PostImageType, useLazyGetUserPostQuery } from '@/services/posts'
+import { Post, useLazyGetUserPostQuery } from '@/services/posts'
 
 import s from './post.module.scss'
 import { sortImagesByWidth } from '@/helpers/filterImages'
@@ -29,7 +29,6 @@ export const PostCard = ({ post }: PropsType) => {
     <>
       <Image
         onClick={handleViewPost}
-        // src={post?.images[0]?.url}
         src={sortImagesByWidth(post?.images)[1].url}
         alt={`post ${post.id} image`}
         width={234}

@@ -1,7 +1,7 @@
-import React from 'react'
 import { getMainLayout } from '@/components'
-import s from './create.module.scss'
 import { CreatePostModal } from '@/components/posts/create'
+
+import s from './create.module.scss'
 
 const Create = () => {
   return (
