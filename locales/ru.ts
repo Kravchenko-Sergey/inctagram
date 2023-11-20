@@ -244,6 +244,23 @@ export const ru = {
     favorites: 'Избранное',
     logout: 'Выйти',
   },
+  data: {
+    lessMinuteAgo: 'Меньше минуты назад',
+    minute: 'минуту',
+    minutes: 'минуты',
+    minuteU: 'минуту',
+    minuteB: 'минуты',
+    minut: 'минут',
+    ago: 'назад',
+    hour: 'час',
+    hoursA: 'часа',
+    hours21: 'час',
+    hours: 'часов',
+    day: 'день',
+    days2: 'дня',
+    days: 'дней',
+    more2Weeks: 'Более двух недель назад',
+  },
 }
 
 export type LocaleType = typeof ru

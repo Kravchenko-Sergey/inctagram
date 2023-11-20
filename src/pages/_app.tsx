@@ -50,6 +50,8 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           <Toast />
           <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_ID ?? ''}>
             {getLayout(<Component {...pageProps} />)}
+            {/*{getLayout(<MainPage {...pageProps} />)}*/}
+            {/*<MainPage {...pageProps} />*/}
           </GoogleOAuthProvider>
         </AuthProvider>
       </Provider>

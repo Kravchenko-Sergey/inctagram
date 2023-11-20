@@ -47,7 +47,7 @@ const SidebarLayout = ({ children }: SidebarLayoutProps) => {
   ]
   const handleModalSubmit = async () => {
     await logOut().unwrap()
-    router.push(PATH.LOGIN)
+    router.push(PATH.MAIN)
   }
   const handleModalClosed = () => {
     setModalOpen(false)

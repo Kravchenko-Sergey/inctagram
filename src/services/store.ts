@@ -3,6 +3,7 @@ import { setupListeners } from '@reduxjs/toolkit/query'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
 import { baseApi } from '@/services/base-api'
+import { createWrapper } from 'next-redux-wrapper'
 
 export const store = configureStore({
   reducer: {
@@ -16,7 +17,12 @@ export const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
+
+const makeStore = () => store
+
+export type RootAppState = ReturnType<typeof makeStore>
+
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
-
+export const wrapper = createWrapper<RootAppState>(makeStore, { debug: true })
 setupListeners(store.dispatch)
