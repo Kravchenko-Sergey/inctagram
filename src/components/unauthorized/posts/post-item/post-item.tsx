@@ -30,31 +30,35 @@ export const PostItem = memo(({ post }: Props) => {
           <Image src={empty} className={s.image} width={234} height={240} alt="Post image" />
         </div>
       ) : (
-        <Slider {...settings}>
-          {filterImagesOnly1440(post.images).map((image: PostImageType) => {
-            return (
-              <div key={image.uploadId}>
-                <Image
-                  src={image.url ? image.url : empty}
-                  className={s.image}
-                  width={234}
-                  height={240}
-                  alt="Post image"
-                />
-              </div>
-            )
-          })}
-        </Slider>
+        <div className={s.aaa}>
+          <Slider {...settings}>
+            {filterImagesOnly1440(post.images).map((image: PostImageType) => {
+              return (
+                <div key={image.uploadId}>
+                  <Image
+                    src={image.url ? image.url : empty}
+                    className={s.image}
+                    width={234}
+                    height={240}
+                    alt="Post image"
+                  />
+                </div>
+              )
+            })}
+          </Slider>
+        </div>
       )}
 
       <div className={s.header}>
-        <Avatar size={36} photo={data.avatar} />
+        <Avatar size={36} photo={post.avatarOwner} />
         <Typography variant="h3">{data.userName}</Typography>
       </div>
       <Typography color="secondary" className={s.status} variant="small_text">
         {useTimeAgo(post.createdAt)}
       </Typography>
-      <Typography variant="regular_text_14">{post.description}</Typography>
+      <Typography className={s.desc} variant="regular_text_14">
+        {post.description}
+      </Typography>
     </div>
   )
 })

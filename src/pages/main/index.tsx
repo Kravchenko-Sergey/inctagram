@@ -1,43 +1,41 @@
 import React from 'react'
-import s from './main-page.module.scss'
 import { getHeaderUnauthorizedLayout } from '@/components/layout'
 import { HeadMeta } from '@/components'
-import { wrapper } from '@/services'
-import { getLastCreatedPosts, getRunningQueriesThunk } from '@/services/public-posts'
 import { NextPageWithLayout } from '@/pages/_app'
+import { InferGetStaticPropsType } from 'next'
+import s from './main-page.module.scss'
+import { GetLastCreatedPostsResponse } from '@/services/public-posts/types'
 import { MainPosts } from '@/components/unauthorized/posts'
 
-export const getStaticProps = wrapper.getStaticProps(store => async context => {
-  const result = await store.dispatch(
-    getLastCreatedPosts.initiate({ pageSize: 4, sortDirection: 'desc', sortBy: 'createdAt' })
-  )
-  // const UserId = await store.dispatch(getProfileData.initiate({}))
+export const getStaticProps = async () => {
+  const params = { pageSize: '4', sortDirection: 'desc', sortBy: 'createdAt' }
 
-  // store.dispatch(getUsersAmount.initiate())
-  // const data = await getLastCreatedPosts.initiate({ pageSize: 4, sortDirection: 'desc' })
-  if (!result) {
+  const queryParams = new URLSearchParams(params).toString()
+
+  const response = await fetch(`https://inctagram.work/api/v1/public-posts/all/?${queryParams}`)
+  const posts: GetLastCreatedPostsResponse = await response.json()
+
+  if (!response) {
     return {
       notFound: true,
     }
   }
-  // store.dispatch(
-  //   getLastCreatedPosts.initiate({ pageSize: 4, sortDirection: 'desc', sortBy: 'createdAt' })
-  // )
-  await Promise.all(store.dispatch(getRunningQueriesThunk()))
 
   return {
-    props: { result },
+    props: { data: posts },
     revalidate: 60,
   }
-})
+}
 
-export const MainPage: NextPageWithLayout = (props: any) => {
+export const MainPage: NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProps>> = ({
+  data,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
+  console.log('props', data)
+
   return (
     <>
       <HeadMeta title="Main Page" />
-      <div className={s.root}>
-        <MainPosts posts={props.result.data.items} />
-      </div>
+      <div className={s.root}>{<MainPosts posts={data} />}</div>
     </>
   )
 }
