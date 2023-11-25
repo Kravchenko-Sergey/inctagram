@@ -16,7 +16,7 @@ import { MAX_CHARS_ABOUT_ME } from '@/consts/input-limits'
 import { useTranslation } from '@/hooks/use-translation'
 import { ProfileSettingsFormType, profileSettingsSchema } from '@/schemas'
 import { FormFields, triggerZodFieldError } from '@/helpers'
-import { AvatarType } from '@/services/profile'
+import { AvatarType, useUpdateProfileMutation } from '@/services/profile'
 
 import s from './profile-update.module.scss'
 

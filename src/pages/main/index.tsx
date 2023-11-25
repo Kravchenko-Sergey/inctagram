@@ -9,9 +9,7 @@ import { MainPosts } from '@/components/unauthorized/posts'
 
 export const getStaticProps = async () => {
   const params = { pageSize: '4', sortDirection: 'desc', sortBy: 'createdAt' }
-
   const queryParams = new URLSearchParams(params).toString()
-
   const response = await fetch(`https://inctagram.work/api/v1/public-posts/all/?${queryParams}`)
   const posts: GetLastCreatedPostsResponse = await response.json()
 
@@ -30,8 +28,6 @@ export const getStaticProps = async () => {
 export const MainPage: NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProps>> = ({
   data,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  console.log('props', data)
-
   return (
     <>
       <HeadMeta title="Main Page" />

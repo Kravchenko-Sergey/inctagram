@@ -3,6 +3,7 @@ import { useMeQuery } from '@/services/auth/auth-api'
 import { getMainLayout, Tabs, ProfileUpdate } from '@/components'
 import { useTranslation } from '@/hooks'
 import { ProfileSettingsFormType } from '@/schemas'
+import { toast } from 'react-toastify'
 
 import s from './profile-settings.module.scss'
 import { Loader } from '@/components/ui/loader'
@@ -10,12 +11,17 @@ import { Loader } from '@/components/ui/loader'
 const ProfileSettings = () => {
   const { t } = useTranslation()
 
-  const [updateProfile] = useUpdateProfileMutation()
+  const [updateProfile, { error: updateProfileError }] = useUpdateProfileMutation()
   const { data: me } = useMeQuery()
   const { data: profile, isLoading } = useGetProfileQuery({ profileId: me?.userId })
 
-  const updateProfileHandler = (data: ProfileSettingsFormType) => {
-    updateProfile(data)
+  const updateProfileHandler = async (data: ProfileSettingsFormType) => {
+    try {
+      await updateProfile(data).unwrap()
+    } catch (error) {
+      // @ts-ignore
+      toast.error(`${error?.data.messages[0].message}`, { icon: false })
+    }
   }
   const profileTabs = [
     { value: 'tab1', title: t.profile.generalInfo },
