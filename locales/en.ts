@@ -6,6 +6,8 @@ export const en: LocaleType = {
   ok: 'OK',
   yes: 'Yes',
   no: 'No',
+  showMore: 'Show more',
+  hide: 'Hide',
   languageSelect: {
     russian: 'Russian',
     english: 'English',

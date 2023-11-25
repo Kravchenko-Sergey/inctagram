@@ -5,6 +5,8 @@ export const ru = {
   ok: 'OK',
   yes: 'Да',
   no: 'Нет',
+  showMore: 'Показать еще',
+  hide: 'Спрятать',
   languageSelect: {
     russian: 'Русский',
     english: 'Английский',
