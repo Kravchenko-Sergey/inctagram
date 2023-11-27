@@ -14,7 +14,7 @@ import { Provider } from 'react-redux'
 
 import { useLoader } from '@/hooks'
 import { AuthProvider } from '@/components'
-import { store } from '@/services'
+import { store, wrapper } from '@/services'
 import { Toast } from '@/components/react-toast/toast-container'
 
 export const inter = Inter({
@@ -32,7 +32,7 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout
 }
 
-export default function App({ Component, pageProps }: AppPropsWithLayout) {
+export function App({ Component, pageProps }: AppPropsWithLayout) {
   useLoader()
 
   const getLayout = Component.getLayout ?? (page => page)
@@ -58,3 +58,5 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     </>
   )
 }
+
+export default wrapper.withRedux(App)

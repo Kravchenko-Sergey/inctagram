@@ -15,14 +15,6 @@ type Props = {
 export const PostItem = memo(({ post }: Props) => {
   const settings = getSliderSettings(s.dots)
 
-  const data = {
-    url: 'https://storage.yandexcloud.net/users-inctagram/users/64/post/188bf2c9-c346-4583-8e4a-79940da77d91-images-1440x1440',
-    avatar: 'https://pbs.twimg.com/media/F_EXFAtWYAA2w7k?format=jpg&name=large',
-    userName: 'Pavel',
-    status: '22 min ago',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incd',
-  }
-
   return (
     <div className={s.root}>
       {post.images.length === 0 ? (
@@ -30,31 +22,35 @@ export const PostItem = memo(({ post }: Props) => {
           <Image src={empty} className={s.image} width={234} height={240} alt="Post image" />
         </div>
       ) : (
-        <Slider {...settings}>
-          {filterImagesOnly1440(post.images).map((image: PostImageType) => {
-            return (
-              <div key={image.uploadId}>
-                <Image
-                  src={image.url ? image.url : empty}
-                  className={s.image}
-                  width={234}
-                  height={240}
-                  alt="Post image"
-                />
-              </div>
-            )
-          })}
-        </Slider>
+        <div className={s.aaa}>
+          <Slider {...settings}>
+            {filterImagesOnly1440(post.images).map((image: PostImageType) => {
+              return (
+                <div key={image.uploadId}>
+                  <Image
+                    src={image.url ? image.url : empty}
+                    className={s.image}
+                    width={234}
+                    height={240}
+                    alt="Post image"
+                  />
+                </div>
+              )
+            })}
+          </Slider>
+        </div>
       )}
 
       <div className={s.header}>
-        <Avatar size={36} photo={data.avatar} />
-        <Typography variant="h3">{data.userName}</Typography>
+        <Avatar size={36} photo={post.avatarOwner} />
+        <Typography variant="h3">{`${post.owner.firstName} ${post.owner.lastName}`}</Typography>
       </div>
       <Typography color="secondary" className={s.status} variant="small_text">
         {useTimeAgo(post.createdAt)}
       </Typography>
-      <Typography variant="regular_text_14">{post.description}</Typography>
+      <Typography className={s.desc} variant="regular_text_14">
+        {post.description}
+      </Typography>
     </div>
   )
 })

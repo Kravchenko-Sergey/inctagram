@@ -32,8 +32,13 @@
   max-width: 180px !important;
 
   background: rgb(51 51 51 / 50%) !important;
+  border-radius: 5px !important;
 
   li button::before {
     color: var(--light-100) !important;
   }
+}
+
+.desc {
+  word-wrap: break-word;
 }
