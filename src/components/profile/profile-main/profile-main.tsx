@@ -28,9 +28,9 @@ export const ProfileMain = memo(() => {
     pageSize > publications && setHasMorePosts(false)
   }
 
-  if (isLoading || isFetching) {
-    return <Loader />
-  }
+  // if (isLoading || isFetching) {
+  //   return <Loader />
+  // }
 
   if (isError) {
     console.error('Get profile is failed')
