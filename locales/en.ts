@@ -266,4 +266,18 @@ export const en: LocaleType = {
     days: 'days',
     more2Weeks: 'More than 2 weeks ago',
   },
+  months: {
+    january: 'January',
+    february: 'February',
+    march: 'March',
+    april: 'April',
+    may: 'May',
+    june: 'June',
+    july: 'July',
+    august: 'August',
+    september: 'September',
+    october: 'October',
+    november: 'November',
+    december: 'December',
+  },
 }
