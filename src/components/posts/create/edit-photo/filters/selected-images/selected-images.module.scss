@@ -52,3 +52,13 @@
   bottom: 10px;
   color: #fff;
 }
+
+.dots {
+  z-index: 5;
+  bottom: 20px !important;
+  left: 160px;
+  width: 195px;
+
+  // opacity: 0.5;
+  // background-color: var(--dark-300);
+}

@@ -20,7 +20,7 @@ type PropsType = {
 }
 
 export const SelectedImages = ({ addedImages, activeFilter, setActiveFilter }: PropsType) => {
-  const settings = getSliderSettings()
+  const settings = getSliderSettings(s.dots)
   const onActiveFilter = (filter: string) => {
     switch (filter) {
       case 'No filter':

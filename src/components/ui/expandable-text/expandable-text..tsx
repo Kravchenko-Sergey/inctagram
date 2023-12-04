@@ -1,6 +1,7 @@
 import ShowMoreText from 'react-show-more-text'
 import s from './expandable-text.module.scss'
 import { useTranslation } from '@/hooks'
+import { Typography } from '@/components'
 
 type ExpandableTextProps = {
   text: string | null
@@ -12,7 +13,7 @@ export const ExpandableText = ({ text, callback }: ExpandableTextProps) => {
   const { t } = useTranslation()
 
   const executeOnClick = () => {
-    callback!()
+    // callback!()
   }
 
   return (
@@ -22,6 +23,8 @@ export const ExpandableText = ({ text, callback }: ExpandableTextProps) => {
       less={t.hide}
       className={s.root}
       anchorClass={s.anchor}
+      // className="content-css"
+      // anchorClass="show-more-less-clickable"
       onClick={executeOnClick}
       expanded={false}
       // width={280}

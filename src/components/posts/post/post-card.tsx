@@ -5,7 +5,7 @@ import { ViewPostModal } from '../view'
 import { Post, useLazyGetUserPostQuery } from '@/services/posts'
 
 import s from './post.module.scss'
-import { sortImagesByWidth } from '@/helpers/filterImages'
+import { filterImagesOnly1440 } from '@/helpers/filterImagesOnly1440'
 
 type PropsType = {
   post: Post
@@ -29,7 +29,7 @@ export const PostCard = ({ post }: PropsType) => {
     <>
       <Image
         onClick={handleViewPost}
-        src={sortImagesByWidth(post?.images)[1].url}
+        src={filterImagesOnly1440(post?.images)[0].url}
         alt={`post ${post.id} image`}
         width={232}
         height={228}
