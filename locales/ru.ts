@@ -263,6 +263,20 @@ export const ru = {
     days: 'дней',
     more2Weeks: 'Более двух недель назад',
   },
+  months: {
+    january: 'Январь',
+    february: 'Февраль',
+    march: 'Март',
+    april: 'Апрель',
+    may: 'Май',
+    june: 'Июнь',
+    july: 'Июль',
+    august: 'Август',
+    september: 'Сентябрь',
+    october: 'Октябрь',
+    november: 'Ноябрь',
+    december: 'Декабрь',
+  },
 }
 
 export type LocaleType = typeof ru

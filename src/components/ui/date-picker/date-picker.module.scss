@@ -5,10 +5,6 @@
     width: 100%;
   }
 
-  :global(.react-datepicker__day--outside-month) {
-    color: var(--dark-100);
-  }
-
   :global(.react-datepicker__day--weekend) {
     color: var(--light-900);
   }
@@ -86,6 +82,10 @@
       background-color: transparent;
       border: 2px solid var(--primary-300);
     }
+  }
+
+  :global(.react-datepicker__day--outside-month) {
+    color: var(--dark-100);
   }
 }
 
@@ -182,13 +182,23 @@
 
 .header {
   display: flex;
+  flex-direction: column;
+  padding-left: 8px;
+}
+
+.headerFooter {
+  display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-left: 8px;
 }
 
 .buttonBox {
   display: flex;
+}
+
+.selectsWrapper {
+  display: flex;
+  justify-content: space-between;
 }
 
 .button {
