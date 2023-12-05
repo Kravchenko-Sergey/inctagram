@@ -6,10 +6,11 @@ import { ImageOutline } from '@/assets/icons'
 import { CropModal } from './crop-modal'
 import { CroppedImage } from './cropped-image'
 import { BaseModal } from './base-modal'
-
-import s from './create-post-modal.module.scss'
+import { permittedPostPhotoFileSize, permittedFileTypes } from '@/consts/image'
 import { useRouter } from 'next/router'
 import { PATH } from '@/consts/route-paths'
+import { toast } from 'react-toastify'
+import s from './create-post-modal.module.scss'
 
 export type ImageType = {
   image: string
@@ -41,16 +42,35 @@ export const CreatePostModal = () => {
   }
 
   const handleImageUpload = async (e: any) => {
-    setAddedImages([
-      {
-        id: (addedImages.length + 1).toString(),
-        image: URL.createObjectURL(e.target.files[0]),
-      },
-    ])
-    setIsBaseModalOpen(false)
-    setIsModalOpen(true)
-  }
+    // ToDo сделать инпут контролируемым тут и в добавлении аватара
+    const uploadInput = e.target
 
+    if (
+      !(uploadInput instanceof HTMLInputElement) ||
+      !uploadInput.files ||
+      !uploadInput.files.length
+    ) {
+      return
+    }
+
+    const file = uploadInput.files[0]
+
+    const fileName = file.name.toLowerCase()
+    const matches = [...permittedFileTypes].some(it => fileName.endsWith(it))
+
+    if (matches && file.size <= permittedPostPhotoFileSize) {
+      setAddedImages([
+        {
+          id: (addedImages.length + 1).toString(),
+          image: URL.createObjectURL(e.target.files[0]),
+        },
+      ])
+      setIsBaseModalOpen(false)
+      setIsModalOpen(true)
+    } else {
+      toast.error(t.errors.imageUploadError, { icon: false })
+    }
+  }
   const selectFileHandler = () => {
     inputRef && inputRef.current?.click()
   }
