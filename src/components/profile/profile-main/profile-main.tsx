@@ -10,10 +10,11 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import s from './profile-main.module.scss'
 
 export const ProfileMain = memo(() => {
-  const [pageSize, setPageSize] = useState(8)
+  const size = 8
+  const [pageSize, setPageSize] = useState(size)
   const [hasMorePosts, setHasMorePosts] = useState(true)
   const { t } = useTranslation()
-
+  const [idLastUploadedPost, setIdLastUploadedPost] = useState<undefined | number>(undefined)
   const { data: me } = useMeQuery()
   const {
     data: profile,
@@ -21,23 +22,28 @@ export const ProfileMain = memo(() => {
     isFetching,
     isError,
   } = useGetProfileQuery({ profileId: me?.userId })
-  const { data: posts } = useGetUserPostsQuery({ pageSize })
-
+  const { data: posts } = useGetUserPostsQuery({
+    idLastUploadedPost,
+    pageSize: size,
+  })
   const loadMorePosts = () => {
-    setPageSize(prev => prev + 8)
-    pageSize > publications && setHasMorePosts(false)
+    if (pageSize >= publications) {
+      setHasMorePosts(false)
+    } else {
+      setPageSize(prev => prev + size)
+      setIdLastUploadedPost(() => posts?.items[posts.items.length - 1].id)
+    }
   }
 
   // if (isLoading || isFetching) {
   //   return <Loader />
   // }
-
   if (isError) {
     console.error('Get profile is failed')
   }
   const following = 2218
   const followers = 2358
-  const publications = posts?.items.length as number
+  const publications = posts?.totalCount as number
 
   const profileName = profile?.fullName
     ? `${profile?.firstName} ${profile?.lastName}`
@@ -81,10 +87,10 @@ export const ProfileMain = memo(() => {
         </div>
       </div>
       <InfiniteScroll
-        dataLength={publications || 0}
+        dataLength={posts?.items.length || 0}
         next={loadMorePosts}
         hasMore={hasMorePosts}
-        loader={publications > 0 ? <Loader className={s.loader} /> : null}
+        loader={posts?.items && posts.items.length > 0 ? <Loader className={s.loader} /> : null}
         className={s.posts}
       >
         {posts?.items.map((post: Post) => <PostCard key={post.id} post={post} />)}

@@ -28,13 +28,22 @@ export const postAPI = baseApi.injectEndpoints({
       }),
     }),
     getUserPosts: build.query<GetAllPostsResponse, GetAllPostsRequest>({
-      query: ({ idLastUploadedPost, pageSize }) => ({
-        url: `posts/user/${idLastUploadedPost}`,
+      query: ({ idLastUploadedPost = '', pageSize }) => ({
+        url: `posts/user${idLastUploadedPost ? `/${idLastUploadedPost}` : ''}`,
         params: {
           pageSize,
         },
       }),
-      providesTags: ['getUserPosts'],
+      serializeQueryArgs: ({ endpointName }) => {
+        return endpointName
+      },
+      merge: (currentCache, newItems) => {
+        if (currentCache.items.length === newItems.totalCount) return newItems
+        currentCache.items.push(...newItems.items)
+      },
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg !== previousArg
+      },
     }),
     getUserPost: build.query<Post, PostRequest>({
       query: ({ postId }) => {

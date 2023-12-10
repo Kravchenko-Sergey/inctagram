@@ -30,6 +30,7 @@
     "@types/react-dom": "18.2.7",
     "@types/react-google-recaptcha": "^2.1.5",
     "@types/react-slick": "^0.23.10",
+    "@types/throttle-debounce": "^5.0.2",
     "async-mutex": "^0.4.0",
     "axios": "^1.5.0",
     "clsx": "^2.0.0",
