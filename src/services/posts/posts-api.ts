@@ -49,7 +49,8 @@ export const postAPI = baseApi.injectEndpoints({
         url: `posts/${postId}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['getUserPosts'],
+      // invalidatesTags: ['getUserPosts'],
+      invalidatesTags: ['getProfileData'],
     }),
     deletePostImage: build.mutation<void, { imageId: string }>({
       query: ({ imageId }) => ({

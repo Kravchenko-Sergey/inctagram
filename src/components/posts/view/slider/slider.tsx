@@ -2,12 +2,13 @@ import RadixSlider from 'react-slick'
 import Image from 'next/image'
 
 import { getSliderSettings } from '@/helpers'
-import { Post, PostImageType } from '@/services/posts'
+import { PostImageType } from '@/services/posts'
 
 import s from './slider.module.scss'
 import { sortImagesByWidth } from '@/helpers/filterImages'
+import { PostProfile } from '@/services/public-posts'
 
-export const Slider = ({ post }: { post: Post }): JSX.Element => {
+export const Slider = ({ post }: { post: PostProfile }): JSX.Element => {
   const settings = getSliderSettings(s.dots)
   const newArr = sortImagesByWidth(post.images).reverse()
 

@@ -2,7 +2,9 @@ import { baseApi } from '@/services'
 import {
   GetLastCreatedPostsRequest,
   GetLastCreatedPostsResponse,
+  GetProfileDataResponse,
 } from '@/services/public-posts/types'
+import { GetProfileResponse } from '@/services/profile'
 
 export const publicPostApi = baseApi.injectEndpoints({
   endpoints: build => {
@@ -20,11 +22,26 @@ export const publicPostApi = baseApi.injectEndpoints({
           method: 'GET',
         }),
       }),
-      getProfileData: build.query<void, { userId: number }>({
-        query: ({ userId }) => ({
-          url: `public-posts/user/${userId}`,
-          method: 'GET',
-        }),
+      getProfileData: build.query<
+        GetProfileDataResponse & { fullName: string | null },
+        { userId: number }
+      >({
+        query: ({ userId }) => {
+          console.log('request')
+
+          return {
+            url: `public-posts/user/${userId}`,
+            method: 'GET',
+          }
+        },
+        transformResponse: (response: GetProfileDataResponse) => {
+          const fullName = response?.profile.firstName
+            ? `${response?.profile.firstName} ${response?.profile.lastName}`
+            : null
+
+          return { ...response, fullName }
+        },
+        providesTags: ['getProfileData'],
       }),
     }
   },

@@ -4,6 +4,7 @@ export const PATH = {
   HOME: '/',
   CREATE: '/create',
   PROFILE: '/profile',
+  // PROFILE: '/profile/[id]',
   PROFILE_SETTINGS: '/profile-settings',
   MESSENGER: '/messenger',
   SEARCH: '/search',
@@ -22,6 +23,7 @@ export const PATH = {
 }
 
 export const commonRoutes = [
+  PATH.PROFILE,
   PATH.LOGIN,
   PATH.REGISTRATION,
   PATH.GITHUB,

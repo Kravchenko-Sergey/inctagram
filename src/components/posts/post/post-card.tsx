@@ -2,13 +2,15 @@ import { useState } from 'react'
 import Image from 'next/image'
 
 import { ViewPostModal } from '../view'
-import { Post, useLazyGetUserPostQuery } from '@/services/posts'
+import { useLazyGetUserPostQuery } from '@/services/posts'
 
 import s from './post.module.scss'
 import { filterImagesOnly1440 } from '@/helpers/filterImagesOnly1440'
+import { PostProfile } from '@/services/public-posts'
 
 type PropsType = {
-  post: Post
+  // post: Post
+  post: PostProfile
 }
 
 export const PostCard = ({ post }: PropsType) => {

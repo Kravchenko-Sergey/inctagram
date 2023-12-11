@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 
 import { MAX_CHARS_POST } from '@/consts/input-limits'
 import { useTranslation } from '@/hooks'
-import { ControlledTextArea, Loader } from '@/components'
+import { ControlledTextArea } from '@/components'
 import { DescriptionFormType, descriptionSchema } from '@/schemas'
 import { FormFields, getBinaryImageData, triggerZodFieldError } from '@/helpers'
 import {
@@ -18,6 +18,7 @@ import { PATH } from '@/consts/route-paths'
 import { ImageType } from '@/components/posts/create'
 
 import s from './description.module.scss'
+import { useMeQuery } from '@/services/auth'
 
 type DescriptionFormTypeProps = {
   onSubmitHandler?: (data: DescriptionFormType) => void
@@ -42,7 +43,7 @@ export const PostDescription = ({
   const { push } = useRouter()
   const [createPostComment, { isLoading: isPostCreateLoading }] = useCreatePostCommentsMutation()
   const [createPostPhoto, { isLoading: isPostPhotoLoading }] = useCreatePostPhotoMutation()
-
+  const { data: me } = useMeQuery()
   const {
     control,
     handleSubmit,
@@ -100,7 +101,8 @@ export const PostDescription = ({
           await createPostComment(requestBody)
         }
         isPostCreateLoadingHandler(false)
-        push(PATH.PROFILE)
+        // push(PATH.PROFILE)
+        push(`${PATH.PROFILE}/${+me?.userId!}`)
       } catch (e: unknown) {
         const error = e as any
 

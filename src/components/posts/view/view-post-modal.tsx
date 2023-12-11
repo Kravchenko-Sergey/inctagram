@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { Button, Loader, Modal, Typography } from '@/components'
 import { useGetProfileQuery } from '@/services/profile'
-import { Post, useDeletePostImageMutation, useDeleteUserPostMutation } from '@/services/posts'
+import { useDeletePostImageMutation, useDeleteUserPostMutation } from '@/services/posts'
 import { PostModalHeader } from './post-modal-header'
 import { PostInfo } from './post-info'
 import { EditPostModal } from '../edit-post-modal'
@@ -10,17 +10,20 @@ import { Slider } from './slider'
 
 import s from './view-post-modal.module.scss'
 import { useTranslation } from '@/hooks'
+import { PostProfile, useGetProfileDataQuery } from '@/services/public-posts'
 
 type PropsType = {
   isOpen: boolean
-  post: Post
+  // post: Post
+  post: PostProfile
   handleModalChange: (value: boolean) => void
 }
 
 export const ViewPostModal = ({ isOpen, handleModalChange, post }: PropsType) => {
   const { t } = useTranslation()
 
-  const { data: profile, isLoading } = useGetProfileQuery({ profileId: post?.ownerId })
+  // const { data: profile, isLoading } = useGetProfileQuery({ profileId: post?.ownerId })
+  const { data: profile, isLoading } = useGetProfileDataQuery({ userId: post?.ownerId })
 
   const [isEditMode, setIsEditMode] = useState(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
@@ -57,7 +60,7 @@ export const ViewPostModal = ({ isOpen, handleModalChange, post }: PropsType) =>
     return <Loader />
   }
 
-  const fullUserName = profile?.fullName ?? profile?.userName
+  const fullUserName = profile?.fullName ?? profile?.profile.userName
 
   return (
     <>
@@ -72,19 +75,19 @@ export const ViewPostModal = ({ isOpen, handleModalChange, post }: PropsType) =>
             handleOpenEditMode={handleOpenEditMode}
             handleDeleteMode={handleDeleteMode}
             userName={fullUserName}
-            avatar={profile?.avatars[1]?.url}
+            avatar={profile?.profile.avatars[1]?.url}
           />
         }
         additionalContent={<Slider post={post} />}
       >
-        <PostInfo userName={fullUserName} avatar={profile?.avatars[1]?.url} post={post} />
+        <PostInfo userName={fullUserName} avatar={profile?.profile.avatars[1]?.url} post={post} />
       </Modal>
       <EditPostModal
         isOpen={isEditMode}
         handleClose={handleEditModalChange}
         post={post}
         userName={fullUserName}
-        avatar={profile?.avatars[1]?.url}
+        avatar={profile?.profile.avatars[1]?.url}
       />
       <Modal
         className={s.contentDeleteModal}

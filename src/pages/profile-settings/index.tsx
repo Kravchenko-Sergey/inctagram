@@ -1,20 +1,26 @@
-import { useGetProfileQuery, useUpdateProfileMutation } from '@/services/profile/profile-api'
+import { useUpdateProfileMutation } from '@/services/profile/profile-api'
 import { useMeQuery } from '@/services/auth/auth-api'
-import { getMainLayout, Tabs, ProfileUpdate } from '@/components'
+import { getMainLayout, ProfileUpdate, Tabs } from '@/components'
 import { useTranslation } from '@/hooks'
 import { ProfileSettingsFormType } from '@/schemas'
 import { toast } from 'react-toastify'
 
 import s from './profile-settings.module.scss'
 import { Loader } from '@/components/ui/loader'
+import { useGetProfileDataQuery } from '@/services/public-posts'
 
 const ProfileSettings = () => {
   const { t } = useTranslation()
 
   const [updateProfile, { error: updateProfileError }] = useUpdateProfileMutation()
   const { data: me } = useMeQuery()
-  const { data: profile, isLoading } = useGetProfileQuery({ profileId: me?.userId })
-
+  // const { data: profile, isLoading } = useGetProfileQuery({ profileId: me?.userId })
+  const {
+    data: profile,
+    isLoading,
+    isFetching,
+    isError,
+  } = useGetProfileDataQuery({ userId: +me?.userId! })
   const updateProfileHandler = async (data: ProfileSettingsFormType) => {
     try {
       await updateProfile(data).unwrap()

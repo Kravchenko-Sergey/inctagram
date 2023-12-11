@@ -11,6 +11,7 @@ import { useRouter } from 'next/router'
 import { PATH } from '@/consts/route-paths'
 import { toast } from 'react-toastify'
 import s from './create-post-modal.module.scss'
+import { useMeQuery } from '@/services/auth'
 
 export type ImageType = {
   image: string
@@ -27,20 +28,22 @@ export const CreatePostModal = () => {
   const [addedImages, setAddedImages] = useState<ImageType[]>([])
   const [isLoadingPost, setIsLoadingPost] = useState(false)
   const { push } = useRouter()
+  const { data: me } = useMeQuery()
 
   const handleButtonClick = () => {
-    push(PATH.PROFILE)
+    // push(PATH.PROFILE)
+    push(`${PATH.PROFILE}/${+me?.userId!}`)
 
     //setIsBaseModalOpen(false)
     setImage(null)
     setIsModalOpen(false)
   }
   const cancelButtonClick = () => {
-    push(PATH.PROFILE)
+    //push(PATH.PROFILE)
+    push(`${PATH.PROFILE}/${+me?.userId!}`)
     //setIsBaseModalOpen(false)
     setIsModalOpen(false)
   }
-
   const handleImageUpload = async (e: any) => {
     // ToDo сделать инпут контролируемым тут и в добавлении аватара
     const uploadInput = e.target

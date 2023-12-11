@@ -19,12 +19,14 @@ import { FormFields, triggerZodFieldError } from '@/helpers'
 import { AvatarType, useUpdateProfileMutation } from '@/services/profile'
 
 import s from './profile-update.module.scss'
+import { GetProfileDataResponse } from '@/services/public-posts'
 
 type ProfileAvatar = { avatars: AvatarType[] }
 
 type ProfileUpdateProps = {
   updateProfileHandler: (data: ProfileSettingsFormType) => void
-  profile?: ProfileSettingsFormType & ProfileAvatar
+  // profile?: ProfileSettingsFormType & ProfileAvatar
+  profile?: GetProfileDataResponse & { fullName: string | null }
 }
 
 const Cities = [
@@ -45,12 +47,14 @@ export const ProfileUpdate = memo(({ updateProfileHandler, profile }: ProfileUpd
     resolver: zodResolver(profileSettingsSchema(t)),
     mode: 'onChange',
     defaultValues: {
-      firstName: profile?.firstName ?? '',
-      userName: profile?.userName ?? '',
-      lastName: profile?.lastName ?? '',
-      city: profile?.city ?? '',
-      dateOfBirth: profile?.dateOfBirth ? parseISO(`${profile.dateOfBirth}`) : new Date(),
-      aboutMe: profile?.aboutMe ?? '',
+      firstName: profile?.profile.firstName ?? '',
+      userName: profile?.profile.userName ?? '',
+      lastName: profile?.profile.lastName ?? '',
+      city: profile?.profile.city ?? '',
+      dateOfBirth: profile?.profile.dateOfBirth
+        ? parseISO(`${profile.profile.dateOfBirth}`)
+        : new Date(),
+      aboutMe: profile?.profile.aboutMe ?? '',
     },
   })
 
@@ -69,7 +73,7 @@ export const ProfileUpdate = memo(({ updateProfileHandler, profile }: ProfileUpd
     <div className={s.container}>
       <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={s.innerContainer}>
-          <ProfileImage avatars={profile?.avatars[0]?.url} />
+          <ProfileImage avatars={profile?.profile.avatars[0]?.url} />
           <div className={s.formWrap}>
             <div className={s.wrap}>
               <ControlledTextField label={t.auth.username} control={control} name="userName" />
