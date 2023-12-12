@@ -27,8 +27,6 @@ export const publicPostApi = baseApi.injectEndpoints({
         { userId: number }
       >({
         query: ({ userId }) => {
-          console.log('request')
-
           return {
             url: `public-posts/user/${userId}`,
             method: 'GET',

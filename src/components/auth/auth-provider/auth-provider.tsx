@@ -16,16 +16,16 @@ export const AuthProvider = ({ children }: PropsType) => {
 
   // const isProtectedPage = !commonRoutes.includes(router.pathname)
   const remainingPath = router.pathname.replace(/^\/profile(\/[^/]+)?/, '/profile')
-
+  //
   const isProtectedPage = !commonRoutes.includes(remainingPath)
 
   useEffect(() => {
-    if (!isLoading && !user && isProtectedPage && !isFetching) {
+    if (!isLoading && !user && isProtectedPage) {
       router.push(PATH.MAIN)
 
       return
     }
-  }, [user, isError, isLoading, isProtectedPage, isFetching, router])
+  }, [user, isProtectedPage, router, isLoading])
 
   if (isLoading || (!user && isProtectedPage)) {
     return <Loader />

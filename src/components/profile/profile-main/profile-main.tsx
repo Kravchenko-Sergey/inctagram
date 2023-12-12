@@ -15,7 +15,6 @@ export const ProfileMain = memo(() => {
   const { t } = useTranslation()
   const { query } = useTypedRouter(routerProfileSchema)
 
-  console.log('ProfileMain')
   const { data: me } = useMeQuery()
   // // const {
   // //   data: profile,
@@ -24,6 +23,7 @@ export const ProfileMain = memo(() => {
   // //   isError,
   // // } = useGetProfileQuery({ profileId: me?.userId })
   //
+
   const {
     data: profile,
     isLoading,

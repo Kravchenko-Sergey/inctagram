@@ -8,17 +8,7 @@ import {
   UserType,
 } from './types'
 import { baseApi } from '@/services'
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query/react'
 
-export type Error = {
-  statusCode: number
-  messages: RootObjectMessages[]
-  error: string
-}
-export type RootObjectMessages = {
-  message: string
-  field: string
-}
 export const authApi = baseApi.injectEndpoints({
   endpoints: build => {
     return {
@@ -86,37 +76,13 @@ export const authApi = baseApi.injectEndpoints({
             method: 'GET',
           })
 
-          return { data: result.data as UserType }
+          return {
+            data:
+              result.data === undefined ? ('' as unknown as UserType) : (result.data as UserType),
+          }
         },
         extraOptions: { maxRetries: 1 },
       }),
-      //   async queryFn(name, api, extraOptions, baseQuery) {
-      //     try {
-      //       const result = await baseQuery({
-      //         url: `/auth/me`,
-      //         method: 'GET',
-      //       })
-      //
-      //       if (result.error) {
-      //         throw result.error
-      //       }
-      //
-      //       return { data: result.data as UserType }
-      //     } catch (error) {
-      //       console.log('value', error)
-      //
-      //       const err = error as Error
-      //
-      //       // return { error: error as FetchBaseQueryError }
-      //       return {} as FetchBaseQueryError
-      //       // return {
-      //       //   status: 401,
-      //       //   data: error,
-      //       // } as FetchBaseQueryError
-      //     }
-      //   },
-      //   extraOptions: { maxRetries: 1 },
-      // }),
       checkRecoveryCode: build.mutation<{ email: string }, { recoveryCode: string }>({
         query: (body: { recoveryCode: string }) => ({
           url: `auth/check-recovery-code`,

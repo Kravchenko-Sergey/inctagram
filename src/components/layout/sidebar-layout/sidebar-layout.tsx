@@ -48,7 +48,7 @@ const SidebarLayout = ({ children }: SidebarLayoutProps) => {
     { href: PATH.FAVORITES, icon: <BookmarkOutline />, title: t.sidebars.favorites },
   ]
   const handleModalSubmit = async () => {
-    await logOut().unwrap()
+    await logOut()
     router.push(PATH.MAIN)
   }
   const handleModalClosed = () => {
