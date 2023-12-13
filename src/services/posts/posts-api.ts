@@ -34,11 +34,14 @@ export const postAPI = baseApi.injectEndpoints({
           pageSize,
         },
       }),
+      providesTags: ['getUserPosts'],
       serializeQueryArgs: ({ endpointName }) => {
         return endpointName
       },
-      merge: (currentCache, newItems) => {
-        if (currentCache.items.length === newItems.totalCount) return newItems
+      merge: (currentCache, newItems, { arg, requestId }) => {
+        if (arg.idLastUploadedPost === undefined) {
+          return newItems
+        }
         currentCache.items.push(...newItems.items)
       },
       forceRefetch({ currentArg, previousArg }) {
