@@ -5,9 +5,12 @@
 }
 
 .header {
+  cursor: pointer;
+
   display: flex;
   gap: 13px;
   align-items: center;
+
   margin-bottom: 12px;
 }
 
@@ -101,4 +104,8 @@
   flex: 1;
   align-items: center;
   justify-content: space-between;
+}
+
+.item {
+  cursor: pointer;
 }

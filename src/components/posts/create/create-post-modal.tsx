@@ -32,7 +32,7 @@ export const CreatePostModal = () => {
 
   const handleButtonClick = () => {
     // push(PATH.PROFILE)
-    push(`${PATH.PROFILE}/${+me?.userId!}`)
+    push(`${PATH.PROFILE}/?id=${+me?.userId!}`)
 
     //setIsBaseModalOpen(false)
     setImage(null)
@@ -40,7 +40,7 @@ export const CreatePostModal = () => {
   }
   const cancelButtonClick = () => {
     //push(PATH.PROFILE)
-    push(`${PATH.PROFILE}/${+me?.userId!}`)
+    push(`${PATH.PROFILE}/?id=${+me?.userId!}`)
     //setIsBaseModalOpen(false)
     setIsModalOpen(false)
   }

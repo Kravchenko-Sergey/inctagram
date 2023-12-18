@@ -102,7 +102,7 @@ export const PostDescription = ({
         }
         isPostCreateLoadingHandler(false)
         // push(PATH.PROFILE)
-        push(`${PATH.PROFILE}/${+me?.userId!}`)
+        push(`${PATH.PROFILE}/?id=${+me?.userId!}`)
       } catch (e: unknown) {
         const error = e as any
 

@@ -20,7 +20,18 @@ export const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
 
-const makeStore = () => store
+// const makeStore = () => store
+const makeStore = () =>
+  configureStore({
+    reducer: {
+      [baseApi.reducerPath]: baseApi.reducer,
+      appReducer,
+    },
+    devTools: true,
+    // preloadedState: initialState,
+    // middleware: gDM => gDM().concat(auth-api.middleware).concat(postsApi.middleware),
+    middleware: gDM => gDM().concat(baseApi.middleware),
+  })
 
 export type RootAppState = ReturnType<typeof makeStore>
 

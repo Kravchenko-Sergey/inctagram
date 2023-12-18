@@ -10,7 +10,7 @@ import { PostProfile } from '@/services/public-posts'
 
 export const Slider = ({ post }: { post: PostProfile }): JSX.Element => {
   const settings = getSliderSettings(s.dots)
-  const newArr = sortImagesByWidth(post.images).reverse()
+  const newArr = sortImagesByWidth(post?.images).reverse()
 
   return (
     <RadixSlider {...settings} className={s.sliderContainer}>

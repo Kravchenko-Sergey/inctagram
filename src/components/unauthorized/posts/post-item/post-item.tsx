@@ -10,6 +10,9 @@ import Slider from 'react-slick'
 import ShowMoreText from 'react-show-more-text'
 import s from './post-item.module.scss'
 import { Block } from '@/assets/icons'
+import { PATH } from '@/consts/route-paths'
+import { useRouter } from 'next/router'
+import defaultPostImage from './../../../../../public/image/post-image.png'
 
 type Props = {
   post: Post
@@ -18,18 +21,22 @@ export const PostItem = memo(({ post }: Props) => {
   const settings = getSliderSettings(s.dots)
   const [isCollapsed, setIsCollapsed] = useState(false)
   const { t } = useTranslation()
+  const { push } = useRouter()
 
   const collapsedTextHandler = () => {
     setIsCollapsed(!isCollapsed)
   }
 
+  const postClickHandler = () => {
+    push(`${PATH.PROFILE}/?id=${post.ownerId}&postId=${post.id}`)
+  }
+
   return (
-    <div className={s.root}>
+    <div className={s.root} onClick={postClickHandler}>
       {post.images.length === 0 ? (
         <div>
-          {/*<Image src={empty} className={s.image} width={234} height={240} alt="Post image" />*/}
           <Image
-            src={empty}
+            src={defaultPostImage}
             className={`${s.image} ${isCollapsed ? s.imageCollapsed : ''}`}
             width={234}
             height={240}
@@ -41,10 +48,9 @@ export const PostItem = memo(({ post }: Props) => {
           <Slider {...settings}>
             {filterImagesOnly1440(post.images).map((image: PostImageType) => {
               return (
-                <div key={image.uploadId}>
+                <div className={s.item} key={image.uploadId}>
                   <Image
                     src={image.url ? image.url : empty}
-                    // className={s.image}
                     className={`${s.image} ${isCollapsed ? s.imageCollapsed : ''}`}
                     width={234}
                     height={240}
@@ -56,7 +62,6 @@ export const PostItem = memo(({ post }: Props) => {
           </Slider>
         </div>
       )}
-
       <div className={s.header}>
         <Avatar size={36} photo={post.avatarOwner} />
         <div className={s.footerInfo}>

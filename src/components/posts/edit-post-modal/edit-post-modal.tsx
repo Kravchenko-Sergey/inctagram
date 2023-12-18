@@ -52,7 +52,7 @@ export const EditPostModal = ({ post, isOpen, handleClose, userName, avatar }: P
     resolver: zodResolver(descriptionSchema(t)),
     mode: 'onChange',
     defaultValues: {
-      description: post.description,
+      description: post?.description ? post.description : '',
     },
   })
 
@@ -107,7 +107,7 @@ export const EditPostModal = ({ post, isOpen, handleClose, userName, avatar }: P
         onInteractOutside={handleClickOutside}
       >
         <Slider {...settings} className={s.container}>
-          {post.images.map((image: PostImageType, idx: number) => {
+          {post?.images.map((image: PostImageType, idx: number) => {
             if (!(idx % 2)) {
               return (
                 <div key={image.uploadId} className={s.carousel}>

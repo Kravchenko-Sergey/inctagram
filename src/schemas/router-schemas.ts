@@ -12,3 +12,8 @@ export const routerRecoverySchema = z.object({
 export const routerProfileSchema = z.object({
   id: z.coerce.string().optional(),
 })
+
+export const routerProfilePostSchema = z.object({
+  id: z.coerce.string().optional(),
+  postId: z.coerce.string().optional(),
+})

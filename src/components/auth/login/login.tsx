@@ -50,9 +50,10 @@ export const Login = () => {
 
         // push(PATH.PROFILE)
         // push(`${PATH.PROFILE}/${+me?.userId!}`)
-        push(`${PATH.PROFILE}/${res?.userId!}`)
+        push(`${PATH.PROFILE}/?id=${res?.userId!}`)
       }
     } catch (e: any) {
+      // TODO разобраться с ошибкой при 500 сервере
       if (
         e.data &&
         (e.data.messages[0].message === 'Authorization error' ||
