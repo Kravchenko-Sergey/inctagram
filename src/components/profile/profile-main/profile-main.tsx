@@ -32,13 +32,6 @@ export const ProfileMain = memo(() => {
     }
   }, [postQuery.postId])
 
-  // const {
-  //   data: profile,
-  //   isLoading,
-  //   isFetching,
-  //   isError,
-  // } = useGetProfileQuery({ profileId: me?.userId })
-
   useEffect(() => {
     if (postQuery.postId) {
       setPostModalIsOpen(true)
@@ -50,8 +43,6 @@ export const ProfileMain = memo(() => {
     isFetching,
     isError,
   } = useGetProfileDataQuery({ userId: +query.id! })
-  //
-  // const { data: posts } = useGetUserPostsQuery({ pageSize })
 
   const loadMorePosts = () => {
     setPageSize(prev => prev + 8)

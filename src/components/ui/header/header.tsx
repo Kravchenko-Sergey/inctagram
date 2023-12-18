@@ -18,15 +18,17 @@ export const Header = ({ unauthorized }: Props) => {
   return (
     <header className={s.header}>
       <div className={s.content}>
-        <Typography
-          as="span"
-          onClick={logoClickHandler}
-          className={s.logo}
-          color="primary"
-          variant="large"
-        >
-          Inctagram
-        </Typography>
+        <div className={s.logoWrapper}>
+          <Typography
+            as="span"
+            onClick={logoClickHandler}
+            className={s.logo}
+            color="primary"
+            variant="large"
+          >
+            Inctagram
+          </Typography>
+        </div>
         <div className={s.menuContainer}>
           <LanguageSelect />
         </div>
