@@ -1,61 +1,72 @@
 import React, { memo, useState } from 'react'
-import { useTranslation } from '@/hooks'
-import { useMeQuery } from '@/services/auth'
-import { useGetProfileQuery } from '@/services/profile'
-import { Post, useGetUserPostsQuery } from '@/services/posts'
+import { useTranslation, useTypedRouter } from '@/hooks'
 import { Avatar, Button, ExpandableText, Loader, PostCard, Typography } from '@/components'
 import Link from 'next/link'
 import { PATH } from '@/consts/route-paths'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import s from './profile-main.module.scss'
+import { PostProfile, useGetProfileDataQuery } from '@/services/public-posts'
+import { routerProfileSchema } from '@/schemas/router-schemas'
+import { useMeQuery } from '@/services/auth'
 
 export const ProfileMain = memo(() => {
   const [pageSize, setPageSize] = useState(8)
   const [hasMorePosts, setHasMorePosts] = useState(true)
   const { t } = useTranslation()
+  const { query } = useTypedRouter(routerProfileSchema)
 
   const { data: me } = useMeQuery()
+  // // const {
+  // //   data: profile,
+  // //   isLoading,
+  // //   isFetching,
+  // //   isError,
+  // // } = useGetProfileQuery({ profileId: me?.userId })
+  //
+
   const {
     data: profile,
     isLoading,
     isFetching,
     isError,
-  } = useGetProfileQuery({ profileId: me?.userId })
-  const { data: posts } = useGetUserPostsQuery({ pageSize })
+  } = useGetProfileDataQuery({ userId: +query.id! })
+  //
+  // const { data: posts } = useGetUserPostsQuery({ pageSize })
 
   const loadMorePosts = () => {
     setPageSize(prev => prev + 8)
     pageSize > publications && setHasMorePosts(false)
   }
 
-  // if (isLoading || isFetching) {
-  //   return <Loader />
-  // }
-
+  if (isLoading || isFetching) {
+    return <Loader />
+  }
   if (isError) {
     console.error('Get profile is failed')
   }
   const following = 2218
   const followers = 2358
-  const publications = posts?.items.length as number
+  const publications = profile?.posts.items.length as number
 
   const profileName = profile?.fullName
-    ? `${profile?.firstName} ${profile?.lastName}`
-    : profile?.userName
+    ? `${profile?.profile.firstName} ${profile?.profile.lastName}`
+    : profile?.profile.userName
 
   return (
     <>
       <div className={s.profile}>
-        <Avatar photo={profile?.avatars[0]?.url} />
+        <Avatar photo={profile?.profile.avatars[0]?.url} name={profile?.profile.userName} />
         <div className={s.info}>
           {/*<div className={s.infoColumn}>*/}
           <div className={s.infoHeader}>
             <Typography variant="large">{profileName}</Typography>
-            <Link passHref legacyBehavior href={PATH.PROFILE_SETTINGS}>
-              <Button as="a" variant="secondary" className={s.btn}>
-                {t.profile.profileSettings}
-              </Button>
-            </Link>
+            {me?.userId && (
+              <Link passHref legacyBehavior href={PATH.PROFILE_SETTINGS}>
+                <Button as="a" variant="secondary" className={s.btn}>
+                  {t.profile.profileSettings}
+                </Button>
+              </Link>
+            )}
           </div>
           <div className={s.items}>
             <div>
@@ -71,13 +82,7 @@ export const ProfileMain = memo(() => {
               <Typography>{t.profile.publications(publications)}</Typography>
             </div>
           </div>
-          <ExpandableText text={profile?.aboutMe ?? null} />
-          {/*</div>*/}
-          {/*<Link passHref legacyBehavior href={PATH.PROFILE_SETTINGS}>*/}
-          {/*  <Button as="a" variant="secondary" className={s.btn}>*/}
-          {/*    {t.profile.profileSettings}*/}
-          {/*  </Button>*/}
-          {/*</Link>*/}
+          <ExpandableText text={profile?.profile.aboutMe ?? null} />
         </div>
       </div>
       <InfiniteScroll
@@ -87,7 +92,8 @@ export const ProfileMain = memo(() => {
         loader={publications > 0 ? <Loader className={s.loader} /> : null}
         className={s.posts}
       >
-        {posts?.items.map((post: Post) => <PostCard key={post.id} post={post} />)}
+        {/*{posts?.items.map((post: Post) => <PostCard key={post.id} post={post} />)}*/}
+        {profile?.posts.items.map((post: PostProfile) => <PostCard key={post.id} post={post} />)}
       </InfiniteScroll>
       <div className={s.scrollableContent}></div>
     </>

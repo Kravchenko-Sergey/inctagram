@@ -16,7 +16,8 @@ const Github = () => {
     if (router.query.accessToken) {
       tokenSetterToLocalStorage(router.query.accessToken)
       refetchUser()
-      router.push(PATH.PROFILE)
+      // router.push(PATH.PROFILE)
+      router.push(PATH.HOME)
     }
   }, [router, getUser])
 

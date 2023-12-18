@@ -5,12 +5,7 @@ import Slider from 'react-slick'
 import Image from 'next/image'
 
 import { Avatar, Button, ControlledTextArea, Modal, Typography } from '@/components'
-import {
-  PostImageType,
-  Post,
-  useEditPostMutation,
-  useDeletePostImageMutation,
-} from '@/services/posts'
+import { PostImageType, useDeletePostImageMutation, useEditPostMutation } from '@/services/posts'
 import { useTranslation } from '@/hooks'
 import { FormFields, getSliderSettings, triggerZodFieldError } from '@/helpers'
 import { MAX_CHARS_POST } from '@/consts/input-limits'
@@ -20,10 +15,11 @@ import s from './edit-post-modal.module.scss'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { DeleteIcon } from '@/assets/icons'
+import { PostProfile } from '@/services/public-posts'
 
 type PropsType = {
   isOpen: boolean
-  post: Post
+  post: PostProfile
   handleClose: () => void
   userName?: string
   avatar?: string

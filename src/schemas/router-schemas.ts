@@ -8,3 +8,7 @@ export const routerRecoverySchema = z.object({
   code: z.coerce.string().optional(),
   email: z.coerce.string().optional(),
 })
+
+export const routerProfileSchema = z.object({
+  id: z.coerce.string().optional(),
+})

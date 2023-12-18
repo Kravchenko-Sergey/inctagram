@@ -1,2 +1,2 @@
 export * from './public-post-api'
-// export * from './types'
+export * from './types'

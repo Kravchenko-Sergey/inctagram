@@ -7,7 +7,10 @@ type HeaderLayoutUnauthorizedProps = {
   children?: ReactNode
 }
 
-const HeaderUnauthorizedLayout = ({ children, className }: HeaderLayoutUnauthorizedProps) => {
+export const HeaderUnauthorizedLayout = ({
+  children,
+  className,
+}: HeaderLayoutUnauthorizedProps) => {
   return (
     <div className={className}>
       <Header unauthorized />

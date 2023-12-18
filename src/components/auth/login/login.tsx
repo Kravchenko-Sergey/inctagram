@@ -1,11 +1,18 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 
 import { useLazyMeQuery, useLoginMutation } from '@/services/auth/auth-api'
-import { Button, Card, ControlledTextField, SocialMediaAuth, Typography } from '@/components'
+import {
+  Button,
+  Card,
+  ControlledTextField,
+  Loader,
+  SocialMediaAuth,
+  Typography,
+} from '@/components'
 import { PATH } from '@/consts/route-paths'
 import { FormFields, tokenSetterToLocalStorage, triggerZodFieldError } from '@/helpers'
 import { useTranslation } from '@/hooks'
@@ -16,9 +23,9 @@ import s from './login.module.scss'
 export const Login = () => {
   const { t } = useTranslation()
   const { push } = useRouter()
-  const [getUser] = useLazyMeQuery()
-
-  const [signIn] = useLoginMutation()
+  const [getUser, { isLoading, isFetching, data }] = useLazyMeQuery()
+  // const { data: me } = useMeQuery()
+  const [signIn, { isLoading: isSignInLoading }] = useLoginMutation()
 
   const {
     handleSubmit,
@@ -38,8 +45,12 @@ export const Login = () => {
 
       if (accessToken) {
         tokenSetterToLocalStorage(accessToken)
-        await getUser().unwrap() // TODO check if it is necessary
-        push(PATH.PROFILE)
+
+        const res = await getUser().unwrap() // TODO check if it is necessary
+
+        // push(PATH.PROFILE)
+        // push(`${PATH.PROFILE}/${+me?.userId!}`)
+        push(`${PATH.PROFILE}/${res?.userId!}`)
       }
     } catch (e: any) {
       if (
@@ -57,6 +68,10 @@ export const Login = () => {
 
     triggerZodFieldError(touchedFieldNames, trigger)
   }, [t, touchedFields, trigger])
+
+  if (isLoading || isSignInLoading) {
+    return <Loader />
+  }
 
   return (
     <Card className={s.card}>

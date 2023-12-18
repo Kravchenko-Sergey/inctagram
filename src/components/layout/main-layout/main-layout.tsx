@@ -1,6 +1,6 @@
 import { ReactElement, ReactNode } from 'react'
 
-import { Header, getSidebarLayout } from '@/components'
+import { getSidebarLayout, Header } from '@/components'
 
 import s from './main-layout.module.scss'
 
