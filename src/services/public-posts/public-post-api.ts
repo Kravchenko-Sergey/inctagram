@@ -3,8 +3,8 @@ import {
   GetLastCreatedPostsRequest,
   GetLastCreatedPostsResponse,
   GetProfileDataResponse,
+  GetPublicPostResponse,
 } from '@/services/public-posts/types'
-import { GetProfileResponse } from '@/services/profile'
 
 export const publicPostApi = baseApi.injectEndpoints({
   endpoints: build => {
@@ -16,12 +16,13 @@ export const publicPostApi = baseApi.injectEndpoints({
           params: { pageSize, sortBy, sortDirection },
         }),
       }),
-      getUsersAmount: build.query<void, void>({
-        query: () => ({
-          url: `fake-url`,
+      getPublicPost: build.query<GetPublicPostResponse, { postId: number }>({
+        query: ({ postId }) => ({
+          url: `/public-posts/p/${postId}`,
           method: 'GET',
         }),
       }),
+
       getProfileData: build.query<
         GetProfileDataResponse & { fullName: string | null },
         { userId: number }
@@ -49,10 +50,11 @@ export const {
   util: { getRunningQueriesThunk },
 } = publicPostApi
 
-export const { getLastCreatedPosts, getUsersAmount, getProfileData } = publicPostApi.endpoints
+export const { getPublicPost, getProfileData } = publicPostApi.endpoints
 export const {
+  useGetPublicPostQuery,
   useGetLastCreatedPostsQuery,
   useLazyGetLastCreatedPostsQuery,
-  useGetUsersAmountQuery,
+  useLazyGetProfileDataQuery,
   useGetProfileDataQuery,
 } = publicPostApi

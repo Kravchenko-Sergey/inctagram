@@ -61,3 +61,8 @@ type Posts = {
   pageSize: number
   items: PostProfile[]
 }
+
+export type GetPublicPostResponse = {
+  profile: Profile
+  posts: PostProfile
+}

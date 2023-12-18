@@ -26,7 +26,7 @@ export const SocialMediaAuth = () => {
         // push(PATH.PROFILE)
         // push(`${PATH.PROFILE}/${+me?.userId!}`)
 
-        push(`${PATH.PROFILE}/${res?.userId!}`)
+        push(`${PATH.PROFILE}/?id=${res?.userId!}`)
       }
     },
     flow: 'auth-code',

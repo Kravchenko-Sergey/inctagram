@@ -11,6 +11,7 @@ import { Slider } from './slider'
 import s from './view-post-modal.module.scss'
 import { useTranslation } from '@/hooks'
 import { PostProfile, useGetProfileDataQuery } from '@/services/public-posts'
+import { useMeQuery } from '@/services/auth'
 
 type PropsType = {
   isOpen: boolean
@@ -21,9 +22,13 @@ type PropsType = {
 
 export const ViewPostModal = ({ isOpen, handleModalChange, post }: PropsType) => {
   const { t } = useTranslation()
+  const { data: me } = useMeQuery() // TODO сделать хук на проверку принадлежности страницы
 
-  // const { data: profile, isLoading } = useGetProfileQuery({ profileId: post?.ownerId })
+  // // // const { data: profile, isLoading } = useGetProfileQuery({ profileId: post?.ownerId })
+
   const { data: profile, isLoading } = useGetProfileDataQuery({ userId: post?.ownerId })
+
+  const isMyPage = me?.userId == profile?.profile.id
 
   const [isEditMode, setIsEditMode] = useState(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
@@ -72,6 +77,7 @@ export const ViewPostModal = ({ isOpen, handleModalChange, post }: PropsType) =>
         closeButtonClass={s.modalCloseButton}
         postHeader={
           <PostModalHeader
+            isMyPage={isMyPage}
             handleOpenEditMode={handleOpenEditMode}
             handleDeleteMode={handleDeleteMode}
             userName={fullUserName}

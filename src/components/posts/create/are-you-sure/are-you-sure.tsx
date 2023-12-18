@@ -35,7 +35,7 @@ export const AreYouSureModal = ({
     setIsBaseModalOpen(true)
     setImage(null)
     // push(PATH.PROFILE)
-    push(`${PATH.PROFILE}/${+me?.userId!}`)
+    push(`${PATH.PROFILE}/?id=${+me?.userId!}`)
   }
 
   return (
