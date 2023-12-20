@@ -64,11 +64,12 @@ export const ProfileMain = memo(() => {
   }, [])
 
   if (isLoading || isFetching) {
-    return <Loader />
+    return <Loader className={s.mainLoader} />
   }
   if (isError) {
     console.error('Get profile is failed')
   }
+  console.log('Profile')
   const following = 2218
   const followers = 2358
   const publications = profile?.posts.items.length as number

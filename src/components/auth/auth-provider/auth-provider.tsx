@@ -17,14 +17,13 @@ export const AuthProvider = ({ children }: PropsType) => {
   // // http://localhost:3000/en/profile?id=2&postId=391
 
   // const isProtectedPage = !commonRoutes.includes(router.pathname)
-  console.log('AuthProvider')
   // const remainingPath = router.pathname.replace(/^\/profile(\/[^/]+)?/, '/profile')
   const remainingPath = router.pathname.replace(/^\/profile(\/[^/]+)?|\/profile\?(.+)/, '/profile')
 
   const isProtectedPage = !commonRoutes.includes(remainingPath)
 
   useEffect(() => {
-    if (!isLoading && !user && isProtectedPage) {
+    if (!isLoading && !user && isProtectedPage && router.pathname === '/github') {
       router.push(PATH.MAIN)
 
       return
