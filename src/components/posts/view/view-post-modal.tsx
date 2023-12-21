@@ -1,7 +1,6 @@
 import { useState } from 'react'
 
 import { Button, Loader, Modal, Typography } from '@/components'
-import { useGetProfileQuery } from '@/services/profile'
 import { useDeletePostImageMutation, useDeleteUserPostMutation } from '@/services/posts'
 import { PostModalHeader } from './post-modal-header'
 import { PostInfo } from './post-info'
@@ -26,9 +25,9 @@ export const ViewPostModal = ({ isOpen, handleModalChange, post }: PropsType) =>
 
   // // // const { data: profile, isLoading } = useGetProfileQuery({ profileId: post?.ownerId })
 
-  const { data: profile, isLoading } = useGetProfileDataQuery({ userId: post?.ownerId })
+  const { data: profile, isLoading } = useGetProfileDataQuery({ profileId: post?.ownerId })
 
-  const isMyPage = me?.userId == profile?.profile.id
+  const isMyPage = me?.userId == profile?.id
 
   const [isEditMode, setIsEditMode] = useState(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
@@ -65,7 +64,8 @@ export const ViewPostModal = ({ isOpen, handleModalChange, post }: PropsType) =>
     return <Loader />
   }
 
-  const fullUserName = profile?.fullName ?? profile?.profile.userName
+  // const fullUserName = profile?.fullName ?? profile?.profile.userName
+  const fullUserName = profile?.userName
 
   return (
     <>
@@ -81,19 +81,22 @@ export const ViewPostModal = ({ isOpen, handleModalChange, post }: PropsType) =>
             handleOpenEditMode={handleOpenEditMode}
             handleDeleteMode={handleDeleteMode}
             userName={fullUserName}
-            avatar={profile?.profile.avatars[1]?.url}
+            // avatar={profile?.avatars[1]?.url}
+            avatar={profile?.avatars[0].url}
           />
         }
         additionalContent={<Slider post={post} />}
       >
-        <PostInfo userName={fullUserName} avatar={profile?.profile.avatars[1]?.url} post={post} />
+        {/*<PostInfo userName={fullUserName} avatar={profile?.avatars[1]?.url} post={post} />*/}
+        <PostInfo userName={fullUserName} avatar={profile?.avatars[0]?.url} post={post} />
       </Modal>
       <EditPostModal
         isOpen={isEditMode}
         handleClose={handleEditModalChange}
         post={post}
         userName={fullUserName}
-        avatar={profile?.profile.avatars[1]?.url}
+        // avatar={profile?.avatars[1]?.url}
+        avatar={profile?.avatars[0]?.url}
       />
       <Modal
         className={s.contentDeleteModal}

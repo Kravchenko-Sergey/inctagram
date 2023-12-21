@@ -20,7 +20,7 @@ const ProfileSettings = () => {
     isLoading,
     isFetching,
     isError,
-  } = useGetProfileDataQuery({ userId: +me?.userId! })
+  } = useGetProfileDataQuery({ profileId: +me?.userId! })
   const updateProfileHandler = async (data: ProfileSettingsFormType) => {
     try {
       await updateProfile(data).unwrap()

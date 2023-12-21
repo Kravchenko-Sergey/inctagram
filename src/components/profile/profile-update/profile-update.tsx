@@ -19,14 +19,14 @@ import { FormFields, triggerZodFieldError } from '@/helpers'
 import { AvatarType, useUpdateProfileMutation } from '@/services/profile'
 
 import s from './profile-update.module.scss'
-import { GetProfileDataResponse } from '@/services/public-posts'
 
 type ProfileAvatar = { avatars: AvatarType[] }
 
 type ProfileUpdateProps = {
   updateProfileHandler: (data: ProfileSettingsFormType) => void
   // profile?: ProfileSettingsFormType & ProfileAvatar
-  profile?: GetProfileDataResponse & { fullName: string | null }
+  // profile?: GetProfileDataResponse & { fullName: string | null }
+  profile?: any & { fullName: string | null } // Todo разобраться с эни которое после обновления сломалось
 }
 
 const Cities = [

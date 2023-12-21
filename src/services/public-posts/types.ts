@@ -13,8 +13,7 @@ export type GetLastCreatedPostsResponse = {
   totalUsers: number
 }
 
-export type GetProfileDataResponse = {
-  profile: Profile
+export type GetUserPostsDataResponse = {
   posts: Posts
 }
 type RootObjectProfileAvatars = {
@@ -34,14 +33,14 @@ type Profile = {
   avatars: RootObjectProfileAvatars[]
   createdAt: string
 }
-type RootObjectPostsItemsImages = {
+type PostsItemsImages = {
   url: string
   width: number
   height: number
   fileSize: number
   uploadId: string
 }
-type RootObjectPostsItemsOwner = {
+type PostsItemsOwner = {
   firstName: string
   lastName: string
 }
@@ -49,20 +48,41 @@ export type PostProfile = {
   id: number
   description: string
   location: string
-  images: RootObjectPostsItemsImages[]
+  images: PostsItemsImages[]
   createdAt: Date
   updatedAt: Date
   ownerId: number
   avatarOwner: string
-  owner: RootObjectPostsItemsOwner
+  owner: PostsItemsOwner
 }
-type Posts = {
+export type Posts = {
   totalCount: number
   pageSize: number
   items: PostProfile[]
 }
 
 export type GetPublicPostResponse = {
-  profile: Profile
   posts: PostProfile
+}
+
+export type PublicProfileRequest = {
+  id: number
+  userName: string
+  aboutMe: string
+  avatars: [
+    {
+      url: string
+      width: number
+      height: number
+      fileSize: number
+    },
+  ]
+}
+
+export type GetUserPostsDataRequest = {
+  userId: number
+  endCursorPostId?: number
+  pageSize?: number
+  sortBy?: string
+  sortDirection?: 'desc' | 'asc'
 }
