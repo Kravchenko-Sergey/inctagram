@@ -55,11 +55,12 @@ export const ProfileMain = memo(() => {
   }, [])
 
   if (isLoading || isFetching) {
-    return <Loader />
+    return <Loader className={s.mainLoader} />
   }
   if (isError) {
     console.error('Get profile is failed')
   }
+  console.log('Profile')
   const following = 2218
   const followers = 2358
   const publications = profile?.posts.items.length as number
@@ -85,7 +86,7 @@ export const ProfileMain = memo(() => {
             <Typography variant="large">{profileName}</Typography>
             {me?.userId && me?.userId === profile?.profile.id && (
               <Link passHref legacyBehavior href={PATH.PROFILE_SETTINGS}>
-                <Button as="a" variant="secondary" className={s.btn}>
+                <Button as="a" variant="secondary">
                   {t.profile.profileSettings}
                 </Button>
               </Link>
@@ -117,7 +118,6 @@ export const ProfileMain = memo(() => {
       >
         {profile?.posts.items.map((post: PostProfile) => <PostCard key={post.id} post={post} />)}
       </InfiniteScroll>
-      <div className={s.scrollableContent}></div>
     </>
   )
 })

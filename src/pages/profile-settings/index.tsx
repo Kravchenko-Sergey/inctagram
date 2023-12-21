@@ -12,15 +12,10 @@ import { useGetProfileDataQuery } from '@/services/public-posts'
 const ProfileSettings = () => {
   const { t } = useTranslation()
 
-  const [updateProfile, { error: updateProfileError }] = useUpdateProfileMutation()
+  const [updateProfile] = useUpdateProfileMutation()
   const { data: me } = useMeQuery()
   // const { data: profile, isLoading } = useGetProfileQuery({ profileId: me?.userId })
-  const {
-    data: profile,
-    isLoading,
-    isFetching,
-    isError,
-  } = useGetProfileDataQuery({ userId: +me?.userId! })
+  const { data: profile, isLoading } = useGetProfileDataQuery({ userId: +me?.userId! })
   const updateProfileHandler = async (data: ProfileSettingsFormType) => {
     try {
       await updateProfile(data).unwrap()

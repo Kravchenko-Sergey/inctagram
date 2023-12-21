@@ -25,7 +25,7 @@ export const Login = () => {
   const { push } = useRouter()
   const [getUser, { isLoading, isFetching, data }] = useLazyMeQuery()
   // const { data: me } = useMeQuery()
-  const [signIn, { isLoading: isSignInLoading }] = useLoginMutation()
+  const [signIn, { isLoading: isSignInLoading, isSuccess }] = useLoginMutation()
 
   const {
     handleSubmit,
@@ -70,7 +70,7 @@ export const Login = () => {
     triggerZodFieldError(touchedFieldNames, trigger)
   }, [t, touchedFields, trigger])
 
-  if (isLoading || isSignInLoading) {
+  if (isLoading || isSignInLoading || isSuccess) {
     return <Loader />
   }
 

@@ -11,17 +11,14 @@ type PropsType = {
 
 export const AuthProvider = ({ children }: PropsType) => {
   const router = useRouter()
-  const { data: user, isLoading, isError, isFetching } = useMeQuery()
-
-  // // http://localhost:3000/en/profile/&id=5&postId=391
-  // // http://localhost:3000/en/profile?id=2&postId=391
+  const { data: user, isLoading } = useMeQuery()
 
   const remainingPath = router.pathname.replace(/^\/profile(\/[^/]+)?|\/profile\?(.+)/, '/profile')
 
   const isProtectedPage = !commonRoutes.includes(remainingPath)
 
   useEffect(() => {
-    if (!isLoading && !user && isProtectedPage) {
+    if (!isLoading && !user && isProtectedPage && router.pathname === '/github') {
       router.push(PATH.MAIN)
 
       return
