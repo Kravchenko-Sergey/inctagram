@@ -12,7 +12,7 @@ export const Header = ({ unauthorized }: Props) => {
   const router = useRouter()
   const { t } = useTranslation()
   const logoClickHandler = () => {
-    router.push(PATH.MAIN)
+    router.push(PATH.HOME)
   }
 
   return (
