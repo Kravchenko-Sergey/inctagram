@@ -16,7 +16,6 @@ import { useLoader } from '@/hooks'
 import { store, useAppSelector, wrapper } from '@/services'
 import { Toast } from '@/components/react-toast/toast-container'
 import { AuthProvider, Loader } from '@/components'
-import { background } from '@storybook/theming'
 
 export const inter = Inter({
   subsets: ['latin', 'cyrillic'],

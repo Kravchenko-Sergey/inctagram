@@ -32,13 +32,6 @@ export const ProfileMain = memo(() => {
     }
   }, [postQuery.postId])
 
-  // const {
-  //   data: profile,
-  //   isLoading,
-  //   isFetching,
-  //   isError,
-  // } = useGetProfileQuery({ profileId: me?.userId })
-
   useEffect(() => {
     if (postQuery.postId) {
       setPostModalIsOpen(true)
@@ -50,8 +43,6 @@ export const ProfileMain = memo(() => {
     isFetching,
     isError,
   } = useGetProfileDataQuery({ userId: +query.id! })
-  //
-  // const { data: posts } = useGetUserPostsQuery({ pageSize })
 
   const loadMorePosts = () => {
     setPageSize(prev => prev + 8)
@@ -95,7 +86,7 @@ export const ProfileMain = memo(() => {
             <Typography variant="large">{profileName}</Typography>
             {me?.userId && me?.userId === profile?.profile.id && (
               <Link passHref legacyBehavior href={PATH.PROFILE_SETTINGS}>
-                <Button as="a" variant="secondary" className={s.btn}>
+                <Button as="a" variant="secondary">
                   {t.profile.profileSettings}
                 </Button>
               </Link>
@@ -127,7 +118,6 @@ export const ProfileMain = memo(() => {
       >
         {profile?.posts.items.map((post: PostProfile) => <PostCard key={post.id} post={post} />)}
       </InfiniteScroll>
-      <div className={s.scrollableContent}></div>
     </>
   )
 })

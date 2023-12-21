@@ -1,4 +1,3 @@
-import React from 'react'
 import { getHeaderUnauthorizedLayout } from '@/components/layout'
 import { HeadMeta } from '@/components'
 import { NextPageWithLayout } from '@/pages/_app'

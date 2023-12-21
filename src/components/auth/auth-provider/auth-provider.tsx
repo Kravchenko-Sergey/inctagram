@@ -11,13 +11,8 @@ type PropsType = {
 
 export const AuthProvider = ({ children }: PropsType) => {
   const router = useRouter()
-  const { data: user, isLoading, isError, isFetching } = useMeQuery()
+  const { data: user, isLoading } = useMeQuery()
 
-  // // http://localhost:3000/en/profile/&id=5&postId=391
-  // // http://localhost:3000/en/profile?id=2&postId=391
-
-  // const isProtectedPage = !commonRoutes.includes(router.pathname)
-  // const remainingPath = router.pathname.replace(/^\/profile(\/[^/]+)?/, '/profile')
   const remainingPath = router.pathname.replace(/^\/profile(\/[^/]+)?|\/profile\?(.+)/, '/profile')
 
   const isProtectedPage = !commonRoutes.includes(remainingPath)
@@ -29,12 +24,6 @@ export const AuthProvider = ({ children }: PropsType) => {
       return
     }
   }, [user, isProtectedPage, router, isLoading])
-
-  // if (isLoading || (!user && isProtectedPage)) {
-  //   console.log('Loader')
-  //
-  //   return <Loader />
-  // }
 
   return <>{children}</>
 }

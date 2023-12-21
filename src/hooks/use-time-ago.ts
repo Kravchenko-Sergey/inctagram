@@ -19,22 +19,24 @@ export const useTimeAgo = (createdAt: Date) => {
       const minutes = Math.round(sec / 60)
 
       if (minutes < 60) {
-        setTimeAgo(
-          `${minutes}  ${
-            // eslint-disable-next-line no-nested-ternary
-            minutes === 1
-              ? t.data.minute
-              : // eslint-disable-next-line no-nested-ternary
-              min.minut.includes(minutes)
-              ? t.data.minut
-              : // eslint-disable-next-line no-nested-ternary
-              min.minuteB.includes(minutes)
-              ? t.data.minuteB
-              : min.minuteU.includes(minutes)
-              ? t.data.minuteU
-              : t.data.minutes
-          }    ${t.data.ago} `
-        )
+        let label = t.data.minutes
+
+        switch (true) {
+          case minutes === 1:
+            label = t.data.minute
+            break
+          case min.minut.includes(minutes):
+            label = t.data.minut
+            break
+          case min.minuteB.includes(minutes):
+            label = t.data.minuteB
+            break
+          case min.minuteU.includes(minutes):
+            label = t.data.minuteU
+            break
+        }
+
+        setTimeAgo(`${minutes} ${label} ${t.data.ago}`)
 
         return
       }
@@ -42,20 +44,22 @@ export const useTimeAgo = (createdAt: Date) => {
       const hours = Math.round(minutes / 60)
 
       if (hours < 24) {
-        setTimeAgo(
-          // eslint-disable-next-line no-nested-ternary
-          `${hours} ${
-            // eslint-disable-next-line no-nested-ternary
-            hours === 1
-              ? t.data.hour
-              : // eslint-disable-next-line no-nested-ternary
-              hours === 21
-              ? t.data.hours21
-              : hoursTime.hours.includes(hours)
-              ? t.data.hoursA
-              : t.data.hours
-          } ${t.data.ago} `
-        )
+        let label = t.data.hours
+
+        switch (hours) {
+          case 1:
+            label = t.data.hour
+            break
+          case 21:
+            label = t.data.hours21
+            break
+          default:
+            if (hoursTime.hours.includes(hours)) {
+              label = t.data.hoursA
+            }
+        }
+
+        setTimeAgo(`${hours} ${label} ${t.data.ago}`)
 
         return
       }
@@ -63,12 +67,22 @@ export const useTimeAgo = (createdAt: Date) => {
       const days = Math.round(hours / 24)
 
       if (days < 14) {
-        setTimeAgo(
-          // eslint-disable-next-line no-nested-ternary,no-constant-condition
-          `${days} ${days === 1 ? t.data.day : days === 2 || 3 || 4 ? t.data.days2 : t.data.days} ${
-            t.data.ago
-          }`
-        )
+        let label
+
+        switch (days) {
+          case 1:
+            label = t.data.day
+            break
+          case 2:
+          case 3:
+          case 4:
+            label = t.data.days2
+            break
+          default:
+            label = t.data.days
+        }
+
+        setTimeAgo(`${days} ${label} ${t.data.ago}`)
 
         return
       }
