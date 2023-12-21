@@ -93,7 +93,6 @@ export const ProfileMain = memo(() => {
       <div className={s.profile}>
         <Avatar photo={profile?.avatars[0]?.url} name={profile?.userName} />
         <div className={s.info}>
-          {/*<div className={s.infoColumn}>*/}
           <div className={s.infoHeader}>
             <Typography variant="large">{profileName}</Typography>
             {me?.userId && me?.userId === profile?.id && (
@@ -129,7 +128,7 @@ export const ProfileMain = memo(() => {
         loader={publications > 0 ? <Loader className={s.loader} /> : null}
         className={s.posts}
       >
-        {profile?.posts.items.map((post: PostProfile) => <PostCard key={post.id} post={post} />)}
+        {posts && posts.items.map((post: PostProfile) => <PostCard key={post.id} post={post} />)}
       </InfiniteScroll>
 
       <div className={s.scrollableContent}></div>

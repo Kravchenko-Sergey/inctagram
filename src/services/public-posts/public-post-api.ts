@@ -2,9 +2,7 @@ import { baseApi } from '@/services'
 import {
   GetLastCreatedPostsRequest,
   GetLastCreatedPostsResponse,
-  GetPublicPostResponse,
   GetUserPostsDataRequest,
-  GetUserPostsDataResponse,
   PostProfile,
   Posts,
   PublicProfileRequest,
@@ -27,18 +25,12 @@ export const publicPostApi = baseApi.injectEndpoints({
         }),
       }),
 
-      getUserPostsData: build.query<
-        // GetUserPostsDataResponse & { fullName: string | null },
-        Posts,
-        GetUserPostsDataRequest
-      >({
+      getUserPostsData: build.query<Posts, GetUserPostsDataRequest>({
         query: ({ userId, endCursorPostId, pageSize, sortBy, sortDirection }) => {
-          console.log('userId', userId)
-
           return {
             url: `public-posts/user/${userId}${endCursorPostId ? `/${endCursorPostId}` : ''}`,
             method: 'GET',
-            // params: { pageSize, sortBy, sortDirection },
+            // params: { pageSize, sortBy, sortDirection }, todo need refactor
           }
         },
       }),
@@ -57,13 +49,10 @@ export const {
   util: { getRunningQueriesThunk },
 } = publicPostApi
 
-// export const { getPublicPost, getProfileData, getUserPostsData } = publicPostApi.endpoints
 export const { getPublicPost, getProfileData, getUserPostsData } = publicPostApi.endpoints
 export const {
   useGetPublicPostQuery,
-  useGetLastCreatedPostsQuery,
-  useLazyGetLastCreatedPostsQuery,
+  useLazyGetPublicPostQuery,
   useGetUserPostsDataQuery,
-  useLazyGetUserPostsDataQuery,
   useGetProfileDataQuery,
 } = publicPostApi

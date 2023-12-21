@@ -2,11 +2,10 @@ import { useState } from 'react'
 import Image from 'next/image'
 
 import { ViewPostModal } from '../view'
-import { useLazyGetUserPostQuery } from '@/services/posts'
 import defaultPostImage from './../../../../public/image/post-image.png'
 import s from './post.module.scss'
 import { filterImagesOnly1440 } from '@/helpers/filterImagesOnly1440'
-import { PostProfile } from '@/services/public-posts'
+import { PostProfile, useLazyGetPublicPostQuery } from '@/services/public-posts'
 import { useMeQuery } from '@/services/auth'
 import { useRouter } from 'next/router'
 import { PATH } from '@/consts/route-paths'
@@ -17,7 +16,7 @@ type PropsType = {
 }
 
 export const PostCard = ({ post }: PropsType) => {
-  const [getPost] = useLazyGetUserPostQuery()
+  const [getPost, { data }] = useLazyGetPublicPostQuery()
   const { data: me } = useMeQuery()
   const { push } = useRouter()
 
@@ -48,7 +47,7 @@ export const PostCard = ({ post }: PropsType) => {
         height={228}
         className={s.post}
       />
-      <ViewPostModal post={post} isOpen={isViewMode} handleModalChange={setIsViewMode} />
+      {data && <ViewPostModal post={post} isOpen={isViewMode} handleModalChange={setIsViewMode} />}
     </>
   )
 }

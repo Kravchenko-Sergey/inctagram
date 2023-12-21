@@ -23,8 +23,6 @@ export const ViewPostModal = ({ isOpen, handleModalChange, post }: PropsType) =>
   const { t } = useTranslation()
   const { data: me } = useMeQuery() // TODO сделать хук на проверку принадлежности страницы
 
-  // // // const { data: profile, isLoading } = useGetProfileQuery({ profileId: post?.ownerId })
-
   const { data: profile, isLoading } = useGetProfileDataQuery({ profileId: post?.ownerId })
 
   const isMyPage = me?.userId == profile?.id
@@ -64,7 +62,6 @@ export const ViewPostModal = ({ isOpen, handleModalChange, post }: PropsType) =>
     return <Loader />
   }
 
-  // const fullUserName = profile?.fullName ?? profile?.profile.userName
   const fullUserName = profile?.userName
 
   return (
@@ -82,12 +79,11 @@ export const ViewPostModal = ({ isOpen, handleModalChange, post }: PropsType) =>
             handleDeleteMode={handleDeleteMode}
             userName={fullUserName}
             // avatar={profile?.avatars[1]?.url}
-            avatar={profile?.avatars[0].url}
+            avatar={profile?.avatars.length && profile?.avatars[0].url}
           />
         }
         additionalContent={<Slider post={post} />}
       >
-        {/*<PostInfo userName={fullUserName} avatar={profile?.avatars[1]?.url} post={post} />*/}
         <PostInfo userName={fullUserName} avatar={profile?.avatars[0]?.url} post={post} />
       </Modal>
       <EditPostModal
@@ -95,7 +91,6 @@ export const ViewPostModal = ({ isOpen, handleModalChange, post }: PropsType) =>
         handleClose={handleEditModalChange}
         post={post}
         userName={fullUserName}
-        // avatar={profile?.avatars[1]?.url}
         avatar={profile?.avatars[0]?.url}
       />
       <Modal
