@@ -42,9 +42,16 @@
   gap: 4px;
 }
 
-.scrollableContent {
-  overflow: auto;
-  height: 200px;
+.mainLoader {
+  position: absolute;
+  z-index: 10;
+  top: -60px;
+  left: 0;
+
+  width: 100%;
+  height: calc(100% + 60px);
+
+  background-color: var(--dark-900);
 }
 
 .loader {

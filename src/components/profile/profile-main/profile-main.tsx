@@ -129,7 +129,7 @@ export const ProfileMain = memo(() => {
         loader={publications > 0 ? <Loader className={s.loader} /> : null}
         className={s.posts}
       >
-        {posts && posts.items.map((post: PostProfile) => <PostCard key={post.id} post={post} />)}
+        {profile?.posts.items.map((post: PostProfile) => <PostCard key={post.id} post={post} />)}
       </InfiniteScroll>
 
       <div className={s.scrollableContent}></div>
