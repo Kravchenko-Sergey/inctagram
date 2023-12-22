@@ -24,7 +24,7 @@ type ProfileUpdateProps = {
   updateProfileHandler: (data: ProfileSettingsFormType) => void
   // profile?: ProfileSettingsFormType & ProfileAvatar
   // profile?: GetProfileDataResponse & { fullName: string | null }
-  profile?: GetProfileResponse & { fullName: string | null }
+  profile?: GetProfileResponse
 }
 
 const Cities = [
