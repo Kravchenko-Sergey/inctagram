@@ -11,7 +11,7 @@ const meta = {
   argTypes: {
     type: {
       options: ['text', 'password'],
-      control: { type: 'radio' },
+      control: { type: 'radio-button' },
     },
   },
   parameters: {

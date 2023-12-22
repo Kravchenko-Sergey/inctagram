@@ -9,7 +9,7 @@ const meta = {
   argTypes: {
     variant: {
       options: ['primary', 'secondary', 'ghost', 'link', 'link-btn'],
-      control: { type: 'inline-radio' },
+      control: { type: 'inline-radio-button' },
     },
     onClick: { action: 'clicked' },
   },
