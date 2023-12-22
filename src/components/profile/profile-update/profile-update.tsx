@@ -22,8 +22,6 @@ import s from './profile-update.module.scss'
 
 type ProfileUpdateProps = {
   updateProfileHandler: (data: ProfileSettingsFormType) => void
-  // profile?: ProfileSettingsFormType & ProfileAvatar
-  // profile?: GetProfileDataResponse & { fullName: string | null }
   profile?: GetProfileResponse
 }
 

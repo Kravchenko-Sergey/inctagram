@@ -14,7 +14,6 @@ import { useMeQuery } from '@/services/auth'
 
 type PropsType = {
   isOpen: boolean
-  // post: Post
   post: PostProfile
   handleModalChange: (value: boolean) => void
 }
