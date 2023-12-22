@@ -2,14 +2,37 @@
   position: relative;
   background-color: var(--dark-300);
 }
+.PublicationPageContainer{
+  display: flex;
+  flex-direction: row;
+  width: 971px;
+  height: 514px;
+  margin-bottom: -5px;
 
+}
+.addPhotoContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 36px 12px;
+}
+.modalContainer{
+  margin: 0;
+  padding: 0;
+  background-color: gainsboro;
+}
 .photoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 222px;
   height: 228px;
   margin-top: 20px;
 
   background-color: var(--dark-500);
   border-radius: 2px;
+  margin-bottom: 60px;
 }
 
 .emptyPhotoContainer {

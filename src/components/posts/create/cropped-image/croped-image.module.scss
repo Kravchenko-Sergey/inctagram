@@ -10,14 +10,17 @@
 
   background-color: #000;
 }
+.sliderContainer{
+    width: 540px;
+}
 
 .croppedImage {
-  width: 490px;
-  height: 503px;
+
 }
 
 .croppedImageContainer {
   display: flex;
+  position: relative;
   flex-direction: column;
   margin-top: 20px;
 }
@@ -36,17 +39,18 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  width: 504px;
 }
 
 .cropContainer {
-  width: 490px;
-  height: 457px;
+
 }
 
 .carousel {
   position: relative;
-  width: 490px;
-  height: 467px;
+  width: 520px;
+  height: 472px;
+
 }
 
 .croppedPhoto {

@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 
 import { MAX_CHARS_POST } from '@/consts/input-limits'
 import { useTranslation } from '@/hooks'
-import { ControlledTextArea } from '@/components'
+import { ControlledTextArea, Loader } from '@/components'
 import { DescriptionFormType, descriptionSchema } from '@/schemas'
 import { FormFields, getBinaryImageData, triggerZodFieldError } from '@/helpers'
 import {
@@ -18,38 +18,23 @@ import { PATH } from '@/consts/route-paths'
 import { ImageType } from '@/components/posts/create'
 
 import s from './description.module.scss'
-import { useMeQuery } from '@/services/auth'
 
 type DescriptionFormTypeProps = {
-  onSubmitHandler?: (data: DescriptionFormType) => void
-  defaultValue?: string | number
-  isEditModalOpen?: boolean
-  setIsEditModalOpen?: (isEditModalOpen: boolean) => void
   addedImages: ImageType[]
-  isPostCreateLoadingHandler: (value: boolean) => void
-  setIsModalOpen: (isModalOpen: boolean) => void
-  setIsFiltersModalOpen: (isFiltersModalOpen: boolean) => void
-  setIsDescriptionModalOpen: (value: boolean) => void
 }
 
 export const PostDescription = ({
   addedImages,
-  setIsFiltersModalOpen,
-  setIsModalOpen,
-  setIsDescriptionModalOpen,
-  isPostCreateLoadingHandler,
 }: DescriptionFormTypeProps) => {
   const { t } = useTranslation()
   const { push } = useRouter()
   const [createPostComment, { isLoading: isPostCreateLoading }] = useCreatePostCommentsMutation()
   const [createPostPhoto, { isLoading: isPostPhotoLoading }] = useCreatePostPhotoMutation()
-  const { data: me } = useMeQuery()
+
   const {
     control,
     handleSubmit,
-
     trigger,
-
     formState: { touchedFields },
   } = useForm<DescriptionFormType>({
     resolver: zodResolver(descriptionSchema(t)),
@@ -66,7 +51,7 @@ export const PostDescription = ({
   }, [t, touchedFields, trigger])
 
   const onSubmit = async (data: DescriptionFormType) => {
-    isPostCreateLoadingHandler(true)
+
     const res = await getBinaryImageData(addedImages)
 
     function createFormData(res: Uint8Array[]) {
@@ -77,10 +62,7 @@ export const PostDescription = ({
 
         formData.append(`file`, blob)
       })
-      setIsFiltersModalOpen(false)
 
-      setIsModalOpen(false)
-      setIsDescriptionModalOpen(false)
 
       return formData
     }
@@ -100,9 +82,7 @@ export const PostDescription = ({
         if (responsePhotoStore.images) {
           await createPostComment(requestBody)
         }
-        isPostCreateLoadingHandler(false)
-        // push(PATH.PROFILE)
-        push(`${PATH.PROFILE}/?id=${+me?.userId!}`)
+
       } catch (e: unknown) {
         const error = e as any
 

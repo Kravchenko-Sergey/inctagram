@@ -8,11 +8,13 @@ import s from './zoom.module.scss'
 type PropsType = {
   className?: string
   zoom: number
-  setZoom: (zoom: number) => void
+  onChangeZoom: (zoom: number,imgId:string) => void
+  imgId:string | undefined
 }
 
-export const Zoom = ({ zoom, setZoom }: PropsType) => {
+export const Zoom = ({ imgId, onChangeZoom }: PropsType) => {
   const [isOpen, setIsOpen] = useState(false)
+  const [zoomValue, setZoomValue] = useState(1)
   const zoomRef = useRef() as MutableRefObject<HTMLDivElement>
 
   useEffect(() => {
@@ -24,13 +26,19 @@ export const Zoom = ({ zoom, setZoom }: PropsType) => {
 
     document.body.addEventListener('click', handleClickOutside)
 
-    return () => document.body.removeEventListener('click', handleClickOutside)
+    return () => {
+      document.body.removeEventListener('click', handleClickOutside)
+
+    }
   }, [])
 
   const onZoomChange = (event: ChangeEvent<HTMLInputElement>) => {
     const scale = parseFloat(event.target.value)
+    setZoomValue(scale)
+    if(imgId){
+      onChangeZoom(zoomValue,imgId)
+    }
 
-    setZoom(scale)
   }
 
   return (
@@ -53,7 +61,7 @@ export const Zoom = ({ zoom, setZoom }: PropsType) => {
             min="1"
             max="3"
             step="0.1"
-            value={zoom}
+            value={zoomValue}
             onChange={onZoomChange}
           />
         </div>

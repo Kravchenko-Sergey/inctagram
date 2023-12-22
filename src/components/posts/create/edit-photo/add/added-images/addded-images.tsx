@@ -1,31 +1,22 @@
-import { useEffect } from 'react'
-
 import Image from 'next/image'
-
 import { CloseModal } from '@/assets/icons'
 import { ImageType } from '@/components/posts/create'
-
 import s from './added-images.module.scss'
+import {useAppDispatch} from "@/services";
+import {deleteImage} from "@/components/posts/create/create-post-slice";
+
 
 type PropsType = {
   addedImages: ImageType[]
-  setAddedImages: (addedImages: ImageType[]) => void
-  image: string | null
-  croppedImage: string | null
+
 }
 
-export const AddedImages = ({ addedImages, setAddedImages }: PropsType) => {
+export const AddedImages = ({ addedImages }: PropsType) => {
   const imagesToShow = addedImages.slice(-2)
 
-  useEffect(() => {
-    setAddedImages(addedImages)
-  }, [addedImages, setAddedImages])
+  const dispatch = useAppDispatch()
+  const onDeleteImage = (id: number) => dispatch(deleteImage({id:id.toString()}))
 
-  const onDeleteImage = (i: number) => {
-    const image = i === 0 ? imagesToShow.slice(1) : imagesToShow.slice(0, -1)
-
-    setAddedImages(addedImages.slice(0, -2).concat(image))
-  }
 
   return (
     <div className={addedImages.length === 10 ? s.wrapperForImg : s.wrapper}>

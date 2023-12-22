@@ -10,69 +10,71 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import s from './selected-images.module.scss'
 import { getSliderSettings } from '@/helpers'
+import {str} from "@storybook/docs-tools";
+import {useState} from "react";
 
 type PropsType = {
   addedImages: ImageType[]
-  activeFilter: string
-  setActiveFilter: (activeFilter: string) => void
-  image?: string | null
-  setAddedImages?: (addedImages: ImageType[]) => void
+  filteredImage:(filter:string,id:string)=>void
 }
 
-export const SelectedImages = ({ addedImages, activeFilter, setActiveFilter }: PropsType) => {
+export const SelectedImages = ({ addedImages,filteredImage }: PropsType) => {
   const settings = getSliderSettings(s.dots)
+  const [imageId,setImageId ] = useState('0')
   const onActiveFilter = (filter: string) => {
     switch (filter) {
       case 'No filter':
-        setActiveFilter('none')
+        filteredImage('none',imageId)
         break
       case 'Kyoto':
-        setActiveFilter('saturate(2)')
+        filteredImage('saturate(2)',imageId)
         break
       case 'Lark':
-        setActiveFilter('grayscale(100%)')
+        filteredImage('grayscale(100%)',imageId)
         break
       case 'Gingham':
-        setActiveFilter('contrast(160%)')
+        filteredImage('contrast(160%)',imageId)
         break
       case 'Happy':
-        setActiveFilter('contrast(110%) brightness(110%) saturate(130%)')
+        filteredImage('contrast(110%) brightness(110%) saturate(130%)',imageId)
         break
       case 'Clarendon':
-        setActiveFilter('invert(100%)')
+        filteredImage('invert(100%)',imageId)
         break
       case 'Shabby':
-        setActiveFilter('sepia(100%)')
+        filteredImage('sepia(100%)',imageId)
         break
       case 'Old school': {
-        setActiveFilter('opacity(50%)')
+        filteredImage('opacity(50%)',imageId)
         break
       }
       case 'Silent Hill': {
-        setActiveFilter('hue-rotate(180deg)')
+        filteredImage('hue-rotate(180deg)',imageId)
         break
       }
       default: {
-        setActiveFilter('')
+        filteredImage('',imageId)
         break
       }
     }
   }
 
+  const currentSlide = (currentSlide:number)=> setImageId(currentSlide.toString())
+
   return (
-    <>
+    <div className={s.FilterContainer}>
       <div className={s.imgContainer}>
-        <Slider {...settings}>
+        <Slider {...settings} afterChange={currentSlide}>
           {addedImages.map((el: ImageType, idx: number) => {
             return (
               <div key={idx} className={s.carousel}>
                 <Image
                   className={s.img}
                   alt="img"
-                  style={{ filter: activeFilter }}
+                  style={{ filter:el.filter,zoom:el.zoom,objectFit:'cover'}}
                   src={el.image}
-                  width={490}
-                  height={503}
+                  width={500}
+                  height={510}
                 />
               </div>
             )
@@ -98,6 +100,6 @@ export const SelectedImages = ({ addedImages, activeFilter, setActiveFilter }: P
           )
         })}
       </div>
-    </>
+    </div>
   )
 }

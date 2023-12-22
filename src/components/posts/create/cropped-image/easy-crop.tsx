@@ -1,15 +1,17 @@
-import ReactCrop from 'react-easy-crop'
+import {Area} from 'react-easy-crop'
+import {useAppDispatch} from "@/services";
+import {setCropValue} from "@/components/posts/create/create-post-slice";
+
+import Cropper from "react-easy-crop";
+
+import {useState} from "react";
 
 type PropsType = {
-  image?: string
-  crop: { x: number; y: number }
+  image: string
+  id:string | undefined
   zoom: number
   aspectRatio: number
-  objectFit?: 'contain' | 'cover' | 'horizontal-cover' | 'vertical-cover' | 'fill'
-  setCrop: (crop: { x: number; y: number }) => void
-  setZoom: (zoom: number) => void
-  croppedAreaPixels: CropArgType | null
-  setCroppedAreaPixels: (croppedAreaPixels: CropArgType | null) => void
+  setZoom: (zoom: number,imgId:string) => void
 }
 
 export type CropArgType = {
@@ -22,18 +24,25 @@ export type CropArgType = {
 export const EasyCrop = ({
   zoom,
   aspectRatio,
-  crop,
   image,
   setZoom,
-  setCroppedAreaPixels,
-  setCrop,
+  id
 }: PropsType) => {
-  const onCropComplete = (croppedArea: CropArgType, croppedAreaPixels: CropArgType) => {
-    setCroppedAreaPixels(croppedAreaPixels)
+
+  const dispatch = useAppDispatch()
+
+  const [crop, setCrop] = useState({ x: 0, y: 0 })
+
+  const onCropComplete =  (croppedArea: Area , croppedAreaPixels: Area) => {
+    if(image && id){
+      dispatch(setCropValue({cropArgs: {...croppedAreaPixels},image,id}))
+    }
   }
+  const onZoomChange = (zoom:number)=> id && setZoom(zoom,id)
+
 
   return (
-    <ReactCrop
+    <Cropper
       image={image}
       objectFit="cover" //zoom and crop doesn't work correctly without it
       crop={crop}
@@ -43,7 +52,7 @@ export const EasyCrop = ({
       aspect={aspectRatio}
       onCropChange={setCrop}
       onCropComplete={onCropComplete}
-      onZoomChange={setZoom}
+      onZoomChange={onZoomChange}
     />
   )
 }

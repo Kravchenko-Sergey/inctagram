@@ -1,17 +1,22 @@
 .imgContainer {
-  width: 490px;
-  height: 457px;
+  width: 491px;
+
 }
+.FilterContainer{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 61px;
 
+  padding: 0;
+  margin-bottom: -5px;
+
+}
 .carousel {
-  position: relative;
-  width: 490px;
 
-  // height: 467px;
 }
 
 .img {
-  object-fit: cover;
 }
 
 .filterContainer {
@@ -19,6 +24,7 @@
   flex-wrap: wrap;
   width: 420px;
   height: 457px;
+
 }
 
 .imgWithFilter {

@@ -5,11 +5,13 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { baseApi } from '@/services/base-api'
 import { createWrapper } from 'next-redux-wrapper'
 import { appReducer } from '@/services/slices/slice'
+import { createPostReducer } from '@/components/posts/create/create-post-slice'
 
 export const store = configureStore({
   reducer: {
     [baseApi.reducerPath]: baseApi.reducer,
     appReducer,
+    createPostInfo: createPostReducer,
   },
   devTools: true,
   // preloadedState: initialState,
