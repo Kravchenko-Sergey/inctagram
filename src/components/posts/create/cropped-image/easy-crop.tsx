@@ -2,6 +2,7 @@ import ReactCrop from 'react-easy-crop'
 import {useState} from "react";
 
 type PropsType = {
+  // crop:{x:number,y:number}
   image?: string
   id:number
   zoom: number
@@ -22,16 +23,16 @@ export type CropArgType = {
 
 export const EasyCrop = ({
   zoom,
+  onCropChange,
   aspectRatio,
   image,
   setZoom,
   setCroppedAreaPixels,
-  onCropChange,
   id
 }: PropsType) => {
 
 
-  const [crop, setCrop] = useState({ x: 0, y: 0 })
+  const [crop, setCrop] = useState({ x: 0, y: 0 })//
 
   const onCropComplete = (croppedArea: CropArgType, croppedAreaPixels: CropArgType) => {
     setCroppedAreaPixels(croppedAreaPixels)
@@ -42,6 +43,7 @@ export const EasyCrop = ({
     setZoom(id,zoom)
 
   }
+
 
 
 

@@ -15,30 +15,31 @@ import {
   useCreatePostPhotoMutation,
 } from '@/services/posts'
 import { PATH } from '@/consts/route-paths'
-import { ImageType } from '@/components/posts/create'
+
 
 import s from './description.module.scss'
+import {ImageType} from "@/components/posts/create/create-post-slice";
 
 type DescriptionFormTypeProps = {
-  onSubmitHandler?: (data: DescriptionFormType) => void
-  defaultValue?: string | number
-  isEditModalOpen?: boolean
-  setIsEditModalOpen?: (isEditModalOpen: boolean) => void
+  // onSubmitHandler?: (data: DescriptionFormType) => void
+  // defaultValue?: string | number
+  // isEditModalOpen?: boolean
+  // setIsEditModalOpen?: (isEditModalOpen: boolean) => void
   addedImages: ImageType[]
-  isPostCreateLoadingHandler: (value: boolean) => void
-
-  setIsModalOpen: (isModalOpen: boolean) => void
-  setIsFiltersModalOpen: (isFiltersModalOpen: boolean) => void
-  setIsDescriptionModalOpen: (value: boolean) => void
+  // isPostCreateLoadingHandler: (value: boolean) => void
+  //
+  // setIsModalOpen: (isModalOpen: boolean) => void
+  // setIsFiltersModalOpen: (isFiltersModalOpen: boolean) => void
+  // setIsDescriptionModalOpen: (value: boolean) => void
 }
 
 export const PostDescription = ({
   addedImages,
-  setIsFiltersModalOpen,
-  setIsModalOpen,
-  defaultValue,
-  setIsDescriptionModalOpen,
-  isPostCreateLoadingHandler,
+  // setIsFiltersModalOpen,
+  // setIsModalOpen,
+  // defaultValue,
+  // setIsDescriptionModalOpen,
+  // isPostCreateLoadingHandler,
 }: DescriptionFormTypeProps) => {
   const { t } = useTranslation()
   const { push } = useRouter()
@@ -67,7 +68,7 @@ export const PostDescription = ({
   }, [t, touchedFields, trigger])
 
   const onSubmit = async (data: DescriptionFormType) => {
-    isPostCreateLoadingHandler(true)
+    // isPostCreateLoadingHandler(true)
     const res = await getBinaryImageData(addedImages)
 
     function createFormData(res: Uint8Array[]) {
@@ -78,10 +79,10 @@ export const PostDescription = ({
 
         formData.append(`file`, blob)
       })
-      setIsFiltersModalOpen(false)
+      // setIsFiltersModalOpen(false)
 
-      setIsModalOpen(false)
-      setIsDescriptionModalOpen(false)
+      // setIsModalOpen(false)
+      // setIsDescriptionModalOpen(false)
 
       return formData
     }
@@ -102,8 +103,8 @@ export const PostDescription = ({
         if (responsePhotoStore.images) {
           await createPostComment(requestBody)
         }
-        isPostCreateLoadingHandler(false)
-        push(PATH.PROFILE)
+        // isPostCreateLoadingHandler(false)
+        // push(PATH.PROFILE)
       } catch (e: unknown) {
         const error = e as any
       }

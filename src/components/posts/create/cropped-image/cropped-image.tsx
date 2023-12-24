@@ -17,7 +17,7 @@ type ImageType = {
 
 import s from './croped-image.module.scss'
 import {useAppDispatch} from "@/services";
-import {setCrop, setZoom} from "@/components/posts/create/create-post-slice";
+import {setAspect, setCrop, setZoom} from "@/components/posts/create/create-post-slice";
 
 type PropsType = {
   // image: string | null
@@ -31,7 +31,7 @@ export const CroppedImage = ({ addedImages }: PropsType) => {
   // const [zoomValue, setZoomValue] = useState(1)
   // const [crop, setCrop] = useState({ x: 0, y: 0 })
   const [aspectRatio, setAspectRatio] = useState(4 / 3)
-  const [croppedImage, setCroppedImage] = useState<string | null>(null)
+  // const [croppedImage, setCroppedImage] = useState<string | null>(null)
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<CropArgType | null>(null)
   const { t } = useTranslation()
 
@@ -42,7 +42,7 @@ export const CroppedImage = ({ addedImages }: PropsType) => {
         {
           const croppedImage = await getCroppedImg(image, croppedAreaPixels)
 
-          setCroppedImage(croppedImage as string)
+          // setCroppedImage(croppedImage as string)
 
           // @ts-ignore
           addedImages[index] = { image: croppedImage }
@@ -62,6 +62,10 @@ export const CroppedImage = ({ addedImages }: PropsType) => {
 
   const onCropChange = (id:number,crop:CropArgType)=>{
     dispatch(setCrop({id,crop}))
+  }
+
+  const onChangeAspect = (id:number,aspect:number)=>{
+    dispatch(setAspect({id,aspect}))
   }
 
   return (
@@ -85,7 +89,10 @@ export const CroppedImage = ({ addedImages }: PropsType) => {
                   />
                   <div className={s.editAndAdd}>
                     <div className={s.edit}>
-                      <Crop className={s.expand} setAspectRatio={setAspectRatio} />
+                      <Crop className={s.expand}
+                            setAspectRatio={onChangeAspect}
+                            id={el.id}
+                      />
                       <Zoom className={s.maximize}
                             zoom={el.zoom}
                             setZoom={onChangeZoom}
@@ -94,12 +101,10 @@ export const CroppedImage = ({ addedImages }: PropsType) => {
                       />
                     </div>
                     <div>
-                      {/*<Add*/}
-                      {/*  image={croppedImage ? croppedImage : image}*/}
-                      {/*  addedImages={addedImages}*/}
-                      {/*  setAddedImages={setAddedImages}*/}
-                      {/*  croppedImage={croppedImage}*/}
-                      {/*/>*/}
+                      <Add
+                        image={el.img}
+                        addedImages={addedImages}
+                      />
                     </div>
                   </div>
                   {/*<button*/}

@@ -1,19 +1,17 @@
 import Slider from 'react-slick'
 import Image from 'next/image'
-
-import { ImageType } from '@/components/posts/create/create-post-modal'
-
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import s from './images-with-filters.module.scss'
 import { getSliderSettings } from '@/helpers'
+import {ImageType} from "@/components/posts/create/create-post-slice";
 
 type PropsType = {
   addedImages: ImageType[]
-  activeFilter: string
+
 }
 
-export const FilteredImages = ({ addedImages, activeFilter }: PropsType) => {
+export const FilteredImages = ({ addedImages}: PropsType) => {
   const settings = getSliderSettings()
 
   return (
@@ -27,10 +25,10 @@ export const FilteredImages = ({ addedImages, activeFilter }: PropsType) => {
                   alt="img"
                   objectFit={'cover'}
                   layout={'fill'}
-                  src={el.image}
+                  src={el.img}
                   // width={490}
                   // height={503}
-                  style={{ filter: activeFilter }}
+                  style={{ filter: el.filter }}
                 />
               </div>
             )

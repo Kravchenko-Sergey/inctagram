@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import {createSlice, current, PayloadAction} from '@reduxjs/toolkit'
 
 type CroppedArea = {
   height: number
@@ -14,7 +14,7 @@ export type ImageType = {
   zoom: number
   filter: string
   aspect: number,
-  crop?:CroppedArea
+  crop?:{x:0,y:0}
 }
 
 export const createPostSlice = createSlice({
@@ -26,12 +26,13 @@ export const createPostSlice = createSlice({
   },
   reducers: {
     setImage: (state, action: PayloadAction<{ img: string }>) => {
-      const newImage = {
-        id: state.images.length + 1,
+      const newImage:ImageType = {
+        id: state.images.length,
         aspect: 1,
         zoom: 1,
         filter: 'none',
         img: action.payload.img,
+        crop:{x:0,y:0}
       }
 
       state.images.push(newImage)
@@ -55,18 +56,18 @@ export const createPostSlice = createSlice({
     },
     setFilter: (state, action: PayloadAction<{ id: number; filter: string }>) => {
       const { id, filter } = action.payload
-      const index = state.croppedImages.findIndex(item => item.id === id)
-
-      if (index !== -1) {
-        state.croppedImages[index] = { ...state.croppedImages[index], filter }
+      const index = state.croppedImages.findIndex(el=> el.id === id)
+      if(index !== -1){
+        state.croppedImages[index].filter = filter
       }
+
     },
     setAspect: (state, action: PayloadAction<{ id: number; aspect: number }>) => {
       const { id, aspect } = action.payload
       const index = state.croppedImages.findIndex(item => item.id === id)
 
       if (index !== -1) {
-        state.croppedImages[index] = { ...state.croppedImages[index], aspect }
+        state.croppedImages[index].aspect =  aspect
       }
     },
     setCrop: (state,action:PayloadAction<{id:number,crop:CroppedArea}>)=>{

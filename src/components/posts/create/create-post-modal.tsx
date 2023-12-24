@@ -7,9 +7,10 @@ import { useRouter } from 'next/router'
 import { PATH } from '@/consts/route-paths'
 import {FixModal, HeaderContent} from "@/components/ui/modal/fix-modal";
 import {useAppDispatch, useAppSelector} from "@/services";
-import {nextPage, prevPage, setImage} from "@/components/posts/create/create-post-slice";
+import {nextPage, prevPage, setFilter, setImage} from "@/components/posts/create/create-post-slice";
 import {SelectedImages} from "@/components/posts/create/edit-photo";
 import {CroppedImage} from "@/components/posts/create/cropped-image";
+import {FilteredImages, PostDescription} from "@/components/posts/create/add-description";
 
 // export type ImageType = {
 //   image: string
@@ -19,36 +20,23 @@ import {CroppedImage} from "@/components/posts/create/cropped-image";
 
 export const CreatePostModal = () => {
 
-  const inputRef = useRef<HTMLInputElement>(null)
-  const [isBaseModalOpen, setIsBaseModalOpen] = useState(true)
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [image, setImage] = useState<string | null>(null)
-  // const [addedImages, setAddedImages] = useState<ImageType[]>([])
+
+
+
   const [isLoadingPost, setIsLoadingPost] = useState(false)
   const { push } = useRouter()
 
   const handleButtonClick = () => {
     push(PATH.PROFILE)
 
-    //setIsBaseModalOpen(false)
-    setImage(null)
-    setIsModalOpen(false)
   }
   const cancelButtonClick = () => {
     push(PATH.PROFILE)
-    //setIsBaseModalOpen(false)
-    setIsModalOpen(false)
+
   }
 
   const handleImageUpload = async (e: any) => {
-    // setAddedImages([
-    //   {
-    //     id: (addedImages.length + 1).toString(),
-    //     image: URL.createObjectURL(e.target.files[0]),
-    //   },
-    // ])
-    // setIsBaseModalOpen(false)
-    // setIsModalOpen(true)
+
   }
 
   const dispatch = useAppDispatch()
@@ -56,13 +44,7 @@ export const CreatePostModal = () => {
   const onNextPage = ()=> dispatch(nextPage())
   const onPrevPage = () => dispatch(prevPage())
 
-  const selectFileHandler = () => {
-    inputRef && inputRef.current?.click()
-  }
 
-  if (isLoadingPost) {
-    return <Loader className={s.loader} />
-  }
   const [ open,setOpen] = useState<boolean>(false)
   const page = useAppSelector(state => state.createPost.page)
   const addPhotoHeader : HeaderContent = {type:'title',title:'Add Photo'}
@@ -70,65 +52,36 @@ export const CreatePostModal = () => {
         <>
           <button onClick={onPrevPage}>{"<"}</button>
           <p>Cropped</p>
-          <button onClick={onNextPage}>{">"}</button>
+          <button onClick={onNextPage}>next</button>
         </>
   }
 
+    const changeFilterHeader:HeaderContent = {type:'node',node:
+            <>
+                <button onClick={onPrevPage}>{"<"}</button>
+                <p>Filter</p>
+                <button onClick={onNextPage}>next</button>
+            </>
+    }
+
+    const PublicationHeader:HeaderContent = {type:'node',node:
+            <>
+                <button onClick={onPrevPage}>{"<"}</button>
+                <p>Publication</p>
+                <button onClick={onNextPage}>Publish</button>
+            </>
+    }
 
   const modalContent = [
     {header:addPhotoHeader,children:<AddPhotoPage/>},
-    {header: croppedPhotoHeader,children:<CroppedPage/>}
+    {header: croppedPhotoHeader,children:<CroppedPage/>},
+      {header: changeFilterHeader,children: <FilterPage/>},
+      {header:PublicationHeader,children: <PublicationPage/>}
 
   ]
   const { t } = useTranslation()
   return (
     <div className={s.container}>
-      {/*{!addedImages.length && isBaseModalOpen ? (*/}
-      {/*  <BaseModal*/}
-      {/*    modalWidth="md"*/}
-      {/*    open={isBaseModalOpen}*/}
-      {/*    onClose={handleButtonClick}*/}
-      {/*    title={t.post.addNewPost.addPhoto}*/}
-      {/*  >*/}
-        {/*</BaseModal>*/}
-      {/*) : (*/}
-      {/*  <CropModal*/}
-      {/*    isPostCreateLoadingHandler={setIsLoadingPost}*/}
-      {/*    image={image}*/}
-      {/*    open={isModalOpen}*/}
-      {/*    onClose={handleButtonClick}*/}
-      {/*    onCancel={cancelButtonClick}*/}
-      {/*    title={t.post.addNewPost.cropping}*/}
-      {/*    addedImages={addedImages}*/}
-      {/*    setAddedImages={setAddedImages}*/}
-      {/*    isBaseModalOpen={isBaseModalOpen}*/}
-      {/*    setIsBaseModalOpen={setIsBaseModalOpen}*/}
-      {/*    setImage={setImage}*/}
-      {/*  >*/}
-      {/*    <CroppedImage*/}
-      {/*      image={image}*/}
-      {/*      setImage={setImage}*/}
-      {/*      addedImages={addedImages}*/}
-      {/*      setAddedImages={setAddedImages}*/}
-      {/*    />*/}
-      {/*  </CropModal>*/}
-      {/*)}*/}
-      {/*<div className={`${s.photoContainer} ${image === null ? s.emptyPhotoContainer : ''}`}>*/}
-      {/*  <ImageOutline />*/}
-      {/*</div>*/}
-      {/*<div>*/}
-      {/*  <Button variant="primary" onClick={selectFileHandler} className={s.btn}>*/}
-      {/*    <Typography variant="h3">{t.profile.selectImage}</Typography>*/}
-      {/*  </Button>*/}
-      {/*  <input*/}
-      {/*      type="file"*/}
-      {/*      ref={inputRef}*/}
-      {/*      name="cover"*/}
-      {/*      onChange={handleImageUpload}*/}
-      {/*      accept="image/png, image/jpeg, image/jpg"*/}
-      {/*      style={{ display: 'none' }}*/}
-      {/*  />*/}
-      {/*</div>*/}
       <button onClick={()=>setOpen(true)}>
         open
       </button>
@@ -143,6 +96,36 @@ export const CreatePostModal = () => {
       </FixModal>
     </div>
   )
+}
+
+
+const PublicationPage = () =>{
+
+    const filteredImages = useAppSelector(state => state.createPost.croppedImages)
+
+    return(
+        <div style={{display:'flex'}}>
+            <FilteredImages addedImages={filteredImages}/>
+            <PostDescription addedImages={filteredImages}/>
+        </div>
+    )
+}
+
+const FilterPage = () =>{
+    const dispatch = useAppDispatch()
+    const addedImages = useAppSelector(state => state.createPost.croppedImages)
+    const onChangeFilter = (filter:string,id:number)=>{
+
+        dispatch(setFilter({id,filter}))
+   }
+
+
+    return (
+        <SelectedImages
+            addedImages={addedImages}
+            onChangeFilter={onChangeFilter}
+        />
+    )
 }
 
 const CroppedPage = () => {

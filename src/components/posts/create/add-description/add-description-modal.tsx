@@ -11,12 +11,13 @@ import { Separator } from '@radix-ui/react-separator'
 import { clsx } from 'clsx'
 
 import { Button, Typography } from '@/components'
-import { ImageType } from '@/components/posts/create'
+
 import { useTranslation } from '@/hooks'
 import { ArrowBack } from '@/assets/icons'
 import { getFilteredImg } from '@/components/posts/create/edit-photo'
 
 import s from './add-description-modal.module.scss'
+import {ImageType} from "@/components/posts/create/create-post-slice";
 
 export type ModalProps = {
   image: string | null
@@ -89,7 +90,7 @@ export const DescriptionModal = ({
     try {
       const updatedImages = await Promise.all(
         addedImages.map(async el => {
-          const filteredImage = await getFilteredImg(el.image, activeFilter)
+          const filteredImage = await getFilteredImg(el.img, activeFilter)
 
           return {
             image: filteredImage as string,
