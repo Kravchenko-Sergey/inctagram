@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.item {
+  cursor: pointer;
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 22px;
+  height: 22px;
+
+  background: transparent;
+  border: 2px solid var(--light-100);
+  border-radius: 50%;
+
+  transition: all 0.3s ease 0s;
+
+  &:hover {
+    border: 2px solid var(--light-900);
+  }
+}
+
+.indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 10px;
+  height: 10px;
+
+  text-align: center;
+
+  background: var(--light-100);
+  border-radius: 50%;
+
+  animation: fadein 0.2s ease;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
