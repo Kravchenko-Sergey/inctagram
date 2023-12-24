@@ -170,6 +170,7 @@ export const ru = {
     titleLogOut: 'Выйти',
     profileSettings: 'Настройки профиля',
     avatarAlt: 'Аватар пользователя',
+    or: 'или',
     following(count: number) {
       const str = pluralizeRu(count)
 

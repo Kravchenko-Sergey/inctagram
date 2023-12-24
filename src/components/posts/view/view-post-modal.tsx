@@ -33,6 +33,7 @@ export const ViewPostModal = ({ isOpen, handleModalChange, post }: PropsType) =>
   const [deletePostImage] = useDeletePostImageMutation()
 
   const handleDeletePost = async () => {
+    setIsDeleteModalOpen(false)
     try {
       await deletePost({ postId: post.id }).unwrap()
       await deletePostImage({ imageId: post?.images[0]?.uploadId }).unwrap()

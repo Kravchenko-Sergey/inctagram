@@ -18,7 +18,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async cont
   const result = await store.dispatch(getProfileData.initiate({ profileId: +id! }))
 
   if (id) {
-    const res = await store.dispatch(getUserPostsData.initiate({ userId: +id }))
+    await store.dispatch(getUserPostsData.initiate({ userId: +id }))
   }
 
   if (postId) {
