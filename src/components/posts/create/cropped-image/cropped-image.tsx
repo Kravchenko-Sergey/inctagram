@@ -1,36 +1,40 @@
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import Slider from 'react-slick'
-
 import getCroppedImg from './Crop'
-
 import { getSliderSettings } from '@/helpers'
 import { CropArgType, EasyCrop } from './easy-crop'
-import { ImageType } from '@/components/posts/create'
 import { Add, Crop, Zoom } from '@/components/posts/create/edit-photo'
 import { useTranslation } from '@/hooks'
 
-import s from './croped-image.module.scss'
-
-type PropsType = {
-  image: string | null
-  setImage: (image: string | null) => void
-  addedImages: ImageType[]
-  setAddedImages: (addedImages: ImageType[]) => void
+type ImageType = {
+  id: number
+  img: string
+  zoom: number
+  filter: string
+  aspect: number
 }
 
-export const CroppedImage = ({ image, addedImages, setAddedImages }: PropsType) => {
+import s from './croped-image.module.scss'
+import {useAppDispatch} from "@/services";
+import {setCrop, setZoom} from "@/components/posts/create/create-post-slice";
+
+type PropsType = {
+  // image: string | null
+  // setImage: (image: string | null) => void
+  addedImages: ImageType[]
+  // setAddedImages: (addedImages: ImageType[]) => void
+}
+
+export const CroppedImage = ({ addedImages }: PropsType) => {
   const [index, setIndex] = useState<number>(0)
-  const [zoomValue, setZoomValue] = useState(1)
-  const [crop, setCrop] = useState({ x: 0, y: 0 })
+  // const [zoomValue, setZoomValue] = useState(1)
+  // const [crop, setCrop] = useState({ x: 0, y: 0 })
   const [aspectRatio, setAspectRatio] = useState(4 / 3)
   const [croppedImage, setCroppedImage] = useState<string | null>(null)
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<CropArgType | null>(null)
   const { t } = useTranslation()
 
-  useEffect(() => {
-    setAddedImages(addedImages)
-  }, [addedImages, setAddedImages])
 
   const showCroppedImg = async (image: string, croppedAreaPixels: CropArgType | null) => {
     if (croppedAreaPixels && image) {
@@ -51,6 +55,15 @@ export const CroppedImage = ({ image, addedImages, setAddedImages }: PropsType) 
   }
   const settings = getSliderSettings(s.dots)
 
+  const dispatch = useAppDispatch()
+  const onChangeZoom = (id:number,zoom:number) =>{
+    dispatch(setZoom({zoom,id}))
+  }
+
+  const onCropChange = (id:number,crop:CropArgType)=>{
+    dispatch(setCrop({id,crop}))
+  }
+
   return (
     <>
       <div className={s.container}>
@@ -60,37 +73,42 @@ export const CroppedImage = ({ image, addedImages, setAddedImages }: PropsType) 
               return (
                 <div key={idx} className={s.carousel} onClick={() => setIndex(idx)}>
                   <EasyCrop
-                    image={el.image}
+                    image={el.img}
+                    id={el.id}
                     objectFit={'fill'}
-                    crop={crop}
-                    zoom={zoomValue}
-                    setZoom={setZoomValue}
-                    setCrop={setCrop}
-                    aspectRatio={aspectRatio}
+                    zoom={el.zoom}
+                    setZoom={onChangeZoom}
+                    onCropChange={onCropChange}
+                    aspectRatio={el.aspect}
                     croppedAreaPixels={croppedAreaPixels}
                     setCroppedAreaPixels={setCroppedAreaPixels}
                   />
                   <div className={s.editAndAdd}>
                     <div className={s.edit}>
                       <Crop className={s.expand} setAspectRatio={setAspectRatio} />
-                      <Zoom className={s.maximize} zoom={zoomValue} setZoom={setZoomValue} />
-                    </div>
-                    <div>
-                      <Add
-                        image={croppedImage ? croppedImage : image}
-                        addedImages={addedImages}
-                        setAddedImages={setAddedImages}
-                        croppedImage={croppedImage}
+                      <Zoom className={s.maximize}
+                            zoom={el.zoom}
+                            setZoom={onChangeZoom}
+                            imgId={el.id}
+
                       />
                     </div>
+                    <div>
+                      {/*<Add*/}
+                      {/*  image={croppedImage ? croppedImage : image}*/}
+                      {/*  addedImages={addedImages}*/}
+                      {/*  setAddedImages={setAddedImages}*/}
+                      {/*  croppedImage={croppedImage}*/}
+                      {/*/>*/}
+                    </div>
                   </div>
-                  <button
-                    onClick={() => showCroppedImg(el.image, croppedAreaPixels)}
-                    color="primary"
-                    className={s.button}
-                  >
-                    {t.post.addNewPost.showResult}
-                  </button>
+                  {/*<button*/}
+                  {/*  onClick={() => showCroppedImg(el.image, croppedAreaPixels)}*/}
+                  {/*  color="primary"*/}
+                  {/*  className={s.button}*/}
+                  {/*>*/}
+                  {/*  {t.post.addNewPost.showResult}*/}
+                  {/*</button>*/}
                 </div>
               )
             })}

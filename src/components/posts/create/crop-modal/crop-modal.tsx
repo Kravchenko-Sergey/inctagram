@@ -147,4 +147,4 @@ function getContentClassName(className?: string) {
   return clsx(className, s.DialogContent)
 }
 
-// export default CropModal // do not export this , instead use dynamic import "Modal" for js bundle reduce
+// export default CropModal // do not export this , instead use dynamic import "FixModal" for js bundle reduce

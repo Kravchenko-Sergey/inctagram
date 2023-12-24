@@ -120,8 +120,8 @@ function getSizeClassName(size: ModalSize) {
 }
 
 //
-// export default BaseModal // do not export this , instead use dynamic import "Modal" for js bundle reduce
-// export const Modal = dynamic(() => import('@/src/components/ui/modals/BaseModal/BaseModal'), {
+// export default BaseModal // do not export this , instead use dynamic import "FixModal" for js bundle reduce
+// export const FixModal = dynamic(() => import('@/src/components/ui/modals/BaseModal/BaseModal'), {
 //   loading: () => <AppLoader />,
 //   ssr: false,
 // })
