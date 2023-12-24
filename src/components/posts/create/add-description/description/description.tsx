@@ -18,34 +18,26 @@ import { PATH } from '@/consts/route-paths'
 
 
 import s from './description.module.scss'
+
+import { useMeQuery } from '@/services/auth'
 import {ImageType} from "@/components/posts/create/create-post-slice";
 
+
 type DescriptionFormTypeProps = {
-  // onSubmitHandler?: (data: DescriptionFormType) => void
-  // defaultValue?: string | number
-  // isEditModalOpen?: boolean
-  // setIsEditModalOpen?: (isEditModalOpen: boolean) => void
+
   addedImages: ImageType[]
-  // isPostCreateLoadingHandler: (value: boolean) => void
-  //
-  // setIsModalOpen: (isModalOpen: boolean) => void
-  // setIsFiltersModalOpen: (isFiltersModalOpen: boolean) => void
-  // setIsDescriptionModalOpen: (value: boolean) => void
+
 }
 
 export const PostDescription = ({
   addedImages,
-  // setIsFiltersModalOpen,
-  // setIsModalOpen,
-  // defaultValue,
-  // setIsDescriptionModalOpen,
-  // isPostCreateLoadingHandler,
+
 }: DescriptionFormTypeProps) => {
   const { t } = useTranslation()
   const { push } = useRouter()
-  const [createPostComment] = useCreatePostCommentsMutation()
-  const [createPostPhoto] = useCreatePostPhotoMutation()
-
+  const [createPostComment, { isLoading: isPostCreateLoading }] = useCreatePostCommentsMutation()
+  const [createPostPhoto, { isLoading: isPostPhotoLoading }] = useCreatePostPhotoMutation()
+  const { data: me } = useMeQuery()
   const {
     control,
     handleSubmit,
@@ -92,7 +84,6 @@ export const PostDescription = ({
     if (addedImages.length) {
       try {
         const responsePhotoStore = await createPostPhoto(formData).unwrap()
-        // console.log('responsePhotoStore', responsePhotoStore)
 
         const imageId = responsePhotoStore.images.map(item => ({ uploadId: item.uploadId }))
         const requestBody: CreatePostRequest = {
@@ -103,10 +94,11 @@ export const PostDescription = ({
         if (responsePhotoStore.images) {
           await createPostComment(requestBody)
         }
-        // isPostCreateLoadingHandler(false)
-        // push(PATH.PROFILE)
+
       } catch (e: unknown) {
         const error = e as any
+
+        console.error(error)
       }
     }
   }

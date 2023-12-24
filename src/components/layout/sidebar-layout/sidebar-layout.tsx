@@ -33,7 +33,13 @@ const SidebarLayout = ({ children }: SidebarLayoutProps) => {
   const [logOut] = useLogoutMutation()
   const sidebarItems = [
     { href: PATH.HOME, icon: <HomeOutline />, title: t.sidebars.home },
-    { href: PATH.PROFILE, icon: <PersonOutline />, title: t.sidebars.myProfile },
+    {
+      href: `${PATH.PROFILE}/?id=${me?.userId}`,
+      icon: <PersonOutline />,
+      title: t.sidebars.myProfile,
+    },
+
+    // { href: PATH.PROFILE, icon: <PersonOutline />, title: t.sidebars.myProfile },
     { href: PATH.CREATE, icon: <PlusSquareOutline />, title: t.sidebars.create },
     { href: PATH.MESSENGER, icon: <MessageCircleOutline />, title: t.sidebars.messenger },
     { href: PATH.SEARCH, icon: <SearchIcon />, title: t.sidebars.search },
@@ -46,8 +52,8 @@ const SidebarLayout = ({ children }: SidebarLayoutProps) => {
     { href: PATH.FAVORITES, icon: <BookmarkOutline />, title: t.sidebars.favorites },
   ]
   const handleModalSubmit = async () => {
-    await logOut().unwrap()
-    router.push(PATH.LOGIN)
+    router.push(PATH.MAIN)
+    await logOut()
   }
   const handleModalClosed = () => {
     setModalOpen(false)

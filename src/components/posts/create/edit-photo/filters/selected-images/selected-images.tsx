@@ -23,8 +23,11 @@ type PropsType = {
   // setAddedImages?: (addedImages: ImageType[]) => void
 }
 
-export const SelectedImages = ({ addedImages, onChangeFilter }: PropsType) => {
-  const settings = getSliderSettings()
+
+
+
+export const SelectedImages = ({ addedImages,onChangeFilter }: PropsType) => {
+  const settings = getSliderSettings(s.dots)
   const [currentSlideId,setCurrentSlideId] = useState(0)
 
   const onActiveFilter = (filter: string) => {
@@ -111,4 +114,5 @@ export const SelectedImages = ({ addedImages, onChangeFilter }: PropsType) => {
       </div>
     </div>
   )
-}
+  }
+

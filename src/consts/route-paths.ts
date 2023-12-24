@@ -4,6 +4,7 @@ export const PATH = {
   HOME: '/',
   CREATE: '/create',
   PROFILE: '/profile',
+  // PROFILE: '/profile/[id]',
   PROFILE_SETTINGS: '/profile-settings',
   MESSENGER: '/messenger',
   SEARCH: '/search',
@@ -18,9 +19,11 @@ export const PATH = {
   CONFIRM: '/auth/registration-confirmation',
   GITHUB: '/github',
   RECOVERY_PASSWORD: '/auth/recovery',
+  MAIN: '/main',
 }
 
 export const commonRoutes = [
+  PATH.PROFILE,
   PATH.LOGIN,
   PATH.REGISTRATION,
   PATH.GITHUB,
@@ -30,4 +33,5 @@ export const commonRoutes = [
   PATH.LOGOUT,
   PATH.SERVICE,
   PATH.RECOVERY_PASSWORD,
+  PATH.MAIN,
 ]

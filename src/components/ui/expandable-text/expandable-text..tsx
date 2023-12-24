@@ -1,28 +1,36 @@
-import { useState } from 'react'
+import ShowMoreText from 'react-show-more-text'
+import s from './expandable-text.module.scss'
+import { useTranslation } from '@/hooks'
+import { Typography } from '@/components'
 
 type ExpandableTextProps = {
   text: string | null
   className?: string
+  callback?: () => void
 }
 
-export const ExpandableText = ({ text, className }: ExpandableTextProps) => {
-  const [isExpanded, setIsExpanded] = useState(false)
+export const ExpandableText = ({ text, callback }: ExpandableTextProps) => {
+  const { t } = useTranslation()
 
-  const sentences = text?.split('. ')
-  const closedText = sentences && sentences[0].split(' ')
-  const preTriggerText = closedText && closedText.slice(0, -1).join(' ')
-  const openTrigger = closedText && closedText.slice(-1).join(' ')
-  const restText = sentences && sentences.slice(1).join('. ')
+  const executeOnClick = () => {
+    // callback!()
+  }
 
   return (
-    sentences && (
-      <div>
-        <span>{preTriggerText}</span>
-        <span onClick={() => setIsExpanded(true)} className={!isExpanded ? className : ''}>
-          {isExpanded ? ` ${openTrigger}. ` : ` ${openTrigger}...`}
-        </span>
-        <span>{isExpanded ? restText : ''}</span>
-      </div>
-    )
+    <ShowMoreText
+      lines={2}
+      more={t.showMore}
+      less={t.hide}
+      className={s.root}
+      anchorClass={s.anchor}
+      // className="content-css"
+      // anchorClass="show-more-less-clickable"
+      onClick={executeOnClick}
+      expanded={false}
+      // width={280}
+      truncatedEndingComponent={' '}
+    >
+      {text}
+    </ShowMoreText>
   )
 }

@@ -5,12 +5,7 @@ import Slider from 'react-slick'
 import Image from 'next/image'
 
 import { Avatar, Button, ControlledTextArea, Modal, Typography } from '@/components'
-import {
-  PostImageType,
-  Post,
-  useEditPostMutation,
-  useDeletePostImageMutation,
-} from '@/services/posts'
+import { PostImageType, useDeletePostImageMutation, useEditPostMutation } from '@/services/posts'
 import { useTranslation } from '@/hooks'
 import { FormFields, getSliderSettings, triggerZodFieldError } from '@/helpers'
 import { MAX_CHARS_POST } from '@/consts/input-limits'
@@ -20,10 +15,11 @@ import s from './edit-post-modal.module.scss'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { DeleteIcon } from '@/assets/icons'
+import { PostProfile } from '@/services/public-posts'
 
 type PropsType = {
   isOpen: boolean
-  post: Post
+  post: PostProfile
   handleClose: () => void
   userName?: string
   avatar?: string
@@ -56,7 +52,7 @@ export const EditPostModal = ({ post, isOpen, handleClose, userName, avatar }: P
     resolver: zodResolver(descriptionSchema(t)),
     mode: 'onChange',
     defaultValues: {
-      description: post.description,
+      description: post?.description ? post.description : '',
     },
   })
 
@@ -111,7 +107,7 @@ export const EditPostModal = ({ post, isOpen, handleClose, userName, avatar }: P
         onInteractOutside={handleClickOutside}
       >
         <Slider {...settings} className={s.container}>
-          {post.images.map((image: PostImageType, idx: number) => {
+          {post?.images.map((image: PostImageType, idx: number) => {
             if (!(idx % 2)) {
               return (
                 <div key={image.uploadId} className={s.carousel}>

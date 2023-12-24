@@ -2,15 +2,20 @@ import { useRef, useState } from 'react'
 import { useTranslation } from '@/hooks'
 import { Button, Loader, Typography } from '@/components'
 import { ImageOutline } from '@/assets/icons'
-import s from './create-post-modal.module.scss'
+import { CroppedImage } from './cropped-image'
+import { BaseModal } from './base-modal'
+import { permittedPostPhotoFileSize, permittedFileTypes } from '@/consts/image'
 import { useRouter } from 'next/router'
 import { PATH } from '@/consts/route-paths'
-import {FixModal, HeaderContent} from "@/components/ui/modal/fix-modal";
+import { toast } from 'react-toastify'
+import s from './create-post-modal.module.scss'
+import { useMeQuery } from '@/services/auth'
 import {useAppDispatch, useAppSelector} from "@/services";
+import {FixModal, HeaderContent} from "@/components/ui/modal/fix-modal";
 import {nextPage, prevPage, setFilter, setImage} from "@/components/posts/create/create-post-slice";
-import {SelectedImages} from "@/components/posts/create/edit-photo";
-import {CroppedImage} from "@/components/posts/create/cropped-image";
 import {FilteredImages, PostDescription} from "@/components/posts/create/add-description";
+import {SelectedImages} from "@/components/posts/create/edit-photo";
+
 
 // export type ImageType = {
 //   image: string
@@ -26,16 +31,17 @@ export const CreatePostModal = () => {
   const [isLoadingPost, setIsLoadingPost] = useState(false)
   const { push } = useRouter()
 
+
   const handleButtonClick = () => {
-    push(PATH.PROFILE)
+    // push(PATH.PROFILE)
+    // push(`${PATH.PROFILE}/?id=${+me?.userId!}`)
 
   }
   const cancelButtonClick = () => {
-    push(PATH.PROFILE)
 
   }
-
   const handleImageUpload = async (e: any) => {
+
 
   }
 
@@ -145,6 +151,36 @@ const AddPhotoPage = () =>{
   const dispatch = useAppDispatch()
 
   const inputRef = useRef<HTMLInputElement>(null)
+  //
+  //   // ToDo сделать инпут контролируемым тут и в добавлении аватара
+  //   const uploadInput = e.target
+  //
+  //   if (
+  //     !(uploadInput instanceof HTMLInputElement) ||
+  //     !uploadInput.files ||
+  //     !uploadInput.files.length
+  //   ) {
+  //     return
+  //   }
+  //
+  //   const file = uploadInput.files[0]
+  //
+  //   const fileName = file.name.toLowerCase()
+  //   const matches = [...permittedFileTypes].some(it => fileName.endsWith(it))
+  //
+  //   if (matches && file.size <= permittedPostPhotoFileSize) {
+  //     setAddedImages([
+  //       {
+  //         id: (addedImages.length + 1).toString(),
+  //         image: URL.createObjectURL(e.target.files[0]),
+  //       },
+  //     ])
+  //
+  //   } else {
+  //     toast.error(t.errors.imageUploadError, { icon: false })
+  //   }
+  // }
+
   const selectFileHandler = () => {
     inputRef && inputRef.current?.click()
   }
@@ -152,10 +188,32 @@ const AddPhotoPage = () =>{
   const images = useAppSelector(state => state.createPost.images)
 
   const handleImageUpload =  (e: any) => {
-      dispatch(setImage({img:
-            URL.createObjectURL(e.target.files[0])
-      }))
-    dispatch(nextPage())
+
+      const uploadInput = e.target
+
+      if (
+          !(uploadInput instanceof HTMLInputElement) ||
+          !uploadInput.files ||
+          !uploadInput.files.length
+      ) {
+          return
+      }
+      const file = uploadInput.files[0]
+
+      const fileName = file.name.toLowerCase()
+      const matches = [...permittedFileTypes].some(it => fileName.endsWith(it))
+
+      if (matches && file.size <= permittedPostPhotoFileSize) {
+          dispatch(setImage({img:
+                  URL.createObjectURL(e.target.files[0])
+          }))
+          dispatch(nextPage())
+
+
+      } else {
+          toast.error(t.errors.imageUploadError, { icon: false })
+      }
+
   }
 
   return (

@@ -23,12 +23,13 @@ export const FilteredImages = ({ addedImages}: PropsType) => {
               <div key={idx} className={s.carousel}>
                 <Image
                   alt="img"
-                  objectFit={'cover'}
-                  layout={'fill'}
+                  // objectFit={'cover'}
+                  // layout={'fill'}
                   src={el.img}
-                  // width={490}
-                  // height={503}
-                  style={{ filter: el.filter }}
+                  priority
+                  width={490}
+                  height={503}
+                  style={{ filter: el.filter, objectFit: 'cover' }}
                 />
               </div>
             )

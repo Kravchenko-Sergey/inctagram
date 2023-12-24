@@ -3,8 +3,7 @@ import { ReactNode, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import { useMeQuery } from '@/services/auth/auth-api'
-import { PATH, commonRoutes } from '@/consts/route-paths'
-import { Loader } from '@/components/ui/loader'
+import { commonRoutes, PATH } from '@/consts/route-paths'
 
 type PropsType = {
   children: ReactNode
@@ -12,20 +11,19 @@ type PropsType = {
 
 export const AuthProvider = ({ children }: PropsType) => {
   const router = useRouter()
-  const { data: user, isLoading, isError, isFetching } = useMeQuery()
-  const isProtectedPage = !commonRoutes.includes(router.pathname)
+  const { data: user, isLoading } = useMeQuery()
+
+  const remainingPath = router.pathname.replace(/^\/profile(\/[^/]+)?|\/profile\?(.+)/, '/profile')
+
+  const isProtectedPage = !commonRoutes.includes(remainingPath)
 
   useEffect(() => {
-    if (!isLoading && !user && isProtectedPage && !isFetching) {
-      router.push(PATH.LOGIN)
+    if (!isLoading && !user && isProtectedPage && router.pathname === '/github') {
+      router.push(PATH.MAIN)
 
       return
     }
-  }, [user, isError, isLoading, isProtectedPage, isFetching, router])
-
-  if (isLoading || (!user && isProtectedPage)) {
-    return <Loader />
-  }
+  }, [user, isProtectedPage, router, isLoading])
 
   return <>{children}</>
 }

@@ -3,6 +3,7 @@ import { useTranslation } from '@/hooks'
 import { BaseModal } from '../base-modal'
 import { PATH } from '@/consts/route-paths'
 import { useRouter } from 'next/router'
+import { useMeQuery } from '@/services/auth'
 
 export type ModalProps = {
   openSureModal: boolean
@@ -22,6 +23,7 @@ export const AreYouSureModal = ({
 }: ModalProps) => {
   const { t } = useTranslation()
   const { push } = useRouter()
+  const { data: me } = useMeQuery()
 
   const onModalClose = () => {
     setOpenSureModal(false)
@@ -32,7 +34,8 @@ export const AreYouSureModal = ({
     setIsModalOpen(false)
     setIsBaseModalOpen(true)
     setImage(null)
-    push(PATH.PROFILE)
+    // push(PATH.PROFILE)
+    push(`${PATH.PROFILE}/?id=${+me?.userId!}`)
   }
 
   return (

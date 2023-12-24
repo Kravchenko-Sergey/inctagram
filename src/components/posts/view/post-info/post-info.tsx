@@ -1,12 +1,12 @@
-import { Typography, Avatar } from '@/components'
-import { Post } from '@/services/posts'
+import { Avatar, Typography } from '@/components'
 import { getTimeAgo } from '@/helpers/date'
 
 import s from './post-info.module.scss'
+import { PostProfile } from '@/services/public-posts'
 
 type PropsType = {
   avatar?: string
-  post: Post
+  post: PostProfile
   userName?: string
 }
 

@@ -13,9 +13,9 @@ import { Inter } from 'next/font/google'
 import { Provider } from 'react-redux'
 
 import { useLoader } from '@/hooks'
-import { AuthProvider } from '@/components'
-import { store } from '@/services'
+import { store, useAppSelector, wrapper } from '@/services'
 import { Toast } from '@/components/react-toast/toast-container'
+import { AuthProvider, Loader } from '@/components'
 
 export const inter = Inter({
   subsets: ['latin', 'cyrillic'],
@@ -32,10 +32,14 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout
 }
 
-export default function App({ Component, pageProps }: AppPropsWithLayout) {
+export function App({ Component, pageProps }: AppPropsWithLayout) {
   useLoader()
-
   const getLayout = Component.getLayout ?? (page => page)
+  const isLoading = useAppSelector(state => state.appReducer.isLoadingState)
+
+  if (isLoading) {
+    return <Loader />
+  }
 
   return (
     <>
@@ -56,3 +60,5 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     </>
   )
 }
+
+export default wrapper.withRedux(App)
