@@ -29,14 +29,14 @@ export const postAPI = baseApi.injectEndpoints({
         body,
       }),
     }),
-    getUserPosts: build.query<GetAllPostsResponse, GetAllPostsRequest>({
-      query: ({ idLastUploadedPost, pageSize }) => ({
-        url: `posts/user/${idLastUploadedPost}`,
-        params: {
-          pageSize,
-        },
-      }),
-    }),
+    // getUserPosts: build.query<GetAllPostsResponse, GetAllPostsRequest>({
+    //   query: ({ idLastUploadedPost, pageSize }) => ({
+    //     url: `posts/user/${idLastUploadedPost}`,
+    //     params: {
+    //       pageSize,
+    //     },
+    //   }),
+    // }),
     getUserPost: build.query<Post, PostRequest>({
       query: ({ postId }) => {
         return {
@@ -100,7 +100,7 @@ export const postAPI = baseApi.injectEndpoints({
 export const {
   useCreatePostCommentsMutation,
   useCreatePostPhotoMutation,
-  useGetUserPostsQuery,
+  // useGetUserPostsQuery,
   useLazyGetUserPostQuery,
   useDeleteUserPostMutation,
   useDeletePostImageMutation,

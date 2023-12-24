@@ -2,8 +2,10 @@ import { baseApi } from '@/services'
 import {
   GetLastCreatedPostsRequest,
   GetLastCreatedPostsResponse,
-  GetProfileDataResponse,
-  GetPublicPostResponse,
+  GetUserPostsDataRequest,
+  PostProfile,
+  Posts,
+  PublicProfileRequest,
 } from '@/services/public-posts/types'
 
 export const publicPostApi = baseApi.injectEndpoints({
@@ -16,31 +18,28 @@ export const publicPostApi = baseApi.injectEndpoints({
           params: { pageSize, sortBy, sortDirection },
         }),
       }),
-      getPublicPost: build.query<GetPublicPostResponse, { postId: number }>({
+      getPublicPost: build.query<PostProfile, { postId: number }>({
         query: ({ postId }) => ({
-          url: `/public-posts/p/${postId}`,
+          url: `public-posts/${postId}`,
           method: 'GET',
         }),
       }),
 
-      getProfileData: build.query<
-        GetProfileDataResponse & { fullName: string | null },
-        { userId: number }
-      >({
-        query: ({ userId }) => {
+      getUserPostsData: build.query<Posts, GetUserPostsDataRequest>({
+        query: ({ userId, endCursorPostId, pageSize, sortBy, sortDirection }) => {
           return {
-            url: `public-posts/user/${userId}`,
+            url: `public-posts/user/${userId}${endCursorPostId ? `/${endCursorPostId}` : ''}`,
             method: 'GET',
+            // params: { pageSize, sortBy, sortDirection }, todo need refactor
           }
         },
-        transformResponse: (response: GetProfileDataResponse) => {
-          const fullName = response?.profile.firstName
-            ? `${response?.profile.firstName} ${response?.profile.lastName}`
-            : null
+      }),
 
-          return { ...response, fullName }
-        },
-        providesTags: ['getProfileData'],
+      getProfileData: build.query<PublicProfileRequest, { profileId: number }>({
+        query: ({ profileId }) => ({
+          url: `public-user/profile/${profileId}`,
+          method: 'GET',
+        }),
       }),
     }
   },
@@ -50,11 +49,10 @@ export const {
   util: { getRunningQueriesThunk },
 } = publicPostApi
 
-export const { getPublicPost, getProfileData } = publicPostApi.endpoints
+export const { getPublicPost, getProfileData, getUserPostsData } = publicPostApi.endpoints
 export const {
   useGetPublicPostQuery,
-  useGetLastCreatedPostsQuery,
-  useLazyGetLastCreatedPostsQuery,
-  useLazyGetProfileDataQuery,
+  useLazyGetPublicPostQuery,
+  useGetUserPostsDataQuery,
   useGetProfileDataQuery,
 } = publicPostApi
