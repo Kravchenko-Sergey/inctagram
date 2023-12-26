@@ -1,4 +1,4 @@
-export const filters = [
+export const filtersData = [
   {
     name: 'No filter',
     filter: 'none',

@@ -1,17 +1,14 @@
-import ReactCrop from 'react-easy-crop'
-import {useState} from "react";
+import ReactCrop, { Point } from 'react-easy-crop'
+import { useState } from 'react'
 
 type PropsType = {
-  // crop:{x:number,y:number}
-  image?: string
-  id:number
+  image: string
+  id: number
   zoom: number
   aspectRatio: number
   objectFit?: 'contain' | 'cover' | 'horizontal-cover' | 'vertical-cover' | 'fill'
-  onCropChange: (id:number,crop:CropArgType) => void
+  onCropChange: (id: number, crop: CropArgType) => void
   setZoom: (id: number, zoom: number) => void
-  croppedAreaPixels: CropArgType | null
-  setCroppedAreaPixels: (croppedAreaPixels: CropArgType | null) => void
 }
 
 export type CropArgType = {
@@ -21,31 +18,16 @@ export type CropArgType = {
   y: number
 }
 
-export const EasyCrop = ({
-  zoom,
-  onCropChange,
-  aspectRatio,
-  image,
-  setZoom,
-  setCroppedAreaPixels,
-  id
-}: PropsType) => {
-
-
-  const [crop, setCrop] = useState({ x: 0, y: 0 })//
+export const EasyCrop = ({ zoom, onCropChange, aspectRatio, image, setZoom, id }: PropsType) => {
+  const [crop, setCrop] = useState({ x: 0, y: 0 })
 
   const onCropComplete = (croppedArea: CropArgType, croppedAreaPixels: CropArgType) => {
-    setCroppedAreaPixels(croppedAreaPixels)
-    onCropChange(id,croppedAreaPixels)
+    onCropChange(id, croppedAreaPixels)
   }
 
-  const onZoomChange = (zoom:number)=>{
-    setZoom(id,zoom)
-
+  const onZoomChange = (zoom: number) => {
+    setZoom(id, zoom)
   }
-
-
-
 
   return (
     <ReactCrop

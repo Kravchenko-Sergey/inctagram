@@ -4,14 +4,13 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import s from './images-with-filters.module.scss'
 import { getSliderSettings } from '@/helpers'
-import {ImageType} from "@/components/posts/create/create-post-slice";
+import { ImageType } from '@/components/posts/create/create-post-slice'
 
 type PropsType = {
   addedImages: ImageType[]
-
 }
 
-export const FilteredImages = ({ addedImages}: PropsType) => {
+export const FilteredImages = ({ addedImages }: PropsType) => {
   const settings = getSliderSettings()
 
   return (
