@@ -42,13 +42,10 @@
 }
 
 .textArea {
-  // width: 433px;
-  height: 144px;
-  padding: 6px 12px;
+
 
   textarea {
-    height: 120px;
-    padding: 6px 12px;
+
   }
 }
 
@@ -64,9 +61,18 @@
 .mainContent {
   padding: 0 24px;
   border-bottom: 1px solid var(--dark-100);
+  textarea{
+    height: 120px;
+  }
 }
 .submitButton {
   position: absolute;
-  top: 23px;
+  top: 21px;
   right: 25px;
+  color: var(--primary-500);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  cursor: pointer;
 }

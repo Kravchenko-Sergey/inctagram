@@ -12,11 +12,18 @@ type PropsType = {
 
 export const FilteredImages = ({ addedImages }: PropsType) => {
   const settings = getSliderSettings()
+  const customStyles = `
+    .slick-dots{
+    position:absolute;
+    bottom:20px;
+    left:12px;
+    }
+  `
 
   return (
     <>
       <div className={s.imgContainer}>
-        <Slider {...settings}>
+        <Slider  className={s.slider} {...settings}>
           {addedImages.map((el: ImageType, idx: number) => {
             return (
               <div key={idx} className={s.carousel}>
@@ -26,10 +33,11 @@ export const FilteredImages = ({ addedImages }: PropsType) => {
                   // layout={'fill'}
                   src={el.img}
                   priority
-                  width={490}
-                  height={503}
+                  width={493}
+                  height={564}
                   style={{ filter: el.filter, objectFit: 'cover' }}
                 />
+                  <style>{customStyles}</style>
               </div>
             )
           })}

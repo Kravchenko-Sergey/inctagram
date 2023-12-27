@@ -8,7 +8,6 @@ import s from '@/components/posts/create/create-post-modal.module.scss'
 import { ImageOutline } from '@/assets/icons'
 import { Button, Typography } from '@/components'
 
-
 export const AddPhotoPage = () => {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()

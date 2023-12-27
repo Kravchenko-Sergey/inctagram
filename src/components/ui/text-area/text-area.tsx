@@ -21,7 +21,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, r
     root: clsx(s.root, className),
     textArea: clsx(s.textarea, error && s.error, classNameTextArea),
   }
-
+    console.log(classNameTextArea)
   return (
     <div className={classNames.root}>
       <Typography

@@ -86,9 +86,6 @@ export const createPostSlice = createSlice({
     prevPage: state => {
       state.page = state.page - 1
     },
-    setDescription: (state, action: PayloadAction<{ description: string }>) => {
-      state.description = action.payload.description
-    },
     resetState: state => {
       state.croppedImages = []
       state.croppedImages = []
@@ -109,5 +106,4 @@ export const {
   setFilter,
   setCroppedImage,
   setCrop,
-  setDescription,
 } = createPostSlice.actions

@@ -64,10 +64,13 @@ export const SelectedImages = ({ addedImages, onChangeFilter }: PropsType) => {
     setCurrentSlideId(currentSlide)
   }
 
+
+
+
   return (
-    <div style={{ display: 'flex' }}>
+    <div className={s.filterPageContainer}>
       <div className={s.imgContainer}>
-        <Slider {...settings} beforeChange={onSlideChange}>
+        <Slider className={s.slider} {...settings}  beforeChange={onSlideChange}>
           {addedImages.map((el: ImageType, idx: number) => {
             return (
               <div key={idx} className={s.carousel}>
@@ -76,9 +79,10 @@ export const SelectedImages = ({ addedImages, onChangeFilter }: PropsType) => {
                   alt="img"
                   style={{ filter: el.filter }}
                   src={el.img}
-                  width={490}
-                  height={503}
+                  width={493}
+                  height={564}
                 />
+
               </div>
             )
           })}
@@ -91,7 +95,7 @@ export const SelectedImages = ({ addedImages, onChangeFilter }: PropsType) => {
               <Image
                 src={airBalloon}
                 alt="image-with-filter"
-                width={108}
+                width={130}
                 height={108}
                 style={{ filter: el.filter }}
                 className={s.image}

@@ -103,14 +103,8 @@ export const ModalWithDoubleButton = {
     }
 
     const headerTitle: HeaderContent = {
-      type: 'node',
-      node: (
-        <>
-          <button>{'<'}</button>
-          <p>Title</p>
-          <button>{'>'}</button>
-        </>
-      ),
+      type: 'title',
+      title:'close'
     }
 
     return (
