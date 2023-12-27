@@ -14,17 +14,17 @@ import {
 } from '@/services/posts'
 import s from './description.module.scss'
 import { useMeQuery } from '@/services/auth'
-import {ImageType, resetState} from '@/components/posts/create/create-post-slice'
+import { ImageType, resetState } from '@/components/posts/create/create-post-slice'
 import { getFilteredImg } from '@/components/posts/create/edit-photo'
-import {useAppDispatch} from "@/services";
-import {router} from "next/client";
-import {PATH} from "@/consts/route-paths";
+import { useAppDispatch } from '@/services'
+import { router } from 'next/client'
+import { PATH } from '@/consts/route-paths'
 
 type DescriptionFormTypeProps = {
   addedImages: ImageType[]
 }
 
-export const  PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
+export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
   const { t } = useTranslation()
   const { push } = useRouter()
   const dispatch = useAppDispatch()
@@ -64,7 +64,6 @@ export const  PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
 
       return updatedImages as ImageType[]
     } catch (e) {
-      console.error(e)
       return []
     }
   }

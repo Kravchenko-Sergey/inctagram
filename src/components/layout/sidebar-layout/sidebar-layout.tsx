@@ -95,7 +95,7 @@ const SidebarLayout = ({ children }: SidebarLayoutProps) => {
               </>
             </Link>
           ) : (
-            <CreateItem />
+            <CreateItem key={index} />
           )
         )}
         <div className={s.logout}>
@@ -120,13 +120,12 @@ const CreateItem = () => {
   const [open, setOpen] = useState(false)
 
   return (
-      <>
-        <div className={s.item} onClick={() => setOpen(true)}>
-          <PlusSquareOutline/>
-          <Typography color="inherit">{t.sidebars.create}</Typography>
-
-        </div>
-        <CreatePostModal open={open} setOpen={setOpen}/>
-      </>
+    <>
+      <div className={s.item} onClick={() => setOpen(true)}>
+        <PlusSquareOutline />
+        <Typography color="inherit">{t.sidebars.create}</Typography>
+      </div>
+      <CreatePostModal open={open} setOpen={setOpen} />
+    </>
   )
 }

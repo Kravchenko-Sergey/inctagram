@@ -57,6 +57,7 @@ export const createPostSlice = createSlice({
     setFilter: (state, action: PayloadAction<{ id: number; filter: string }>) => {
       const { id, filter } = action.payload
       const index = state.croppedImages.findIndex(el => el.id === id)
+
       if (index !== -1) {
         state.croppedImages[index].filter = filter
       }

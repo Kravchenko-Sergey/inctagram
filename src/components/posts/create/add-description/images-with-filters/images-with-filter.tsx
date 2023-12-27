@@ -23,7 +23,7 @@ export const FilteredImages = ({ addedImages }: PropsType) => {
   return (
     <>
       <div className={s.imgContainer}>
-        <Slider  className={s.slider} {...settings}>
+        <Slider className={s.slider} {...settings}>
           {addedImages.map((el: ImageType, idx: number) => {
             return (
               <div key={idx} className={s.carousel}>
@@ -37,7 +37,7 @@ export const FilteredImages = ({ addedImages }: PropsType) => {
                   height={564}
                   style={{ filter: el.filter, objectFit: 'cover' }}
                 />
-                  <style>{customStyles}</style>
+                <style>{customStyles}</style>
               </div>
             )
           })}

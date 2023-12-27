@@ -28,6 +28,7 @@ export const Zoom = ({ zoom, setZoom, imgId }: PropsType) => {
 
   const onZoomChange = (event: ChangeEvent<HTMLInputElement>) => {
     const scale = parseFloat(event.target.value)
+
     setZoom(imgId, scale)
   }
 

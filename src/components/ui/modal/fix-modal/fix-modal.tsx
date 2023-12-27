@@ -8,8 +8,8 @@ import { clsx } from 'clsx'
 
 import s from './fix-modal.module.scss'
 
-type TitleContent = { type: 'title', title: string }
-type NodeContent = { type: 'node', node: ReactNode }
+type TitleContent = { type: 'title'; title: string }
+type NodeContent = { type: 'node'; node: ReactNode }
 
 export type HeaderContent = TitleContent | NodeContent
 
@@ -27,11 +27,11 @@ export const FixModal = forwardRef<ElementRef<typeof Dialog.Overlay>, ModalType>
     }
 
     return (
-      <Dialog.Root open={open} {...restProps} >
+      <Dialog.Root open={open} {...restProps}>
         {open && (
-          <Dialog.Portal  >
-            <Dialog.Overlay  className={s.dialogOverlay}  />
-            <Dialog.Content  className={classNames.container}>
+          <Dialog.Portal>
+            <Dialog.Overlay className={s.dialogOverlay} />
+            <Dialog.Content className={classNames.container}>
               <Card>
                 <div className={s.header}>
                   {headerContent?.type === 'title' && (
@@ -39,10 +39,9 @@ export const FixModal = forwardRef<ElementRef<typeof Dialog.Overlay>, ModalType>
                       <Dialog.Title>
                         <Typography variant={'h1'}>{headerContent.title}</Typography>
                       </Dialog.Title>
-                      <Dialog.Close  className={classNames.closeButton} aria-label={'Close'}>
-                         <CloseModal />
+                      <Dialog.Close className={classNames.closeButton} aria-label={'Close'}>
+                        <CloseModal />
                       </Dialog.Close>
-
                     </>
                   )}
                   {headerContent?.type === 'node' && <>{headerContent.node}</>}

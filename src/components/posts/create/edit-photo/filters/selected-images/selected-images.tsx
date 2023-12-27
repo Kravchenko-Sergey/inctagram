@@ -64,13 +64,10 @@ export const SelectedImages = ({ addedImages, onChangeFilter }: PropsType) => {
     setCurrentSlideId(currentSlide)
   }
 
-
-
-
   return (
     <div className={s.filterPageContainer}>
       <div className={s.imgContainer}>
-        <Slider className={s.slider} {...settings}  beforeChange={onSlideChange}>
+        <Slider className={s.slider} {...settings} beforeChange={onSlideChange}>
           {addedImages.map((el: ImageType, idx: number) => {
             return (
               <div key={idx} className={s.carousel}>
@@ -82,7 +79,6 @@ export const SelectedImages = ({ addedImages, onChangeFilter }: PropsType) => {
                   width={493}
                   height={564}
                 />
-
               </div>
             )
           })}

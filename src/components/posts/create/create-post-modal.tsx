@@ -10,19 +10,14 @@ import { AddPhotoPage } from '@/components/posts/create/modal-pages/add-photo-pa
 import { ModalHeader } from '@/components/posts/create/modal-header/modal-header'
 import getCroppedImg from '@/components/posts/create/cropped-image/Crop'
 import { Layer2 } from '@/assets/icons/Layer 2'
-import {NotificationModal} from "@/components/posts/create/notification-modal/notification-modal";
+import { NotificationModal } from '@/components/posts/create/notification-modal/notification-modal'
 
 type CreatePostModalProps = {
   open: boolean
   setOpen: (open: boolean) => void
 }
-export const CreatePostModal = (
-    {
-        setOpen,
-        open
-    }:CreatePostModalProps
-) => {
-  const [openNotification,setOpenNotification] = useState(false)
+export const CreatePostModal = ({ setOpen, open }: CreatePostModalProps) => {
+  const [openNotification, setOpenNotification] = useState(false)
   const dispatch = useAppDispatch()
   const page = useAppSelector(state => state.createPost.page)
   const addedImages = useAppSelector(state => state.createPost.croppedImages)
@@ -37,7 +32,7 @@ export const CreatePostModal = (
     dispatch(nextPage())
   }
 
-  const onCloseModalHandler = (open:boolean)=>{
+  const onCloseModalHandler = (open: boolean) => {
     setOpenNotification(true)
   }
   const showCroppedImg = async () => {
@@ -45,6 +40,7 @@ export const CreatePostModal = (
       {
         const croppedImg = addedImages.map(async el => {
           const res = await getCroppedImg(el.img, el.crop)
+
           if (res) {
             dispatch(setCroppedImage({ img: res, id: el.id }))
           }
@@ -53,7 +49,7 @@ export const CreatePostModal = (
         await Promise.all(croppedImg)
       }
     } catch (e) {
-      console.error(e)
+      console.log(e)
     }
   }
 
@@ -104,8 +100,6 @@ export const CreatePostModal = (
     `${s.publishContainer}`,
   ]
 
-
-
   return (
     <div className={s.container}>
       <FixModal
@@ -116,7 +110,11 @@ export const CreatePostModal = (
       >
         {modalContent[page].children}
       </FixModal>
-      <NotificationModal closeOtherModal={setOpen} open={openNotification} setOpen={setOpenNotification}/>
+      <NotificationModal
+        closeOtherModal={setOpen}
+        open={openNotification}
+        setOpen={setOpenNotification}
+      />
     </div>
   )
 }

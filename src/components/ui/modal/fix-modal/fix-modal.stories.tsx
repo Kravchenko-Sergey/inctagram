@@ -104,7 +104,7 @@ export const ModalWithDoubleButton = {
 
     const headerTitle: HeaderContent = {
       type: 'title',
-      title:'close'
+      title: 'close',
     }
 
     return (
