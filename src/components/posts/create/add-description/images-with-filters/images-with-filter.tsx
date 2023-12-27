@@ -20,7 +20,7 @@ export const FilteredImages = ({ addedImages, activeFilter }: PropsType) => {
     <>
       <div className={s.imgContainer}>
         <Slider {...settings}>
-          {addedImages.map((el: ImageType, idx: number) => {
+          {addedImages?.map((el: ImageType, idx: number) => {
             return (
               <div key={idx} className={s.carousel}>
                 <Image
