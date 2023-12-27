@@ -2,6 +2,10 @@ import { baseApi } from '@/services'
 import {
   GetLastCreatedPostsRequest,
   GetLastCreatedPostsResponse,
+  GetUserPostsDataRequest,
+  PostProfile,
+  Posts,
+  PublicProfileRequest,
 } from '@/services/public-posts/types'
 
 export const publicPostApi = baseApi.injectEndpoints({
@@ -14,15 +18,27 @@ export const publicPostApi = baseApi.injectEndpoints({
           params: { pageSize, sortBy, sortDirection },
         }),
       }),
-      getUsersAmount: build.query<void, void>({
-        query: () => ({
-          url: `fake-url`,
+      getPublicPost: build.query<PostProfile, { postId: number }>({
+        query: ({ postId }) => ({
+          url: `public-posts/${postId}`,
           method: 'GET',
         }),
       }),
-      getProfileData: build.query<void, { userId: number }>({
-        query: ({ userId }) => ({
-          url: `public-posts/user/${userId}`,
+
+      getUserPostsData: build.query<Posts, GetUserPostsDataRequest>({
+        query: ({ userId, endCursorPostId, pageSize, sortBy, sortDirection }) => {
+          return {
+            url: `public-posts/user/${userId}${endCursorPostId ? `/${endCursorPostId}` : ''}`,
+            method: 'GET',
+            // params: { pageSize, sortBy, sortDirection }, todo need refactor
+          }
+        },
+        providesTags: ['getUserPostsData'],
+      }),
+
+      getProfileData: build.query<PublicProfileRequest, { profileId: number }>({
+        query: ({ profileId }) => ({
+          url: `public-user/profile/${profileId}`,
           method: 'GET',
         }),
       }),
@@ -34,10 +50,10 @@ export const {
   util: { getRunningQueriesThunk },
 } = publicPostApi
 
-export const { getLastCreatedPosts, getUsersAmount, getProfileData } = publicPostApi.endpoints
+export const { getPublicPost, getProfileData, getUserPostsData } = publicPostApi.endpoints
 export const {
-  useGetLastCreatedPostsQuery,
-  useLazyGetLastCreatedPostsQuery,
-  useGetUsersAmountQuery,
+  useGetPublicPostQuery,
+  useLazyGetPublicPostQuery,
+  useGetUserPostsDataQuery,
   useGetProfileDataQuery,
 } = publicPostApi

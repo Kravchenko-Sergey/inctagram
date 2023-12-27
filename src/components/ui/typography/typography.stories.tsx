@@ -24,7 +24,7 @@ const meta = {
         'small_link',
         'error',
       ],
-      control: { type: 'radio' },
+      control: { type: 'radio-button' },
     },
   },
 } satisfies Meta<typeof Typography>

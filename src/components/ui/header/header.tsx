@@ -11,13 +11,24 @@ type Props = {
 export const Header = ({ unauthorized }: Props) => {
   const router = useRouter()
   const { t } = useTranslation()
+  const logoClickHandler = () => {
+    router.push(PATH.HOME)
+  }
 
   return (
     <header className={s.header}>
       <div className={s.content}>
-        <Typography className={s.logo} color="primary" variant="large">
-          Inctagram
-        </Typography>
+        <div className={s.logoWrapper}>
+          <Typography
+            as="span"
+            onClick={logoClickHandler}
+            className={s.logo}
+            color="primary"
+            variant="large"
+          >
+            Inctagram
+          </Typography>
+        </div>
         <div className={s.menuContainer}>
           <LanguageSelect />
         </div>

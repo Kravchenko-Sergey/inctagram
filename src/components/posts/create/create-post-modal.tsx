@@ -1,132 +1,120 @@
-import { useRef, useState } from 'react'
-
-import { useTranslation } from '@/hooks'
-import { Button, Loader, Typography } from '@/components'
-import { ImageOutline } from '@/assets/icons'
-import { CropModal } from './crop-modal'
-import { CroppedImage } from './cropped-image'
-import { BaseModal } from './base-modal'
-import { permittedPostPhotoFileSize, permittedFileTypes } from '@/consts/image'
-import { useRouter } from 'next/router'
-import { PATH } from '@/consts/route-paths'
-import { toast } from 'react-toastify'
+import { useState } from 'react'
 import s from './create-post-modal.module.scss'
+import { useAppDispatch, useAppSelector } from '@/services'
+import { FixModal, HeaderContent } from '@/components/ui/modal/fix-modal'
+import { nextPage, prevPage, setCroppedImage } from '@/components/posts/create/create-post-slice'
+import { FilterPage } from '@/components/posts/create/edit-photo'
+import { CroppedPage } from '@/components/posts/create/modal-pages/cropped-page/cropped-page'
+import { PublicationPage } from '@/components/posts/create/modal-pages/publication-page/publication-page'
+import { AddPhotoPage } from '@/components/posts/create/modal-pages/add-photo-page/add-photo-page'
+import { ModalHeader } from '@/components/posts/create/modal-header/modal-header'
+import getCroppedImg from '@/components/posts/create/cropped-image/Crop'
+import { Layer2 } from '@/assets/icons/Layer 2'
+import { NotificationModal } from '@/components/posts/create/notification-modal/notification-modal'
 
-export type ImageType = {
-  image: string
-  id?: string
-  croppedImage?: string
+type CreatePostModalProps = {
+  open: boolean
+  setOpen: (open: boolean) => void
 }
+export const CreatePostModal = ({ setOpen, open }: CreatePostModalProps) => {
+  const [openNotification, setOpenNotification] = useState(false)
+  const dispatch = useAppDispatch()
+  const page = useAppSelector(state => state.createPost.page)
+  const addedImages = useAppSelector(state => state.createPost.croppedImages)
 
-export const CreatePostModal = () => {
-  const { t } = useTranslation()
-  const inputRef = useRef<HTMLInputElement>(null)
-  const [isBaseModalOpen, setIsBaseModalOpen] = useState(true)
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [image, setImage] = useState<string | null>(null)
-  const [addedImages, setAddedImages] = useState<ImageType[]>([])
-  const [isLoadingPost, setIsLoadingPost] = useState(false)
-  const { push } = useRouter()
+  const onNextPage = () => dispatch(nextPage())
+  const onPrevPage = () => dispatch(prevPage())
 
-  const handleButtonClick = () => {
-    push(PATH.PROFILE)
+  const AddPhotoHeader: HeaderContent = { type: 'title', title: 'Add Photo' }
 
-    //setIsBaseModalOpen(false)
-    setImage(null)
-    setIsModalOpen(false)
-  }
-  const cancelButtonClick = () => {
-    push(PATH.PROFILE)
-    //setIsBaseModalOpen(false)
-    setIsModalOpen(false)
+  const onCroppedHandler = async () => {
+    await showCroppedImg()
+    dispatch(nextPage())
   }
 
-  const handleImageUpload = async (e: any) => {
-    // ToDo сделать инпут контролируемым тут и в добавлении аватара
-    const uploadInput = e.target
+  const onCloseModalHandler = (open: boolean) => {
+    setOpenNotification(true)
+  }
+  const showCroppedImg = async () => {
+    try {
+      {
+        const croppedImg = addedImages.map(async el => {
+          const res = await getCroppedImg(el.img, el.crop)
 
-    if (
-      !(uploadInput instanceof HTMLInputElement) ||
-      !uploadInput.files ||
-      !uploadInput.files.length
-    ) {
-      return
-    }
+          if (res) {
+            dispatch(setCroppedImage({ img: res, id: el.id }))
+          }
+        })
 
-    const file = uploadInput.files[0]
-
-    const fileName = file.name.toLowerCase()
-    const matches = [...permittedFileTypes].some(it => fileName.endsWith(it))
-
-    if (matches && file.size <= permittedPostPhotoFileSize) {
-      setAddedImages([
-        {
-          id: (addedImages.length + 1).toString(),
-          image: URL.createObjectURL(e.target.files[0]),
-        },
-      ])
-      setIsBaseModalOpen(false)
-      setIsModalOpen(true)
-    } else {
-      toast.error(t.errors.imageUploadError, { icon: false })
+        await Promise.all(croppedImg)
+      }
+    } catch (e) {
+      console.log(e)
     }
   }
-  const selectFileHandler = () => {
-    inputRef && inputRef.current?.click()
+
+  const CroppedPhotoHeader: HeaderContent = {
+    type: 'node',
+    node: (
+      <ModalHeader
+        left={{ title: <Layer2 />, callBack: onPrevPage }}
+        title={'Cropped'}
+        right={{ title: 'Next', callBack: onCroppedHandler }}
+      />
+    ),
   }
 
-  if (isLoadingPost) {
-    return <Loader className={s.loader} />
+  const ChangeFilterHeader: HeaderContent = {
+    type: 'node',
+    node: (
+      <ModalHeader
+        left={{ title: <Layer2 />, callBack: onPrevPage }}
+        title={'Filter'}
+        right={{ title: 'Next', callBack: onNextPage }}
+      />
+    ),
   }
+
+  const PublicationHeader: HeaderContent = {
+    type: 'node',
+    node: (
+      <ModalHeader
+        left={{ title: <Layer2 />, callBack: onPrevPage }}
+        title={'Publication'}
+        right={{ title: '' }}
+      />
+    ),
+  }
+
+  const modalContent = [
+    { header: AddPhotoHeader, children: <AddPhotoPage /> },
+    { header: CroppedPhotoHeader, children: <CroppedPage /> },
+    { header: ChangeFilterHeader, children: <FilterPage /> },
+    { header: PublicationHeader, children: <PublicationPage /> },
+  ]
+
+  const classNames = [
+    `${s.addPhotoContainer}`,
+    `${s.CroppedPageContainer}`,
+    `${s.filterContainer}`,
+    `${s.publishContainer}`,
+  ]
 
   return (
     <div className={s.container}>
-      {!addedImages.length && isBaseModalOpen ? (
-        <BaseModal
-          modalWidth="md"
-          open={isBaseModalOpen}
-          onClose={handleButtonClick}
-          title={t.post.addNewPost.addPhoto}
-        >
-          <div className={`${s.photoContainer} ${image === null ? s.emptyPhotoContainer : ''}`}>
-            <ImageOutline />
-          </div>
-          <div>
-            <Button variant="primary" onClick={selectFileHandler} className={s.btn}>
-              <Typography variant="h3">{t.profile.selectImage}</Typography>
-            </Button>
-            <input
-              type="file"
-              ref={inputRef}
-              name="cover"
-              onChange={handleImageUpload}
-              accept="image/png, image/jpeg, image/jpg"
-              style={{ display: 'none' }}
-            />
-          </div>
-        </BaseModal>
-      ) : (
-        <CropModal
-          isPostCreateLoadingHandler={setIsLoadingPost}
-          image={image}
-          open={isModalOpen}
-          onClose={handleButtonClick}
-          onCancel={cancelButtonClick}
-          title={t.post.addNewPost.cropping}
-          addedImages={addedImages}
-          setAddedImages={setAddedImages}
-          isBaseModalOpen={isBaseModalOpen}
-          setIsBaseModalOpen={setIsBaseModalOpen}
-          setImage={setImage}
-        >
-          <CroppedImage
-            image={image}
-            setImage={setImage}
-            addedImages={addedImages}
-            setAddedImages={setAddedImages}
-          />
-        </CropModal>
-      )}
+      <FixModal
+        open={open}
+        className={classNames[page]}
+        onOpenChange={onCloseModalHandler}
+        headerContent={modalContent[page].header}
+      >
+        {modalContent[page].children}
+      </FixModal>
+      <NotificationModal
+        closeOtherModal={setOpen}
+        open={openNotification}
+        setOpen={setOpenNotification}
+      />
     </div>
   )
 }

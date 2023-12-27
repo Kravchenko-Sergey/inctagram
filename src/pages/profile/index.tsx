@@ -1,8 +1,41 @@
-import { getMainLayout, HeadMeta } from '@/components'
+import { HeadMeta } from '@/components'
 
 import s from './profile.module.scss'
 import { ProfileMain } from '@/components/profile/profile-main'
+import { wrapper } from '@/services'
+import {
+  getProfileData,
+  getPublicPost,
+  getRunningQueriesThunk,
+  getUserPostsData,
+} from '@/services/public-posts'
+import { getMixedLayout } from '@/components/layout'
 
+export const getServerSideProps = wrapper.getServerSideProps(store => async context => {
+  const id = context.query?.id
+  const postId = context.query?.postId
+
+  const result = await store.dispatch(getProfileData.initiate({ profileId: +id! }))
+
+  if (id) {
+    await store.dispatch(getUserPostsData.initiate({ userId: +id }))
+  }
+
+  if (postId) {
+    await store.dispatch(getPublicPost.initiate({ postId: +postId! }))
+  }
+
+  if (!result) {
+    return {
+      notFound: true,
+    }
+  }
+  await Promise.all(store.dispatch(getRunningQueriesThunk()))
+
+  return {
+    props: {},
+  }
+})
 const Profile = () => {
   return (
     <>
@@ -14,5 +47,6 @@ const Profile = () => {
   )
 }
 
-Profile.getLayout = getMainLayout
+Profile.getLayout = getMixedLayout
+
 export default Profile

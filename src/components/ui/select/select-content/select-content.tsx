@@ -1,4 +1,4 @@
-import React from 'react'
+import { memo } from 'react'
 import * as SelectRadix from '@radix-ui/react-select'
 import { Typography } from '@/components'
 import s from '@/components/ui/select/select.module.scss'
@@ -10,7 +10,7 @@ type Props = {
   variant?: 'primary' | 'pagination'
 }
 
-export const SelectContent = React.memo(({ options, variant = 'primary' }: Props) => {
+export const SelectContent = memo(({ options, variant = 'primary' }: Props) => {
   const classNames = {
     item: clsx(s.item, s[variant]),
     content: clsx(s.content, s[variant]),

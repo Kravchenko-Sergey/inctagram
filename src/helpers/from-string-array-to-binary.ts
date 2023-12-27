@@ -1,10 +1,12 @@
-import { ImageType } from '@/components/posts/create/create-post-modal'
+// import { ImageType } from '@/components/posts/create/create-post-modal'
+
+import { ImageType } from '@/components/posts/create/create-post-slice'
 
 export const getBinaryImageData = async (imageObjects: ImageType[]) => {
   const binaryImages = []
 
   for (const imageObj of imageObjects) {
-    const imageUrl = imageObj.image
+    const imageUrl = imageObj.img
 
     try {
       const response = await fetch(imageUrl)

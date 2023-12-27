@@ -26,8 +26,12 @@
   margin: 12px 64px 12px 60px;
 }
 
-.logo {
+.logoWrapper {
   flex: 1;
+}
+
+.logo {
+  cursor: pointer;
 }
 
 .buttons {

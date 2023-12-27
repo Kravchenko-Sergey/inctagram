@@ -1,6 +1,5 @@
 import { useGetProfileQuery, useUpdateProfileMutation } from '@/services/profile/profile-api'
-import { useMeQuery } from '@/services/auth/auth-api'
-import { getMainLayout, Tabs, ProfileUpdate } from '@/components'
+import { getMainLayout, ProfileUpdate, Tabs } from '@/components'
 import { useTranslation } from '@/hooks'
 import { ProfileSettingsFormType } from '@/schemas'
 import { toast } from 'react-toastify'
@@ -11,9 +10,9 @@ import { Loader } from '@/components/ui/loader'
 const ProfileSettings = () => {
   const { t } = useTranslation()
 
-  const [updateProfile, { error: updateProfileError }] = useUpdateProfileMutation()
-  const { data: me } = useMeQuery()
-  const { data: profile, isLoading } = useGetProfileQuery({ profileId: me?.userId })
+  const [updateProfile] = useUpdateProfileMutation()
+
+  const { data: profile, isLoading } = useGetProfileQuery()
 
   const updateProfileHandler = async (data: ProfileSettingsFormType) => {
     try {
