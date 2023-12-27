@@ -15,6 +15,8 @@ export const Header = ({ unauthorized }: Props) => {
     router.push(PATH.HOME)
   }
 
+  console.log('test')
+
   return (
     <header className={s.header}>
       <div className={s.content}>
