@@ -55,46 +55,46 @@ export const CroppedImage = ({ image, addedImages, setAddedImages }: PropsType) 
     <>
       <div className={s.container}>
         <div className={s.cropContainer}>
-          <Slider {...settings}>
-            {addedImages.map((el, idx) => {
-              return (
-                <div key={idx} className={s.carousel} onClick={() => setIndex(idx)}>
-                  <EasyCrop
-                    image={el.image}
-                    objectFit={'fill'}
-                    crop={crop}
-                    zoom={zoomValue}
-                    setZoom={setZoomValue}
-                    setCrop={setCrop}
-                    aspectRatio={aspectRatio}
-                    croppedAreaPixels={croppedAreaPixels}
-                    setCroppedAreaPixels={setCroppedAreaPixels}
-                  />
-                  <div className={s.editAndAdd}>
-                    <div className={s.edit}>
-                      <Crop className={s.expand} setAspectRatio={setAspectRatio} />
-                      <Zoom className={s.maximize} zoom={zoomValue} setZoom={setZoomValue} />
-                    </div>
-                    <div>
-                      <Add
-                        image={croppedImage ? croppedImage : image}
-                        addedImages={addedImages}
-                        setAddedImages={setAddedImages}
-                        croppedImage={croppedImage}
-                      />
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => showCroppedImg(el.image, croppedAreaPixels)}
-                    color="primary"
-                    className={s.button}
-                  >
-                    {t.post.addNewPost.showResult}
-                  </button>
-                </div>
-              )
-            })}
-          </Slider>
+          {/*<Slider {...settings}>*/}
+          {/*  {addedImages.map((el, idx) => {*/}
+          {/*    return (*/}
+          {/*      <div key={idx} className={s.carousel} onClick={() => setIndex(idx)}>*/}
+          {/*        <EasyCrop*/}
+          {/*          image={el.image}*/}
+          {/*          objectFit={'fill'}*/}
+          {/*          crop={crop}*/}
+          {/*          zoom={zoomValue}*/}
+          {/*          setZoom={setZoomValue}*/}
+          {/*          setCrop={setCrop}*/}
+          {/*          aspectRatio={aspectRatio}*/}
+          {/*          croppedAreaPixels={croppedAreaPixels}*/}
+          {/*          setCroppedAreaPixels={setCroppedAreaPixels}*/}
+          {/*        />*/}
+          {/*        <div className={s.editAndAdd}>*/}
+          {/*          <div className={s.edit}>*/}
+          {/*            <Crop className={s.expand} setAspectRatio={setAspectRatio} />*/}
+          {/*            <Zoom className={s.maximize} zoom={zoomValue} setZoom={setZoomValue} />*/}
+          {/*          </div>*/}
+          {/*          <div>*/}
+          {/*            <Add*/}
+          {/*              image={croppedImage ? croppedImage : image}*/}
+          {/*              addedImages={addedImages}*/}
+          {/*              setAddedImages={setAddedImages}*/}
+          {/*              croppedImage={croppedImage}*/}
+          {/*            />*/}
+          {/*          </div>*/}
+          {/*        </div>*/}
+          {/*        <button*/}
+          {/*          onClick={() => showCroppedImg(el.image, croppedAreaPixels)}*/}
+          {/*          color="primary"*/}
+          {/*          className={s.button}*/}
+          {/*        >*/}
+          {/*          {t.post.addNewPost.showResult}*/}
+          {/*        </button>*/}
+          {/*      </div>*/}
+          {/*    )*/}
+          {/*  })}*/}
+          {/*</Slider>*/}
         </div>
       </div>
     </>
