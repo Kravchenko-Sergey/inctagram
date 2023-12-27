@@ -2,7 +2,10 @@
   display: flex;
   gap: 12px;
   align-items: center;
-  margin-bottom: 24px;
+
+  &:not(:last-child) {
+    margin-bottom: 24px;
+  }
 }
 
 .item {
@@ -43,6 +46,11 @@
   border-radius: 50%;
 
   animation: fadein 0.2s ease;
+}
+
+.label {
+  cursor: pointer;
+  user-select: none;
 }
 
 @keyframes fadein {

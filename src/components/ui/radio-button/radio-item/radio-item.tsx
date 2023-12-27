@@ -20,7 +20,7 @@ export const RadioItem = forwardRef<ElementRef<typeof RadioGroup.Item>, RadioIte
         <RadioGroup.Item ref={ref} className={classNames.item} value={value} id={id}>
           <RadioGroup.Indicator className={classNames.indicator} />
         </RadioGroup.Item>
-        <Typography as={'span'} variant={'regular_text_14'}>
+        <Typography htmlFor={id} as={'label'} className={s.label} variant={'regular_text_14'}>
           {title}
         </Typography>
       </div>
