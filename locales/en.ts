@@ -179,6 +179,7 @@ export const en: LocaleType = {
     titleLogOut: 'Log Out',
     profileSettings: 'Profile Settings',
     avatarAlt: 'User avatar',
+    or: 'Or',
     following(count: number): any {
       const str = pluralizeEn(count)
 

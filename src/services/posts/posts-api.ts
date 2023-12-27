@@ -20,7 +20,8 @@ export const postAPI = baseApi.injectEndpoints({
           body,
         }
       },
-      invalidatesTags: ['getProfileData'],
+      // invalidatesTags: ['getProfileData'],
+      invalidatesTags: ['getUserPostsData'],
     }),
     createPostPhoto: build.mutation<CreatePostImageResponse, CreatePostImageRequest>({
       query: body => ({
@@ -59,7 +60,7 @@ export const postAPI = baseApi.injectEndpoints({
           method: 'DELETE',
         }
       },
-      invalidatesTags: ['getProfileData'],
+      invalidatesTags: ['getUserPostsData'],
     }),
     deletePostImage: build.mutation<void, { imageId: string }>({
       query: ({ imageId }) => ({
@@ -92,7 +93,7 @@ export const postAPI = baseApi.injectEndpoints({
       //     patchResult.undo()
       //   }
       // },
-      invalidatesTags: ['getProfileData'],
+      invalidatesTags: ['getUserPostsData'],
     }),
   }),
 })
