@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-
+import { createPostReducer } from '@/components/posts/create/create-post-slice'
 import { baseApi } from '@/services/base-api'
 import { createWrapper } from 'next-redux-wrapper'
 import { appReducer } from '@/services/slices/slice'
@@ -9,6 +9,7 @@ import { appReducer } from '@/services/slices/slice'
 export const store = configureStore({
   reducer: {
     [baseApi.reducerPath]: baseApi.reducer,
+    createPost: createPostReducer,
     appReducer,
   },
   devTools: true,

@@ -1,17 +1,16 @@
 import { ChangeEvent, MutableRefObject, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
-
 import maximize from '@/assets/icons/maximize-outline.svg'
-
 import s from './zoom.module.scss'
 
 type PropsType = {
   className?: string
   zoom: number
-  setZoom: (zoom: number) => void
+  imgId: number
+  setZoom: (zoom: number, id: number) => void
 }
 
-export const Zoom = ({ zoom, setZoom }: PropsType) => {
+export const Zoom = ({ zoom, setZoom, imgId }: PropsType) => {
   const [isOpen, setIsOpen] = useState(false)
   const zoomRef = useRef() as MutableRefObject<HTMLDivElement>
 
@@ -30,7 +29,7 @@ export const Zoom = ({ zoom, setZoom }: PropsType) => {
   const onZoomChange = (event: ChangeEvent<HTMLInputElement>) => {
     const scale = parseFloat(event.target.value)
 
-    setZoom(scale)
+    setZoom(imgId, scale)
   }
 
   return (

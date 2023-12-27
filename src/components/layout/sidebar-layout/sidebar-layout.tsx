@@ -19,6 +19,7 @@ import {
 } from '@/assets/icons'
 import { useTranslation } from '@/hooks'
 import { PATH } from '@/consts/route-paths'
+import { CreatePostModal } from '@/components/posts/create'
 
 type SidebarLayoutProps = {
   className?: string
@@ -40,7 +41,7 @@ const SidebarLayout = ({ children }: SidebarLayoutProps) => {
     },
 
     // { href: PATH.PROFILE, icon: <PersonOutline />, title: t.sidebars.myProfile },
-    { href: PATH.CREATE, icon: <PlusSquareOutline />, title: t.sidebars.create },
+    { href: 'create', icon: <PlusSquareOutline />, title: t.sidebars.create },
     { href: PATH.MESSENGER, icon: <MessageCircleOutline />, title: t.sidebars.messenger },
     { href: PATH.SEARCH, icon: <SearchIcon />, title: t.sidebars.search },
     {
@@ -79,20 +80,24 @@ const SidebarLayout = ({ children }: SidebarLayoutProps) => {
         </div>
       </Modal>
       <Sidebar>
-        {sidebarItems.map((item, index) => (
-          <Link
-            key={index}
-            href={item.href}
-            className={`${item.className ? item.className : s.item} ${
-              router.pathname === item.href ? s.active : ''
-            }`}
-          >
-            <>
-              {item.icon}
-              <Typography color="inherit">{item.title}</Typography>
-            </>
-          </Link>
-        ))}
+        {sidebarItems.map((item, index) =>
+          item.href !== 'create' ? (
+            <Link
+              key={index}
+              href={item.href}
+              className={`${item.className ? item.className : s.item} ${
+                router.pathname === item.href ? s.active : ''
+              }`}
+            >
+              <>
+                {item.icon}
+                <Typography color="inherit">{item.title}</Typography>
+              </>
+            </Link>
+          ) : (
+            <CreateItem key={index} />
+          )
+        )}
         <div className={s.logout}>
           <LogOutOutline color="inherit" />
           <Typography onClick={() => setModalOpen(!modalOpen)} color="inherit">
@@ -107,4 +112,20 @@ const SidebarLayout = ({ children }: SidebarLayoutProps) => {
 
 export const getSidebarLayout = (page: ReactNode) => {
   return <SidebarLayout>{page}</SidebarLayout>
+}
+
+const CreateItem = () => {
+  const { t } = useTranslation()
+
+  const [open, setOpen] = useState(false)
+
+  return (
+    <>
+      <div className={s.item} onClick={() => setOpen(true)}>
+        <PlusSquareOutline />
+        <Typography color="inherit">{t.sidebars.create}</Typography>
+      </div>
+      <CreatePostModal open={open} setOpen={setOpen} />
+    </>
+  )
 }
