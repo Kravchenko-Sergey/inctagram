@@ -180,6 +180,16 @@ export const en: LocaleType = {
     profileSettings: 'Profile Settings',
     avatarAlt: 'User avatar',
     or: 'Or',
+    personal: 'Personal',
+    business: 'Business',
+    accountType: 'Account type',
+    yourSubscriptionCosts: 'Your subscription costs',
+    tenPerDay: '$10 per 1 Day',
+    fiftyPerWeek: '$50 per 7 Day',
+    hundredPerMonths: '$100 per month',
+    fivePerDay: '$5 per 1 Day',
+    twentyFivePerWeek: '$25 per 7 Day',
+    fiftyPerMonths: '$50 per month',
     following(count: number): any {
       const str = pluralizeEn(count)
 

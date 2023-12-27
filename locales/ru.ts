@@ -171,6 +171,16 @@ export const ru = {
     profileSettings: 'Настройки профиля',
     avatarAlt: 'Аватар пользователя',
     or: 'или',
+    personal: 'Персональный',
+    business: 'Бизнес',
+    accountType: 'Тип подписки',
+    yourSubscriptionCosts: 'Стоимость подписки',
+    tenPerDay: '10 долларов за 1 день',
+    fiftyPerWeek: '50 долларов за неделю',
+    hundredPerMonths: '100 долларов за месяц',
+    fivePerDay: '5 долларов за 1 день',
+    twentyFivePerWeek: '25 долларов за неделю',
+    fiftyPerMonths: '50 долларов за месяц',
     following(count: number) {
       const str = pluralizeRu(count)
 

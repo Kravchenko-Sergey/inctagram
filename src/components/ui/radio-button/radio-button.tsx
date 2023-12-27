@@ -16,7 +16,7 @@ export type RadioGroupProps = {
 export const RadioButton = forwardRef<ElementRef<typeof RadioGroup.Root>, RadioGroupProps>(
   ({ onValueChange, options, defaultValue, className }, ref) => {
     const buttons = options.map(el => (
-      <RadioItem value={el.value} key={el.title} title={el.title} />
+      <RadioItem value={el.value} key={el.title} id={el.value} title={el.title} />
     ))
 
     return (
