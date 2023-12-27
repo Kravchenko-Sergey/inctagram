@@ -31,6 +31,8 @@ export const PostItem = memo(({ post }: Props) => {
     push(`${PATH.PROFILE}/?id=${post.ownerId}&postId=${post.id}`)
   }
 
+  console.log('value')
+
   return (
     <div className={s.root} onClick={postClickHandler}>
       {post.images.length === 0 ? (
