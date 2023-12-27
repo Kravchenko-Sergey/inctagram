@@ -106,21 +106,21 @@ export const EditPostModal = ({ post, isOpen, handleClose, userName, avatar }: P
         title={t.post.edit.title}
         onInteractOutside={handleClickOutside}
       >
-        <Slider {...settings} className={s.container}>
-          {post?.images.map((image: PostImageType, idx: number) => {
-            if (!(idx % 2)) {
-              return (
-                <div key={image.uploadId} className={s.carousel}>
-                  <DeleteIcon
-                    className={s.deleteImage}
-                    onClick={() => handleDeletePostImage(image.uploadId)}
-                  />
-                  <Image alt="img" src={image.url} width={490} height={503} />
-                </div>
-              )
-            }
-          })}
-        </Slider>
+        {/*<Slider {...settings} className={s.container}>*/}
+        {/*  {post?.images.map((image: PostImageType, idx: number) => {*/}
+        {/*    if (!(idx % 2)) {*/}
+        {/*      return (*/}
+        {/*        <div key={image.uploadId} className={s.carousel}>*/}
+        {/*          <DeleteIcon*/}
+        {/*            className={s.deleteImage}*/}
+        {/*            onClick={() => handleDeletePostImage(image.uploadId)}*/}
+        {/*          />*/}
+        {/*          <Image alt="img" src={image.url} width={490} height={503} />*/}
+        {/*        </div>*/}
+        {/*      )*/}
+        {/*    }*/}
+        {/*  })}*/}
+        {/*</Slider>*/}
         <div className={s.wrap}>
           <div className={s.userInfo}>
             <Avatar photo={avatar} size={36} className={s.avatar} />

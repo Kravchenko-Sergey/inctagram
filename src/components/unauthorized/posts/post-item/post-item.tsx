@@ -45,21 +45,21 @@ export const PostItem = memo(({ post }: Props) => {
         </div>
       ) : (
         <div>
-          <Slider {...settings}>
-            {filterImagesOnly1440(post.images).map((image: PostImageType) => {
-              return (
-                <div className={s.item} key={image.uploadId}>
-                  <Image
-                    src={image.url ? image.url : empty}
-                    className={`${s.image} ${isCollapsed ? s.imageCollapsed : ''}`}
-                    width={234}
-                    height={240}
-                    alt="Post image"
-                  />
-                </div>
-              )
-            })}
-          </Slider>
+          {/*<Slider {...settings}>*/}
+          {/*  {filterImagesOnly1440(post.images).map((image: PostImageType) => {*/}
+          {/*    return (*/}
+          {/*      <div className={s.item} key={image.uploadId}>*/}
+          {/*        <Image*/}
+          {/*          src={image.url ? image.url : empty}*/}
+          {/*          className={`${s.image} ${isCollapsed ? s.imageCollapsed : ''}`}*/}
+          {/*          width={234}*/}
+          {/*          height={240}*/}
+          {/*          alt="Post image"*/}
+          {/*        />*/}
+          {/*      </div>*/}
+          {/*    )*/}
+          {/*  })}*/}
+          {/*</Slider>*/}
         </div>
       )}
       <div className={s.header}>

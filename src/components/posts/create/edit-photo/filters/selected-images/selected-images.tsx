@@ -62,22 +62,22 @@ export const SelectedImages = ({ addedImages, activeFilter, setActiveFilter }: P
   return (
     <>
       <div className={s.imgContainer}>
-        <Slider {...settings}>
-          {/*{addedImages.map((el: ImageType, idx: number) => {*/}
-          {/*  return (*/}
-          {/*    <div key={idx} className={s.carousel}>*/}
-          {/*      <Image*/}
-          {/*        className={s.img}*/}
-          {/*        alt="img"*/}
-          {/*        style={{ filter: activeFilter }}*/}
-          {/*        src={el.image}*/}
-          {/*        width={490}*/}
-          {/*        height={503}*/}
-          {/*      />*/}
-          {/*    </div>*/}
-          {/*  )*/}
-          {/*})}*/}
-        </Slider>
+        {/*<Slider {...settings}>*/}
+        {/*  {addedImages.map((el: ImageType, idx: number) => {*/}
+        {/*    return (*/}
+        {/*      <div key={idx} className={s.carousel}>*/}
+        {/*        <Image*/}
+        {/*          className={s.img}*/}
+        {/*          alt="img"*/}
+        {/*          style={{ filter: activeFilter }}*/}
+        {/*          src={el.image}*/}
+        {/*          width={490}*/}
+        {/*          height={503}*/}
+        {/*        />*/}
+        {/*      </div>*/}
+        {/*    )*/}
+        {/*  })}*/}
+        {/*</Slider>*/}
       </div>
       <div className={s.filterContainer}>
         {filters.map((el, idx) => {
