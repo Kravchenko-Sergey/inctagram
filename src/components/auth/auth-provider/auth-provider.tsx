@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }: PropsType) => {
   const isProtectedPage = !commonRoutes.includes(remainingPath)
 
   useEffect(() => {
-    if (!isLoading && !user && isProtectedPage && router.pathname === '/github') {
+    if ((!isLoading && !user && isProtectedPage) || router.pathname === '/github') {
       router.push(PATH.MAIN)
 
       return

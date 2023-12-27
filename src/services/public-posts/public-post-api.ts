@@ -33,6 +33,7 @@ export const publicPostApi = baseApi.injectEndpoints({
             // params: { pageSize, sortBy, sortDirection }, todo need refactor
           }
         },
+        providesTags: ['getUserPostsData'],
       }),
 
       getProfileData: build.query<PublicProfileRequest, { profileId: number }>({

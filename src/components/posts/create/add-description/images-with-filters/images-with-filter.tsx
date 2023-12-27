@@ -20,6 +20,8 @@ export const FilteredImages = ({ addedImages }: PropsType) => {
     }
   `
 
+  console.log('value')
+
   return (
     <>
       <div className={s.imgContainer}>

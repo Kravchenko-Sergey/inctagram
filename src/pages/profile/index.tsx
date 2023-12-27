@@ -3,13 +3,13 @@ import { HeadMeta } from '@/components'
 import s from './profile.module.scss'
 import { ProfileMain } from '@/components/profile/profile-main'
 import { wrapper } from '@/services'
-import { getMixedLayout } from '@/components/layout'
 import {
   getProfileData,
   getPublicPost,
   getRunningQueriesThunk,
   getUserPostsData,
 } from '@/services/public-posts'
+import { getMixedLayout } from '@/components/layout'
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async context => {
   const id = context.query?.id
@@ -18,7 +18,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async cont
   const result = await store.dispatch(getProfileData.initiate({ profileId: +id! }))
 
   if (id) {
-    const res = await store.dispatch(getUserPostsData.initiate({ userId: +id }))
+    await store.dispatch(getUserPostsData.initiate({ userId: +id }))
   }
 
   if (postId) {
