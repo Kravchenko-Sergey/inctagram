@@ -16,6 +16,8 @@ type PropsType = {
 export const FilteredImages = ({ addedImages, activeFilter }: PropsType) => {
   const settings = getSliderSettings()
 
+  console.log('value')
+
   return (
     <>
       <div className={s.imgContainer}>
