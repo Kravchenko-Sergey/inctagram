@@ -3,7 +3,7 @@ import { ForgotPasswordForm, getHeaderLayout, HeadMeta } from '@/components'
 const ForgotPassword = () => {
   return (
     <>
-      <HeadMeta title="Forgot password" />
+      <HeadMeta title="Forgot  password" />
       <main>
         <ForgotPasswordForm />
       </main>
