@@ -1,14 +1,9 @@
-
-.tabsRoot{
+.tabsRoot {
   display: flex;
   flex-direction: column;
-
-
 }
 .tabsList {
-display: flex;
-
-
+  display: flex;
 }
 .item {
   cursor: pointer;
@@ -36,7 +31,7 @@ display: flex;
 
     border-bottom: none;
   }
-  &:disabled{
+  &:disabled {
     cursor: auto;
     color: var(--primary-900);
     border-bottom: 2px solid var(--primary-900);
@@ -53,5 +48,3 @@ display: flex;
   border-bottom: 2px solid var(--primary-500);
   background: none;
 }
-
-
