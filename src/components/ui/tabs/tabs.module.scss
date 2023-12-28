@@ -1,7 +1,11 @@
 .tabsList {
-  display: flex;
-}
 
+
+}
+.tabsRoot{
+  display: flex;
+  flex-direction: column;
+}
 .item {
   cursor: pointer;
   user-select: none;
@@ -9,13 +13,11 @@
   flex: 1 1 auto;
 
   padding: 6px 24px;
-
-  color: var(--primary-500);
-
-  border-bottom: 2px solid var(--primary-100);
+  color: var(--dark-100);
+  border-bottom: 2px solid var(--dark-100);
 
   &:hover {
-    background-color: #101722;
+    color: var(--primary-500);
     border-bottom: 2px solid var(--primary-500);
   }
 
@@ -26,13 +28,16 @@
   &:focus {
     background-color: var(--dark-700);
     border-radius: 2px;
-    outline: 2px solid var(--primary-700);
+    box-sizing: border-box;
+
+    border-bottom: none;
   }
 }
 
 .item[data-state='active'] {
-  background-color: #1c2431;
+  color: var(--primary-500);
   border-bottom: 2px solid var(--primary-500);
+  background: none;
 }
 
 .disabled {

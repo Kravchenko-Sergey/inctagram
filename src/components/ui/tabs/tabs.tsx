@@ -1,38 +1,67 @@
-import { MouseEventHandler } from 'react'
+import {ComponentPropsWithoutRef, MouseEventHandler, ReactNode} from 'react'
 
 import * as TabsRadixUI from '@radix-ui/react-tabs'
 
 import s from './tabs.module.scss'
 
-type Tab = {
+export type SwitcherOptions = {
+  label: string
   value: string
-  title: string
-  onClick?: MouseEventHandler<HTMLButtonElement> | undefined
-  disabled?: boolean
+  disabled:boolean
 }
 
+//Тут изменил onChange на onValueChange так как ругался TS когда передавал в onChange свою функцию
 type TabsProps = {
-  tabsList: Tab[]
-}
+  tabs: SwitcherOptions[]
+    content?:ReactNode
+  disabled?: boolean
+  className?: string
+} & ComponentPropsWithoutRef<typeof TabsRadixUI.Root>
 
-export const Tabs = ({ tabsList }: TabsProps) => {
-  const defaultValue = tabsList[0].value
+export const Tabs = (
+    {
+      tabs,
+      children,
+      value,
+      defaultValue,
+        content,
+      ...rest
+    }: TabsProps
+) => {
+
 
   return (
-    <TabsRadixUI.Root className={s.tabsRoot} defaultValue={defaultValue}>
+    <TabsRadixUI.Root className={s.tabsRoot} value={value} defaultValue={defaultValue} {...rest}>
       <TabsRadixUI.List className={s.tabsList}>
-        {tabsList.map(tab => (
+        {tabs?.map(tab => (
           <TabsRadixUI.Trigger
             className={`${s.item} ${tab.disabled ? s.disabled : ''}`}
             key={tab.value}
             value={tab.value}
             disabled={tab.disabled}
-            onClick={tab.onClick}
           >
-            {tab.title}
+            {tab.label}
           </TabsRadixUI.Trigger>
         ))}
+          <>{children}</>
       </TabsRadixUI.List>
     </TabsRadixUI.Root>
   )
+}
+
+type ContentForTabsProps = {
+
+} & ComponentPropsWithoutRef<typeof TabsRadixUI.Content>
+export const ContentForTabs = (
+    {
+        value,
+        children,
+        ...rest
+    }:ContentForTabsProps
+)=>{
+    return (
+        <TabsRadixUI.Content value={value} {...rest}>
+            {children}
+        </TabsRadixUI.Content>
+    )
 }
