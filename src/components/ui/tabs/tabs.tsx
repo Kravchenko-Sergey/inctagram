@@ -13,7 +13,7 @@ export type SwitcherOptions = {
 //Тут изменил onChange на onValueChange так как ругался TS когда передавал в onChange свою функцию
 type TabsProps = {
   tabs: SwitcherOptions[]
-    content?:ReactNode
+  content?:ReactNode
   disabled?: boolean
   className?: string
 } & ComponentPropsWithoutRef<typeof TabsRadixUI.Root>
@@ -24,14 +24,15 @@ export const Tabs = (
       children,
       value,
       defaultValue,
-        content,
+      className,
+      content,
       ...rest
     }: TabsProps
 ) => {
 
 
   return (
-    <TabsRadixUI.Root className={s.tabsRoot} value={value} defaultValue={defaultValue} {...rest}>
+    <TabsRadixUI.Root className={className} value={value} defaultValue={defaultValue} {...rest}>
       <TabsRadixUI.List className={s.tabsList}>
         {tabs?.map(tab => (
           <TabsRadixUI.Trigger
@@ -43,8 +44,8 @@ export const Tabs = (
             {tab.label}
           </TabsRadixUI.Trigger>
         ))}
-          <>{children}</>
       </TabsRadixUI.List>
+        <div>{children}</div>
     </TabsRadixUI.Root>
   )
 }
@@ -52,7 +53,7 @@ export const Tabs = (
 type ContentForTabsProps = {
 
 } & ComponentPropsWithoutRef<typeof TabsRadixUI.Content>
-export const ContentForTabs = (
+export const TabsContent = (
     {
         value,
         children,

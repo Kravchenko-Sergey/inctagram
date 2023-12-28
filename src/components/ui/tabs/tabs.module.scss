@@ -1,10 +1,14 @@
-.tabsList {
 
-
-}
 .tabsRoot{
   display: flex;
   flex-direction: column;
+
+
+}
+.tabsList {
+display: flex;
+
+
 }
 .item {
   cursor: pointer;
@@ -32,6 +36,16 @@
 
     border-bottom: none;
   }
+  &:disabled{
+    cursor: auto;
+    color: var(--primary-900);
+    border-bottom: 2px solid var(--primary-900);
+
+    &:hover {
+      background-color: transparent;
+      border-bottom: 2px solid var(--primary-900);
+    }
+  }
 }
 
 .item[data-state='active'] {
@@ -40,13 +54,4 @@
   background: none;
 }
 
-.disabled {
-  cursor: auto;
-  color: var(--primary-900);
-  border-bottom: 2px solid var(--primary-900);
 
-  &:hover {
-    background-color: transparent;
-    border-bottom: 2px solid var(--primary-900);
-  }
-}

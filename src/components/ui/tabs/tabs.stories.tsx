@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import * as TabsRadixUI from '@radix-ui/react-tabs'
-import {ContentForTabs, Tabs} from './tabs'
+import { Tabs, TabsContent} from './tabs'
 import {useState} from "react";
 import {Card} from "@/components";
 
@@ -64,23 +63,22 @@ export const TabsWithContent = {
                 display:'flex',
                 flexDirection:'column',
                 height:'500px',
-                width:'640px',
                 alignItems:'center',
                 justifyContent:'center',
                 marginTop:'20px'
               }}>
-                <ContentForTabs value={'1'}>
+                <TabsContent value={'1'}>
                 <div>General information</div>
-              </ContentForTabs>
-                <ContentForTabs value={'2'}>
+              </TabsContent>
+                <TabsContent value={'2'}>
                   <div>Devices</div>
-                </ContentForTabs>
-                <ContentForTabs value={'3'}>
+                </TabsContent>
+                <TabsContent value={'3'}>
                   <div>Account Management</div>
-                </ContentForTabs>
-                <ContentForTabs value={'4'}>
+                </TabsContent>
+                <TabsContent value={'4'}>
                   <div>My payments</div>
-                </ContentForTabs>
+                </TabsContent>
               </Card>
             </Tabs>
 
