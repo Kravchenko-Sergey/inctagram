@@ -67,7 +67,7 @@ export const TabsWithContent = {
                 width:'640px',
                 alignItems:'center',
                 justifyContent:'center',
-                marginTop:'20px'
+                marginTop:'19px'
               }}>
                 <ContentForTabs value={'1'}>
                 <div>General information</div>
