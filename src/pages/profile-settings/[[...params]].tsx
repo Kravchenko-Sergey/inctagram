@@ -8,6 +8,7 @@ import s from './profile-settings.module.scss'
 import { Loader } from '@/components/ui/loader'
 import { TabsContent } from '@/components/ui/tabs/tabs'
 import { useState } from 'react'
+import { AccountManagement } from '@/components/profile/account-management'
 
 const ProfileSettings = () => {
   const { t } = useTranslation()
@@ -48,7 +49,7 @@ const ProfileSettings = () => {
         <div>Devices</div>
       </TabsContent>
       <TabsContent value={'3'}>
-        <div>Account Management</div>
+        <AccountManagement />
       </TabsContent>
       <TabsContent value={'4'}>
         <div>My payments</div>
