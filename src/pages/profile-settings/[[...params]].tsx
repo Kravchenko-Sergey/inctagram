@@ -6,6 +6,8 @@ import { toast } from 'react-toastify'
 
 import s from './profile-settings.module.scss'
 import { Loader } from '@/components/ui/loader'
+import { AccountManagement } from '@/components/profile/account-management'
+import { useRouter } from 'next/router'
 
 const ProfileSettings = () => {
   const { t } = useTranslation()
@@ -13,6 +15,7 @@ const ProfileSettings = () => {
   const [updateProfile] = useUpdateProfileMutation()
 
   const { data: profile, isLoading } = useGetProfileQuery()
+  const { query, push } = useRouter()
 
   const updateProfileHandler = async (data: ProfileSettingsFormType) => {
     try {
@@ -34,16 +37,17 @@ const ProfileSettings = () => {
   }
 
   return (
-    <div className={s.root}>
-      <div>
-        <Tabs tabsList={profileTabs} />
-      </div>
-      <div className={s.formContent}>
-        <div className={s.form}>
-          <ProfileUpdate updateProfileHandler={updateProfileHandler} profile={profile} />
-        </div>
-      </div>
-    </div>
+    <AccountManagement />
+    // <div className={s.root}>
+    //   <div>
+    //     <Tabs tabsList={profileTabs} />
+    //   </div>
+    //   <div className={s.formContent}>
+    //     <div className={s.form}>
+    //       <ProfileUpdate updateProfileHandler={updateProfileHandler} profile={profile} />
+    //     </div>
+    //   </div>
+    // </div>
   )
 }
 

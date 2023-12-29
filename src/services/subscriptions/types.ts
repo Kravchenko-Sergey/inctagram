@@ -1,5 +1,5 @@
 export type CreateSubscriptions = {
-  typeSubscription: {}
+  typeSubscription: 'MONTHLY' | 'DAY' | 'WEEKLY'
   paymentType: 'STRIPE' | 'PAYPAL'
   amount: number
   baseUrl: string

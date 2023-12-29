@@ -5,7 +5,7 @@ import { LocaleType } from 'locales/ru'
 export const accountManagementSchema = (t: LocaleType) => {
   return z.object({
     type: z.string(),
-    cost: z.nullable(z.string()),
+    cost: z.string(),
   })
 }
 

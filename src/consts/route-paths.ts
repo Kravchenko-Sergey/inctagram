@@ -5,6 +5,8 @@ export const PATH = {
   CREATE: '/create',
   PROFILE: '/profile',
   // PROFILE: '/profile/[id]',
+  // PROFILE_SETTINGS: 'profile/settings/edit',
+
   PROFILE_SETTINGS: '/profile-settings',
   MESSENGER: '/messenger',
   SEARCH: '/search',

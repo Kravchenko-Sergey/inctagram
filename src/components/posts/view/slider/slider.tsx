@@ -18,7 +18,7 @@ export const Slider = ({ post }: { post: PostProfile }): JSX.Element => {
         if (!(idx % 2)) {
           return (
             <div key={image.uploadId} className={s.carousel}>
-              <Image alt="img" src={image.url} width={490} height={562} />
+              <Image alt="img" priority src={image.url} width={490} height={562} />
             </div>
           )
         }

@@ -190,6 +190,11 @@ export const en: LocaleType = {
     fivePerDay: '$5 per 1 Day',
     twentyFivePerWeek: '$25 per 7 Day',
     fiftyPerMonths: '$50 per month',
+    success: 'Success',
+    paymentSuccessful: 'Payment was successful!',
+    error: 'Error',
+    transactionFailed: 'Transaction failed. Please, write to support',
+    backToPayment: 'Back to payment',
     following(count: number): any {
       const str = pluralizeEn(count)
 
