@@ -181,6 +181,11 @@ export const ru = {
     fivePerDay: '5 долларов за 1 день',
     twentyFivePerWeek: '25 долларов за неделю',
     fiftyPerMonths: '50 долларов за месяц',
+    success: 'Успешно',
+    paymentSuccessful: 'Платеж прошел успешно!',
+    error: 'Ошибка',
+    transactionFailed: 'Платеж не прошел, обратитесь в службу поддержки.',
+    backToPayment: 'Вернуться обратно',
     following(count: number) {
       const str = pluralizeRu(count)
 

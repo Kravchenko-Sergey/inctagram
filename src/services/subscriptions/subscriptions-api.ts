@@ -4,9 +4,10 @@ import { CreateSubscriptions } from '@/services/subscriptions/types'
 export const subscriptionsAPI = baseApi.injectEndpoints({
   endpoints: build => ({
     createSubscriptions: build.mutation<{ url: string }, CreateSubscriptions>({
-      query: () => ({
+      query: body => ({
         url: `subscriptions`,
         method: 'POST',
+        body,
       }),
     }),
   }),
