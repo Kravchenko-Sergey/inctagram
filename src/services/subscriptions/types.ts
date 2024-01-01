@@ -4,3 +4,11 @@ export type CreateSubscriptions = {
   amount: number
   baseUrl: string
 }
+
+export type CurrentSubscriptions ={
+  "userId": number,
+  "subscriptionId": string,
+  "dateOfPayment": string,
+  "endDateOfSubscription": string,
+  "autoRenewal": boolean
+}
