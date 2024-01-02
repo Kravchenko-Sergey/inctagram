@@ -186,6 +186,9 @@ export const ru = {
     error: 'Ошибка',
     transactionFailed: 'Платеж не прошел, обратитесь в службу поддержки.',
     backToPayment: 'Вернуться обратно',
+    currentSubscriptions:'Текущие подписки:',
+    expireAt:'Истекает',
+    nextPayment:'Следующий платеж',
     following(count: number) {
       const str = pluralizeRu(count)
 

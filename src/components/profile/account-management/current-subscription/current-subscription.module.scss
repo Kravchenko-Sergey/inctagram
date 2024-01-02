@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+.cardContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  border-radius: 2px;
+  border: 1px solid var(--Dark-300, #333);
+  background: var(--Dark-500, #171717);
+  height: 84px;
+  padding: 12px 24px;
+}
+.dateContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.dateTitle {
+  color: var(--Light-900, #8d9094);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+}
+.checkBox {
+  margin-left: -9px;
+  margin-bottom: 17px;
+}

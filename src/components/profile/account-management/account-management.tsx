@@ -7,12 +7,18 @@ import { useTranslation } from '@/hooks'
 import { useForm } from 'react-hook-form'
 import { AccountManagementFormType } from '@/schemas/account-management-schema'
 import { RegisterError } from '@/types'
-import { useCreateSubscriptionsMutation } from '@/services/subscriptions'
+import {
+  useCreateSubscriptionsMutation,
+  useCurrentSubscriptionsQuery,
+} from '@/services/subscriptions'
 import { useRouter } from 'next/router'
 import { PATH } from '@/consts/route-paths'
+import { CurrentSubscription } from '@/components/profile/account-management/current-subscription/current-subscription'
 
 export const AccountManagement = memo(() => {
   const { t } = useTranslation()
+  const { data: currentSubscription } = useCurrentSubscriptionsQuery()
+  const isEmptySubscription = currentSubscription?.data.length === 0
 
   const typeData = [
     { value: 'Personal', title: t.profile.personal },
@@ -92,6 +98,7 @@ export const AccountManagement = memo(() => {
 
   return (
     <div className={s.root}>
+      {!isEmptySubscription && <CurrentSubscription />}
       <Modal
         className={s.modalRoot}
         onOpenChange={handleModalClosed}
