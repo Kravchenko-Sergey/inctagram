@@ -11,12 +11,10 @@ export const CurrentSubscription = () => {
 
   const isEmptySubscription = data?.data.length === 0
 
-
   let dateNextPayment
   let expireAtDate
 
   if (data) {
-
     let expireDataForFormat = data?.data[0].dateOfPayment
     let paymentDataForFormat = data?.data[data.data.length - 1].endDateOfSubscription
 

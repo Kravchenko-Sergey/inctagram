@@ -5,7 +5,6 @@ export type CreateSubscriptions = {
   baseUrl: string
 }
 
-
 type SubscriptionType = {
   userId: number
   subscriptionId: string
