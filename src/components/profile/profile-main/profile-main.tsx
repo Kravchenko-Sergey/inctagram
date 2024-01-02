@@ -14,12 +14,13 @@ import {
 import { routerProfilePostSchema, routerProfileSchema } from '@/schemas/router-schemas'
 import { useMeQuery } from '@/services/auth'
 import { ViewPostModal } from '@/components/posts/view'
+import { Post } from '@/services/posts'
 
 export const ProfileMain = memo(() => {
-  const size = 8
-  const [pageSize, setPageSize] = useState(size)
+  const size = 5
   const [hasMorePosts, setHasMorePosts] = useState(true)
   const [skipPostRequest, setSkipPostRequest] = useState(true)
+  const [page, setPage] = useState(1)
   const { t } = useTranslation()
   const { query } = useTypedRouter(routerProfileSchema)
   const { query: postQuery } = useTypedRouter(routerProfilePostSchema)
@@ -59,18 +60,22 @@ export const ProfileMain = memo(() => {
   } = useGetProfileDataQuery({ profileId: +query.id! })
   //
 
-  const { data: posts } = useGetUserPostsDataQuery({ userId: +query.id! })
-
-  } = useGetProfileQuery({ profileId: me?.userId })
-  const { data: posts } = useGetUserPostsQuery({
-    idLastUploadedPost,
+  const { data: posts } = useGetUserPostsDataQuery({
+    userId: +query.id!,
+    endCursorPostId: idLastUploadedPost,
     pageSize: size,
   })
+
+  // } = useGetProfileQuery({ profileId: me?.userId })
+  // const { data: posts } = useGetUserPostsQuery({
+  //   idLastUploadedPost,
+  //   pageSize: size,
+  // })
   const loadMorePosts = () => {
-    if (pageSize >= publications) {
+    if (page === countPage) {
       setHasMorePosts(false)
     } else {
-      setPageSize(prev => prev + size)
+      setPage(prev => prev + 1)
       setIdLastUploadedPost(() => posts?.items[posts.items.length - 1].id)
     }
   }
@@ -89,7 +94,7 @@ export const ProfileMain = memo(() => {
   const following = 2218
   const followers = 2358
   const publications = posts?.totalCount as number
-
+  const countPage = Math.ceil(publications / size)
   const profileName = profile?.userName
 
   return (

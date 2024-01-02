@@ -30,8 +30,20 @@ export const publicPostApi = baseApi.injectEndpoints({
           return {
             url: `public-posts/user/${userId}${endCursorPostId ? `/${endCursorPostId}` : ''}`,
             method: 'GET',
-            // params: { pageSize, sortBy, sortDirection }, todo need refactor
+            params: { pageSize, sortBy, sortDirection }, //todo need refactor
           }
+        },
+        serializeQueryArgs: ({ endpointName }) => {
+          return endpointName
+        },
+        merge: (currentCache, newItems, { arg, requestId }) => {
+          if (arg.endCursorPostId === undefined) {
+            return newItems
+          }
+          currentCache.items.push(...newItems.items)
+        },
+        forceRefetch({ currentArg, previousArg }) {
+          return currentArg !== previousArg
         },
         providesTags: ['getUserPostsData'],
       }),

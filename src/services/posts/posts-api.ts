@@ -29,6 +29,7 @@ export const postAPI = baseApi.injectEndpoints({
         method: 'POST',
         body,
       }),
+      invalidatesTags: ['getUserPostsData'],
     }),
     // getUserPosts: build.query<GetAllPostsResponse, GetAllPostsRequest>({
     //   query: ({ idLastUploadedPost, pageSize }) => ({
