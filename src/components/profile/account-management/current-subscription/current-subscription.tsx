@@ -9,6 +9,9 @@ export const CurrentSubscription = () => {
   const { t } = useTranslation()
   const { data } = useCurrentSubscriptionsQuery()
 
+  const isEmptySubscription = data?.data.length === 0
+
+
   let dateNextPayment
   let expireAtDate
 
@@ -25,6 +28,7 @@ export const CurrentSubscription = () => {
     <div className={s.container}>
       <Typography variant="h3">{t.profile.currentSubscriptions}</Typography>
       <Card className={s.cardContainer}>
+        {isEmptySubscription}
         <div className={s.dateContainer}>
           <p className={s.dateTitle}>{t.profile.expireAt}</p>
           <p>{expireAtDate}</p>

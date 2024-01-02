@@ -5,15 +5,16 @@ export type CreateSubscriptions = {
   baseUrl: string
 }
 
+
+type SubscriptionType = {
+  userId: number
+  subscriptionId: string
+  dateOfPayment: Date
+  endDateOfSubscription: Date
+  autoRenewal: boolean
+}
+
 export type CurrentSubscriptions = {
-  data: [
-    {
-      userId: number
-      subscriptionId: string
-      dateOfPayment: Date
-      endDateOfSubscription: Date
-      autoRenewal: boolean
-    },
-  ]
+  data: SubscriptionType[]
   hasAutoRenewal: boolean
 }
