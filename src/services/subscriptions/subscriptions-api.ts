@@ -1,5 +1,5 @@
 import { baseApi } from '@/services'
-import {CreateSubscriptions, CurrentSubscriptions} from '@/services/subscriptions/types'
+import { CreateSubscriptions, CurrentSubscriptions } from '@/services/subscriptions/types'
 
 export const subscriptionsAPI = baseApi.injectEndpoints({
   endpoints: build => ({
@@ -10,13 +10,13 @@ export const subscriptionsAPI = baseApi.injectEndpoints({
         body,
       }),
     }),
-    currentSubscriptions:build.query<CurrentSubscriptions,void>({
-      query:()=>({
+    currentSubscriptions: build.query<CurrentSubscriptions, void>({
+      query: () => ({
         url: 'subscriptions/current-subscriptions',
-        method:'GET',
-      })
-    })
+        method: 'GET',
+      }),
+    }),
   }),
 })
 
-export const { useCreateSubscriptionsMutation,useCurrentSubscriptionsQuery } = subscriptionsAPI
+export const { useCreateSubscriptionsMutation, useCurrentSubscriptionsQuery } = subscriptionsAPI

@@ -7,16 +7,15 @@ import { useTranslation } from '@/hooks'
 import { useForm } from 'react-hook-form'
 import { AccountManagementFormType } from '@/schemas/account-management-schema'
 import { RegisterError } from '@/types'
-import {useCreateSubscriptionsMutation, useCurrentSubscriptionsQuery} from '@/services/subscriptions'
+import {
+  useCreateSubscriptionsMutation,
+} from '@/services/subscriptions'
 import { useRouter } from 'next/router'
 import { PATH } from '@/consts/route-paths'
-import {CurrentSubscription} from "@/components/profile/account-management/current-subscription/current-subscription";
+import { CurrentSubscription } from '@/components/profile/account-management/current-subscription/current-subscription'
 
 export const AccountManagement = memo(() => {
   const { t } = useTranslation()
-
-
-
   const typeData = [
     { value: 'Personal', title: t.profile.personal },
     { value: 'Business', title: t.profile.business },
@@ -95,7 +94,7 @@ export const AccountManagement = memo(() => {
 
   return (
     <div className={s.root}>
-      <CurrentSubscription/>
+      <CurrentSubscription />
       <Modal
         className={s.modalRoot}
         onOpenChange={handleModalClosed}
