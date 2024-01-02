@@ -30,7 +30,7 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
   const dispatch = useAppDispatch()
   const [createPostComment, { isLoading: isPostCreateLoading }] = useCreatePostCommentsMutation()
   const [createPostPhoto, { isLoading: isPostPhotoLoading }] = useCreatePostPhotoMutation()
-  const { data: me } = useMeQuery()
+  const userId = useMeQuery().data?.userId
   const {
     control,
     handleSubmit,
@@ -100,7 +100,7 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
           await createPostComment(requestBody)
         }
         dispatch(resetState())
-        await push(PATH.PROFILE)
+        await push(`${PATH.PROFILE}?id=${userId}`)
       } catch (e: unknown) {
         const error = e as any
 
