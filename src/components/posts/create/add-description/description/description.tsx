@@ -1,10 +1,10 @@
-import { useEffect } from 'react'
+import {useEffect, useState} from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { MAX_CHARS_POST } from '@/consts/input-limits'
 import { useTranslation } from '@/hooks'
-import { ControlledTextArea } from '@/components'
+import { ControlledTextArea, Loader} from '@/components'
 import { DescriptionFormType, descriptionSchema } from '@/schemas'
 import { FormFields, getBinaryImageData, triggerZodFieldError } from '@/helpers'
 import {
@@ -30,6 +30,7 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
   const dispatch = useAppDispatch()
   const [createPostComment, { isLoading: isPostCreateLoading }] = useCreatePostCommentsMutation()
   const [createPostPhoto, { isLoading: isPostPhotoLoading }] = useCreatePostPhotoMutation()
+  const [loading, setLoading] = useState(false)
   const userId = useMeQuery().data?.userId
   const {
     control,
@@ -69,6 +70,7 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
   }
 
   const onSubmit = async (data: DescriptionFormType) => {
+    setLoading(true)
     const imgWithFilter = await saveFilteredImage(addedImages)
     const res = await getBinaryImageData(imgWithFilter)
 
@@ -105,6 +107,8 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
         const error = e as any
 
         console.error(error)
+      } finally {
+        setLoading(false)
       }
     }
   }
@@ -124,6 +128,7 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
         </div>
         <button className={s.submitButton}>Publish</button>
       </form>
+      {loading && <Loader className={s.loader} />}
     </div>
   )
 }
