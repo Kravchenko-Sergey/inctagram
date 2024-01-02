@@ -1,10 +1,10 @@
-import {useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { MAX_CHARS_POST } from '@/consts/input-limits'
 import { useTranslation } from '@/hooks'
-import { ControlledTextArea, Loader} from '@/components'
+import { ControlledTextArea, Loader } from '@/components'
 import { DescriptionFormType, descriptionSchema } from '@/schemas'
 import { FormFields, getBinaryImageData, triggerZodFieldError } from '@/helpers'
 import {
@@ -17,7 +17,6 @@ import { useMeQuery } from '@/services/auth'
 import { ImageType, resetState } from '@/components/posts/create/create-post-slice'
 import { getFilteredImg } from '@/components/posts/create/edit-photo'
 import { useAppDispatch } from '@/services'
-import { router } from 'next/client'
 import { PATH } from '@/consts/route-paths'
 
 type DescriptionFormTypeProps = {
