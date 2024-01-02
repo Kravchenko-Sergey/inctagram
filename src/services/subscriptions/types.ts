@@ -6,9 +6,11 @@ export type CreateSubscriptions = {
 }
 
 export type CurrentSubscriptions ={
-  "userId": number,
-  "subscriptionId": string,
-  "dateOfPayment": string,
-  "endDateOfSubscription": string,
-  "autoRenewal": boolean
+ data:[{
+   "userId": number,
+   "subscriptionId": string,
+   "dateOfPayment": Date,
+   "endDateOfSubscription": Date,
+   "autoRenewal": boolean
+ }]
 }

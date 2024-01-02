@@ -195,6 +195,9 @@ export const en: LocaleType = {
     error: 'Error',
     transactionFailed: 'Transaction failed. Please, write to support',
     backToPayment: 'Back to payment',
+    currentSubscriptions:'Current Subscription:',
+    expireAt:'Expire at',
+    nextPayment:'Next payment',
     following(count: number): any {
       const str = pluralizeEn(count)
 

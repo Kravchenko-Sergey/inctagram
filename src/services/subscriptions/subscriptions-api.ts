@@ -10,13 +10,13 @@ export const subscriptionsAPI = baseApi.injectEndpoints({
         body,
       }),
     }),
-    currentSubscriptions:build.query<void,CurrentSubscriptions[]>({
+    currentSubscriptions:build.query<CurrentSubscriptions,void>({
       query:()=>({
-        url: 'current-subscriptions',
+        url: 'subscriptions/current-subscriptions',
         method:'GET',
       })
     })
   }),
 })
 
-export const { useCreateSubscriptionsMutation } = subscriptionsAPI
+export const { useCreateSubscriptionsMutation,useCurrentSubscriptionsQuery } = subscriptionsAPI
