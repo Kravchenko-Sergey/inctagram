@@ -9,6 +9,7 @@ import { Loader } from '@/components/ui/loader'
 import { TabsContent } from '@/components/ui/tabs/tabs'
 import { useState } from 'react'
 import { AccountManagement } from '@/components/profile/account-management'
+import { ProfilePayments } from '@/components/profile/profile-payments'
 
 const ProfileSettings = () => {
   const { t } = useTranslation()
@@ -41,20 +42,21 @@ const ProfileSettings = () => {
   }
 
   return (
-    <Tabs tabs={profileTabs} value={tabsValue} onValueChange={onChangeTabs} className={s.root}>
-      <TabsContent value={'1'} className={s.profileContainer}>
-        <ProfileUpdate updateProfileHandler={updateProfileHandler} profile={profile} />
-      </TabsContent>
-      <TabsContent value={'2'}>
-        <div>Devices</div>
-      </TabsContent>
-      <TabsContent value={'3'}>
-        <AccountManagement />
-      </TabsContent>
-      <TabsContent value={'4'}>
-        <div>My payments</div>
-      </TabsContent>
-    </Tabs>
+    <ProfilePayments />
+    // <Tabs tabs={profileTabs} value={tabsValue} onValueChange={onChangeTabs} className={s.root}>
+    //   <TabsContent value={'1'} className={s.profileContainer}>
+    //     <ProfileUpdate updateProfileHandler={updateProfileHandler} profile={profile} />
+    //   </TabsContent>
+    //   <TabsContent value={'2'}>
+    //     <div>Devices</div>
+    //   </TabsContent>
+    //   <TabsContent value={'3'}>
+    //     <AccountManagement />
+    //   </TabsContent>
+    //   <TabsContent value={'4'}>
+    //     <div>My payments</div>
+    //   </TabsContent>
+    // </Tabs>
   )
 }
 
