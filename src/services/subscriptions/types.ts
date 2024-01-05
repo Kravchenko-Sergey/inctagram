@@ -17,3 +17,14 @@ export type CurrentSubscriptions = {
   data: SubscriptionType[]
   hasAutoRenewal: boolean
 }
+
+type MySubscriptionType = {
+  userId: number
+  subscriptionId: string
+  dateOfPayment: Date
+  endDateOfSubscription: Date
+  price: number
+  subscriptionType: 'MONTHLY' | 'DAY' | 'WEEKLY'
+  paymentType: 'STRIPE' | 'PAYPAL'
+}
+export type MySubscriptionResponseType = MySubscriptionType[]

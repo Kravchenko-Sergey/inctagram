@@ -4,8 +4,10 @@ export const PATH = {
   HOME: '/',
   CREATE: '/create',
   PROFILE: '/profile',
-  // PROFILE: '/profile/[id]',
-  // PROFILE_SETTINGS: 'profile/settings/edit',
+  PROFILE_ACCOUNT: '/profile-settings/account',
+  PROFILE_GENERAL: '/profile-settings/general',
+  PROFILE_DEVICE: '/profile-settings/device',
+  PROFILE_PAYMENTS: '/profile-settings/payments',
 
   PROFILE_SETTINGS: '/profile-settings',
   MESSENGER: '/messenger',

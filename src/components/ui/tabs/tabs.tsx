@@ -48,6 +48,8 @@ export const Tabs = ({
 
 type ContentForTabsProps = {} & ComponentPropsWithoutRef<typeof TabsRadixUI.Content>
 export const TabsContent = ({ value, children, ...rest }: ContentForTabsProps) => {
+  console.log('children', children)
+
   return (
     <TabsRadixUI.Content value={value} {...rest}>
       {children}
