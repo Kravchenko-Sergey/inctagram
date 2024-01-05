@@ -1,10 +1,10 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { MAX_CHARS_POST } from '@/consts/input-limits'
 import { useTranslation } from '@/hooks'
-import { ControlledTextArea } from '@/components'
+import { ControlledTextArea, Loader } from '@/components'
 import { DescriptionFormType, descriptionSchema } from '@/schemas'
 import { FormFields, getBinaryImageData, triggerZodFieldError } from '@/helpers'
 import {
@@ -17,7 +17,6 @@ import { useMeQuery } from '@/services/auth'
 import { ImageType, resetState } from '@/components/posts/create/create-post-slice'
 import { getFilteredImg } from '@/components/posts/create/edit-photo'
 import { useAppDispatch } from '@/services'
-import { router } from 'next/client'
 import { PATH } from '@/consts/route-paths'
 
 type DescriptionFormTypeProps = {
@@ -30,7 +29,8 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
   const dispatch = useAppDispatch()
   const [createPostComment, { isLoading: isPostCreateLoading }] = useCreatePostCommentsMutation()
   const [createPostPhoto, { isLoading: isPostPhotoLoading }] = useCreatePostPhotoMutation()
-  const { data: me } = useMeQuery()
+  const [loading, setLoading] = useState(false)
+  const userId = useMeQuery().data?.userId
   const {
     control,
     handleSubmit,
@@ -69,6 +69,7 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
   }
 
   const onSubmit = async (data: DescriptionFormType) => {
+    setLoading(true)
     const imgWithFilter = await saveFilteredImage(addedImages)
     const res = await getBinaryImageData(imgWithFilter)
 
@@ -100,11 +101,13 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
           await createPostComment(requestBody)
         }
         dispatch(resetState())
-        await push(PATH.PROFILE)
+        await push(`${PATH.PROFILE}?id=${userId}`)
       } catch (e: unknown) {
         const error = e as any
 
         console.error(error)
+      } finally {
+        setLoading(false)
       }
     }
   }
@@ -124,6 +127,7 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
         </div>
         <button className={s.submitButton}>Publish</button>
       </form>
+      {loading && <Loader className={s.loader} />}
     </div>
   )
 }
