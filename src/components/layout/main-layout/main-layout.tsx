@@ -21,6 +21,7 @@ const MainLayout = ({ className, children }: LayoutProps) => {
   )
 }
 
-export const getMainLayout = (page: ReactElement) => {
+// export const getMainLayout = (page: ReactElement) => {
+export const getMainLayout = (page: ReactNode) => {
   return <MainLayout>{page}</MainLayout>
 }

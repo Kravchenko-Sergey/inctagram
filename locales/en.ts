@@ -195,9 +195,9 @@ export const en: LocaleType = {
     error: 'Error',
     transactionFailed: 'Transaction failed. Please, write to support',
     backToPayment: 'Back to payment',
-    currentSubscriptions:'Current Subscription:',
-    expireAt:'Expire at',
-    nextPayment:'Next payment',
+    currentSubscriptions: 'Current Subscription:',
+    expireAt: 'Expire at',
+    nextPayment: 'Next payment',
     following(count: number): any {
       const str = pluralizeEn(count)
 
@@ -254,7 +254,7 @@ export const en: LocaleType = {
       areYouSure:
         'Do you really want to close the edition of the publication? If you close changes won’t be saved',
     },
-    editPost: 'Edit Post',
+    editPost: 'Index Post',
     deletePost: 'Delete Post',
     areYouSureToDelete: 'Are you sure you want to delete this post?',
   },

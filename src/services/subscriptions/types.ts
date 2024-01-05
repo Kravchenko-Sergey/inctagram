@@ -8,8 +8,8 @@ export type CreateSubscriptions = {
 type SubscriptionType = {
   userId: number
   subscriptionId: string
-  dateOfPayment: any
-  endDateOfSubscription: any
+  dateOfPayment: Date
+  endDateOfSubscription: Date
   autoRenewal: boolean
 }
 
@@ -27,3 +27,14 @@ export type Payment = {
   subscriptionType: 'MONTHLY' | 'DAY' | 'WEEKLY'
   paymentType: 'STRIPE' | 'PAYPAL'
 }
+
+type MySubscriptionType = {
+  userId: number
+  subscriptionId: string
+  dateOfPayment: Date
+  endDateOfSubscription: Date
+  price: number
+  subscriptionType: 'MONTHLY' | 'DAY' | 'WEEKLY'
+  paymentType: 'STRIPE' | 'PAYPAL'
+}
+export type MySubscriptionResponseType = MySubscriptionType[]

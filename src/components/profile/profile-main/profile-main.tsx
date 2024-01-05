@@ -96,7 +96,8 @@ export const ProfileMain = memo(() => {
           <div className={s.infoHeader}>
             <Typography variant="large">{profileName}</Typography>
             {me?.userId && me?.userId === profile?.id && (
-              <Link passHref legacyBehavior href={PATH.PROFILE_SETTINGS}>
+              // <Link passHref legacyBehavior href={PATH.PROFILE_SETTINGS}>
+              <Link passHref legacyBehavior href={PATH.PROFILE_GENERAL}>
                 <Button as="a" variant="secondary" className={s.btn}>
                   {t.profile.profileSettings}
                 </Button>
