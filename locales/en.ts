@@ -60,6 +60,10 @@ export const en: LocaleType = {
   components: {
     selectPlaceholder: 'Select Box',
   },
+  pagination: {
+    show: 'show',
+    perPage: 'per page',
+  },
   auth: {
     emailLabel: 'Email',
     emailSent: 'Email Sent',
@@ -198,6 +202,16 @@ export const en: LocaleType = {
     currentSubscriptions: 'Current Subscription:',
     expireAt: 'Expire at',
     nextPayment: 'Next payment',
+    dateOfPayment: 'Date of Payment',
+    endDateSubscription: 'End date of subscription',
+    subscriptionType: 'Subscription Type',
+    price: 'Price',
+    paymentType: 'Payment Type',
+    monthly: 'MONTHLY',
+    day: 'DAY',
+    weekly: 'WEEKLY',
+    stripe: 'Stripe',
+    payPal: 'PayPal',
     following(count: number): any {
       const str = pluralizeEn(count)
 

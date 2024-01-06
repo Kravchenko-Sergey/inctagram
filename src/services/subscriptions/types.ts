@@ -18,16 +18,6 @@ export type CurrentSubscriptions = {
   hasAutoRenewal: boolean
 }
 
-export type Payment = {
-  userId: number
-  subscriptionId: string
-  dateOfPayment: any
-  endDateOfSubscription: any
-  price: number
-  subscriptionType: 'MONTHLY' | 'DAY' | 'WEEKLY'
-  paymentType: 'STRIPE' | 'PAYPAL'
-}
-
 type MySubscriptionType = {
   userId: number
   subscriptionId: string

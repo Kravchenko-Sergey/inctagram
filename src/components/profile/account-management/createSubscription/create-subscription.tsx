@@ -83,8 +83,6 @@ export const CreateSubscription = () => {
 
   useEffect(() => {
     if (errorType && data) {
-      console.log('value')
-      console.log('data', data)
       setValue('cost', data[0].price.toString())
       setValue('type', 'Business')
     }

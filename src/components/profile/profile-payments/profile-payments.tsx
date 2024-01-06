@@ -1,94 +1,99 @@
-import React from 'react'
-import {
-  Column,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table'
+import React, { useState } from 'react'
+import { Column, Table, TableBody, TableCell, TableHeader, TableRow } from '@/components/ui/table'
+import { useMySubscriptionsQuery } from '@/services/subscriptions'
 import s from './profile-payments.module.scss'
-import { Payment } from '@/services/subscriptions'
-
-const tableHeader: Column[] = [
-  { title: 'Date of Payment', key: '0' },
-  { title: 'End date of subscription', key: '1' },
-  { title: 'Price', key: '2' },
-  { title: 'Subscription Type', key: '3' },
-  { title: 'Payment Type', key: '4' },
-]
-
-const data1: Payment[] = [
-  {
-    userId: 1,
-    subscriptionId: 'sffffgrgg',
-    dateOfPayment: '2024-01-05T16:53:17.270Z',
-    endDateOfSubscription: '2024-01-05T16:53:17.270Z',
-    price: 55,
-    subscriptionType: 'MONTHLY',
-    paymentType: 'PAYPAL',
-  },
-  {
-    userId: 2,
-    subscriptionId: 'sfgrgg',
-    dateOfPayment: '2024-01-05T16:53:17.270Z',
-    endDateOfSubscription: '2023-01-05T16:53:17.270Z',
-    price: 45,
-    subscriptionType: 'DAY',
-    paymentType: 'STRIPE',
-  },
-]
+import { format } from 'date-fns'
+import { Loader, Pagination } from '@/components'
+import { useTranslation } from '@/hooks'
 
 export const ProfilePayments = () => {
+  const { data, isLoading } = useMySubscriptionsQuery()
+  const [page, setPage] = useState(1)
+  const [perPage, setPerPage] = useState('8')
+
+  const { t } = useTranslation()
+  const startIndex = (page - 1) * +perPage
+
+  const displayedElements = data?.slice(startIndex, startIndex + +perPage)
+
+  const headers: Column[] = [
+    { title: t.profile.dateOfPayment, key: '0' },
+    { title: t.profile.endDateSubscription, key: '1' },
+    { title: t.profile.price, key: '2' },
+    { title: t.profile.subscriptionType, key: '3' },
+    { title: t.profile.paymentType, key: '4' },
+  ]
+
+  if (isLoading) {
+    return <Loader />
+  }
+
+  const value = {
+    MONTHLY: t.profile.monthly,
+    DAY: t.profile.day,
+    WEEKLY: t.profile.weekly,
+  }
+
   return (
-    <div>
-      <Table>
-        <TableHeader columns={tableHeader} />
-        <TableBody>
-          {data1?.map(item => {
-            return (
-              <TableRow key={item.subscriptionId}>
-                <TableCell>
-                  <div
-                    style={{ wordBreak: 'break-word', display: 'flex', flexDirection: 'column' }}
-                  >
-                    {item.dateOfPayment}
-                  </div>
-                </TableCell>
-                <TableCell>
-                  <div
-                    style={{ wordBreak: 'break-word', display: 'flex', flexDirection: 'column' }}
-                  >
-                    {item.endDateOfSubscription}
-                  </div>
-                </TableCell>
-                <TableCell>
-                  <div
-                    style={{ wordBreak: 'break-word', display: 'flex', flexDirection: 'column' }}
-                  >
-                    {item.price}
-                  </div>
-                </TableCell>
-                <TableCell>
-                  <div
-                    style={{ wordBreak: 'break-word', display: 'flex', flexDirection: 'column' }}
-                  >
-                    {item.subscriptionType}
-                  </div>
-                </TableCell>
-                <TableCell>
-                  <div
-                    style={{ wordBreak: 'break-word', display: 'flex', flexDirection: 'column' }}
-                  >
-                    {item.paymentType}
-                  </div>
-                </TableCell>
-              </TableRow>
-            )
-          })}
-        </TableBody>
-      </Table>
+    <div className={s.root}>
+      <div className={s.rootTable}>
+        <Table>
+          <TableHeader columns={headers} />
+          <TableBody>
+            {displayedElements?.map(item => {
+              return (
+                <TableRow key={item.subscriptionId}>
+                  <TableCell>
+                    <div
+                      style={{ wordBreak: 'break-word', display: 'flex', flexDirection: 'column' }}
+                    >
+                      {format(new Date(item.dateOfPayment), 'dd.MM.yyyy')}
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div
+                      style={{ wordBreak: 'break-word', display: 'flex', flexDirection: 'column' }}
+                    >
+                      {format(new Date(item.endDateOfSubscription), 'dd.MM.yyyy')}
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div
+                      style={{ wordBreak: 'break-word', display: 'flex', flexDirection: 'column' }}
+                    >
+                      {item.price}
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div
+                      style={{ wordBreak: 'break-word', display: 'flex', flexDirection: 'column' }}
+                    >
+                      {value[item.subscriptionType]}
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div
+                      style={{ wordBreak: 'break-word', display: 'flex', flexDirection: 'column' }}
+                    >
+                      {item.paymentType === 'STRIPE' ? t.profile.stripe : t.profile.payPal}
+                    </div>
+                  </TableCell>
+                </TableRow>
+              )
+            })}
+          </TableBody>
+        </Table>
+      </div>
+      {data?.length! > +perPage && (
+        <Pagination
+          perPage={perPage}
+          count={Math.ceil(data?.length! / +perPage)}
+          page={page}
+          onPerPageChange={setPerPage}
+          perPageOptions={[5, 8, 12, 100]}
+          onChange={setPage}
+        />
+      )}
     </div>
   )
 }

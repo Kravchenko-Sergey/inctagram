@@ -9,10 +9,6 @@ export const CurrentSubscription = () => {
   const { t } = useTranslation()
   const { data } = useCurrentSubscriptionsQuery()
 
-  // console.log(
-  //   'data',
-  //   data?.data.map(item => console.log('value', new Date(item.endDateOfSubscription)))
-  // )
   const isEmptySubscription = data?.data.length === 0
 
   let dateNextPayment
