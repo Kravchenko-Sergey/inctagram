@@ -1,6 +1,6 @@
 import { ReactElement, ReactNode } from 'react'
 
-import { Header, getSidebarLayout } from '@/components'
+import { getSidebarLayout, Header } from '@/components'
 
 import s from './main-layout.module.scss'
 
@@ -21,6 +21,7 @@ const MainLayout = ({ className, children }: LayoutProps) => {
   )
 }
 
-export const getMainLayout = (page: ReactElement) => {
+// export const getMainLayout = (page: ReactElement) => {
+export const getMainLayout = (page: ReactNode) => {
   return <MainLayout>{page}</MainLayout>
 }

@@ -10,6 +10,7 @@ type AvatarPropsType = {
   size?: number
   defaultImage?: ReactNode
   className?: string
+  name?: string
 }
 
 export const Avatar = ({
@@ -17,6 +18,7 @@ export const Avatar = ({
   size = 204,
   defaultImage = <ImageOutline />,
   className,
+  name,
 }: AvatarPropsType) => {
   const rootClass = clsx(s.avatarRoot, className)
 
@@ -27,8 +29,10 @@ export const Avatar = ({
         height={size}
         src={photo}
         className={s.avatarImage}
-        alt={`${name} avatar`}
-        title={`${name} avatar`}
+        // alt={`${name}:"" avatar`}
+        // title={`${name} avatar`}
+        alt={` avatar`}
+        title={` avatar`}
       />
       <AvatarRadix.Fallback
         style={{ height: `${size}px`, width: `${size}px` }}

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { useGoogleLogin } from '@react-oauth/google'
 
-import { useGoogleLoginMutation, useLazyMeQuery } from '@/services/auth/auth-api'
+import { useGoogleLoginMutation, useLazyMeQuery, useMeQuery } from '@/services/auth/auth-api'
 import { GitHubIcon, GoogleIcon } from '@/assets/icons'
 import { tokenSetterToLocalStorage } from '@/helpers'
 import { PATH } from '@/consts/route-paths'
@@ -13,6 +13,7 @@ export const SocialMediaAuth = () => {
 
   const [googleLogin] = useGoogleLoginMutation()
   const [getUser] = useLazyMeQuery()
+  // const { data: me } = useMeQuery()
 
   const googleLoginAndRegister = useGoogleLogin({
     onSuccess: async tokenResponse => {
@@ -20,8 +21,12 @@ export const SocialMediaAuth = () => {
 
       if (accessToken) {
         tokenSetterToLocalStorage(accessToken)
-        await getUser().unwrap()
-        push(PATH.PROFILE)
+        const res = await getUser().unwrap()
+
+        // push(PATH.PROFILE)
+        // push(`${PATH.PROFILE}/${+me?.userId!}`)
+
+        push(`${PATH.PROFILE}/?id=${res?.userId!}`)
       }
     },
     flow: 'auth-code',

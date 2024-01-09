@@ -1,12 +1,10 @@
-import { useEffect } from 'react'
-
+import { useEffect, useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
-
 import { MAX_CHARS_POST } from '@/consts/input-limits'
 import { useTranslation } from '@/hooks'
-import { ControlledTextArea } from '@/components'
+import { ControlledTextArea, Loader } from '@/components'
 import { DescriptionFormType, descriptionSchema } from '@/schemas'
 import { FormFields, getBinaryImageData, triggerZodFieldError } from '@/helpers'
 import {
@@ -14,43 +12,29 @@ import {
   useCreatePostCommentsMutation,
   useCreatePostPhotoMutation,
 } from '@/services/posts'
-import { PATH } from '@/consts/route-paths'
-import { ImageType } from '@/components/posts/create'
-
 import s from './description.module.scss'
+import { useMeQuery } from '@/services/auth'
+import { ImageType, resetState } from '@/components/posts/create/create-post-slice'
+import { getFilteredImg } from '@/components/posts/create/edit-photo'
+import { useAppDispatch } from '@/services'
+import { PATH } from '@/consts/route-paths'
 
 type DescriptionFormTypeProps = {
-  onSubmitHandler?: (data: DescriptionFormType) => void
-  defaultValue?: string | number
-  isEditModalOpen?: boolean
-  setIsEditModalOpen?: (isEditModalOpen: boolean) => void
   addedImages: ImageType[]
-  isPostCreateLoadingHandler: (value: boolean) => void
-
-  setIsModalOpen: (isModalOpen: boolean) => void
-  setIsFiltersModalOpen: (isFiltersModalOpen: boolean) => void
-  setIsDescriptionModalOpen: (value: boolean) => void
 }
 
-export const PostDescription = ({
-  addedImages,
-  setIsFiltersModalOpen,
-  setIsModalOpen,
-  defaultValue,
-  setIsDescriptionModalOpen,
-  isPostCreateLoadingHandler,
-}: DescriptionFormTypeProps) => {
+export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
   const { t } = useTranslation()
   const { push } = useRouter()
-  const [createPostComment] = useCreatePostCommentsMutation()
-  const [createPostPhoto] = useCreatePostPhotoMutation()
-
+  const dispatch = useAppDispatch()
+  const [createPostComment, { isLoading: isPostCreateLoading }] = useCreatePostCommentsMutation()
+  const [createPostPhoto, { isLoading: isPostPhotoLoading }] = useCreatePostPhotoMutation()
+  const [loading, setLoading] = useState(false)
+  const userId = useMeQuery().data?.userId
   const {
     control,
     handleSubmit,
-
     trigger,
-
     formState: { touchedFields },
   } = useForm<DescriptionFormType>({
     resolver: zodResolver(descriptionSchema(t)),
@@ -66,9 +50,28 @@ export const PostDescription = ({
     triggerZodFieldError(touchedFieldNames, trigger)
   }, [t, touchedFields, trigger])
 
+  const saveFilteredImage = async (images: ImageType[]): Promise<ImageType[]> => {
+    try {
+      const updatedImages = await Promise.all(
+        images.map(async el => {
+          const filteredImage = await getFilteredImg(el.img, el.filter)
+
+          return {
+            img: filteredImage as string,
+          }
+        })
+      )
+
+      return updatedImages as ImageType[]
+    } catch (e) {
+      return []
+    }
+  }
+
   const onSubmit = async (data: DescriptionFormType) => {
-    isPostCreateLoadingHandler(true)
-    const res = await getBinaryImageData(addedImages)
+    setLoading(true)
+    const imgWithFilter = await saveFilteredImage(addedImages)
+    const res = await getBinaryImageData(imgWithFilter)
 
     function createFormData(res: Uint8Array[]) {
       const formData = new FormData()
@@ -78,10 +81,6 @@ export const PostDescription = ({
 
         formData.append(`file`, blob)
       })
-      setIsFiltersModalOpen(false)
-
-      setIsModalOpen(false)
-      setIsDescriptionModalOpen(false)
 
       return formData
     }
@@ -91,7 +90,6 @@ export const PostDescription = ({
     if (addedImages.length) {
       try {
         const responsePhotoStore = await createPostPhoto(formData).unwrap()
-        // console.log('responsePhotoStore', responsePhotoStore)
 
         const imageId = responsePhotoStore.images.map(item => ({ uploadId: item.uploadId }))
         const requestBody: CreatePostRequest = {
@@ -102,10 +100,14 @@ export const PostDescription = ({
         if (responsePhotoStore.images) {
           await createPostComment(requestBody)
         }
-        isPostCreateLoadingHandler(false)
-        push(PATH.PROFILE)
+        dispatch(resetState())
+        await push(`${PATH.PROFILE}?id=${userId}`)
       } catch (e: unknown) {
         const error = e as any
+
+        console.error(error)
+      } finally {
+        setLoading(false)
       }
     }
   }
@@ -123,7 +125,9 @@ export const PostDescription = ({
           />
           <div className={s.counter}></div>
         </div>
+        <button className={s.submitButton}>Publish</button>
       </form>
+      {loading && <Loader className={s.loader} />}
     </div>
   )
 }

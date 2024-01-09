@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import { memo } from 'react'
 import { CustomArrowProps } from 'react-slick'
 
 export const SampleNextArrow = memo((props: CustomArrowProps) => {
@@ -7,7 +7,7 @@ export const SampleNextArrow = memo((props: CustomArrowProps) => {
   return (
     <div
       className={className}
-      style={{ ...style, display: 'block', right: 15 }}
+      style={{ display: 'block', right: 15, ...style }}
       onClick={onClick}
     />
   )

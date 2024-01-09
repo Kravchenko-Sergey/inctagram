@@ -1,0 +1,42 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  max-width: 972px;
+  height: 72px;
+  margin-bottom: 35px;
+  padding: 12px 24px;
+
+  background: var(--dark-500);
+  border: 1px solid var(--dark-300);
+  border-radius: 2px;
+}
+
+.counter {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+
+  width: 203px;
+  padding: 8px 12px 10px;
+
+  background: var(--dark-700);
+  border: 1px solid var(--dark-300);
+  border-radius: 2px;
+}
+
+.digit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 30px;
+  padding: 10px;
+
+  &:not(:last-child) {
+    border-right: 1px solid var(--dark-300);
+  }
+}

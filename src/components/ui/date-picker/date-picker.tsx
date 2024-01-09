@@ -1,22 +1,24 @@
 import { ComponentProps, forwardRef } from 'react'
 import 'react-datepicker/dist/react-datepicker.min.css'
-import { ReactDatePickerCustomHeaderProps } from 'react-datepicker'
+import * as RDP from 'react-datepicker'
 import { clsx } from 'clsx'
 // eslint-disable-next-line import/no-duplicates
-import { format } from 'date-fns'
+import { getYear } from 'date-fns'
 // eslint-disable-next-line import/no-duplicates
-import { ru, enUS } from 'date-fns/locale'
-import * as RDP from 'react-datepicker'
+import { enUS, ru } from 'date-fns/locale'
 
 import { PATH } from '@/consts/route-paths'
-import { ArrowLeft, ArrowRight, CalendarIcon } from '@/assets/icons'
-import { Typography, Label } from '@/components'
+import { CalendarIcon } from '@/assets/icons'
+import { Label, Typography } from '@/components'
 import { FieldValues } from 'react-hook-form'
 import { useTranslation } from '@/hooks'
 
 import textFieldStyles from '@/components/ui/text-field/text-field.module.scss'
 import s from './date-picker.module.scss'
 import { useRouter } from 'next/router'
+import { CustomHeader } from '@/components/ui/date-picker/custom-header/custom-header'
+import { formatWeekDay } from '@/helpers'
+import { range } from '@/helpers/range'
 
 export type DatePickerProps = {
   placeholder?: string
@@ -53,7 +55,22 @@ export const DatePicker = forwardRef<FieldValues, DatePickerProps>(
     const showError = !!errorMessage && errorMessage.length > 0
     const { t } = useTranslation()
     const { locale } = useRouter()
+    const years = range(1937, getYear(new Date()) + 1)
 
+    const months = [
+      t.months.january,
+      t.months.february,
+      t.months.march,
+      t.months.april,
+      t.months.may,
+      t.months.june,
+      t.months.july,
+      t.months.august,
+      t.months.september,
+      t.months.october,
+      t.months.november,
+      t.months.december,
+    ]
     const classNames = {
       root: clsx(s.root, className),
       inputContainer: s.inputContainer,
@@ -89,7 +106,12 @@ export const DatePicker = forwardRef<FieldValues, DatePickerProps>(
           formatWeekDay={formatWeekDay}
           placeholderText={placeholder}
           renderCustomHeader={params => (
-            <CustomHeader {...params} locale={locale === 'ru' ? ru : enUS} />
+            <CustomHeader
+              {...params}
+              years={years}
+              months={months}
+              locale={locale === 'ru' ? ru : enUS}
+            />
           )}
           customInput={<CustomInput error={errorMessage} disabled={disabled} label={label} />}
           calendarClassName={classNames.calendar}
@@ -123,7 +145,7 @@ export const DatePicker = forwardRef<FieldValues, DatePickerProps>(
                   as="a"
                   href={`${PATH.POLICY}?referrer=data-picker`}
                 >
-                  {t.auth.termsOfService}
+                  {t.auth.termsOfServiceTitle}
                 </Typography>
               )}
             </div>
@@ -158,43 +180,3 @@ const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
     )
   }
 )
-
-const CustomHeader = ({
-  date,
-  decreaseMonth,
-  increaseMonth,
-  locale,
-}: ReactDatePickerCustomHeaderProps & {
-  locale: Locale
-}) => {
-  const classNames = {
-    header: s.header,
-    buttonBox: s.buttonBox,
-    button: s.button,
-  }
-
-  const headerText = capitalizeFirstLetter(
-    format(date, 'LLLL Y', { locale: locale.code === 'ru' ? ru : enUS })
-  )
-
-  return (
-    <div className={classNames.header}>
-      <Typography variant="bold_text_16">{headerText}</Typography>
-      <div className={classNames.buttonBox}>
-        <button className={classNames.button} type="button" onClick={decreaseMonth}>
-          <ArrowLeft />
-        </button>
-
-        <button className={classNames.button} onClick={increaseMonth}>
-          <ArrowRight />
-        </button>
-      </div>
-    </div>
-  )
-}
-
-const formatWeekDay = (day: string) => capitalizeFirstLetter(day.substring(0, 2))
-
-const capitalizeFirstLetter = (text: string) => {
-  return text[0].toUpperCase() + text.slice(1)
-}

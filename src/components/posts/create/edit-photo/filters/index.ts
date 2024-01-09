@@ -1,4 +1,4 @@
-export { getFilteredImg } from './Filter'
-export { FiltersModal } from './filters-modal'
+export { getFilteredImg } from './helpers/filter-helpers'
+export { FilterPage } from '../../modal-pages/filter-page/filter-page'
 export { SelectedImages } from './selected-images'
-export { filters } from './filters'
+export { filtersData } from './helpers/filters-data'

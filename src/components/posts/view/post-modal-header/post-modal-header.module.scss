@@ -1,11 +1,11 @@
 .header {
-  width: 430px;
   display: flex;
   justify-content: space-between;
+  width: 430px;
 
   .userInfo {
     display: flex;
-    align-items: center;
     gap: 12px;
+    align-items: center;
   }
 }

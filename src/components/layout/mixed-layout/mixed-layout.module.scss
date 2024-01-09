@@ -1,0 +1,78 @@
+.flexContainer {
+  display: flex;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 60px;
+
+  main {
+    flex-grow: 1;
+  }
+}
+
+%item {
+  display: flex;
+  column-gap: 12px;
+  align-items: center;
+
+  width: fit-content;
+  margin: 24px 0;
+  padding: 0 1px;
+
+  color: var(--light-100);
+  text-decoration: none;
+
+  border: 2px solid transparent;
+
+  svg {
+    color: var(--light-100);
+  }
+
+  &:hover * {
+    color: var(--primary-100);
+  }
+
+  &:active * {
+    color: var(--primary-500);
+  }
+
+  &:focus {
+    // border: 2px solid var(--primary-700);
+    border-radius: 2px;
+  }
+}
+
+.active {
+  color: var(--primary-700);
+}
+
+.active svg {
+  color: var(--primary-700);
+}
+
+.item {
+  @extend %item;
+}
+
+.statisticsItem {
+  @extend %item;
+
+  margin-top: 60px;
+}
+
+.logout {
+  cursor: pointer;
+
+  display: flex;
+  gap: 13px;
+
+  margin-top: 180px;
+  padding: 0 3px;
+
+  &:hover {
+    color: var(--primary-100);
+  }
+}
+
+.modalContent {
+  max-width: 438px;
+}

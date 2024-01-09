@@ -1,5 +1,6 @@
 .header {
   position: sticky;
+  z-index: 10;
   top: 0;
 
   display: flex;
@@ -21,14 +22,30 @@
   justify-content: space-between;
 
   width: 100%;
-  max-width: 1280px;
+  max-width: 1160px;
   margin: 12px 64px 12px 60px;
+}
+
+.logoWrapper {
+  flex: 1;
+}
+
+.logo {
+  cursor: pointer;
+}
+
+.buttons {
+  margin-left: 35px;
 }
 
 .menuContainer {
   display: flex;
   gap: 48px;
   align-items: center;
+}
+
+.btn {
+  margin-right: 25px;
 }
 
 // MEDIA REQUESTS

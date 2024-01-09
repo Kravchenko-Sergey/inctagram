@@ -104,6 +104,10 @@
   margin-bottom: 18px;
 }
 
+.arrowButton svg {
+  transform: scale(1.5);
+}
+
 .IconButton {
   all: unset;
 
@@ -132,10 +136,6 @@
   top: 20px;
   left: 24px;
 
-  svg {
-    transform: scale(1.5);
-  }
-
   &:hover svg {
     background-color: var(--dark-500);
     border-radius: 100%;
@@ -157,10 +157,9 @@
 
   &:hover {
     color: var(--primary-700);
+    border: none;
     outline: 0;
     outline-offset: 0;
-
-    border: none;
   }
 
   &:focus-within {

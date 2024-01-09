@@ -14,11 +14,12 @@ export type GetProfileResponse = {
   dateOfBirth: Date
   aboutMe: string | null
   avatars: AvatarType[]
+  createdAt: Date
 }
 
 export type ArgGetProfile = { profileId: number | undefined }
 
-export type ArgUpdateProfile = Omit<GetProfileResponse, 'id' | 'avatars'>
+export type ArgUpdateProfile = Omit<GetProfileResponse, 'id' | 'avatars' | 'createdAt'>
 
 export type UploadAvatarResponse = { avatars: AvatarType[] }
 

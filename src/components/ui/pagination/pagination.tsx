@@ -2,6 +2,7 @@ import { ArrowLeft, ArrowRight } from '@/assets/icons'
 import { Select, usePagination } from '@/components'
 
 import s from './pagination.module.scss'
+import { useTranslation } from '@/hooks'
 
 export type PaginationProps = {
   count: number
@@ -29,6 +30,7 @@ export const Pagination = ({
     handleNextPageClicked,
     handlePreviousPageClicked,
   } = usePagination({ page, count, siblings, onChange })
+  const { t } = useTranslation()
 
   const showPerPageSelect = !!perPage && !!perPageOptions && !!onPerPageChange
 
@@ -70,13 +72,13 @@ export const Pagination = ({
       </div>
       {showPerPageSelect && (
         <div className={s.selectBox}>
-          show
+          {t.pagination.show}
           <Select
             value={perPage}
             onChange={onPerPageChange}
             options={perPageOptions?.map(el => ({ label: `${el}`, value: `${el}` }))}
           />
-          per page
+          {t.pagination.perPage}
         </div>
       )}
     </div>

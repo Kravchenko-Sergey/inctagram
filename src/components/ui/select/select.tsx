@@ -9,6 +9,7 @@ import { ArrowDownIcon } from '@/assets/icons'
 import { useTranslation } from '@/hooks'
 
 import s from './select.module.scss'
+import { SelectContent } from '@/components/ui/select/select-content/select-content'
 
 export type Option = { label: string | ReactElement; value: string }
 
@@ -52,6 +53,7 @@ export const Select = forwardRef<ElementRef<typeof SelectRadix.Root>, SelectProp
       label,
       rootClassName,
       width,
+      portal = true,
     },
     ref
   ) => {
@@ -67,8 +69,6 @@ export const Select = forwardRef<ElementRef<typeof SelectRadix.Root>, SelectProp
         className
       ),
       icon: clsx(s.icon, s[variant]),
-      item: clsx(s.item, s[variant]),
-      content: clsx(s.content, s[variant]),
       label: clsx(s.label, disabled && s.disabled),
     }
     const withoutPlaceholder = variant === 'pagination' ? value : t.components.selectPlaceholder
@@ -93,25 +93,13 @@ export const Select = forwardRef<ElementRef<typeof SelectRadix.Root>, SelectProp
               <ArrowDownIcon size={variant === 'pagination' ? 16 : 24} />
             </SelectRadix.Icon>
           </SelectRadix.Trigger>
-          <SelectRadix.Portal>
-            <SelectRadix.Content className={classNames.content} position="popper">
-              <SelectRadix.Viewport>
-                {options.map(option => (
-                  <SelectRadix.Item
-                    value={option.value}
-                    className={classNames.item}
-                    key={option.value}
-                  >
-                    <SelectRadix.ItemText>
-                      <Typography as="span" className={s.active}>
-                        {option.label}
-                      </Typography>
-                    </SelectRadix.ItemText>
-                  </SelectRadix.Item>
-                ))}
-              </SelectRadix.Viewport>
-            </SelectRadix.Content>
-          </SelectRadix.Portal>
+          {portal ? (
+            <SelectRadix.Portal>
+              <SelectContent options={options} variant={variant} />
+            </SelectRadix.Portal>
+          ) : (
+            <SelectContent options={options} variant={variant} />
+          )}
           <div className={s.errorContainer}>
             {showError && <Typography variant="error">{errorMessage}</Typography>}
           </div>

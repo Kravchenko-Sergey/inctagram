@@ -22,10 +22,12 @@ const baseQuery = fetchBaseQuery({
   baseUrl,
   credentials: 'include',
   prepareHeaders: headers => {
-    const accessToken = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)
+    if (typeof window !== 'undefined') {
+      const accessToken = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)
 
-    if (accessToken) {
-      headers.set('Authorization', `Bearer ${accessToken}`)
+      if (accessToken) {
+        headers.set('Authorization', `Bearer ${accessToken}`)
+      }
     }
 
     return headers

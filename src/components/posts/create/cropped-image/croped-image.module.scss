@@ -39,14 +39,13 @@
 }
 
 .cropContainer {
-  width: 490px;
   height: 457px;
 }
 
 .carousel {
   position: relative;
-  width: 490px;
-  height: 467px;
+  width: 493px;
+  height: 564px;
 }
 
 .croppedPhoto {
@@ -83,7 +82,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 420px;
+  margin-top: 520px;
 }
 
 .slick-next {
@@ -98,7 +97,6 @@
   z-index: 5;
   bottom: 40px !important;
   left: 160px;
-
   width: 195px;
 
   // opacity: 0.5;

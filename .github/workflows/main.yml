@@ -1,0 +1,33 @@
+name: linting, building
+on:
+  push:
+    branches: [ dev ]
+  pull_request:
+    branches: [ dev ]
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 18.x ]
+
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: install modules
+        run: yarn install --frozen-lockfile
+
+      - name: build production project
+        run: yarn run build:production
+
+      - name: linting typescript
+        run: yarn run lint
+
+      - name: build storybook
+        run: yarn run build-storybook

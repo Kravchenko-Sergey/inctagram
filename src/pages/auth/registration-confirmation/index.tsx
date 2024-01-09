@@ -9,6 +9,7 @@ import {
 } from '@/components'
 import { routerRecoverySchema } from '@/schemas'
 import { useTypedRouter } from '@/hooks'
+
 const Confirm = () => {
   const [verify, { isSuccess, isLoading, isUninitialized }] = useVerifyMailMutation()
   const { query, isReady } = useTypedRouter(routerRecoverySchema)

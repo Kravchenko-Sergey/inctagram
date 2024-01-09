@@ -1,4 +1,4 @@
-import { ForgotPasswordForm, HeadMeta, getHeaderLayout } from '@/components'
+import { ForgotPasswordForm, getHeaderLayout, HeadMeta } from '@/components'
 
 const ForgotPassword = () => {
   return (

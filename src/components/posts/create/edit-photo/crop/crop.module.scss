@@ -1,7 +1,4 @@
 .cropBtn {
-  width: 36px;
-  height: 36px;
-
   cursor: pointer;
 
   position: relative;
@@ -10,6 +7,8 @@
   align-items: center;
   justify-content: center;
 
+  width: 36px;
+  height: 36px;
   margin: 0 24px 11px 11px;
 
   color: var(--light-700);
@@ -24,15 +23,14 @@
 }
 
 .cropOptions {
-  width: 156px;
-  height: 152px;
-
   position: absolute;
 
   display: flex;
   flex-direction: column;
   gap: 2px;
 
+  width: 156px;
+  height: 152px;
   margin-top: -200px;
   margin-left: 11px;
 
@@ -44,15 +42,14 @@
 }
 
 .cropOption {
-  width: 128px;
-  height: 26px;
-
   cursor: pointer;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
+  width: 128px;
+  height: 26px;
   margin: 1px 12px 11px;
 
   &:hover {
@@ -61,15 +58,14 @@
 }
 
 .cropOption1 {
-  width: 128px;
-  height: 26px;
-
   cursor: pointer;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
+  width: 128px;
+  height: 26px;
   margin: 8px 12px 11px;
 }
 
@@ -80,6 +76,7 @@
     filter: invert(0.5) sepia(1) saturate(5) hue-rotate(175deg);
   }
 }
+
 .blueActive {
   filter: invert(0.5) sepia(1) saturate(5) hue-rotate(175deg);
 }

@@ -14,8 +14,14 @@ export type Post = {
   createdAt: Date
   updatedAt: Date
   ownerId: number
+  avatarOwner: string
+  owner: Owner
 }
 
+type Owner = {
+  firstName: string
+  lastName: string
+}
 export type CreatePostRequest = {
   description: string
   childrenMetadata: { uploadId: string }[]
