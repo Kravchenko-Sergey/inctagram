@@ -60,6 +60,10 @@ export const en: LocaleType = {
   components: {
     selectPlaceholder: 'Select Box',
   },
+  pagination: {
+    show: 'show',
+    perPage: 'per page',
+  },
   auth: {
     emailLabel: 'Email',
     emailSent: 'Email Sent',
@@ -195,9 +199,19 @@ export const en: LocaleType = {
     error: 'Error',
     transactionFailed: 'Transaction failed. Please, write to support',
     backToPayment: 'Back to payment',
-    currentSubscriptions:'Current Subscription:',
-    expireAt:'Expire at',
-    nextPayment:'Next payment',
+    currentSubscriptions: 'Current Subscription:',
+    expireAt: 'Expire at',
+    nextPayment: 'Next payment',
+    dateOfPayment: 'Date of Payment',
+    endDateSubscription: 'End date of subscription',
+    subscriptionType: 'Subscription Type',
+    price: 'Price',
+    paymentType: 'Payment Type',
+    monthly: 'MONTHLY',
+    day: 'DAY',
+    weekly: 'WEEKLY',
+    stripe: 'Stripe',
+    payPal: 'PayPal',
     following(count: number): any {
       const str = pluralizeEn(count)
 
@@ -254,7 +268,7 @@ export const en: LocaleType = {
       areYouSure:
         'Do you really want to close the edition of the publication? If you close changes won’t be saved',
     },
-    editPost: 'Edit Post',
+    editPost: 'Index Post',
     deletePost: 'Delete Post',
     areYouSureToDelete: 'Are you sure you want to delete this post?',
   },

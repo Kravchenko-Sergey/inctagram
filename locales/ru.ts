@@ -57,6 +57,10 @@ export const ru = {
   components: {
     selectPlaceholder: 'Выберете опцию',
   },
+  pagination: {
+    show: 'показать',
+    perPage: 'на странице',
+  },
   auth: {
     emailLabel: 'Электронная почта',
     emailSent: 'Письмо с подтверждением отправлено',
@@ -186,9 +190,19 @@ export const ru = {
     error: 'Ошибка',
     transactionFailed: 'Платеж не прошел, обратитесь в службу поддержки.',
     backToPayment: 'Вернуться обратно',
-    currentSubscriptions:'Текущие подписки:',
-    expireAt:'Истекает',
-    nextPayment:'Следующий платеж',
+    currentSubscriptions: 'Текущие подписки:',
+    expireAt: 'Истекает',
+    nextPayment: 'Следующий платеж',
+    dateOfPayment: 'Дата платежа',
+    endDateSubscription: 'Подписка заканчивается',
+    subscriptionType: 'Тип подписки',
+    price: 'Стоимость',
+    paymentType: 'Тип платежа',
+    monthly: 'Месячная',
+    day: 'Дневная',
+    weekly: 'Недельная',
+    stripe: 'Страйп',
+    payPal: 'ПэйПал',
     following(count: number) {
       const str = pluralizeRu(count)
 
