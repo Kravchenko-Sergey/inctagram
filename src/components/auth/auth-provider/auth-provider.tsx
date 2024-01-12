@@ -1,9 +1,10 @@
-import { ReactNode, useEffect } from 'react'
+import React, { ReactNode, useEffect } from 'react'
 
 import { useRouter } from 'next/router'
 
 import { useMeQuery } from '@/services/auth/auth-api'
 import { commonRoutes, PATH } from '@/consts/route-paths'
+import { Loader } from '@/components'
 
 type PropsType = {
   children: ReactNode
@@ -24,6 +25,10 @@ export const AuthProvider = ({ children }: PropsType) => {
       return
     }
   }, [user, isProtectedPage, router, isLoading])
+
+  if (isLoading) {
+    return <Loader />
+  }
 
   return <>{children}</>
 }

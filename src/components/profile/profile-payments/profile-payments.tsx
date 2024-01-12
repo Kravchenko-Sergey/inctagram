@@ -44,37 +44,23 @@ export const ProfilePayments = () => {
               return (
                 <TableRow key={item.subscriptionId}>
                   <TableCell>
-                    <div
-                      style={{ wordBreak: 'break-word', display: 'flex', flexDirection: 'column' }}
-                    >
+                    <div className={s.cell}>
                       {format(new Date(item.dateOfPayment), 'dd.MM.yyyy')}
                     </div>
                   </TableCell>
                   <TableCell>
-                    <div
-                      style={{ wordBreak: 'break-word', display: 'flex', flexDirection: 'column' }}
-                    >
+                    <div className={s.cell}>
                       {format(new Date(item.endDateOfSubscription), 'dd.MM.yyyy')}
                     </div>
                   </TableCell>
                   <TableCell>
-                    <div
-                      style={{ wordBreak: 'break-word', display: 'flex', flexDirection: 'column' }}
-                    >
-                      {item.price}
-                    </div>
+                    <div className={s.cell}>{item.price}</div>
                   </TableCell>
                   <TableCell>
-                    <div
-                      style={{ wordBreak: 'break-word', display: 'flex', flexDirection: 'column' }}
-                    >
-                      {value[item.subscriptionType]}
-                    </div>
+                    <div className={s.cell}>{value[item.subscriptionType]}</div>
                   </TableCell>
                   <TableCell>
-                    <div
-                      style={{ wordBreak: 'break-word', display: 'flex', flexDirection: 'column' }}
-                    >
+                    <div className={s.cell}>
                       {item.paymentType === 'STRIPE' ? t.profile.stripe : t.profile.payPal}
                     </div>
                   </TableCell>

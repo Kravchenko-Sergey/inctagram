@@ -1,7 +1,6 @@
 import ShowMoreText from 'react-show-more-text'
 import s from './expandable-text.module.scss'
 import { useTranslation } from '@/hooks'
-import { Typography } from '@/components'
 
 type ExpandableTextProps = {
   text: string | null

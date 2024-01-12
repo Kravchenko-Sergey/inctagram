@@ -66,7 +66,7 @@ export const CreateSubscription = () => {
           typeSubscription: duration,
           paymentType: event.nativeEvent.submitter.getAttribute('data-type'),
           amount: +data.cost!,
-          baseUrl: 'http://localhost:3000/profile-settings/',
+          baseUrl: 'http://localhost:3000/profile-settings/account',
         }
 
         const res = await createSubscriptions(body).unwrap()

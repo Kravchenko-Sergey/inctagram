@@ -30,8 +30,6 @@
   height: 36px;
   margin-right: 12px;
 
-  // color: var(--danger-500);
-
   border-radius: 50%;
 }
 
@@ -58,10 +56,12 @@
 .mainContent {
   padding: 0 24px;
   border-bottom: 1px solid var(--dark-100);
+
   textarea {
     height: 120px;
   }
 }
+
 .submitButton {
   position: absolute;
   top: 21px;
@@ -73,6 +73,7 @@
   line-height: 24px;
   cursor: pointer;
 }
+
 .loader {
   position: absolute;
   top: 20px;

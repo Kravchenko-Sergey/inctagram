@@ -1,4 +1,5 @@
 import { getMainLayout, HeadMeta } from '@/components'
+import React from 'react'
 
 const Home = () => {
   return (
