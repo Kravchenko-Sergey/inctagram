@@ -1,5 +1,4 @@
 import {
-  ArgGetProfile,
   ArgUpdateProfile,
   ArgUploadAvatar,
   GetProfileResponse,

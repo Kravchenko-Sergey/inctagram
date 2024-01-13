@@ -4,8 +4,6 @@ import {
   CreatePostImageResponse,
   CreatePostRequest,
   EditPostRequest,
-  GetAllPostsRequest,
-  GetAllPostsResponse,
   Post,
   PostRequest,
 } from '@/services/posts/types'
@@ -20,7 +18,6 @@ export const postAPI = baseApi.injectEndpoints({
           body,
         }
       },
-      // invalidatesTags: ['getProfileData'],
       invalidatesTags: ['getUserPostsData'],
     }),
     createPostPhoto: build.mutation<CreatePostImageResponse, CreatePostImageRequest>({
@@ -30,28 +27,12 @@ export const postAPI = baseApi.injectEndpoints({
         body,
       }),
     }),
-    // getUserPosts: build.query<GetAllPostsResponse, GetAllPostsRequest>({
-    //   query: ({ idLastUploadedPost, pageSize }) => ({
-    //     url: `posts/user/${idLastUploadedPost}`,
-    //     params: {
-    //       pageSize,
-    //     },
-    //   }),
-    // }),
     getUserPost: build.query<Post, PostRequest>({
       query: ({ postId }) => {
         return {
           url: `posts/p/${postId}`,
         }
       },
-      // providesTags: result => {   убрал надо ли?
-      //   console.log('result?.id ', result?.id)
-      //   console.log('result', result)
-
-      // return [{ type: 'post' as const, id: result?.id }, 'post']
-      // return [{ type: 'getProfileData' as const, id: result?.id }, 'getProfileData'] // эта инвалидация приводила
-      // к падению запроса
-      // },
     }),
     deleteUserPost: build.mutation<void, PostRequest>({
       query: ({ postId }) => {
@@ -78,21 +59,6 @@ export const postAPI = baseApi.injectEndpoints({
           },
         }
       },
-
-      // invalidatesTags: (result, error, arg) => [{ type: 'post', id: arg.postId }], // какую тут инвалидацию?
-      // async onQueryStarted({ postId, ...patch }, { dispatch, queryFulfilled }) {
-      //   const patchResult = dispatch(
-      //     postAPI.util.updateQueryData('getUserPost', { postId }, draft => {
-      //       Object.assign(draft, patch)
-      //     })
-      //   )
-      //
-      //   try {
-      //     await queryFulfilled
-      //   } catch {
-      //     patchResult.undo()
-      //   }
-      // },
       invalidatesTags: ['getUserPostsData'],
     }),
   }),
@@ -101,8 +67,6 @@ export const postAPI = baseApi.injectEndpoints({
 export const {
   useCreatePostCommentsMutation,
   useCreatePostPhotoMutation,
-  // useGetUserPostsQuery,
-  useLazyGetUserPostQuery,
   useDeleteUserPostMutation,
   useDeletePostImageMutation,
   useEditPostMutation,
