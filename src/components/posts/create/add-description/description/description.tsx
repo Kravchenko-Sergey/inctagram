@@ -18,6 +18,7 @@ import { ImageType, resetState } from '@/components/posts/create/create-post-sli
 import { getFilteredImg } from '@/components/posts/create/edit-photo'
 import { useAppDispatch } from '@/services'
 import { PATH } from '@/consts/route-paths'
+import { customerTable } from '@/components/posts/create/database.config'
 
 type DescriptionFormTypeProps = {
   addedImages: ImageType[]
@@ -72,6 +73,17 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
     setLoading(true)
     const imgWithFilter = await saveFilteredImage(addedImages)
     const res = await getBinaryImageData(imgWithFilter)
+
+    let resForJSON = [
+      { id: 1, title: '1231231' },
+      { id: 2, title: '121231233' },
+      { id: 3, title: '1212312313' },
+      { id: 4, title: '131231231232123' },
+      { id: 5, title: '1231231223' },
+      { id: 6, title: '123123123' },
+    ]
+
+    await customerTable.bulkAdd(resForJSON)
 
     function createFormData(res: Uint8Array[]) {
       const formData = new FormData()

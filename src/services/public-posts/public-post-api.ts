@@ -8,6 +8,7 @@ import {
   PublicProfileRequest,
 } from '@/services/public-posts/types'
 
+
 export const publicPostApi = baseApi.injectEndpoints({
   endpoints: build => {
     return {
@@ -27,13 +28,29 @@ export const publicPostApi = baseApi.injectEndpoints({
 
       getUserPostsData: build.query<Posts, GetUserPostsDataRequest>({
         query: ({ userId, endCursorPostId, pageSize, sortBy, sortDirection }) => {
+
+          const  lastItem = endCursorPostId ? endCursorPostId : ''
+
           return {
-            url: `public-posts/user/${userId}${endCursorPostId ? `/${endCursorPostId}` : ''}`,
+            url: `public-posts/user/${userId}/${lastItem}`,
             method: 'GET',
-            // params: { pageSize, sortBy, sortDirection }, todo need refactor
+            params: { pageSize},
           }
         },
-        providesTags: ['getUserPostsData'],
+        serializeQueryArgs: ({ endpointName }) => {
+          return endpointName
+        },
+
+        merge: (currentCache, newItems) => {
+          currentCache.items.push(...newItems.items)
+          currentCache.totalCount = newItems.totalCount
+        },
+
+        forceRefetch({ currentArg, previousArg }) {
+          return true
+        },
+
+
       }),
 
       getProfileData: build.query<PublicProfileRequest, { profileId: number }>({
@@ -56,4 +73,5 @@ export const {
   useLazyGetPublicPostQuery,
   useGetUserPostsDataQuery,
   useGetProfileDataQuery,
+  useLazyGetUserPostsDataQuery,
 } = publicPostApi

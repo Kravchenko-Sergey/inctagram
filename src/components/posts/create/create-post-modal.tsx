@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import s from './create-post-modal.module.scss'
 import { useAppDispatch, useAppSelector } from '@/services'
 import { FixModal, HeaderContent } from '@/components/ui/modal/fix-modal'
@@ -32,7 +32,8 @@ export const CreatePostModal = ({ setOpen, open }: CreatePostModalProps) => {
     dispatch(nextPage())
   }
 
-  const onCloseModalHandler = (open: boolean) => {
+
+  const onCloseModalHandler = () => {
     setOpenNotification(true)
   }
   const showCroppedImg = async () => {

@@ -10,13 +10,14 @@ import {
   useGetProfileDataQuery,
   useGetPublicPostQuery,
   useGetUserPostsDataQuery,
+  useLazyGetUserPostsDataQuery,
 } from '@/services/public-posts'
 import { routerProfilePostSchema, routerProfileSchema } from '@/schemas/router-schemas'
 import { useMeQuery } from '@/services/auth'
 import { ViewPostModal } from '@/components/posts/view'
 
-export const ProfileMain = memo(() => {
-  const [pageSize, setPageSize] = useState(8)
+export const ProfileMain = () => {
+  const [pageSize, setPageSize] = useState(12)
   const [hasMorePosts, setHasMorePosts] = useState(true)
   const [skipPostRequest, setSkipPostRequest] = useState(true)
   const { t } = useTranslation()
@@ -31,11 +32,11 @@ export const ProfileMain = memo(() => {
     { skip: skipPostRequest }
   )
 
-  useEffect(() => {
-    if (postQuery.postId) {
-      setSkipPostRequest(false)
-    }
-  }, [postQuery.postId])
+  // useEffect(() => {
+  //   if (postQuery.postId) {
+  //     setSkipPostRequest(false)
+  //   }
+  // }, [postQuery.postId])
 
   // const {
   //   data: profile,
@@ -57,27 +58,39 @@ export const ProfileMain = memo(() => {
   } = useGetProfileDataQuery({ profileId: +query.id! })
   //
 
-  const { data: posts } = useGetUserPostsDataQuery({ userId: +query.id! })
+  // const { data: posts } = useGetUserPostsDataQuery({ userId: +query.id!,pageSize })
+
+  const [loadMorePost, { data: posts }] = useLazyGetUserPostsDataQuery()
+
+  useEffect(() => {
+    if (query.id) {
+      loadMorePost({ userId: +query.id })
+    }
+  }, [])
 
   const loadMorePosts = () => {
-    setPageSize(prev => prev + 8)
-    pageSize > publications && setHasMorePosts(false)
+    console.log('mire')
+    loadMorePost({
+      userId: me?.userId!,
+      endCursorPostId: posts?.items[posts.items.length - 1].id,
+      pageSize: 12,
+    })
   }
 
-  const modalPostHandler = useCallback(() => {
+  const modalPostHandler = () => {
     setPostModalIsOpen(prev => !prev)
     // push(`${PATH.PROFILE}/?id=${postQuery.id}`)
-  }, [])
+  }
 
   if (isLoading || isFetching) {
     return <Loader />
   }
-  if (isError) {
-    console.error('Get profile is failed')
-  }
+  // if (isError) {
+  //   console.error('Get profile is failed')
+  // }
   const following = 2218
   const followers = 2358
-  const publications = posts?.items.length as number
+  const publications = posts?.totalCount ?? 0
 
   const profileName = profile?.userName
 
@@ -123,7 +136,7 @@ export const ProfileMain = memo(() => {
       </div>
 
       <InfiniteScroll
-        dataLength={publications || 0}
+        dataLength={publications}
         next={loadMorePosts}
         hasMore={hasMorePosts}
         loader={publications > 0 ? <Loader className={s.loader} /> : null}
@@ -131,8 +144,6 @@ export const ProfileMain = memo(() => {
       >
         {posts && posts.items.map((post: PostProfile) => <PostCard key={post.id} post={post} />)}
       </InfiniteScroll>
-
-      <div className={s.scrollableContent}></div>
     </>
   )
-})
+}
