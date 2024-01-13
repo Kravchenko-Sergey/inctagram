@@ -78,6 +78,9 @@ export const createPostSlice = createSlice({
         state.croppedImages[index].crop = crop
       }
     },
+    setCroppedImages: (state, action: PayloadAction<ImageType[]>) => {
+      state.croppedImages = action.payload
+    },
     deleteImg: (state, action: PayloadAction<{ id: number }>) => {
       state.croppedImages = state.croppedImages.filter(el => el.id !== action.payload.id)
     },
@@ -107,4 +110,5 @@ export const {
   setFilter,
   setCroppedImage,
   setCrop,
+  setCroppedImages
 } = createPostSlice.actions

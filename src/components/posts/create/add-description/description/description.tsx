@@ -74,16 +74,16 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
     const imgWithFilter = await saveFilteredImage(addedImages)
     const res = await getBinaryImageData(imgWithFilter)
 
-    let resForJSON = [
-      { id: 1, title: '1231231' },
-      { id: 2, title: '121231233' },
-      { id: 3, title: '1212312313' },
-      { id: 4, title: '131231231232123' },
-      { id: 5, title: '1231231223' },
-      { id: 6, title: '123123123' },
-    ]
-
-    await customerTable.bulkAdd(resForJSON)
+    // let resForJSON = [
+    //   { id: 1, title: '1231231' },
+    //   { id: 2, title: '121231233' },
+    //   { id: 3, title: '1212312313' },
+    //   { id: 4, title: '131231231232123' },
+    //   { id: 5, title: '1231231223' },
+    //   { id: 6, title: '123123123' },
+    // ]
+    //
+    // await customerTable.bulkAdd(resForJSON)
 
     function createFormData(res: Uint8Array[]) {
       const formData = new FormData()
@@ -96,6 +96,7 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
 
       return formData
     }
+
 
     const formData = createFormData(res)
 

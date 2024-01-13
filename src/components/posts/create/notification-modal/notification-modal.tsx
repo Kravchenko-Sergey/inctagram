@@ -3,6 +3,8 @@ import { FixModal, HeaderContent } from '@/components/ui/modal/fix-modal'
 import { Button, Typography } from '@/components'
 import { useTranslation } from '@/hooks'
 import s from './notification-modal.module.scss'
+import { customerTable } from '@/components/posts/create/database.config'
+import { useAppSelector } from '@/services'
 
 const header: HeaderContent = { type: 'title', title: 'Close' }
 
@@ -14,13 +16,18 @@ type NotificationModalProps = {
 
 export const NotificationModal = ({ setOpen, open, closeOtherModal }: NotificationModalProps) => {
   const { t } = useTranslation()
+  const addedImages = useAppSelector(state => state.createPost.croppedImages)
 
-  const onCloseAllHandler = () => {
+  const onCloseAllHandler = async () => {
     setOpen(false)
     closeOtherModal(false)
+    await customerTable.bulkAdd(addedImages)
   }
 
-  const onCloseNotificationHandler = () => setOpen(false)
+  const onCloseNotificationHandler = () => {
+    closeOtherModal(false)
+    setOpen(false)
+  }
 
   return (
     <FixModal

@@ -2,11 +2,12 @@ import { useTranslation } from '@/hooks'
 import { useAppDispatch, useAppSelector } from '@/services'
 import { useRef } from 'react'
 import { permittedFileTypes, permittedPostPhotoFileSize } from '@/consts/image'
-import { nextPage, setImage } from '@/components/posts/create/create-post-slice'
+import {nextPage, setCroppedImage, setCroppedImages, setImage} from '@/components/posts/create/create-post-slice'
 import { toast } from 'react-toastify'
 import s from '@/components/posts/create/create-post-modal.module.scss'
 import { ImageOutline } from '@/assets/icons'
 import { Button, Typography } from '@/components'
+import {customerTable} from "@/components/posts/create/database.config";
 
 export const AddPhotoPage = () => {
   const { t } = useTranslation()
@@ -43,6 +44,13 @@ export const AddPhotoPage = () => {
     }
   }
 
+  const onOpenDraftHandler = async () => {
+    let res = await customerTable.toArray()
+
+    dispatch(setCroppedImages(res))
+
+  }
+
   return (
     <>
       <div className={`${s.photoContainer} ${images === null ? s.emptyPhotoContainer : ''}`}>
@@ -60,7 +68,9 @@ export const AddPhotoPage = () => {
           accept="image/png, image/jpeg, image/jpg"
           style={{ display: 'none' }}
         />
+
       </div>
+      <button onClick={onOpenDraftHandler}>open Draft</button>
     </>
   )
 }
