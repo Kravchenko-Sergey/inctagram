@@ -1,6 +1,6 @@
 import Dexie from 'dexie'
 
-const database = new Dexie('database')
+export const database = new Dexie('database')
 
 database.version(1).stores({
   photos: 'id',
@@ -9,3 +9,5 @@ database.version(1).stores({
 export const customerTable = database.table('photos')
 
 export default database;
+
+

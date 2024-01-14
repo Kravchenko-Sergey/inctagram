@@ -1,8 +1,13 @@
 import { ChangeEvent, useState } from 'react'
 import s from './create-post-modal.module.scss'
-import { useAppDispatch, useAppSelector } from '@/services'
+import { AppDispatch, useAppDispatch, useAppSelector } from '@/services'
 import { FixModal, HeaderContent } from '@/components/ui/modal/fix-modal'
-import { nextPage, prevPage, setCroppedImage } from '@/components/posts/create/create-post-slice'
+import {
+  ImageType,
+  nextPage,
+  prevPage,
+  setCroppedImage,
+} from '@/components/posts/create/create-post-slice'
 import { FilterPage } from '@/components/posts/create/edit-photo'
 import { CroppedPage } from '@/components/posts/create/modal-pages/cropped-page/cropped-page'
 import { PublicationPage } from '@/components/posts/create/modal-pages/publication-page/publication-page'
@@ -11,11 +16,36 @@ import { ModalHeader } from '@/components/posts/create/modal-header/modal-header
 import getCroppedImg from '@/components/posts/create/cropped-image/Crop'
 import { Layer2 } from '@/assets/icons/Layer 2'
 import { NotificationModal } from '@/components/posts/create/notification-modal/notification-modal'
+import { customerTable } from '@/components/posts/create/database.config'
 
 type CreatePostModalProps = {
   open: boolean
   setOpen: (open: boolean) => void
 }
+
+export const showCroppedImg = async (addedImages: ImageType[], dispatch: AppDispatch) => {
+  let result: ImageType[] = []
+
+  try {
+    {
+      const croppedImg = addedImages.map(async el => {
+        const res = await getCroppedImg(el.img, el.crop)
+
+        if (res) {
+          dispatch(setCroppedImage({ img: res, id: el.id }))
+          result.push({ ...el, img: res })
+        }
+      })
+
+      await Promise.all(croppedImg)
+
+      return result
+    }
+  } catch (e) {
+    console.log(e)
+  }
+}
+
 export const CreatePostModal = ({ setOpen, open }: CreatePostModalProps) => {
   const [openNotification, setOpenNotification] = useState(false)
   const dispatch = useAppDispatch()
@@ -28,31 +58,30 @@ export const CreatePostModal = ({ setOpen, open }: CreatePostModalProps) => {
   const AddPhotoHeader: HeaderContent = { type: 'title', title: 'Add Photo' }
 
   const onCroppedHandler = async () => {
-    await showCroppedImg()
+    await showCroppedImg(addedImages, dispatch)
     dispatch(nextPage())
   }
-
 
   const onCloseModalHandler = () => {
     setOpenNotification(true)
   }
-  const showCroppedImg = async () => {
-    try {
-      {
-        const croppedImg = addedImages.map(async el => {
-          const res = await getCroppedImg(el.img, el.crop)
-
-          if (res) {
-            dispatch(setCroppedImage({ img: res, id: el.id }))
-          }
-        })
-
-        await Promise.all(croppedImg)
-      }
-    } catch (e) {
-      console.log(e)
-    }
-  }
+  // const showCroppedImg = async () => {
+  //   try {
+  //     {
+  //       const croppedImg = addedImages.map(async el => {
+  //         const res = await getCroppedImg(el.img, el.crop)
+  //
+  //         if (res) {
+  //           dispatch(setCroppedImage({ img: res, id: el.id }))
+  //         }
+  //       })
+  //
+  //       await Promise.all(croppedImg)
+  //     }
+  //   } catch (e) {
+  //     console.log(e)
+  //   }
+  // }
 
   const CroppedPhotoHeader: HeaderContent = {
     type: 'node',

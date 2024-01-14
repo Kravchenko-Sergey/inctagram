@@ -2,12 +2,14 @@ import { useTranslation } from '@/hooks'
 import { useAppDispatch, useAppSelector } from '@/services'
 import { useRef } from 'react'
 import { permittedFileTypes, permittedPostPhotoFileSize } from '@/consts/image'
-import {nextPage, setCroppedImage, setCroppedImages, setImage} from '@/components/posts/create/create-post-slice'
+import { nextPage, setDraft, setImage } from '@/components/posts/create/create-post-slice'
 import { toast } from 'react-toastify'
 import s from '@/components/posts/create/create-post-modal.module.scss'
 import { ImageOutline } from '@/assets/icons'
 import { Button, Typography } from '@/components'
-import {customerTable} from "@/components/posts/create/database.config";
+import { customerTable, database } from '@/components/posts/create/database.config'
+
+
 
 export const AddPhotoPage = () => {
   const { t } = useTranslation()
@@ -20,6 +22,7 @@ export const AddPhotoPage = () => {
   }
 
   const images = useAppSelector(state => state.createPost.images)
+
 
   const handleImageUpload = (e: any) => {
     const uploadInput = e.target
@@ -39,6 +42,7 @@ export const AddPhotoPage = () => {
     if (matches && file.size <= permittedPostPhotoFileSize) {
       dispatch(setImage({ img: URL.createObjectURL(e.target.files[0]) }))
       dispatch(nextPage())
+      // customerTable.bulkDelete(['id'])
     } else {
       toast.error(t.errors.imageUploadError, { icon: false })
     }
@@ -47,8 +51,9 @@ export const AddPhotoPage = () => {
   const onOpenDraftHandler = async () => {
     let res = await customerTable.toArray()
 
-    dispatch(setCroppedImages(res))
-
+    dispatch(setDraft(res))
+    dispatch(nextPage())
+    database.delete()
   }
 
   return (
