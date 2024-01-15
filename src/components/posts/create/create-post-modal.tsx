@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { useState } from 'react'
 import s from './create-post-modal.module.scss'
 import { AppDispatch, useAppDispatch, useAppSelector } from '@/services'
 import { FixModal, HeaderContent } from '@/components/ui/modal/fix-modal'
@@ -16,7 +16,6 @@ import { ModalHeader } from '@/components/posts/create/modal-header/modal-header
 import getCroppedImg from '@/components/posts/create/cropped-image/Crop'
 import { Layer2 } from '@/assets/icons/Layer 2'
 import { NotificationModal } from '@/components/posts/create/notification-modal/notification-modal'
-import { customerTable } from '@/components/posts/create/database.config'
 
 type CreatePostModalProps = {
   open: boolean
@@ -39,6 +38,7 @@ export const showCroppedImg = async (addedImages: ImageType[], dispatch: AppDisp
 
       await Promise.all(croppedImg)
 
+      // result добавлен для корректной отработки сохранение черновика
       return result
     }
   } catch (e) {
@@ -63,25 +63,12 @@ export const CreatePostModal = ({ setOpen, open }: CreatePostModalProps) => {
   }
 
   const onCloseModalHandler = () => {
-    setOpenNotification(true)
+    if (page === 0) {
+      setOpen(false)
+    } else {
+      setOpenNotification(true)
+    }
   }
-  // const showCroppedImg = async () => {
-  //   try {
-  //     {
-  //       const croppedImg = addedImages.map(async el => {
-  //         const res = await getCroppedImg(el.img, el.crop)
-  //
-  //         if (res) {
-  //           dispatch(setCroppedImage({ img: res, id: el.id }))
-  //         }
-  //       })
-  //
-  //       await Promise.all(croppedImg)
-  //     }
-  //   } catch (e) {
-  //     console.log(e)
-  //   }
-  // }
 
   const CroppedPhotoHeader: HeaderContent = {
     type: 'node',

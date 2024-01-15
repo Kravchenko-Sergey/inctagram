@@ -268,6 +268,7 @@ export const ru = {
     },
     deletePost: 'Удалить пост',
     areYouSureToDelete: 'Вы уверены что хотите удалить этот пост?',
+    openDraft: 'Открыть Черновик',
   },
   sidebars: {
     home: 'Главная',

@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FixModal, HeaderContent } from '@/components/ui/modal/fix-modal'
 import { Button, Typography } from '@/components'
 import { useTranslation } from '@/hooks'
 import s from './notification-modal.module.scss'
-import database, { customerTable } from '@/components/posts/create/database.config'
+import database, { draftTable, pageTable } from '@/components/posts/create/database.config'
 import { useAppDispatch, useAppSelector } from '@/services'
-import {showCroppedImg} from "@/components/posts/create/create-post-modal";
-import {resetState} from "@/components/posts/create/create-post-slice";
+import { showCroppedImg } from '@/components/posts/create/create-post-modal'
+import { resetState } from '@/components/posts/create/create-post-slice'
 
 const header: HeaderContent = { type: 'title', title: 'Close' }
 
@@ -23,23 +23,33 @@ export const NotificationModal = ({ setOpen, open, closeOtherModal }: Notificati
   const page = useAppSelector(state => state.createPost.page)
   const dispatch = useAppDispatch()
 
-
   const onCloseAllHandler = async () => {
+    let images
 
-    let images = await showCroppedImg(addedImages, dispatch)
+    // проверка для того ,тобы обрезание фотографии происходило всегда только 1 раз
+    if (page === 1) {
+      images = await showCroppedImg(addedImages, dispatch)
+    } else {
+      images = addedImages
+    }
     setOpen(false)
     closeOtherModal(false)
 
     if (images) {
       await database.open()
-      await customerTable.bulkAdd(images)
+      await draftTable.bulkAdd(images)
+      await pageTable.bulkAdd([{ page }])
+      localStorage.setItem('save-in-db', 'true')
       dispatch(resetState())
     }
   }
 
   const onCloseNotificationHandler = () => {
+
     closeOtherModal(false)
     setOpen(false)
+    database.delete()
+    localStorage.removeItem('save-in-db')
     dispatch(resetState())
   }
 

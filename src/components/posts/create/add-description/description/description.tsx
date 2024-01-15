@@ -18,7 +18,7 @@ import { ImageType, resetState } from '@/components/posts/create/create-post-sli
 import { getFilteredImg } from '@/components/posts/create/edit-photo'
 import { useAppDispatch } from '@/services'
 import { PATH } from '@/consts/route-paths'
-import { customerTable, database } from '@/components/posts/create/database.config'
+import { database } from '@/components/posts/create/database.config'
 
 type DescriptionFormTypeProps = {
   addedImages: ImageType[]
