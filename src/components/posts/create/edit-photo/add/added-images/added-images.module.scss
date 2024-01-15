@@ -36,8 +36,10 @@
 
 .image {
   margin-bottom: 12px;
+  object-fit: cover;
 }
 
 .oneImage {
+  object-fit: contain;
   margin: 12px 12px 12px 0;
 }

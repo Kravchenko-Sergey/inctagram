@@ -1,16 +1,44 @@
 import { useTranslation } from '@/hooks'
 import { useAppDispatch, useAppSelector } from '@/services'
-import { useRef } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { permittedFileTypes, permittedPostPhotoFileSize } from '@/consts/image'
-import { nextPage, setImage } from '@/components/posts/create/create-post-slice'
+import { nextPage, setDraft, setImage, setPage } from '@/components/posts/create/create-post-slice'
 import { toast } from 'react-toastify'
 import s from '@/components/posts/create/create-post-modal.module.scss'
 import { ImageOutline } from '@/assets/icons'
 import { Button, Typography } from '@/components'
+import { draftTable, database, pageTable } from '@/components/posts/create/database.config'
+
+const checkIsOpenDB = async () => {
+  try {
+    let res = await draftTable.toArray().catch(e => console.log(e.name))
+
+    if (res?.length === 0) {
+      await database.delete()
+
+      return false
+    } else {
+      return true
+    }
+  } catch (e) {
+    console.log(e)
+
+    return false
+  }
+}
 
 export const AddPhotoPage = () => {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
+  const [hasDraft, setHasDraft] = useState(false)
+
+  useLayoutEffect(() => {
+    let res = localStorage.getItem('save-in-db')
+
+    if (res) {
+      setHasDraft(JSON.parse(res))
+    }
+  }, [])
 
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -38,9 +66,19 @@ export const AddPhotoPage = () => {
     if (matches && file.size <= permittedPostPhotoFileSize) {
       dispatch(setImage({ img: URL.createObjectURL(e.target.files[0]) }))
       dispatch(nextPage())
+      database.delete()
     } else {
       toast.error(t.errors.imageUploadError, { icon: false })
     }
+  }
+
+  const onOpenDraftHandler = async () => {
+    let res = await draftTable.toArray()
+    let page = await pageTable.toArray()
+
+    dispatch(setDraft(res))
+    dispatch(setPage(page[0]))
+    database.delete()
   }
 
   return (
@@ -61,6 +99,11 @@ export const AddPhotoPage = () => {
           style={{ display: 'none' }}
         />
       </div>
+      {hasDraft && (
+        <Button variant={'ghost'} onClick={onOpenDraftHandler} className={s.btn}>
+          {t.post.openDraft}
+        </Button>
+      )}
     </>
   )
 }

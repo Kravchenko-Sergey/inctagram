@@ -15,9 +15,11 @@ import {
 import s from './description.module.scss'
 import { useMeQuery } from '@/services/auth'
 import { ImageType, resetState } from '@/components/posts/create/create-post-slice'
-import { getFilteredImg } from '@/components/posts/create/edit-photo'
 import { useAppDispatch } from '@/services'
 import { PATH } from '@/consts/route-paths'
+import { database } from '@/components/posts/create/database.config'
+import { saveFilteredImage } from '@/components/posts/create/DTO/save-filtered-images'
+import { createFormData } from '@/components/posts/create/DTO/create-form-data'
 
 type DescriptionFormTypeProps = {
   addedImages: ImageType[]
@@ -27,8 +29,8 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
   const { t } = useTranslation()
   const { push } = useRouter()
   const dispatch = useAppDispatch()
-  const [createPostComment, { isLoading: isPostCreateLoading }] = useCreatePostCommentsMutation()
-  const [createPostPhoto, { isLoading: isPostPhotoLoading }] = useCreatePostPhotoMutation()
+  const [createPostComment] = useCreatePostCommentsMutation()
+  const [createPostPhoto] = useCreatePostPhotoMutation()
   const [loading, setLoading] = useState(false)
   const userId = useMeQuery().data?.userId
   const {
@@ -50,46 +52,16 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
     triggerZodFieldError(touchedFieldNames, trigger)
   }, [t, touchedFields, trigger])
 
-  const saveFilteredImage = async (images: ImageType[]): Promise<ImageType[]> => {
-    try {
-      const updatedImages = await Promise.all(
-        images.map(async el => {
-          const filteredImage = await getFilteredImg(el.img, el.filter)
-
-          return {
-            img: filteredImage as string,
-          }
-        })
-      )
-
-      return updatedImages as ImageType[]
-    } catch (e) {
-      return []
-    }
-  }
-
   const onSubmit = async (data: DescriptionFormType) => {
     setLoading(true)
     const imgWithFilter = await saveFilteredImage(addedImages)
-    const res = await getBinaryImageData(imgWithFilter)
+    const binaryImageData = await getBinaryImageData(imgWithFilter)
 
-    function createFormData(res: Uint8Array[]) {
-      const formData = new FormData()
-
-      res.forEach(binaryData => {
-        const blob = new Blob([binaryData], { type: 'image/jpeg' })
-
-        formData.append(`file`, blob)
-      })
-
-      return formData
-    }
-
-    const formData = createFormData(res)
+    const formattedToFormData = createFormData(binaryImageData)
 
     if (addedImages.length) {
       try {
-        const responsePhotoStore = await createPostPhoto(formData).unwrap()
+        const responsePhotoStore = await createPostPhoto(formattedToFormData).unwrap()
 
         const imageId = responsePhotoStore.images.map(item => ({ uploadId: item.uploadId }))
         const requestBody: CreatePostRequest = {
@@ -100,6 +72,9 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
         if (responsePhotoStore.images) {
           await createPostComment(requestBody)
         }
+
+        await database.delete()
+
         dispatch(resetState())
         await push(`${PATH.PROFILE}?id=${userId}`)
       } catch (e: unknown) {

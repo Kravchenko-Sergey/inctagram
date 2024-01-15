@@ -1,4 +1,4 @@
-import { createSlice, current, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 type CroppedArea = {
   height: number
@@ -22,7 +22,6 @@ export const createPostSlice = createSlice({
     page: 0,
     images: [] as ImageType[],
     croppedImages: [] as ImageType[],
-    description: '' as string,
   },
   reducers: {
     setImage: (state, action: PayloadAction<{ img: string }>) => {
@@ -78,6 +77,12 @@ export const createPostSlice = createSlice({
         state.croppedImages[index].crop = crop
       }
     },
+    setPage: (state, action: PayloadAction<{ page: number }>) => {
+      state.page = action.payload.page
+    },
+    setDraft: (state, action: PayloadAction<ImageType[]>) => {
+      state.croppedImages = action.payload
+    },
     deleteImg: (state, action: PayloadAction<{ id: number }>) => {
       state.croppedImages = state.croppedImages.filter(el => el.id !== action.payload.id)
     },
@@ -107,4 +112,6 @@ export const {
   setFilter,
   setCroppedImage,
   setCrop,
+  setDraft,
+  setPage,
 } = createPostSlice.actions

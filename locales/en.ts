@@ -271,6 +271,7 @@ export const en: LocaleType = {
     editPost: 'Index Post',
     deletePost: 'Delete Post',
     areYouSureToDelete: 'Are you sure you want to delete this post?',
+    openDraft: 'Open Draft',
   },
   sidebars: {
     home: 'Home',
