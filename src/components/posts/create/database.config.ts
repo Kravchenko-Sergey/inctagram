@@ -10,7 +10,4 @@ database.version(1).stores({
 export const draftTable = database.table('photos')
 export const pageTable = database.table('pages')
 
-
-export default database;
-
-
+export default database

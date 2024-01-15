@@ -15,25 +15,14 @@ import {
 import s from './description.module.scss'
 import { useMeQuery } from '@/services/auth'
 import { ImageType, resetState } from '@/components/posts/create/create-post-slice'
-import { getFilteredImg } from '@/components/posts/create/edit-photo'
 import { useAppDispatch } from '@/services'
 import { PATH } from '@/consts/route-paths'
 import { database } from '@/components/posts/create/database.config'
+import { saveFilteredImage } from '@/components/posts/create/DTO/save-filtered-images'
+import { createFormData } from '@/components/posts/create/DTO/create-form-data'
 
 type DescriptionFormTypeProps = {
   addedImages: ImageType[]
-}
-
-export const createFormData = (res: Uint8Array[]) => {
-  const formData = new FormData()
-
-  res.forEach(binaryData => {
-    const blob = new Blob([binaryData], { type: 'image/jpeg' })
-
-    formData.append(`file`, blob)
-  })
-
-  return formData
 }
 
 export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
@@ -62,24 +51,6 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
 
     triggerZodFieldError(touchedFieldNames, trigger)
   }, [t, touchedFields, trigger])
-
-  const saveFilteredImage = async (images: ImageType[]): Promise<ImageType[]> => {
-    try {
-      const updatedImages = await Promise.all(
-        images.map(async el => {
-          const filteredImage = await getFilteredImg(el.img, el.filter)
-
-          return {
-            img: filteredImage as string,
-          }
-        })
-      )
-
-      return updatedImages as ImageType[]
-    } catch (e) {
-      return []
-    }
-  }
 
   const onSubmit = async (data: DescriptionFormType) => {
     setLoading(true)

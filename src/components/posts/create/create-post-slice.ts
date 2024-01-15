@@ -113,5 +113,5 @@ export const {
   setCroppedImage,
   setCrop,
   setDraft,
-  setPage
+  setPage,
 } = createPostSlice.actions

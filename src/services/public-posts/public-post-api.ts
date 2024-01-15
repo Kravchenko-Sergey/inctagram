@@ -8,7 +8,6 @@ import {
   PublicProfileRequest,
 } from '@/services/public-posts/types'
 
-
 export const publicPostApi = baseApi.injectEndpoints({
   endpoints: build => {
     return {
@@ -28,13 +27,12 @@ export const publicPostApi = baseApi.injectEndpoints({
 
       getUserPostsData: build.query<Posts, GetUserPostsDataRequest>({
         query: ({ userId, endCursorPostId, pageSize, sortBy, sortDirection }) => {
-
-          const  lastItem = endCursorPostId ? endCursorPostId : ''
+          const lastItem = endCursorPostId ? endCursorPostId : ''
 
           return {
             url: `public-posts/user/${userId}/${lastItem}`,
             method: 'GET',
-            params: { pageSize},
+            params: { pageSize },
           }
         },
         serializeQueryArgs: ({ endpointName }) => {
@@ -49,8 +47,6 @@ export const publicPostApi = baseApi.injectEndpoints({
         forceRefetch({ currentArg, previousArg }) {
           return true
         },
-
-
       }),
 
       getProfileData: build.query<PublicProfileRequest, { profileId: number }>({

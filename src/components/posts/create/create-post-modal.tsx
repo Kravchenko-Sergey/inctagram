@@ -2,48 +2,20 @@ import { useState } from 'react'
 import s from './create-post-modal.module.scss'
 import { AppDispatch, useAppDispatch, useAppSelector } from '@/services'
 import { FixModal, HeaderContent } from '@/components/ui/modal/fix-modal'
-import {
-  ImageType,
-  nextPage,
-  prevPage,
-  setCroppedImage,
-} from '@/components/posts/create/create-post-slice'
+import { nextPage, prevPage } from '@/components/posts/create/create-post-slice'
 import { FilterPage } from '@/components/posts/create/edit-photo'
 import { CroppedPage } from '@/components/posts/create/modal-pages/cropped-page/cropped-page'
 import { PublicationPage } from '@/components/posts/create/modal-pages/publication-page/publication-page'
 import { AddPhotoPage } from '@/components/posts/create/modal-pages/add-photo-page/add-photo-page'
 import { ModalHeader } from '@/components/posts/create/modal-header/modal-header'
-import getCroppedImg from '@/components/posts/create/cropped-image/Crop'
+
 import { Layer2 } from '@/assets/icons/Layer 2'
 import { NotificationModal } from '@/components/posts/create/notification-modal/notification-modal'
+import { saveCropping } from '@/components/posts/create/DTO/save-cropping-dto'
 
 type CreatePostModalProps = {
   open: boolean
   setOpen: (open: boolean) => void
-}
-
-export const showCroppedImg = async (addedImages: ImageType[], dispatch: AppDispatch) => {
-  let result: ImageType[] = []
-
-  try {
-    {
-      const croppedImg = addedImages.map(async el => {
-        const res = await getCroppedImg(el.img, el.crop)
-
-        if (res) {
-          dispatch(setCroppedImage({ img: res, id: el.id }))
-          result.push({ ...el, img: res })
-        }
-      })
-
-      await Promise.all(croppedImg)
-
-      // result добавлен для корректной отработки сохранение черновика
-      return result
-    }
-  } catch (e) {
-    console.log(e)
-  }
 }
 
 export const CreatePostModal = ({ setOpen, open }: CreatePostModalProps) => {
@@ -58,11 +30,12 @@ export const CreatePostModal = ({ setOpen, open }: CreatePostModalProps) => {
   const AddPhotoHeader: HeaderContent = { type: 'title', title: 'Add Photo' }
 
   const onCroppedHandler = async () => {
-    await showCroppedImg(addedImages, dispatch)
+    await saveCropping(addedImages, dispatch)
     dispatch(nextPage())
   }
 
   const onCloseModalHandler = () => {
+    // закрытие первого окна на крестик
     if (page === 0) {
       setOpen(false)
     } else {

@@ -5,8 +5,9 @@ import { useTranslation } from '@/hooks'
 import s from './notification-modal.module.scss'
 import database, { draftTable, pageTable } from '@/components/posts/create/database.config'
 import { useAppDispatch, useAppSelector } from '@/services'
-import { showCroppedImg } from '@/components/posts/create/create-post-modal'
+
 import { resetState } from '@/components/posts/create/create-post-slice'
+import { saveCropping } from '@/components/posts/create/DTO/save-cropping-dto'
 
 const header: HeaderContent = { type: 'title', title: 'Close' }
 
@@ -28,7 +29,7 @@ export const NotificationModal = ({ setOpen, open, closeOtherModal }: Notificati
 
     // проверка для того ,тобы обрезание фотографии происходило всегда только 1 раз
     if (page === 1) {
-      images = await showCroppedImg(addedImages, dispatch)
+      images = await saveCropping(addedImages, dispatch)
     } else {
       images = addedImages
     }
@@ -45,7 +46,6 @@ export const NotificationModal = ({ setOpen, open, closeOtherModal }: Notificati
   }
 
   const onCloseNotificationHandler = () => {
-
     closeOtherModal(false)
     setOpen(false)
     database.delete()
