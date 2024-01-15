@@ -78,7 +78,6 @@ export const ViewPostModal = ({ isOpen, handleModalChange, post }: PropsType) =>
             handleOpenEditMode={handleOpenEditMode}
             handleDeleteMode={handleDeleteMode}
             userName={fullUserName}
-            // avatar={profile?.avatars[1]?.url}
             avatar={profile?.avatars.length && profile?.avatars[0].url}
           />
         }

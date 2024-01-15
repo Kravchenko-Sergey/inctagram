@@ -27,23 +27,13 @@ export const SettingsTab = () => {
 
   return (
     <Tabs tabs={profileTabs} value={tabsValue} onValueChange={onChangeTabs} className={s.root}>
-      <TabsContent
-        className={route === PATH.PROFILE_GENERAL ? s.active : ''}
-        value={PATH.PROFILE_GENERAL}
-      ></TabsContent>
-      <TabsContent
-        className={route === PATH.PROFILE_DEVICE ? s.active : ''}
-        value={PATH.PROFILE_DEVICE}
-        data-state="active"
-      ></TabsContent>
-      <TabsContent
-        className={route === PATH.PROFILE_ACCOUNT ? s.active : ''}
-        value={PATH.PROFILE_ACCOUNT}
-      ></TabsContent>
-      <TabsContent
-        className={route === PATH.PROFILE_PAYMENTS ? s.active : ''}
-        value={PATH.PROFILE_PAYMENTS}
-      ></TabsContent>
+      {profileTabs.map(item => (
+        <TabsContent
+          key={item.value}
+          className={route === item.value ? s.active : ''}
+          value={item.value}
+        />
+      ))}
     </Tabs>
   )
 }
