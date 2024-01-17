@@ -314,4 +314,10 @@ export const en: LocaleType = {
     november: 'November',
     december: 'December',
   },
+  devices: {
+    currentDevice: 'Current device',
+    terminateAll: 'Terminate all other session',
+    activeSessions: 'Active sessions',
+    lastVisit: 'Last visit:',
+  },
 }
