@@ -13,7 +13,7 @@ export const getStaticProps = async () => {
     sortBy: 'createdAt',
   }
   const queryParams = new URLSearchParams(params).toString()
-  const response = await fetch(`https://inctagram.work/api/v1/public-posts/all/ ?${queryParams}`)
+  const response = await fetch(`https://inctagram.work/api/v1/public-posts/all/?${queryParams}`)
   const posts: GetLastCreatedPostsResponse = await response.json()
 
   if (!posts.items.length) {
