@@ -8,6 +8,7 @@ export type PostImageType = {
 
 export type Post = {
   id: number
+  userName: string
   description: string
   location: string
   images: PostImageType[]
