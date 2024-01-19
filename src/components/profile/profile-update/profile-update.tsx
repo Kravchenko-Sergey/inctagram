@@ -78,6 +78,7 @@ export const ProfileUpdate = memo(({ updateProfileHandler, profile }: ProfileUpd
             <div className={s.wrap}>
               <ControlledTextField label={t.profile.lastName} control={control} name="lastName" />
             </div>
+
             <ControlledDataPicker
               label={t.profile.dateOfBirth}
               className={s.dataPicker}

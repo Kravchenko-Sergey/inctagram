@@ -311,6 +311,12 @@ export const ru = {
     november: 'Ноябрь',
     december: 'Декабрь',
   },
+  devices: {
+    currentDevice: 'Текущее устройство',
+    terminateAll: 'Деактивировать все остальные сессии',
+    activeSessions: 'Активные сессии',
+    lastVisit: 'Последнее посещение:',
+  },
 }
 
 export type LocaleType = typeof ru
