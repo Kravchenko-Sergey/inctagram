@@ -66,9 +66,22 @@ export const authApi = baseApi.injectEndpoints({
         }),
       }),
       me: build.query<UserType, void>({
-        query: () => ({
-          url: '/auth/me',
-        }),
+        //   query: () => ({
+        //     url: '/auth/me',
+        //   }),
+        // }),
+        async queryFn(_name, _api, _extraOptions, baseQuery) {
+          const result = await baseQuery({
+            url: `/auth/me`,
+            method: 'GET',
+          })
+
+          return {
+            data:
+              result.data === undefined ? ('' as unknown as UserType) : (result.data as UserType),
+          }
+        },
+        extraOptions: { maxRetries: 1 },
       }),
       checkRecoveryCode: build.mutation<{ email: string }, { recoveryCode: string }>({
         query: (body: { recoveryCode: string }) => ({

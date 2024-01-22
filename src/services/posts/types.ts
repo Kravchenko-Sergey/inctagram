@@ -8,14 +8,21 @@ export type PostImageType = {
 
 export type Post = {
   id: number
+  userName: string
   description: string
   location: string
   images: PostImageType[]
   createdAt: Date
   updatedAt: Date
   ownerId: number
+  avatarOwner: string
+  owner: Owner
 }
 
+type Owner = {
+  firstName: string
+  lastName: string
+}
 export type CreatePostRequest = {
   description: string
   childrenMetadata: { uploadId: string }[]

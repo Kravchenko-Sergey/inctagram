@@ -4,6 +4,9 @@
 }
 
 .photoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 222px;
   height: 228px;
   margin-top: 20px;
@@ -36,4 +39,39 @@
 .loader {
   width: 100%;
   height: 100%;
+}
+
+.addPhotoContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  height: 564px;
+  width: 492px;
+}
+
+.CroppedPageContainer {
+  padding: 0;
+  height: 564px;
+  width: 492px;
+}
+.filterContainer {
+  width: 972px;
+  height: 564px;
+}
+.publishContainer {
+  display: flex;
+  width: 972px;
+  height: 564px;
+}
+.layer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.btn {
+  min-width: 219px;
 }

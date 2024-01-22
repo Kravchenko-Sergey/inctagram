@@ -4,11 +4,11 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { parseISO } from 'date-fns'
 
 import {
-  ControlledTextField,
-  ControlledTextArea,
   Button,
   ControlledDataPicker,
   ControlledSelect,
+  ControlledTextArea,
+  ControlledTextField,
   ProfileImage,
 } from '@/components'
 
@@ -16,15 +16,13 @@ import { MAX_CHARS_ABOUT_ME } from '@/consts/input-limits'
 import { useTranslation } from '@/hooks/use-translation'
 import { ProfileSettingsFormType, profileSettingsSchema } from '@/schemas'
 import { FormFields, triggerZodFieldError } from '@/helpers'
-import { AvatarType } from '@/services/profile'
+import { GetProfileResponse } from '@/services/profile'
 
 import s from './profile-update.module.scss'
 
-type ProfileAvatar = { avatars: AvatarType[] }
-
 type ProfileUpdateProps = {
   updateProfileHandler: (data: ProfileSettingsFormType) => void
-  profile?: ProfileSettingsFormType & ProfileAvatar
+  profile?: GetProfileResponse
 }
 
 const Cities = [
@@ -80,6 +78,7 @@ export const ProfileUpdate = memo(({ updateProfileHandler, profile }: ProfileUpd
             <div className={s.wrap}>
               <ControlledTextField label={t.profile.lastName} control={control} name="lastName" />
             </div>
+
             <ControlledDataPicker
               label={t.profile.dateOfBirth}
               className={s.dataPicker}

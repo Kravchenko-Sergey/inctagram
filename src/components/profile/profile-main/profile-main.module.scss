@@ -1,0 +1,59 @@
+.profile {
+  display: flex;
+  gap: 38px;
+}
+
+.info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.infoHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.items {
+  display: flex;
+  gap: 88px;
+  margin-bottom: 23px;
+}
+
+.expandDescription {
+  color: var(--primary-500);
+  text-decoration: underline;
+}
+
+.posts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+  justify-content: center;
+  margin-top: 54px;
+}
+
+.postWrapper {
+  display: flex;
+  flex: 0 1 24%;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mainLoader {
+  position: absolute;
+  z-index: 10;
+  top: -60px;
+  left: 0;
+
+  width: 100%;
+  height: calc(100% + 60px);
+
+  background-color: var(--dark-900);
+}
+
+.loader {
+  width: 100%;
+  height: 228px;
+}

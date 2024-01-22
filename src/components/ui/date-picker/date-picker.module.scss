@@ -5,10 +5,6 @@
     width: 100%;
   }
 
-  :global(.react-datepicker__day--outside-month) {
-    color: var(--dark-100);
-  }
-
   :global(.react-datepicker__day--weekend) {
     color: var(--light-900);
   }
@@ -87,9 +83,16 @@
       border: 2px solid var(--primary-300);
     }
   }
+
+  :global(.react-datepicker__day--outside-month) {
+    color: var(--dark-100);
+  }
 }
 
 .calendar {
+  position: fixed;
+  top: -338px;
+
   width: 300px;
   padding: 16px 24px;
 
@@ -182,13 +185,23 @@
 
 .header {
   display: flex;
+  flex-direction: column;
+  padding-left: 8px;
+}
+
+.headerFooter {
+  display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-left: 8px;
 }
 
 .buttonBox {
   display: flex;
+}
+
+.selectsWrapper {
+  display: flex;
+  justify-content: space-between;
 }
 
 .button {
@@ -254,19 +267,20 @@
     border-radius: 0;
   }
 
-  &:global(.react-datepicker__day--range-start) {
-    background-color: var(--primary-900);
-    background-image: radial-gradient(28px circle, var(--primary-500) 48%, transparent 51%);
-    border-radius: 50% 0 0 50%;
+  &:global(.react-datepicker__day--weekend) {
+    color: var(--danger-300);
   }
 
   &:global(.react-datepicker__day--range-end) {
-    // color: var(--color-neutral-light-50);
-    // background-color: var(--color-action-hover);
-    // background-image: radial-gradient(28px circle, var(--color-accent-500) 48%, transparent 51%);
     background-color: var(--primary-900);
     background-image: radial-gradient(28px circle, var(--primary-500) 48%, transparent 51%);
     border-radius: 0 50% 50% 0;
+  }
+
+  .d &:global(.react-datepicker__day--range-start) {
+    background-color: var(--primary-900);
+    background-image: radial-gradient(28px circle, var(--primary-500) 48%, transparent 51%);
+    border-radius: 50% 0 0 50%;
   }
 }
 

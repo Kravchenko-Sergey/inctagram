@@ -2,6 +2,7 @@
   display: flex;
   max-width: 1280px;
   margin: 0 auto;
+  padding: 0 60px;
 
   main {
     flex-grow: 1;
@@ -21,6 +22,7 @@
   text-decoration: none;
 
   border: 2px solid transparent;
+  cursor: pointer;
 
   svg {
     color: var(--light-100);
