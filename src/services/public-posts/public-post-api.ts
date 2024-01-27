@@ -26,7 +26,7 @@ export const publicPostApi = baseApi.injectEndpoints({
       }),
 
       getUserPostsData: build.query<Posts, GetUserPostsDataRequest>({
-        query: ({ userId, endCursorPostId, pageSize, sortBy, sortDirection }) => {
+        query: ({ userId, isMerge, endCursorPostId, pageSize, sortBy, sortDirection }) => {
           const lastItem = endCursorPostId ? endCursorPostId : ''
 
           return {
@@ -39,10 +39,14 @@ export const publicPostApi = baseApi.injectEndpoints({
           return endpointName
         },
 
-        merge: (currentCache, newItems) => {
-          currentCache.items.push(...newItems.items)
-          currentCache.totalCount = newItems.totalCount
-        },
+        // merge: (currentCache, newItems) => {
+        //   currentCache.items.push(...newItems.items)
+        //   currentCache.totalCount = newItems.totalCount
+        // },
+        // merge: (currentCache, newItems) => {
+        //   currentCache.items = newItems.items
+        //   currentCache.totalCount = newItems.totalCount
+        // },
 
         forceRefetch({ currentArg, previousArg }) {
           return true
@@ -69,5 +73,4 @@ export const {
   useLazyGetPublicPostQuery,
   useGetUserPostsDataQuery,
   useGetProfileDataQuery,
-  useLazyGetUserPostsDataQuery,
 } = publicPostApi

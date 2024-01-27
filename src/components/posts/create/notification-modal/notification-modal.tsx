@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { FixModal, HeaderContent } from '@/components/ui/modal/fix-modal'
 import { Button, Typography } from '@/components'
 import { useTranslation } from '@/hooks'
