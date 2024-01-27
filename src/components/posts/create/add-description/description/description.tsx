@@ -46,11 +46,11 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
     },
   })
 
-  useEffect(() => {
-    const touchedFieldNames: FormFields[] = Object.keys(touchedFields) as FormFields[]
-
-    triggerZodFieldError(touchedFieldNames, trigger)
-  }, [t, touchedFields, trigger])
+  // useEffect(() => {
+  //   const touchedFieldNames: FormFields[] = Object.keys(touchedFields) as FormFields[]
+  //
+  //   triggerZodFieldError(touchedFieldNames, trigger)
+  // }, [t, touchedFields, trigger])
 
   const onSubmit = async (data: DescriptionFormType) => {
     setLoading(true)
@@ -74,8 +74,8 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
         }
 
         await database.delete()
-
         dispatch(resetState())
+        localStorage.removeItem('save-in-db')
         await push(`${PATH.PROFILE}?id=${userId}`)
       } catch (e: unknown) {
         const error = e as any
@@ -89,7 +89,7 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
 
   return (
     <div className={s.wrap}>
-      <form id="form1" method="get" className={s.wrapper} onSubmit={handleSubmit(onSubmit)}>
+      <form id="form1" className={s.wrapper} onSubmit={handleSubmit(onSubmit)}>
         <div className={s.mainContent}>
           <ControlledTextArea
             counter={MAX_CHARS_POST}
