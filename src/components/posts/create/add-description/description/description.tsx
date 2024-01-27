@@ -37,6 +37,8 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
   const [createPostPhoto] = useCreatePostPhotoMutation()
   const [loading, setLoading] = useState(false)
   const userId = useMeQuery().data?.userId
+
+  const description = useAppSelector(state => state.createPost.publication)
   const {
     control,
     handleSubmit,
@@ -45,11 +47,9 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
     resolver: zodResolver(descriptionSchema(t)),
     mode: 'onChange',
     defaultValues: {
-      description: '',
+      description: description as string,
     },
   })
-
-  const text = useAppSelector(state => state.createPost.publication)
 
   const onSaveTextHandler = (text: string) => {
     dispatch(setPublicationText({ publication: text }))
