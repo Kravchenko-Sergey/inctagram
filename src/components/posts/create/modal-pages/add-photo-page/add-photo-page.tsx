@@ -2,30 +2,23 @@ import { useTranslation } from '@/hooks'
 import { useAppDispatch, useAppSelector } from '@/services'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { permittedFileTypes, permittedPostPhotoFileSize } from '@/consts/image'
-import { nextPage, setDraft, setImage, setPage } from '@/components/posts/create/create-post-slice'
+import {
+  nextPage,
+  setDraft,
+  setImage,
+  setPage,
+  setPublicationText,
+} from '@/components/posts/create/create-post-slice'
 import { toast } from 'react-toastify'
 import s from '@/components/posts/create/create-post-modal.module.scss'
 import { ImageOutline } from '@/assets/icons'
 import { Button, Typography } from '@/components'
-import { draftTable, database, pageTable } from '@/components/posts/create/database.config'
-
-const checkIsOpenDB = async () => {
-  try {
-    let res = await draftTable.toArray().catch(e => console.log(e.name))
-
-    if (res?.length === 0) {
-      await database.delete()
-
-      return false
-    } else {
-      return true
-    }
-  } catch (e) {
-    console.log(e)
-
-    return false
-  }
-}
+import {
+  draftTable,
+  database,
+  pageTable,
+  textPublicationTable,
+} from '@/components/posts/create/database.config'
 
 export const AddPhotoPage = () => {
   const { t } = useTranslation()
@@ -75,9 +68,17 @@ export const AddPhotoPage = () => {
   const onOpenDraftHandler = async () => {
     let res = await draftTable.toArray()
     let page = await pageTable.toArray()
+    let publicationText = await textPublicationTable.toArray()
+
+    const isNotEmptyPublicationText = !!publicationText[0]
 
     dispatch(setDraft(res))
     dispatch(setPage(page[0]))
+
+    if (isNotEmptyPublicationText) {
+      dispatch(setPublicationText({ publication: publicationText[0].publication }))
+    }
+
     database.delete()
   }
 

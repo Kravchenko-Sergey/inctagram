@@ -22,6 +22,7 @@ export const createPostSlice = createSlice({
     page: 0,
     images: [] as ImageType[],
     croppedImages: [] as ImageType[],
+    publication: '' as String,
   },
   reducers: {
     setImage: (state, action: PayloadAction<{ img: string }>) => {
@@ -92,10 +93,14 @@ export const createPostSlice = createSlice({
     prevPage: state => {
       state.page = state.page - 1
     },
+    setPublicationText: (state, action: PayloadAction<{ publication: string }>) => {
+      state.publication = action.payload.publication
+    },
     resetState: state => {
       state.croppedImages = []
       state.croppedImages = []
       state.page = 0
+      state.publication = ''
     },
   },
 })
@@ -114,4 +119,5 @@ export const {
   setCrop,
   setDraft,
   setPage,
+  setPublicationText,
 } = createPostSlice.actions

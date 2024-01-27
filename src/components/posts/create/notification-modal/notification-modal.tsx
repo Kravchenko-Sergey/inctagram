@@ -3,7 +3,11 @@ import { FixModal, HeaderContent } from '@/components/ui/modal/fix-modal'
 import { Button, Typography } from '@/components'
 import { useTranslation } from '@/hooks'
 import s from './notification-modal.module.scss'
-import database, { draftTable, pageTable } from '@/components/posts/create/database.config'
+import database, {
+  draftTable,
+  pageTable,
+  textPublicationTable,
+} from '@/components/posts/create/database.config'
 import { useAppDispatch, useAppSelector } from '@/services'
 
 import { resetState } from '@/components/posts/create/create-post-slice'
@@ -22,6 +26,7 @@ export const NotificationModal = ({ setOpen, open, closeOtherModal }: Notificati
   const addedImages = useAppSelector(state => state.createPost.croppedImages)
 
   const page = useAppSelector(state => state.createPost.page)
+  const publicationText = useAppSelector(state => state.createPost.publication)
   const dispatch = useAppDispatch()
 
   const onCloseAllHandler = async () => {
@@ -42,6 +47,9 @@ export const NotificationModal = ({ setOpen, open, closeOtherModal }: Notificati
       await pageTable.bulkAdd([{ page }])
       localStorage.setItem('save-in-db', 'true')
       dispatch(resetState())
+    }
+    if (publicationText) {
+      await textPublicationTable.bulkAdd([{ publication: publicationText }])
     }
   }
 

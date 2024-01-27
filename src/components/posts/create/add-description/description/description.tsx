@@ -14,8 +14,12 @@ import {
 } from '@/services/posts'
 import s from './description.module.scss'
 import { useMeQuery } from '@/services/auth'
-import { ImageType, resetState } from '@/components/posts/create/create-post-slice'
-import { useAppDispatch } from '@/services'
+import {
+  ImageType,
+  resetState,
+  setPublicationText,
+} from '@/components/posts/create/create-post-slice'
+import { useAppDispatch, useAppSelector } from '@/services'
 import { PATH } from '@/consts/route-paths'
 import { database } from '@/components/posts/create/database.config'
 import { saveFilteredImage } from '@/components/posts/create/DTO/save-filtered-images'
@@ -33,24 +37,23 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
   const [createPostPhoto] = useCreatePostPhotoMutation()
   const [loading, setLoading] = useState(false)
   const userId = useMeQuery().data?.userId
+
+  const description = useAppSelector(state => state.createPost.publication)
   const {
     control,
     handleSubmit,
-    trigger,
     formState: { touchedFields },
   } = useForm<DescriptionFormType>({
     resolver: zodResolver(descriptionSchema(t)),
     mode: 'onChange',
     defaultValues: {
-      description: '',
+      description: description as string,
     },
   })
 
-  useEffect(() => {
-    const touchedFieldNames: FormFields[] = Object.keys(touchedFields) as FormFields[]
-
-    triggerZodFieldError(touchedFieldNames, trigger)
-  }, [t, touchedFields, trigger])
+  const onSaveTextHandler = (text: string) => {
+    dispatch(setPublicationText({ publication: text }))
+  }
 
   const onSubmit = async (data: DescriptionFormType) => {
     setLoading(true)
@@ -74,8 +77,8 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
         }
 
         await database.delete()
-
         dispatch(resetState())
+        localStorage.removeItem('save-in-db')
         await push(`${PATH.PROFILE}?id=${userId}`)
       } catch (e: unknown) {
         const error = e as any
@@ -89,12 +92,13 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
 
   return (
     <div className={s.wrap}>
-      <form id="form1" method="get" className={s.wrapper} onSubmit={handleSubmit(onSubmit)}>
+      <form id="form1" className={s.wrapper} onSubmit={handleSubmit(onSubmit)}>
         <div className={s.mainContent}>
           <ControlledTextArea
             counter={MAX_CHARS_POST}
+            setValueFromForm={onSaveTextHandler}
             control={control}
-            classNameTextArea={s.textArea}
+            className={s.textArea}
             name="description"
             label={t.post.addNewPost.addDescription}
           />
