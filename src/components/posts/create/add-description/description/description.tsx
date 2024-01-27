@@ -14,8 +14,12 @@ import {
 } from '@/services/posts'
 import s from './description.module.scss'
 import { useMeQuery } from '@/services/auth'
-import { ImageType, resetState } from '@/components/posts/create/create-post-slice'
-import { useAppDispatch } from '@/services'
+import {
+  ImageType,
+  resetState,
+  setPublicationText,
+} from '@/components/posts/create/create-post-slice'
+import { useAppDispatch, useAppSelector } from '@/services'
 import { PATH } from '@/consts/route-paths'
 import { database } from '@/components/posts/create/database.config'
 import { saveFilteredImage } from '@/components/posts/create/DTO/save-filtered-images'
@@ -36,7 +40,6 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
   const {
     control,
     handleSubmit,
-    trigger,
     formState: { touchedFields },
   } = useForm<DescriptionFormType>({
     resolver: zodResolver(descriptionSchema(t)),
@@ -46,11 +49,11 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
     },
   })
 
-  // useEffect(() => {
-  //   const touchedFieldNames: FormFields[] = Object.keys(touchedFields) as FormFields[]
-  //
-  //   triggerZodFieldError(touchedFieldNames, trigger)
-  // }, [t, touchedFields, trigger])
+  const text = useAppSelector(state => state.createPost.publication)
+
+  const onSaveTextHandler = (text: string) => {
+    dispatch(setPublicationText({ publication: text }))
+  }
 
   const onSubmit = async (data: DescriptionFormType) => {
     setLoading(true)
@@ -93,6 +96,7 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
         <div className={s.mainContent}>
           <ControlledTextArea
             counter={MAX_CHARS_POST}
+            setValueFromForm={onSaveTextHandler}
             control={control}
             className={s.textArea}
             name="description"
