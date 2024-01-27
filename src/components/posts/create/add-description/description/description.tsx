@@ -94,7 +94,7 @@ export const PostDescription = ({ addedImages }: DescriptionFormTypeProps) => {
           <ControlledTextArea
             counter={MAX_CHARS_POST}
             control={control}
-            classNameTextArea={s.textArea}
+            className={s.textArea}
             name="description"
             label={t.post.addNewPost.addDescription}
           />
