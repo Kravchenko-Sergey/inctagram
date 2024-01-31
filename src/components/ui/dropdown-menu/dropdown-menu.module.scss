@@ -1,6 +1,9 @@
 .mainIcon {
   padding: 0;
   outline: none;
+  &[data-state="open"] {
+    color: var(--primary-500);
+  }
 }
 
 .content {

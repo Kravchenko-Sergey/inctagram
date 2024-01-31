@@ -65,7 +65,6 @@ export const PostItem = memo(({ post }: Props) => {
       <div className={s.header}>
         <Avatar size={36} photo={post.avatarOwner} />
         <div className={s.footerInfo}>
-          {/*<Typography variant="h3">{`${post.owner.firstName} ${post.owner.lastName}`}</Typography>*/}
           <Typography variant="h3">{post.userName}</Typography>
           {isCollapsed && <Block />}
         </div>

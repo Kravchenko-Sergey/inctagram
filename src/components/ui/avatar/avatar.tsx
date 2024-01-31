@@ -29,8 +29,6 @@ export const Avatar = ({
         height={size}
         src={photo}
         className={s.avatarImage}
-        // alt={`${name}:"" avatar`}
-        // title={`${name} avatar`}
         alt={` avatar`}
         title={` avatar`}
       />

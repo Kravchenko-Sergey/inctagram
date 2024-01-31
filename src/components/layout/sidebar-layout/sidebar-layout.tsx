@@ -72,10 +72,10 @@ const SidebarLayout = ({ children }: SidebarLayoutProps) => {
         </Typography>
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 24 }}>
           <Button onClick={handleModalSubmit} variant="ghost">
-            Yes
+            {t.yes}
           </Button>
           <Button onClick={handleModalClosed} variant="primary">
-            No
+            {t.no}
           </Button>
         </div>
       </Modal>

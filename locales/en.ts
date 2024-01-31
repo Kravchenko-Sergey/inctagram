@@ -212,6 +212,7 @@ export const en: LocaleType = {
     weekly: 'WEEKLY',
     stripe: 'Stripe',
     payPal: 'PayPal',
+    sendMessage: 'Send Message',
     following(count: number): any {
       const str = pluralizeEn(count)
 
@@ -268,7 +269,7 @@ export const en: LocaleType = {
       areYouSure:
         'Do you really want to close the edition of the publication? If you close changes won’t be saved',
     },
-    editPost: 'Index Post',
+    editPost: 'Edit Post',
     deletePost: 'Delete Post',
     areYouSureToDelete: 'Are you sure you want to delete this post?',
     openDraft: 'Open Draft',
@@ -319,5 +320,13 @@ export const en: LocaleType = {
     terminateAll: 'Terminate all other session',
     activeSessions: 'Active sessions',
     lastVisit: 'Last visit:',
+  },
+  homeAuth: {
+    like: 'Like',
+    viewAllComments: 'View All Comments',
+    placeholder: 'Add a Comment...',
+    follow: 'Follow',
+    unfollow: 'Unfollow',
+    copyLink: 'Copy Link',
   },
 }

@@ -20,12 +20,10 @@ import {
 import { format } from 'date-fns'
 
 export const Devices = () => {
-  const { data } = useGetAllUserSessionsQuery()
-  // const [deleteAllSessions] = useDeleteAllSessionsMutation()
+  const { data, isLoading } = useGetAllUserSessionsQuery()
   const [deleteSessionsByID] = useDeleteSessionsByIdMutation()
   const { t } = useTranslation()
 
-  console.log('data', data)
   const versionOS = {
     Chrome: <ChromeIcon />,
     Safari: <SafariIcon />,
