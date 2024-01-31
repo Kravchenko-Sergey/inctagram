@@ -18,12 +18,12 @@ import { ProfileInfoItem } from '@/components/ui/profile-info-item'
 import { useBooleanFlag } from '@/hooks/useBooleanFlag'
 
 export const ProfileMain = memo(() => {
-  const [pageSize, setPageSize] = useState(8)
+  const [pageSize, setPageSize] = useState(9)
 
   const { isTrue: hasMorePosts, setFalse: setFalseHasMorePosts } = useBooleanFlag(true)
 
   const { isTrue: skipPostRequest, setFalse: setFalseSkipPostRequest } = useBooleanFlag(true)
-
+  const [idLastUploadedPost, setIdLastUploadedPost] = useState('')
   const { t } = useTranslation()
   const { query } = useTypedRouter(routerProfileSchema)
   const { query: postQuery } = useTypedRouter(routerProfilePostSchema)
@@ -55,11 +55,22 @@ export const ProfileMain = memo(() => {
     isError,
   } = useGetProfileDataQuery({ profileId: +query.id! })
 
-  const { data: posts } = useGetUserPostsDataQuery({ userId: +query.id! })
+  const { data: posts } = useGetUserPostsDataQuery({
+    userId: +query.id!,
+    pageSize,
+  })
+
+  useEffect(() => {
+    const lastPostId = posts?.items.slice(-1)[0]?.id.toString()
+
+    if (lastPostId && lastPostId !== idLastUploadedPost) {
+      setIdLastUploadedPost(lastPostId)
+    }
+  }, [idLastUploadedPost, posts])
 
   const loadMorePosts = () => {
-    setPageSize(prev => prev + 8)
-    pageSize > publications && setFalseHasMorePosts()
+    setPageSize(prev => prev + 9)
+    pageSize > publications! && setFalseHasMorePosts()
   }
 
   const modalPostHandler = useCallback(() => {
@@ -75,7 +86,7 @@ export const ProfileMain = memo(() => {
   }
   const following = 2218
   const followers = 2358
-  const publications = posts?.items.length as number
+  const publications = posts?.totalCount
 
   const profileName = profile?.userName
 
@@ -104,7 +115,7 @@ export const ProfileMain = memo(() => {
           <div className={s.items}>
             <ProfileInfoItem number={following} item={t.profile.following(following)} />
             <ProfileInfoItem number={followers} item={t.profile.followers(followers)} />
-            <ProfileInfoItem number={publications} item={t.profile.publications(publications)} />
+            <ProfileInfoItem number={publications!} item={t.profile.publications(publications!)} />
           </div>
           <ExpandableText text={profile?.aboutMe ?? null} />
         </div>
@@ -113,7 +124,11 @@ export const ProfileMain = memo(() => {
         dataLength={publications || 0}
         next={loadMorePosts}
         hasMore={hasMorePosts}
-        loader={publications > 0 ? <Loader className={s.loader} /> : null}
+        loader={
+          publications! > 9 && publications! < posts?.totalCount! ? (
+            <Loader className={s.loader} />
+          ) : null
+        }
         className={s.posts}
       >
         {posts && posts.items.map((post: PostProfile) => <PostCard key={post.id} post={post} />)}

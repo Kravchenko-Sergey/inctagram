@@ -81,8 +81,9 @@ export type PublicProfileRequest = {
 
 export type GetUserPostsDataRequest = {
   userId: number
-  endCursorPostId?: number
+  endCursorPostId?: number | null
   pageSize?: number
   sortBy?: string
   sortDirection?: 'desc' | 'asc'
+  isMerge?: boolean
 }
