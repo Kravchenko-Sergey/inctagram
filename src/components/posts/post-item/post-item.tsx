@@ -25,12 +25,13 @@ export const PostItem = ({ post }: Props) => {
     resolver: zodResolver(postItemSchema()),
     mode: 'onChange',
   })
+
   // const { data } = useGetUsersFollowersDataQuery({ userName: me?.userName!, cursor: 10 })
   // // todo узнать у Насти как правильно с ми
   //
   // console.log('me', me)
   // console.log('data', data)
-
+  console.log('value')
   const dotsWrap = {
     appendDots: (dots: ReactElement) => (
       <div
