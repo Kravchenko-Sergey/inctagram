@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Column, Table, TableBody, TableCell, TableHeader, TableRow } from '@/components/ui/table'
 import { useMySubscriptionsQuery } from '@/services/subscriptions'
 import s from './profile-payments.module.scss'

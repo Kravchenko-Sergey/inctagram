@@ -203,6 +203,7 @@ export const ru = {
     weekly: 'Недельная',
     stripe: 'Страйп',
     payPal: 'ПэйПал',
+    sendMessage: 'Отправить сообщение',
     following(count: number) {
       const str = pluralizeRu(count)
 
@@ -316,6 +317,14 @@ export const ru = {
     terminateAll: 'Деактивировать все остальные сессии',
     activeSessions: 'Активные сессии',
     lastVisit: 'Последнее посещение:',
+  },
+  homeAuth: {
+    like: 'Лайков',
+    viewAllComments: 'Посмотреть все комментарии',
+    placeholder: 'Добавьте комментарий...',
+    follow: 'Подписаться',
+    unfollow: 'Отписаться',
+    copyLink: 'Копировать ссылку',
   },
 }
 

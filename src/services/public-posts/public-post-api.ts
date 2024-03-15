@@ -73,4 +73,5 @@ export const {
   useLazyGetPublicPostQuery,
   useGetUserPostsDataQuery,
   useGetProfileDataQuery,
+  useGetLastCreatedPostsQuery,
 } = publicPostApi

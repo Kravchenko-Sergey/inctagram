@@ -90,6 +90,9 @@ export const ProfileMain = memo(() => {
 
   const profileName = profile?.userName
 
+  console.log('me', !!me)
+  const a = true
+
   return (
     <>
       {postData && (
@@ -104,6 +107,16 @@ export const ProfileMain = memo(() => {
         <div className={s.info}>
           <div className={s.infoHeader}>
             <Typography variant="large">{profileName}</Typography>
+            {!!me && me?.userId !== profile?.id && (
+              <div className={s.bntContainer}>
+                <Button as="a" variant="primary" className={s.btn}>
+                  {a ? t.homeAuth.unfollow : t.homeAuth.follow}
+                </Button>
+                <Button as="a" variant="secondary" className={s.btn}>
+                  {t.profile.sendMessage}
+                </Button>
+              </div>
+            )}
             {me?.userId && me?.userId === profile?.id && (
               <Link passHref legacyBehavior href={PATH.PROFILE_GENERAL}>
                 <Button as="a" variant="secondary" className={s.btn}>
