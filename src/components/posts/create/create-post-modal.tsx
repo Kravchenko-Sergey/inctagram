@@ -27,8 +27,6 @@ export const CreatePostModal = ({ setOpen, open }: CreatePostModalProps) => {
   const onNextPage = () => dispatch(nextPage())
   const onPrevPage = () => dispatch(prevPage())
 
-  const AddPhotoHeader: HeaderContent = { type: 'title', title: 'Add Photo' }
-
   const onCroppedHandler = async () => {
     await saveCropping(addedImages, dispatch)
     dispatch(nextPage())
@@ -42,6 +40,8 @@ export const CreatePostModal = ({ setOpen, open }: CreatePostModalProps) => {
       setOpenNotification(true)
     }
   }
+
+  const AddPhotoHeader: HeaderContent = { type: 'title', title: 'Add Photo' }
 
   const CroppedPhotoHeader: HeaderContent = {
     type: 'node',

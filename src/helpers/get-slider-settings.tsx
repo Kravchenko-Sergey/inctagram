@@ -1,7 +1,7 @@
 import { SampleNextArrow } from '@/components/posts/create/cropped-image/arrow-for-courusel/sample-next-arrow'
 import { SamplePrevArrow } from '@/components/posts/create/cropped-image/arrow-for-courusel/sample-prev-arrow'
 
-export const getSliderSettings = (value = 'slick-thumb') => {
+export const getSliderSettings = (value = 'slick-thumb', rest?: any) => {
   return {
     dots: true,
     swipe: false,
@@ -13,5 +13,6 @@ export const getSliderSettings = (value = 'slick-thumb') => {
     slidesToScroll: 1,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
+    ...rest,
   }
 }

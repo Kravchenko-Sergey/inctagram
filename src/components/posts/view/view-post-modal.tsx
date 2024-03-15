@@ -30,13 +30,14 @@ export const ViewPostModal = ({ isOpen, handleModalChange, post }: PropsType) =>
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
 
   const [deletePost] = useDeleteUserPostMutation()
-  const [deletePostImage] = useDeletePostImageMutation()
+  const [deletePostImage, { isLoading: isDeleteLoading }] = useDeletePostImageMutation()
 
   const handleDeletePost = async () => {
     setIsDeleteModalOpen(false)
     try {
       await deletePost({ postId: post.id }).unwrap()
       await deletePostImage({ imageId: post?.images[0]?.uploadId }).unwrap()
+      handleModalChange(false)
     } catch (error: unknown) {
       console.error(`Some error occured when delete post with id ${post.id}, ${error}`)
     }
@@ -58,7 +59,7 @@ export const ViewPostModal = ({ isOpen, handleModalChange, post }: PropsType) =>
 
   const handleCancelDeletePost = () => setIsDeleteModalOpen(false)
 
-  if (isLoading) {
+  if (isLoading || isDeleteLoading) {
     return <Loader />
   }
 

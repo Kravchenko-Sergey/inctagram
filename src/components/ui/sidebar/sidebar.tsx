@@ -11,7 +11,7 @@ type SidebarProps = {
 
 export const Sidebar = ({ children, className }: SidebarProps) => {
   return (
-    <div className={`${s.root} ${className}`}>
+    <div className={`${s.root} ${className ? className : ''}`}>
       <Scrollbar>{children}</Scrollbar>
     </div>
   )

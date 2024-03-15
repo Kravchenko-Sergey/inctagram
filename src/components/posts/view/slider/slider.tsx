@@ -12,16 +12,18 @@ export const Slider = ({ post }: { post: PostProfile }): JSX.Element => {
   const settings = getSliderSettings(s.dots)
   const newArr = sortImagesByWidth(post?.images).reverse()
 
+  console.log('newArr', newArr)
+
   return (
     <RadixSlider {...settings} className={s.sliderContainer}>
-      {newArr.map((image: PostImageType, idx: number) => {
-        if (!(idx % 2)) {
-          return (
-            <div key={image.uploadId} className={s.carousel}>
-              <Image alt="img" priority src={image.url} width={490} height={562} />
-            </div>
-          )
-        }
+      {sortImagesByWidth(post?.images).map((image: PostImageType, idx: number) => {
+        // if (!(idx % 2)) {
+        return (
+          <div key={image.uploadId} className={s.carousel}>
+            <Image alt="img" priority src={image.url} width={490} height={562} />
+          </div>
+        )
+        // }
       })}
     </RadixSlider>
   )

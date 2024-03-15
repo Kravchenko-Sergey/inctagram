@@ -12,6 +12,7 @@ type PropsType = {
 }
 
 export const ActionOptions = ({ handleOpenEditMode, handleDeleteMode }: PropsType) => {
+  // todo need refactor
   const { t } = useTranslation()
 
   return (
